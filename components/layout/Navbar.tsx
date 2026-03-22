@@ -64,6 +64,12 @@ export default function Navbar() {
           >
             Simuladores
           </Link>
+          <Link
+            href="/novedades"
+            className="text-sm text-ink-muted hover:text-ink transition-colors"
+          >
+            Novedades
+          </Link>
           <a
             href={SITE_CONFIG.whatsappUrl}
             target="_blank"
@@ -109,6 +115,9 @@ export default function Navbar() {
           </a>
           <Link href="/simulador" className="text-sm text-ink-muted" onClick={() => setMenuOpen(false)}>
             Simuladores
+          </Link>
+          <Link href="/novedades" className="text-sm text-ink-muted" onClick={() => setMenuOpen(false)}>
+            Novedades
           </Link>
           <a
             href={SITE_CONFIG.whatsappUrl}
