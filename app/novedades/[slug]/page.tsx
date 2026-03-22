@@ -3,17 +3,16 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import BlockRenderer from "@/components/notion/BlockRenderer";
-import { getPost, getBlocks, getPosts } from "@/lib/notion";
+import { getPost, getBlocks } from "@/lib/notion";
 import { categoriaColor, formatFecha } from "../NovedadesClient";
 import { SITE_CONFIG } from "@/lib/config";
 
 export const revalidate = 3600;
+export const dynamicParams = true;
 
-// Genera rutas estáticas en build
+// No pre-renderizamos en build — las páginas se generan on-demand (ISR)
 export async function generateStaticParams() {
-  if (!process.env.NOTION_TOKEN || !process.env.NOTION_DB_ID) return [];
-  const posts = await getPosts();
-  return posts.map((p) => ({ slug: p.slug }));
+  return [];
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
