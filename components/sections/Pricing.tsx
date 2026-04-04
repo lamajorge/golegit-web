@@ -7,14 +7,14 @@ const plans = [
   {
     label: "1 trabajadora",
     monthlyPrice: 9990,
-    featured: false,
+    featured: true,
     description: "Para el empleador que tiene una trabajadora",
   },
   {
     label: "2 o más trabajadoras",
     monthlyPrice: 17990,
-    featured: true,
-    description: "El plan más popular entre nuestros usuarios",
+    featured: false,
+    description: "Para familias con más de una trabajadora",
   },
 ];
 
@@ -73,6 +73,23 @@ export default function Pricing() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          {/* Plan Lite — coming soon */}
+          <div className="relative rounded-2xl p-6 border border-gray-100 bg-gray-50/50 opacity-60">
+            <span className="absolute top-4 right-4 text-[10px] font-semibold text-ink-light bg-gray-100 px-2 py-0.5 rounded-full">
+              Próximamente
+            </span>
+            <p className="text-sm font-semibold text-ink-light mb-5">Lite</p>
+            <div className="flex items-end gap-1 mb-2">
+              <span className="text-4xl font-extrabold tracking-tight text-ink">—</span>
+            </div>
+            <p className="text-sm text-ink-muted mb-7">
+              Solo generación de documentos legales. Sin automatización de liquidaciones.
+            </p>
+            <div className="block text-center text-sm font-semibold py-2.5 px-4 rounded-xl bg-gray-200 text-gray-400 cursor-not-allowed">
+              Próximamente
+            </div>
+          </div>
+
           {plans.map((plan, i) => {
             const displayMonthly = annual
               ? Math.round(plan.monthlyPrice * 0.8)
@@ -129,23 +146,6 @@ export default function Pricing() {
               </div>
             );
           })}
-
-          {/* Plan Lite — coming soon */}
-          <div className="relative rounded-2xl p-6 border border-gray-100 bg-gray-50/50 opacity-60">
-            <span className="absolute top-4 right-4 text-[10px] font-semibold text-ink-light bg-gray-100 px-2 py-0.5 rounded-full">
-              Próximamente
-            </span>
-            <p className="text-sm font-semibold text-ink-light mb-5">Lite</p>
-            <div className="flex items-end gap-1 mb-2">
-              <span className="text-4xl font-extrabold tracking-tight text-ink">—</span>
-            </div>
-            <p className="text-sm text-ink-muted mb-7">
-              Solo generación de documentos legales. Sin automatización de liquidaciones.
-            </p>
-            <div className="block text-center text-sm font-semibold py-2.5 px-4 rounded-xl bg-gray-200 text-gray-400 cursor-not-allowed">
-              Próximamente
-            </div>
-          </div>
         </div>
 
         <div className="bg-white rounded-2xl border border-gray-100 p-8">
