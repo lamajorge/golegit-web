@@ -31,25 +31,13 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-7 h-7 bg-brand-600 rounded-md flex items-center justify-center transition-colors group-hover:bg-brand-700">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-              <path
-                fill="white"
-                d="M4,2 H20 Q22,2 22,4 V16 Q22,18 20,18 H9 L5.5,22.5 V18 Q2,18 2,16 V4 Q2,2 4,2 Z"
-              />
-              <polyline
-                points="7,10.5 10,13.5 16.5,7"
-                stroke="#16a34a"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <span className={`font-bold text-[17px] tracking-tight transition-colors ${isDark ? "text-white" : "text-ink"}`}>
-            GoLegit
-          </span>
+        <Link href="/" className="flex items-center group">
+          <img
+            src={isDark ? "/logo/golegit-logo-dark.svg" : "/logo/golegit-logo.svg"}
+            alt="GoLegit"
+            height={28}
+            style={{ height: 28, width: "auto" }}
+          />
         </Link>
 
         {/* Desktop nav */}

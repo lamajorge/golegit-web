@@ -9,19 +9,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* Brand */}
           <div className="col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-7 h-7 bg-brand-600 rounded-lg flex items-center justify-center">
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 4h10M3 8h7M3 12h5" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
-                  <circle cx="13" cy="12" r="2" fill="white" />
-                </svg>
-              </div>
-              <span
-                className="font-semibold text-white text-base"
-                style={{ fontFamily: "var(--font-fraunces)" }}
-              >
-                GoLegit
-              </span>
+            <div className="mb-4">
+              <img
+                src="/logo/golegit-logo-dark.svg"
+                alt="GoLegit"
+                height={28}
+                style={{ height: 28, width: "auto" }}
+              />
             </div>
             <p className="text-sm leading-relaxed text-ink-light">
               Gestión laboral legal para trabajadoras de casa particular.
