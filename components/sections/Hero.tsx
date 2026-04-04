@@ -30,7 +30,7 @@ function ChatMockup() {
         </div>
 
         {/* Chat area */}
-        <div className="flex-1 min-h-0 px-3 pt-3 pb-4 flex flex-col gap-2.5 overflow-hidden bg-[#f0f2f5]">
+        <div className="flex-1 min-h-0 px-3 py-3 flex flex-col gap-2.5 overflow-hidden bg-[#f0f2f5]">
           <div className="flex justify-center">
             <span className="text-[9px] bg-white/80 text-gray-500 px-2.5 py-0.5 rounded-full font-medium">
               Hoy
@@ -77,13 +77,6 @@ function ChatMockup() {
             </div>
           </div>
 
-          <div className="self-start">
-            <div className="bg-white rounded-full px-3.5 py-2.5 shadow-sm flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-              <span className="w-1.5 h-1.5 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: "160ms" }} />
-              <span className="w-1.5 h-1.5 bg-gray-300 rounded-full animate-bounce" style={{ animationDelay: "320ms" }} />
-            </div>
-          </div>
         </div>
       </div>
     </div>
