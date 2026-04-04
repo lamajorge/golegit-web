@@ -33,15 +33,15 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
           <div className="w-7 h-7 bg-brand-600 rounded-md flex items-center justify-center transition-colors group-hover:bg-brand-700">
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
               <path
                 fill="white"
-                d="M3,1.5 H13 Q14.5,1.5 14.5,3 V10 Q14.5,11.5 13,11.5 H6.5 L4,14.5 V11.5 Q1.5,11.5 1.5,10 V3 Q1.5,1.5 3,1.5 Z"
+                d="M4,2 H20 Q22,2 22,4 V16 Q22,18 20,18 H9 L5.5,22.5 V18 Q2,18 2,16 V4 Q2,2 4,2 Z"
               />
               <polyline
-                points="5,6.5 7.5,9 11.5,4.5"
+                points="7,10.5 10,13.5 16.5,7"
                 stroke="#16a34a"
-                strokeWidth="1.5"
+                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
