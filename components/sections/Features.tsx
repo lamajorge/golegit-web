@@ -47,8 +47,8 @@ const features = [
       </svg>
     ),
     title: "Vacaciones y licencias",
-    description: "Registro de días acumulados, solicitudes, licencias médicas y ausencias con su impacto en la liquidación.",
-    status: "soon",
+    description: "Registro de días acumulados, solicitudes, licencias médicas (DFL N°44) y ausencias con su impacto en la liquidación.",
+    status: "live",
   },
   {
     icon: (
@@ -56,9 +56,9 @@ const features = [
         <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
       </svg>
     ),
-    title: "Finiquito y XML Previred",
-    description: "Finiquito con causal correcta y cálculo de indemnizaciones. XML listo para cargar en Previred.",
-    status: "soon",
+    title: "Finiquito",
+    description: "6 causales de término, cálculo automático de indemnizaciones, pago de días especiales pendientes y PDF firmable.",
+    status: "live",
   },
 ];
 
