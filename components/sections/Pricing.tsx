@@ -1,26 +1,20 @@
+"use client";
+
+import { useState } from "react";
 import CtaButton from "@/components/CtaButton";
 
 const plans = [
   {
     label: "1 trabajadora",
-    price: "$9.990",
-    period: "/mes",
+    monthlyPrice: 9990,
     featured: false,
     description: "Para el empleador que tiene una trabajadora",
   },
   {
-    label: "2 trabajadoras",
-    price: "$17.990",
-    period: "/mes",
+    label: "2 o más trabajadoras",
+    monthlyPrice: 17990,
     featured: true,
     description: "El plan más popular entre nuestros usuarios",
-  },
-  {
-    label: "3 o más",
-    price: "$7.990",
-    period: "/mes por cada una",
-    featured: false,
-    description: "Para familias con más necesidades",
   },
 ];
 
@@ -34,7 +28,13 @@ const included = [
   "Soporte por WhatsApp",
 ];
 
+function formatPrice(n: number) {
+  return "$" + n.toLocaleString("es-CL");
+}
+
 export default function Pricing() {
+  const [annual, setAnnual] = useState(false);
+
   return (
     <section id="precios" className="py-24 bg-[#fafaf8]">
       <div className="max-w-6xl mx-auto px-6">
@@ -47,52 +47,105 @@ export default function Pricing() {
             La competencia cobra $24.000/mes. GoLegit es automatizado,
             cuesta menos y funciona mejor.
           </p>
+
+          {/* Billing toggle */}
+          <div className="inline-flex items-center gap-3 mt-8 bg-white border border-gray-200 rounded-xl p-1">
+            <button
+              onClick={() => setAnnual(false)}
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                !annual ? "bg-ink text-white shadow-sm" : "text-ink-muted hover:text-ink"
+              }`}
+            >
+              Mensual
+            </button>
+            <button
+              onClick={() => setAnnual(true)}
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
+                annual ? "bg-ink text-white shadow-sm" : "text-ink-muted hover:text-ink"
+              }`}
+            >
+              Anual
+              <span className={`text-xs font-bold px-1.5 py-0.5 rounded-md ${annual ? "bg-brand-500 text-white" : "bg-brand-100 text-brand-700"}`}>
+                −20%
+              </span>
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          {plans.map((plan, i) => (
-            <div
-              key={i}
-              className={`relative rounded-2xl p-6 border ${
-                plan.featured
-                  ? "bg-zinc-950 border-zinc-800 text-white"
-                  : "bg-white border-gray-100"
-              }`}
-            >
-              {plan.featured && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full">
-                  Más popular
-                </span>
-              )}
+          {plans.map((plan, i) => {
+            const displayMonthly = annual
+              ? Math.round(plan.monthlyPrice * 0.8)
+              : plan.monthlyPrice;
+            const annualTotal = Math.round(plan.monthlyPrice * 12 * 0.8);
 
-              <p className={`text-sm font-semibold mb-5 ${plan.featured ? "text-white/40" : "text-ink-light"}`}>
-                {plan.label}
-              </p>
-
-              <div className="flex items-end gap-1 mb-2">
-                <span className={`text-4xl font-extrabold tracking-tight ${plan.featured ? "text-white" : "text-ink"}`}>
-                  {plan.price}
-                </span>
-                <span className={`text-sm pb-1 ${plan.featured ? "text-white/40" : "text-ink-light"}`}>
-                  {plan.period}
-                </span>
-              </div>
-
-              <p className={`text-sm mb-7 ${plan.featured ? "text-white/50" : "text-ink-muted"}`}>
-                {plan.description}
-              </p>
-
-              <CtaButton
-                className={`block text-center text-sm font-semibold py-2.5 px-4 rounded-xl transition-colors ${
+            return (
+              <div
+                key={i}
+                className={`relative rounded-2xl p-6 border ${
                   plan.featured
-                    ? "bg-brand-600 text-white hover:bg-brand-500"
-                    : "bg-ink text-white hover:bg-ink-soft"
+                    ? "bg-zinc-950 border-zinc-800 text-white"
+                    : "bg-white border-gray-100"
                 }`}
               >
-                Empezar gratis
-              </CtaButton>
+                {plan.featured && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                    Más popular
+                  </span>
+                )}
+
+                <p className={`text-sm font-semibold mb-5 ${plan.featured ? "text-white/40" : "text-ink-light"}`}>
+                  {plan.label}
+                </p>
+
+                <div className="flex items-end gap-1 mb-1">
+                  <span className={`text-4xl font-extrabold tracking-tight ${plan.featured ? "text-white" : "text-ink"}`}>
+                    {formatPrice(displayMonthly)}
+                  </span>
+                  <span className={`text-sm pb-1 ${plan.featured ? "text-white/40" : "text-ink-light"}`}>
+                    /mes
+                  </span>
+                </div>
+
+                {annual && (
+                  <p className={`text-xs mb-3 ${plan.featured ? "text-brand-400" : "text-brand-600"}`}>
+                    {formatPrice(annualTotal)} al año · ahorras {formatPrice(plan.monthlyPrice * 12 - annualTotal)}
+                  </p>
+                )}
+
+                <p className={`text-sm mb-7 ${plan.featured ? "text-white/50" : "text-ink-muted"}`}>
+                  {plan.description}
+                </p>
+
+                <CtaButton
+                  className={`block text-center text-sm font-semibold py-2.5 px-4 rounded-xl transition-colors ${
+                    plan.featured
+                      ? "bg-brand-600 text-white hover:bg-brand-500"
+                      : "bg-ink text-white hover:bg-ink-soft"
+                  }`}
+                >
+                  Empezar gratis
+                </CtaButton>
+              </div>
+            );
+          })}
+
+          {/* Plan Lite — coming soon */}
+          <div className="relative rounded-2xl p-6 border border-gray-100 bg-gray-50/50 opacity-60">
+            <span className="absolute top-4 right-4 text-[10px] font-semibold text-ink-light bg-gray-100 px-2 py-0.5 rounded-full">
+              Próximamente
+            </span>
+            <p className="text-sm font-semibold text-ink-light mb-5">Lite</p>
+            <div className="flex items-end gap-1 mb-2">
+              <span className="text-4xl font-extrabold tracking-tight text-ink">—</span>
             </div>
-          ))}
+            <p className="text-sm text-ink-muted mb-7">
+              Solo generación de documentos legales. Sin automatización de liquidaciones.
+            </p>
+            <div className="block text-center text-sm font-semibold py-2.5 px-4 rounded-xl bg-gray-200 text-gray-400 cursor-not-allowed">
+              Próximamente
+            </div>
+          </div>
         </div>
 
         <div className="bg-white rounded-2xl border border-gray-100 p-8">

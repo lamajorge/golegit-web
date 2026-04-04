@@ -25,16 +25,6 @@ export default function SimuladorLanding() {
           }}
         />
         <div className="relative max-w-5xl mx-auto px-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1.5 text-xs text-ink-muted hover:text-ink transition-colors mb-8"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M19 12H5M12 5l-7 7 7 7" />
-            </svg>
-            Volver al inicio
-          </Link>
-
           <div className="inline-flex items-center gap-2 bg-white border border-brand-200 text-brand-700 text-xs font-medium px-3.5 py-1.5 rounded-full mb-6 shadow-sm">
             <span className="w-1.5 h-1.5 bg-brand-500 rounded-full" />
             Herramientas gratuitas — sin registrarse
