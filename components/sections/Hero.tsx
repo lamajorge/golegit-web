@@ -4,14 +4,16 @@ import CtaButton from "@/components/CtaButton";
 
 function ChatMockup() {
   return (
-    <div className="relative w-full max-w-[260px] mx-auto">
+    <div
+      className="relative mx-auto"
+      style={{ height: "min(480px, calc(100dvh - 220px))", aspectRatio: "9/18" }}
+    >
       {/* Glow — tasteful on dark bg */}
       <div className="absolute -inset-6 bg-brand-500/15 rounded-[3.5rem] blur-3xl -z-10" />
 
       {/* Phone frame */}
       <div
-        className="relative bg-[#1c1c1e] rounded-[2.8rem] shadow-2xl overflow-hidden border border-white/10"
-        style={{ aspectRatio: "9/18" }}
+        className="relative bg-[#1c1c1e] rounded-[2.8rem] shadow-2xl overflow-hidden border border-white/10 w-full h-full"
       >
         {/* Dynamic island */}
         <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-[#1c1c1e] rounded-full z-20" />
@@ -90,7 +92,7 @@ function ChatMockup() {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-zinc-950">
+    <section className="relative h-[100dvh] flex items-center overflow-hidden bg-zinc-950">
       {/* Ambient glow — top left */}
       <div
         className="absolute top-0 left-0 w-[700px] h-[700px] pointer-events-none"
@@ -106,7 +108,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative max-w-6xl mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] gap-12 xl:gap-20 items-center">
+      <div className="relative w-full max-w-6xl mx-auto px-6 pt-16 pb-8 grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] gap-10 xl:gap-16 items-center h-full">
         {/* Left: Copy */}
         <div>
           {/* Badge */}
