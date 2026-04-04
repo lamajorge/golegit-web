@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- GoLegit — Ícono standalone, versión clara (sobre fondos claros o blancos)
+     Sin fondo — solo trazo verde. Mismo path que golegit-logo.svg.
+     Usar sobre: fondos blancos, grises claros, papel. -->
+<svg width="28" height="35" viewBox="0 0 28 35" xmlns="http://www.w3.org/2000/svg">
+  <path
+    fill="none"
+    stroke="#16a34a"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M4.5,4 H22.5 Q25,4 25,6.5 V22 Q25,25 22.5,25 H10.5 L6,33 V25 Q3,25 3,22 V6.5 Q3,4 4.5,4 Z"
+  />
+  <polyline
+    fill="none"
+    stroke="#16a34a"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    points="8,15 11.5,18.5 19.5,10"
+  />
+</svg>
