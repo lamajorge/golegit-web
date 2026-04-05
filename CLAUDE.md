@@ -20,10 +20,10 @@ Landing page + herramientas públicas de **GoLegit**, plataforma legal por Whats
 | Framework | Next.js 15.1 (App Router) |
 | UI | React 19, Tailwind CSS 3.4, Framer Motion |
 | Lenguaje | TypeScript 5 (strict) |
+| Fuente | Plus Jakarta Sans (Google Fonts, pesos 400–800) |
 | CMS | Notion API (`@notionhq/client`) |
 | URL shortener | Supabase (tabla `url_cortas`) |
 | Hosting | Vercel — deploy automático desde `main` |
-| Iconos | Lucide React |
 
 ---
 
@@ -60,7 +60,8 @@ No hay tests configurados (ni Jest, ni Vitest, ni Playwright).
 
 ```
 app/
-  layout.tsx              # Root layout, metadata global
+  layout.tsx              # Root layout, metadata global, favicon
+  icon.svg                # Favicon adaptivo (light/dark via prefers-color-scheme)
   page.tsx                # Landing (ensambla secciones)
   globals.css             # Estilos globales y fuentes
   [code]/route.ts         # Edge Function — URL shortener
@@ -71,22 +72,22 @@ app/
     utils.ts              # categoriaColor, formatFecha (sin "use client")
   simulador/
     page.tsx              # Landing simuladores
-    liquidacion/page.tsx  # Calculadora liquidación (509 líneas)
-    jornada/page.tsx      # Calculadora jornada (551 líneas)
+    liquidacion/page.tsx  # Calculadora liquidación
+    jornada/page.tsx      # Calculadora jornada
   privacidad/page.tsx
   terminos/page.tsx
 
 components/
   layout/
-    Navbar.tsx            # Header sticky con scroll transparente
-    Footer.tsx
+    Navbar.tsx            # Header sticky — logo SVG adaptivo light/dark
+    Footer.tsx            # Footer oscuro con logo dark
   sections/               # Secciones de la landing page
-    Hero.tsx              # Mockup animado de WhatsApp
+    Hero.tsx              # Hero oscuro con mockup chat (hidden en móvil)
     Problem.tsx
     Solution.tsx
     HowItWorks.tsx
     Features.tsx
-    Pricing.tsx
+    Pricing.tsx           # Client component — toggle mensual/anual
     Trust.tsx
     FAQ.tsx
     FinalCTA.tsx
@@ -98,7 +99,128 @@ lib/
   config.ts               # Config central del sitio
   notion.ts               # Cliente Notion y queries
   utils.ts                # Utilidad cn()
+
+public/
+  favicon.ico             # Fallback para browsers sin soporte SVG
+  apple-touch-icon.png    # 180x180 para iOS
+  logo/
+    golegit-logo.svg          # Logo horizontal — fondos claros
+    golegit-logo-dark.svg     # Logo horizontal — fondos oscuros
+    golegit-icon.svg          # Ícono con fondo verde (referencia/backup)
+    golegit-icon-light.svg    # Ícono outline verde, sin fondo (fondos claros)
+    golegit-icon-dark.svg     # Ícono trazo blanco + checkmark brand-400 (fondos oscuros)
+    golegit-icon-512.png      # PNG 512x512 del ícono oficial
+    golegit-whatsapp.svg      # Avatar WhatsApp Business (outline, fondo blanco)
+    golegit-whatsapp-512.png  # PNG 512x512 para subir a WhatsApp Business
 ```
+
+---
+
+## Branding
+
+### Identidad visual
+
+GoLegit usa un sistema de diseño sobrio, moderno y sin decoraciones innecesarias. La inspiración es el design language de productos SaaS como Linear y Clerk: oscuro, tipografía extrabold, acentos de color contenidos.
+
+**Tres adjetivos:** Confiable · Simple · Preciso
+
+### Paleta de colores
+
+| Token | Valor | Uso |
+|---|---|---|
+| `brand-400` | `#4ade80` | Acento en fondos oscuros, checkmark dark mode |
+| `brand-500` | `#22c55e` | Hover states |
+| `brand-600` | `#16a34a` | Color principal de marca |
+| `brand-700` | `#15803d` | Header del chat mockup |
+| `ink` | `#0d1117` | Texto principal |
+| `ink-muted` | `#6b7280` | Texto secundario |
+| `ink-light` | `#9ca3af` | Texto terciario |
+| `paper` | `#fafaf8` | Fondo general del sitio |
+| `zinc-950` | `#09090b` | Hero, FinalCTA (secciones oscuras) |
+
+### Tipografía
+
+**Plus Jakarta Sans** — única fuente del sitio, todos los pesos.
+
+- Headings principales: `font-extrabold` (800), `tracking-tight`
+- Body: `font-normal` (400) o `font-medium` (500)
+- Nunca usar `font-light` en headings — fue lo que daba el aspecto "Times New Roman"
+- Las variables CSS `--font-fraunces` y `--font-instrument-sans` apuntan ambas a Plus Jakarta Sans por compatibilidad con código antiguo
+
+### Ícono / Logo
+
+El ícono de GoLegit es una **burbuja de chat rectangular** (no circular como WhatsApp) con un checkmark dentro y la cola abajo-izquierda. La forma rectangular evoca documento/contrato. La cola a la izquierda significa que GoLegit habla hacia el empleador (mensaje recibido).
+
+**Reglas del ícono:**
+- Nunca usar fill verde sólido en la burbuja para el logo — solo outline (trazo)
+- El fill verde sólido con burbuja blanca es exclusivo del favicon y app icon (necesario para legibilidad a 16px)
+- El checkmark en fondos claros: verde `#16a34a`. En fondos oscuros: `#4ade80` (brand-400)
+
+**Archivos y cuándo usar cada uno:**
+
+| Archivo | Cuándo usar |
+|---|---|
+| `golegit-logo.svg` | Navbar (fondo claro), documentos, emails |
+| `golegit-logo-dark.svg` | Navbar (hero oscuro), footer, fondos oscuros |
+| `golegit-icon-light.svg` | Ícono solo sobre fondo claro (sin wordmark) |
+| `golegit-icon-dark.svg` | Ícono solo sobre fondo oscuro (sin wordmark) |
+| `golegit-icon.svg` | Referencia/backup. No usar directamente en la UI |
+| `golegit-whatsapp-512.png` | Subir como foto de perfil en WhatsApp Business |
+| `app/icon.svg` | Favicon — adaptivo light/dark automático |
+
+### Favicon
+
+`app/icon.svg` usa `@media (prefers-color-scheme: dark)` para cambiar automáticamente:
+- **Modo claro:** trazo verde `#16a34a` sobre fondo blanco
+- **Modo oscuro:** trazo blanco + checkmark `#4ade80` sobre fondo `#18181b`
+- `public/favicon.ico` actúa de fallback (16px + 32px, PNG-in-ICO)
+
+---
+
+## Diseño UI — lineamientos
+
+### Estructura de la landing
+
+El hero y el FinalCTA son `bg-zinc-950` (oscuro) — enmarcan la página. Las secciones intermedias alternan entre `bg-white` y `bg-[#fafaf8]` (paper).
+
+### Navbar
+
+- Transparente con texto blanco solo en homepage antes de hacer scroll (`isDark = isHome && !scrolled`)
+- Al hacer scroll o en cualquier subpágina: `bg-white/95 backdrop-blur-md border-b border-gray-100` con texto oscuro
+- Logo: `<img>` con src condicional (`golegit-logo-dark.svg` vs `golegit-logo.svg`) según `isDark`
+- Altura: `h-16` (64px)
+
+### Hero
+
+- `h-[100dvh]` — usa `dvh` (dynamic viewport height) para móvil correcto
+- Grid: `grid-cols-1 lg:grid-cols-[1fr_280px]` — texto a la izquierda, mockup a la derecha
+- **Mockup chat:** `hidden lg:flex` — se oculta en móvil para evitar recortes
+- Dos glows radiales verdes como decoración de fondo (no grid, no ruido)
+- Stats row debajo de los CTAs: $9.990/mes · 0 apps · 100% automatizado
+
+### Mockup del teléfono (Hero)
+
+- Contenedor con `height: "min(480px, calc(100dvh - 220px))"` y `aspectRatio: "9/18"`
+- Frame: `flex flex-col overflow-hidden rounded-[2.8rem]`
+- Header chat: `flex-shrink-0` — nunca comprime
+- Área de chat: `flex-1 min-h-0 overflow-hidden` — `min-h-0` es crítico para que flex shrink funcione
+- Avatar: SVG inline del ícono oficial (burbuja + checkmark), fondo blanco circular sobre header verde
+
+### Pricing
+
+- Client component con `useState` para toggle mensual/anual
+- 3 columnas: Lite (izq, pendiente) · 1 trabajadora (centro, featured dark) · 2+ (der)
+- Anual: descuento 20% (`monthlyPrice * 0.8`), muestra ahorro total al año
+- Sección inferior: misma grilla de 3 cols — Lite features a la izq, "Todo incluido" col-span-2 a la der
+- Lite: `opacity-60`, badge "Próximamente", sin precio, botón deshabilitado
+
+### Secciones generales
+
+- Sin emojis en ningún componente
+- Sin gradientes de texto (evitar el look genérico de SaaS barato)
+- Cards con `border border-gray-100 rounded-2xl` o `rounded-3xl`
+- Shadows: `shadow-sm` en cards normales, `shadow-xl shadow-brand-600/8` en hover
+- Badges de estado: `text-xs font-medium px-2.5 py-0.5 rounded-full border`
 
 ---
 
@@ -186,23 +308,31 @@ Edge Function (Vercel Edge Network — sin cold starts). Consulta la tabla `url_
 
 ## Decisiones arquitectónicas importantes
 
-1. **Server vs Client Components:** Las funciones `categoriaColor` y `formatFecha` viven en `app/novedades/utils.ts` **sin** `"use client"`. Importarlas desde un módulo `"use client"` dentro de un Server Component causa error de runtime en Next.js 15. Si se añaden utilidades compartidas, deben seguir este patrón.
+1. **Server vs Client Components:** Las funciones `categoriaColor` y `formatFecha` viven en `app/novedades/utils.ts` **sin** `"use client"`. Importarlas desde un módulo `"use client"` dentro de un Server Component causa error de runtime en Next.js 15.
 
 2. **Anchor links en Navbar:** Usan `/#como-funciona` (con `/` al inicio) para funcionar desde cualquier subpágina, no solo desde `/`.
 
-3. **Error handling en Notion:** `getPost` y `getBlocks` tienen try/catch — los errores devuelven `null`/`[]` en vez de 500.
+3. **Navbar isDark:** `isDark = isHome && !scrolled` — lógica de color invertida. Texto blanco solo en homepage antes de scroll. Al hacer scroll o en subpáginas siempre es fondo blanco con texto oscuro.
 
-4. **Path alias:** `@/*` apunta a la raíz del proyecto (`tsconfig.json`).
+4. **`min-h-0` en flex children:** Patrón crítico en el mockup del teléfono. Sin `min-h-0` en el área de chat, el contenido overflow en vez de comprimir.
 
-5. **Imágenes remotas permitidas:** `notion.so`, `amazonaws.com`, `images.unsplash.com`, `getpronto.io` (configurado en `next.config.ts`).
+5. **`h-[100dvh]` en Hero:** Usar `dvh` (dynamic viewport height) y no `vh` para que en móvil el hero no quede tapado por la barra del browser.
+
+6. **Pricing como Client Component:** `"use client"` necesario por el toggle anual/mensual con `useState`. El resto de las secciones son Server Components.
+
+7. **Error handling en Notion:** `getPost` y `getBlocks` tienen try/catch — los errores devuelven `null`/`[]` en vez de 500.
+
+8. **Path alias:** `@/*` apunta a la raíz del proyecto (`tsconfig.json`).
+
+9. **Imágenes remotas permitidas:** `notion.so`, `amazonaws.com`, `images.unsplash.com`, `getpronto.io` (configurado en `next.config.ts`).
 
 ---
 
 ## Deploy
 
-- **Plataforma:** Vercel (`web-page-lake.vercel.app`)
-- **Rama principal:** `main` → deploy automático en cada push
-- **Flujo habitual:** rama `feat/...` → PR → merge a `main` → Vercel deploya
+- **Plataforma:** Vercel (`web-page-lake.vercel.app` / `golegit.cl`)
+- **Rama principal:** `main` → deploy automático en cada push (~60s)
+- **Flujo habitual:** editar → commit → push → Vercel deploya solo
 - **Security headers** configurados en `vercel.json`: X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy.
 
 ---
@@ -214,6 +344,7 @@ Edge Function (Vercel Edge Network — sin cold starts). Consulta la tabla `url_
 - [ ] Completar `app/terminos/page.tsx`
 - [ ] Configurar dominio `golegit.cl` en Vercel
 - [ ] Activar analytics (Vercel Analytics o similar)
+- [ ] Plan Lite: desarrollar feature de solo generación de documentos
 
 ---
 
@@ -232,5 +363,10 @@ GoLegit automatiza la burocracia legal de contratar TCP en Chile: contrato, anex
 - "Todo por WhatsApp. Sin apps, sin portales."
 - "La liquidación exacta, sin hacer cuentas."
 - "Menos de la mitad del precio de la competencia." ($9.990/mes vs $24.000/mes Pipol)
+
+**Planes:**
+- **1 trabajadora:** $9.990/mes (featured)
+- **2 o más trabajadoras:** $17.990/mes
+- **Lite:** pendiente de desarrollo — solo generación de documentos, sin automatizaciones
 
 **SEO keywords principales:** contrato trabajadora de casa particular Chile, liquidación TCP, ley 20786, calcular liquidación nana Chile.
