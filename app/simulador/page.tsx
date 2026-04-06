@@ -2,12 +2,6 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-export const metadata = {
-  title: "Simuladores laborales — GoLegit",
-  description:
-    "Calcula liquidaciones de sueldo y verifica jornadas laborales según la ley chilena vigente. Gratis, sin registrarse.",
-};
-
 export default function SimuladorLanding() {
   return (
     <main className="min-h-screen bg-paper">
@@ -30,16 +24,14 @@ export default function SimuladorLanding() {
             Herramientas gratuitas — sin registrarse
           </div>
 
-          <h1
-            className="text-4xl lg:text-5xl font-light text-ink leading-tight mb-4"
-            style={{ fontFamily: "var(--font-fraunces)" }}
-          >
-            Simuladores{" "}
-            <em className="not-italic text-brand-600">laborales</em>
+          <h1 className="text-4xl lg:text-5xl font-extrabold text-ink leading-tight tracking-tight mb-4">
+            Simuladores laborales para{" "}
+            <span className="text-brand-600">trabajadoras de casa particular</span>
           </h1>
           <p className="text-lg text-ink-muted leading-relaxed max-w-2xl">
-            Calculadoras precisas basadas en la ley chilena vigente para empleadores
-            de trabajadoras de casa particular. Resultados instantáneos.
+            Calcula la liquidación de sueldo y verifica la jornada laboral de tu trabajadora
+            de casa particular según la ley chilena vigente. Gratis, sin registrarse,
+            sin instalar nada.
           </p>
         </div>
       </section>

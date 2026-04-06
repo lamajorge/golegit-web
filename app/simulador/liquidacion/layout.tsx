@@ -14,6 +14,48 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://golegit.cl/simulador/liquidacion" },
 };
 
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "Cómo calcular la liquidación de sueldo de una trabajadora de casa particular en Chile",
+  description:
+    "Calculadora gratuita para determinar el sueldo líquido y el costo total del empleador de una trabajadora de casa particular (TCP) en Chile, incluyendo AFP, Fonasa y aportes patronales.",
+  tool: [
+    { "@type": "HowToTool", name: "Calculadora de liquidación GoLegit" },
+  ],
+  step: [
+    {
+      "@type": "HowToStep",
+      name: "Ingresa el sueldo base",
+      text: "Escribe el sueldo base bruto mensual pactado en el contrato, en pesos chilenos.",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Selecciona la AFP",
+      text: "Elige la AFP de la trabajadora. Cada AFP tiene una tasa de comisión distinta que afecta el descuento.",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Indica los días trabajados",
+      text: "Si la trabajadora no trabajó el mes completo, ingresa los días efectivamente trabajados para calcular el proporcional.",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Obtén el resultado",
+      text: "La calculadora muestra el sueldo líquido (lo que recibe la trabajadora), los descuentos legales (AFP + Fonasa) y el costo total para el empleador incluyendo aportes patronales (SIS, AFC TCP, Mutual).",
+    },
+  ],
+  totalTime: "PT2M",
+};
+
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+      {children}
+    </>
+  );
 }
