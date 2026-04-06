@@ -363,8 +363,8 @@ Edge Function (Vercel Edge Network — sin cold starts). Consulta la tabla `url_
   - Operado por: Cubillos y Compañía Limitada, RUT 78.048.033-5
 - [ ] Configurar dominio `golegit.cl` en Vercel
 - [ ] Activar analytics (Vercel Analytics o similar)
-- [ ] **Actualizar `Pricing.tsx`** con nombres oficiales (Lite / Pro / Plus), precios ($4.990 / $9.990 / $17.990) y feature matrix actual
-- [ ] Activar Lite en la sección de precios (quitar opacity-60 y badge "Próximamente")
+- [x] **`Pricing.tsx`** actualizado con Lite/Pro/Plus, precios y feature matrix completa (6 abril 2026)
+- [ ] Activar Lite: quitar `disabled: true` y `opacity-60` cuando el plan esté listo en el bot
 
 ## SEO — Estado y pendientes (Auditoría Abril 2026)
 
