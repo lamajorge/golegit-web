@@ -330,6 +330,7 @@ Edge Function (Vercel Edge Network — sin cold starts). Consulta la tabla `url_
 
 ## Deploy
 
+- **Repositorio:** `lamajorge/golegit-web`
 - **Plataforma:** Vercel (`web-page-lake.vercel.app` / `golegit.cl`)
 - **Rama principal:** `main` → deploy automático en cada push (~60s)
 - **Flujo habitual:** editar → commit → push → Vercel deploya solo
