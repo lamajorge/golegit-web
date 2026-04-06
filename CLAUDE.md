@@ -212,8 +212,9 @@ El hero y el FinalCTA son `bg-zinc-950` (oscuro) — enmarcan la página. Las se
 - 3 columnas: **Lite** (izq) · **Pro** (centro, featured dark) · **Plus** (der)
 - Anual: descuento 20% (`monthlyPrice * 0.8`), muestra ahorro total al año
 - Sección inferior: misma grilla de 3 cols — Lite features a la izq, "Todo incluido" col-span-2 a la der
-- Lite: `opacity-60`, badge "Próximamente", precio por definir, botón deshabilitado
-- **Pendiente:** actualizar `components/sections/Pricing.tsx` con nombres Pro/Plus y feature matrix oficial (ver tabla en sección Contexto del producto)
+- Lite: `opacity-60`, badge "Próximamente", $4.990/mes, botón deshabilitado (activar cuando esté listo en el bot)
+- **El botón "Comenzar" siempre redirige a WhatsApp** — el flujo de suscripción y pago ocurre dentro del bot, no en la web ni en golegit-app
+- **Pendiente:** actualizar `components/sections/Pricing.tsx` con nombres Pro/Plus, precios y feature matrix oficial
 
 ### Secciones generales
 
@@ -362,9 +363,8 @@ Edge Function (Vercel Edge Network — sin cold starts). Consulta la tabla `url_
   - Operado por: Cubillos y Compañía Limitada, RUT 78.048.033-5
 - [ ] Configurar dominio `golegit.cl` en Vercel
 - [ ] Activar analytics (Vercel Analytics o similar)
-- [ ] **Actualizar `Pricing.tsx`** con nombres oficiales (Lite / Pro / Plus) y feature matrix actual
-- [ ] Definir precio del plan Lite y activarlo en la sección de precios
-- [ ] Integrar flujo de suscripción MercadoPago desde el botón "Comenzar" del plan elegido (redirige a `golegit-app`)
+- [ ] **Actualizar `Pricing.tsx`** con nombres oficiales (Lite / Pro / Plus), precios ($4.990 / $9.990 / $17.990) y feature matrix actual
+- [ ] Activar Lite en la sección de precios (quitar opacity-60 y badge "Próximamente")
 
 ## Arquitectura multi-producto (pendiente)
 
@@ -415,9 +415,9 @@ GoLegit automatiza la burocracia legal de contratar TCP en Chile: contrato, anex
 | Registro ausencias, licencias, amonestaciones, vacaciones | ✗ | ✓ | ✓ |
 | Portal Trabajadora + firma digital | ✗ | ✓ | ✓ |
 | Certificados (vacaciones, antigüedad) | ✗ | ✓ | ✓ |
-| Precio | — | $9.990/mes | $17.990/mes |
+| Precio mensual | $4.990 | $9.990 | $17.990 |
 
 - **Mes de prueba gratuita** para todos los usuarios nuevos (features de Pro)
-- Los precios de Lite están por definir
+- Descuento anual: 20% (mostrar ahorro total en la web)
 
 **SEO keywords principales:** contrato trabajadora de casa particular Chile, liquidación TCP, ley 20786, calcular liquidación nana Chile.
