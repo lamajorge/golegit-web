@@ -370,23 +370,35 @@ Edge Function (Vercel Edge Network — sin cold starts). Consulta la tabla `url_
 
 Auditoría realizada el 6 de abril de 2026. Competidores: Asefy, Nanapp, Nanaaldia.
 
-### Quick wins implementados ✅
+### Implementado ✅
 
 | Acción | Archivo |
 |---|---|
-| `lang="es-CL"` | `app/layout.tsx` |
-| FAQPage + SoftwareApplication + Organization JSON-LD | `app/JsonLd.tsx` |
-| `robots.txt` con sitemap declarado | `public/robots.txt` |
-| Sitemap XML automático post-build | `next-sitemap.config.js` + script `build` |
-| Keywords unificadas en metadata | `app/layout.tsx` |
+| `lang="es-CL"` + hreflang | `app/layout.tsx` |
+| FAQPage + SoftwareApplication + Organization + WebSite JSON-LD | `app/JsonLd.tsx` |
+| `robots.txt` con sitemap declarado + disallow legales | `public/robots.txt` |
+| Sitemap XML automático post-build con prioridades | `next-sitemap.config.js` |
+| Keywords expandidas + meta description con CTA | `app/layout.tsx` |
 | `noindex` en /privacidad y /terminos | Cada `page.tsx` |
+| H1 unificado: "trabajadora de casa particular" (antes "asesora del hogar") | `Hero.tsx` |
+| Alt text con keyword en logos Navbar y Footer | `Navbar.tsx`, `Footer.tsx` |
+| Metadata propia para /simulador, /simulador/liquidacion, /simulador/jornada | Layouts por ruta |
+| Metadata + keywords para /novedades | `app/novedades/page.tsx` |
+| H1 de /simulador con keyword principal | `app/simulador/page.tsx` |
+| HowTo schema en /simulador/liquidacion (4 pasos) | `app/simulador/liquidacion/layout.tsx` |
+| HowTo schema en /simulador/jornada (5 pasos, menciona Ley 21.561) | `app/simulador/jornada/layout.tsx` |
+| Canonical explícito en todas las rutas principales | Layouts por ruta |
 
-### Pendiente técnico
+### Pendiente — requiere acción externa
 
-- [ ] **Google Search Console** — verificar dominio y enviar sitemap (`https://golegit.cl/sitemap.xml`)
-- [ ] **Redirect 301 www→apex** — confirmar en Vercel que `www.golegit.cl` redirige a `golegit.cl`
-- [ ] **Social proof** — añadir 3-5 testimonios reales + contador de contratos generados en homepage
-- [ ] **Alt text** — auditar todas las imágenes SVG inline del homepage
+- [ ] **Google Search Console** — verificar dominio `golegit.cl` y enviar `https://golegit.cl/sitemap.xml`
+- [ ] **Redirect 301 www→apex** — confirmar en Vercel → Domains que `www.golegit.cl` redirige a `golegit.cl`
+- [ ] **Social proof** — 3-5 testimonios reales + contador de contratos generados (requiere usuarios reales)
+- [ ] **Link building** — ComparaSoftware.cl, GetApp, blogs de finanzas personales y portales laborales
+
+### Descartado (decisión)
+
+- Landing comparativa `/comparar` — marketing demasiado agresivo para esta etapa
 
 ### Pendiente estratégico (este trimestre)
 
