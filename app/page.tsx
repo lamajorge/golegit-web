@@ -1,6 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/sections/Hero";
-import ProductSuite from "@/components/sections/ProductSuite";
 import Problem from "@/components/sections/Problem";
 import Solution from "@/components/sections/Solution";
 import HowItWorks from "@/components/sections/HowItWorks";
@@ -16,7 +15,6 @@ export default function Home() {
     <main className="min-h-screen bg-paper overflow-x-hidden">
       <Navbar />
       <Hero />
-      <ProductSuite />
       <Problem />
       <Solution />
       <HowItWorks />

@@ -1,10 +1,83 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SITE_CONFIG } from "@/lib/config";
 import CtaButton from "@/components/CtaButton";
+
+function ProductSwitcher({ isDark }: { isDark: boolean }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen(!open)}
+        className={`flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full border tracking-wide transition-colors ${
+          isDark
+            ? "text-brand-400 border-brand-400/30 bg-brand-400/10 hover:bg-brand-400/20"
+            : "text-brand-700 border-brand-200 bg-brand-50 hover:bg-brand-100"
+        }`}
+      >
+        Home
+        <svg width="8" height="8" viewBox="0 0 10 10" fill="currentColor">
+          <path d="M1 3l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50">
+          {/* Home — activo */}
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 transition-colors"
+          >
+            <div className="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center flex-shrink-0">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-bold text-ink">GoLegit Home</p>
+              <p className="text-[10px] text-ink-light">Personal doméstico · TCP</p>
+            </div>
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-500 flex-shrink-0" />
+          </Link>
+
+          <div className="h-px bg-gray-100 mx-4" />
+
+          {/* Business — bloqueado */}
+          <div className="flex items-center gap-3 px-4 py-3.5 opacity-40 cursor-not-allowed">
+            <div className="w-7 h-7 rounded-lg bg-gray-200 flex items-center justify-center flex-shrink-0">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" />
+                <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
+              </svg>
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs font-bold text-ink">GoLegit Business</p>
+              <p className="text-[10px] text-ink-light">Equipos y PYMEs</p>
+            </div>
+            <span className="text-[9px] font-semibold text-ink-light bg-gray-100 px-1.5 py-0.5 rounded-full flex-shrink-0">
+              Pronto
+            </span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -18,7 +91,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Texto blanco solo en home antes de hacer scroll
   const isDark = isHome && !scrolled;
 
   return (
@@ -30,22 +102,18 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <img
-            src={isDark ? "/logo/golegit-logo-dark.svg" : "/logo/golegit-logo.svg"}
-            alt="GoLegit"
-            height={28}
-            style={{ height: 28, width: "auto" }}
-          />
-          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border tracking-wide ${
-            isDark
-              ? "text-brand-400 border-brand-400/30 bg-brand-400/10"
-              : "text-brand-700 border-brand-200 bg-brand-50"
-          }`}>
-            Home
-          </span>
-        </Link>
+        {/* Logo + product switcher */}
+        <div className="flex items-center gap-2.5">
+          <Link href="/" className="flex items-center">
+            <img
+              src={isDark ? "/logo/golegit-logo-dark.svg" : "/logo/golegit-logo.svg"}
+              alt="GoLegit"
+              height={28}
+              style={{ height: 28, width: "auto" }}
+            />
+          </Link>
+          <ProductSwitcher isDark={isDark} />
+        </div>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
