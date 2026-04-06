@@ -148,17 +148,15 @@ export default function Pricing() {
                 </div>
 
                 <div className="flex items-end gap-1 mb-1">
-                  <span className={`text-4xl font-extrabold tracking-tight ${plan.featured ? "text-white" : plan.disabled ? "text-ink/40" : "text-ink"}`}>
-                    {plan.disabled ? "—" : formatPrice(displayMonthly)}
+                  <span className={`text-4xl font-extrabold tracking-tight ${plan.featured ? "text-white" : "text-ink"}`}>
+                    {formatPrice(displayMonthly)}
                   </span>
-                  {!plan.disabled && (
-                    <span className={`text-sm pb-1 ${plan.featured ? "text-white/40" : "text-ink-light"}`}>
-                      /mes
-                    </span>
-                  )}
+                  <span className={`text-sm pb-1 ${plan.featured ? "text-white/40" : "text-ink-light"}`}>
+                    /mes
+                  </span>
                 </div>
 
-                {annual && !plan.disabled && (
+                {annual && (
                   <p className={`text-xs mb-2 ${plan.featured ? "text-brand-400" : "text-brand-600"}`}>
                     {formatPrice(annualTotal)} al año · ahorras {formatPrice(savings)}
                   </p>
