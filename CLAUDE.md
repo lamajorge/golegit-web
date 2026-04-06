@@ -363,6 +363,26 @@ Edge Function (Vercel Edge Network — sin cold starts). Consulta la tabla `url_
 - [ ] Activar analytics (Vercel Analytics o similar)
 - [ ] Plan Lite: desarrollar feature de solo generación de documentos
 
+## Arquitectura multi-producto (pendiente)
+
+GoLegit será una suite de productos bajo subdominios:
+
+| Subdominio | Producto | Estado |
+|---|---|---|
+| `golegit.cl` / `home.golegit.cl` | GoLegit Home (TCP) | Live |
+| `business.golegit.cl` | GoLegit Business (PYMEs) | En desarrollo |
+
+**Pasos para activar Business cuando esté listo:**
+
+1. Crear `app/business/page.tsx` (landing Business)
+2. Descomentar el bloque `business` en `middleware.ts`
+3. Agregar `business.golegit.cl` en Vercel → Settings → Domains
+4. Actualizar el card de Business en `components/sections/ProductSuite.tsx` (quitar opacity, activar link)
+
+**`middleware.ts`** ya está creado con el routing skeleton. En producción detecta el subdominio desde el header `host` y hace rewrite. En local/Vercel preview el middleware no actúa (bypass explícito).
+
+**Decisión arquitectónica:** un solo repo/deploy, subdominios vía middleware rewrite — no repos separados. Esto simplifica el deploy y permite compartir componentes entre productos.
+
 ---
 
 ## Contexto del producto

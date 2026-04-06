@@ -31,13 +31,20 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center group">
+        <Link href="/" className="flex items-center gap-2.5 group">
           <img
             src={isDark ? "/logo/golegit-logo-dark.svg" : "/logo/golegit-logo.svg"}
             alt="GoLegit"
             height={28}
             style={{ height: 28, width: "auto" }}
           />
+          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border tracking-wide ${
+            isDark
+              ? "text-brand-400 border-brand-400/30 bg-brand-400/10"
+              : "text-brand-700 border-brand-200 bg-brand-50"
+          }`}>
+            Home
+          </span>
         </Link>
 
         {/* Desktop nav */}
