@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import JsonLd from "./JsonLd";
 
 export const metadata: Metadata = {
   icons: {
@@ -8,19 +9,21 @@ export const metadata: Metadata = {
   },
   title: "GoLegit — Contratos y liquidaciones para trabajadoras de casa particular",
   description:
-    "GoLegit genera contratos legales, calcula liquidaciones y mantiene el historial laboral de tu trabajadora de casa particular. Todo por WhatsApp, sin apps ni papelería.",
+    "GoLegit genera contratos legales, calcula liquidaciones y mantiene el historial laboral de tu trabajadora de casa particular. Todo por WhatsApp. Primer mes gratis, sin contrato.",
   keywords: [
     "contrato trabajadora de casa particular Chile",
     "liquidación trabajadora de casa particular",
     "contrato puertas adentro puertas afuera",
     "ley 20786 trabajadora casa particular",
     "calcular liquidación nana Chile",
-    "gestión laboral doméstica Chile",
+    "software gestión trabajadora de casa particular",
+    "cotizaciones empleada doméstica Chile",
+    "contrato asesora de hogar WhatsApp",
   ],
   openGraph: {
-    title: "GoLegit — El contrato de tu trabajadora, por WhatsApp",
+    title: "GoLegit — El contrato de tu trabajadora de casa particular, por WhatsApp",
     description:
-      "Contratos legales, liquidaciones y documentos laborales para trabajadoras de casa particular. Todo desde WhatsApp.",
+      "Contratos legales, liquidaciones y documentos laborales para trabajadoras de casa particular. Todo desde WhatsApp. Primer mes gratis.",
     url: "https://golegit.cl",
     siteName: "GoLegit",
     locale: "es_CL",
@@ -47,8 +50,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es">
-      <body className="antialiased">{children}</body>
+    <html lang="es-CL">
+      <body className="antialiased">
+        <JsonLd />
+        {children}
+      </body>
     </html>
   );
 }

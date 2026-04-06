@@ -366,6 +366,54 @@ Edge Function (Vercel Edge Network — sin cold starts). Consulta la tabla `url_
 - [ ] **Actualizar `Pricing.tsx`** con nombres oficiales (Lite / Pro / Plus), precios ($4.990 / $9.990 / $17.990) y feature matrix actual
 - [ ] Activar Lite en la sección de precios (quitar opacity-60 y badge "Próximamente")
 
+## SEO — Estado y pendientes (Auditoría Abril 2026)
+
+Auditoría realizada el 6 de abril de 2026. Competidores: Asefy, Nanapp, Nanaaldia.
+
+### Quick wins implementados ✅
+
+| Acción | Archivo |
+|---|---|
+| `lang="es-CL"` | `app/layout.tsx` |
+| FAQPage + SoftwareApplication + Organization JSON-LD | `app/JsonLd.tsx` |
+| `robots.txt` con sitemap declarado | `public/robots.txt` |
+| Sitemap XML automático post-build | `next-sitemap.config.js` + script `build` |
+| Keywords unificadas en metadata | `app/layout.tsx` |
+| `noindex` en /privacidad y /terminos | Cada `page.tsx` |
+
+### Pendiente técnico
+
+- [ ] **Google Search Console** — verificar dominio y enviar sitemap (`https://golegit.cl/sitemap.xml`)
+- [ ] **Redirect 301 www→apex** — confirmar en Vercel que `www.golegit.cl` redirige a `golegit.cl`
+- [ ] **Social proof** — añadir 3-5 testimonios reales + contador de contratos generados en homepage
+- [ ] **Alt text** — auditar todas las imágenes SVG inline del homepage
+
+### Pendiente estratégico (este trimestre)
+
+**Keywords principales a capturar:**
+
+| Keyword | Dificultad | Intención | Contenido |
+|---|---|---|---|
+| liquidación trabajadora de casa particular | Media | Transaccional | Optimizar `/simulador/liquidacion` |
+| contrato trabajadora de casa particular Chile | Media-Alta | Transaccional | Landing dedicada o homepage |
+| finiquito trabajadora de casa particular | Media | Transaccional | Calculadora de finiquito |
+| cómo pagar a mi trabajadora de casa particular | Baja | Informacional | Guía blog |
+| sueldo mínimo asesora de hogar 2026 | Baja | Informacional | Artículo anual |
+| software gestión trabajadora de casa particular | Media | Comercial | Landing comparativa |
+| cotizaciones empleada doméstica Chile 2026 | Baja | Informacional | Artículo + tabla |
+
+**Contenido prioritario a crear:**
+
+1. **Optimizar `/simulador`** — title/meta/H1 propios, párrafo introductorio con keywords, structured data `HowTo`
+2. **Calculadora de finiquito** — nueva herramienta en `/simulador/finiquito` (genera backlinks espontáneos)
+3. **Guía "Cómo pagar a tu asesora de hogar 2026"** — artículo blog 2.000+ palabras, tabla de aportes
+4. **Landing comparativa** — `/comparar` GoLegit vs Asefy vs Nanapp (keywords comerciales de alta conversión)
+5. **Artículos evergreen** — puertas adentro vs afuera, sueldo mínimo 2026, registro DT
+
+**Link building:**
+- Directorios: ComparaSoftware.cl, GetApp
+- Outreach: blogs finanzas personales, portales laborales chilenos
+
 ## Arquitectura multi-producto (pendiente)
 
 GoLegit será una suite de productos bajo subdominios:

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# No indexar páginas legales placeholder
+Disallow: /privacidad
+Disallow: /terminos
+
+Sitemap: https://golegit.cl/sitemap.xml
