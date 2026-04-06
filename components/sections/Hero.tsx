@@ -54,7 +54,7 @@ function ChatMockup() {
             <div className="bg-white rounded-2xl rounded-tl-sm px-3 py-2 shadow-sm">
               <p className="text-[11px] text-gray-800 leading-snug">Hola, soy GoLegit.</p>
               <p className="text-[11px] text-gray-700 leading-snug mt-1">
-                Vamos a crear el contrato de tu trabajadora.
+                Vamos a crear el contrato de tu asesora del hogar.
               </p>
               <p className="text-[9px] text-gray-400 text-right mt-1.5">09:14</p>
             </div>
