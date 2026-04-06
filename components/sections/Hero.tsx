@@ -125,9 +125,9 @@ export default function Hero() {
 
           {/* Headline */}
           <h1 className="text-[2.75rem] sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.0] tracking-tight mb-6 animate-fade-up animate-delay-100">
-            El contrato
+            El contrato de tu
             <br />
-            de tu asesora del hogar,
+            asesora del hogar,
             <br />
             <span className="text-brand-400">por WhatsApp.</span>
           </h1>
