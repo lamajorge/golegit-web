@@ -12,7 +12,7 @@ export default function Footer() {
             <div className="mb-4">
               <img
                 src="/logo/golegit-logo-dark.svg"
-                alt="GoLegit"
+                alt="GoLegit — Contratos y liquidaciones para trabajadoras de casa particular"
                 height={28}
                 style={{ height: 28, width: "auto" }}
               />

@@ -7,9 +7,16 @@ import NovedadesClient, { categoriaColor, formatFecha } from "./NovedadesClient"
 export const revalidate = 3600;
 
 export const metadata = {
-  title: "Novedades — GoLegit",
+  title: "Novedades legales para empleadores de trabajadoras de casa particular — GoLegit",
   description:
-    "Alertas laborales, novedades en remuneraciones y actualizaciones legales para empleadores de trabajadoras de casa particular.",
+    "Alertas laborales, cambios en remuneraciones, actualizaciones de la ley 20786 y novedades sobre trabajadoras de casa particular en Chile.",
+  keywords: [
+    "novedades ley trabajadora de casa particular",
+    "actualización ley 20786 Chile",
+    "sueldo mínimo asesora de hogar 2026",
+    "cambios laborales empleada doméstica Chile",
+  ],
+  alternates: { canonical: "https://golegit.cl/novedades" },
 };
 
 export default async function NovedadesPage({

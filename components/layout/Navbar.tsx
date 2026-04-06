@@ -107,7 +107,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center">
             <img
               src={isDark ? "/logo/golegit-logo-dark.svg" : "/logo/golegit-logo.svg"}
-              alt="GoLegit"
+              alt="GoLegit — Contratos y liquidaciones para trabajadoras de casa particular"
               height={28}
               style={{ height: 28, width: "auto" }}
             />

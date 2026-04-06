@@ -41,6 +41,7 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://golegit.cl",
+    languages: { "es-CL": "https://golegit.cl" },
   },
 };
 
