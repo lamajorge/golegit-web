@@ -209,10 +209,11 @@ El hero y el FinalCTA son `bg-zinc-950` (oscuro) — enmarcan la página. Las se
 ### Pricing
 
 - Client component con `useState` para toggle mensual/anual
-- 3 columnas: Lite (izq, pendiente) · 1 trabajadora (centro, featured dark) · 2+ (der)
+- 3 columnas: **Lite** (izq) · **Pro** (centro, featured dark) · **Plus** (der)
 - Anual: descuento 20% (`monthlyPrice * 0.8`), muestra ahorro total al año
 - Sección inferior: misma grilla de 3 cols — Lite features a la izq, "Todo incluido" col-span-2 a la der
-- Lite: `opacity-60`, badge "Próximamente", sin precio, botón deshabilitado
+- Lite: `opacity-60`, badge "Próximamente", precio por definir, botón deshabilitado
+- **Pendiente:** actualizar `components/sections/Pricing.tsx` con nombres Pro/Plus y feature matrix oficial (ver tabla en sección Contexto del producto)
 
 ### Secciones generales
 
@@ -361,7 +362,9 @@ Edge Function (Vercel Edge Network — sin cold starts). Consulta la tabla `url_
   - Operado por: Cubillos y Compañía Limitada, RUT 78.048.033-5
 - [ ] Configurar dominio `golegit.cl` en Vercel
 - [ ] Activar analytics (Vercel Analytics o similar)
-- [ ] Plan Lite: desarrollar feature de solo generación de documentos
+- [ ] **Actualizar `Pricing.tsx`** con nombres oficiales (Lite / Pro / Plus) y feature matrix actual
+- [ ] Definir precio del plan Lite y activarlo en la sección de precios
+- [ ] Integrar flujo de suscripción MercadoPago desde el botón "Comenzar" del plan elegido (redirige a `golegit-app`)
 
 ## Arquitectura multi-producto (pendiente)
 
@@ -401,9 +404,20 @@ GoLegit automatiza la burocracia legal de contratar TCP en Chile: contrato, anex
 - "La liquidación exacta, sin hacer cuentas."
 - "Menos de la mitad del precio de la competencia." ($9.990/mes vs $24.000/mes Pipol)
 
-**Planes:**
-- **1 trabajadora:** $9.990/mes (featured)
-- **2 o más trabajadoras:** $17.990/mes
-- **Lite:** pendiente de desarrollo — solo generación de documentos, sin automatizaciones
+**Planes (definidos 6 abril 2026):**
+
+| | Lite | Pro | Plus |
+|--|------|-----|------|
+| Trabajadoras | 1 | 1 | 2 o más |
+| Contrato, finiquito, carta de aviso | ✓ | ✓ | ✓ |
+| Liquidación manual (pregunta ausencias siempre) | ✓ | — | — |
+| Liquidación automatizada (pre-carga ausencias/licencias) | ✗ | ✓ | ✓ |
+| Registro ausencias, licencias, amonestaciones, vacaciones | ✗ | ✓ | ✓ |
+| Portal Trabajadora + firma digital | ✗ | ✓ | ✓ |
+| Certificados (vacaciones, antigüedad) | ✗ | ✓ | ✓ |
+| Precio | — | $9.990/mes | $17.990/mes |
+
+- **Mes de prueba gratuita** para todos los usuarios nuevos (features de Pro)
+- Los precios de Lite están por definir
 
 **SEO keywords principales:** contrato trabajadora de casa particular Chile, liquidación TCP, ley 20786, calcular liquidación nana Chile.
