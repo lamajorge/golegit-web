@@ -126,7 +126,7 @@ export default function Hero() {
           </div>
 
           {/* Headline */}
-          <h1 className="text-[2.75rem] sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.0] tracking-tight mb-6 animate-fade-up animate-delay-100">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.05] tracking-tight mb-6 animate-fade-up animate-delay-100">
             El contrato de tu
             <br />
             trabajadora de casa particular,
