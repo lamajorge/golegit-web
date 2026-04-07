@@ -87,17 +87,17 @@ export default function Problem() {
           ))}
         </div>
 
-        <div className="mt-10 p-6 rounded-2xl border border-gray-200 flex flex-col sm:flex-row items-start sm:items-center gap-5">
-          <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-ink flex items-center justify-center">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <div className="mt-10 p-7 rounded-2xl bg-red-50 border border-red-100 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+          <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#991b1b" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10"/>
               <line x1="12" y1="8" x2="12" y2="12"/>
               <line x1="12" y1="16" x2="12.01" y2="16"/>
             </svg>
           </div>
           <div>
-            <p className="font-bold text-ink mb-1">La Inspección del Trabajo puede fiscalizar en cualquier momento.</p>
-            <p className="text-sm text-ink-muted">
+            <p className="font-bold text-red-900 mb-1">La Inspección del Trabajo puede fiscalizar en cualquier momento.</p>
+            <p className="text-sm text-red-800/70">
               Las multas por contrato mal hecho o liquidación incorrecta pueden superar
               con creces lo que cuesta tenerlo en regla.
             </p>
