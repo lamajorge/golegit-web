@@ -426,6 +426,40 @@ Auditoría realizada el 6 de abril de 2026. Competidores: Asefy, Nanapp, Nanaald
 - Directorios: ComparaSoftware.cl, GetApp
 - Outreach: blogs finanzas personales, portales laborales chilenos
 
+## Coordinación entre repos — Ley Base
+
+GoLegit opera como 4 repos independientes pero comparten la misma DB y el mismo producto. **Un feature que toca al usuario casi siempre requiere cambios en más de un repo.** Antes de cerrar cualquier tarea, revisar si algún otro repo debe cambiar también.
+
+### Los 4 repos y sus responsabilidades
+
+| Repo | Rol | Deploy |
+|------|-----|--------|
+| `golegit` | Bot WhatsApp + Edge Functions + **todas las migraciones DB** | Supabase CI/CD |
+| **`web`** | **Landing page + simuladores + precios públicos (este repo)** | **Vercel** |
+| `golegit-panel` | Superadmin: parámetros legales, AFPs, plantillas, monitoreo | Vercel |
+| `golegit-app` | Portal empleador/trabajadora: suscripción, firma, documentos | Vercel |
+
+### Cuándo coordinar (desde la perspectiva de la web)
+
+Este repo es el escaparate del producto — lo que se promete aquí debe estar implementado. Los triggers principales:
+
+| Trigger | Qué revisar aquí |
+|---------|-----------------|
+| `golegit` activa o modifica una feature de plan | Actualizar `components/sections/Pricing.tsx` — features, precios, flags de disponibilidad |
+| `golegit-app` lanza una nueva ruta pública | ¿Hay CTA en la landing que deba apuntar a ella? |
+| Cambio de precios o nombres de plan | Actualizar `lib/config.ts` PRICING + `Pricing.tsx` |
+| Nueva herramienta gratuita disponible | Agregar a `/simulador` |
+| Plan Lite activado en el bot | Quitar `disabled: true` y `opacity-60` en `Pricing.tsx` |
+
+### Checklist antes de hacer push
+
+- [ ] **¿El cambio afecta lo que se promete en Pricing?** → verificar que está implementado en `golegit` y `golegit-app` o marcarlo como "Próximamente" explícito.
+- [ ] **¿Cambié precios o nombres de plan?** → sincronizar con `golegit/CLAUDE.md` (feature flags) y `golegit-app` (UI suscripción).
+- [ ] **¿El botón "Comenzar" o cualquier CTA apunta a una URL nueva?** → verificar que la ruta existe en el repo destino.
+- [ ] **¿Cambié el URL shortener (`/[code]`)?** → coordinado con tabla `url_cortas` en `golegit` (la crea `notificar/index.ts`).
+
+---
+
 ## Arquitectura multi-producto (pendiente)
 
 GoLegit será una suite de productos bajo subdominios:
