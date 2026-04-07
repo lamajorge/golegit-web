@@ -115,7 +115,7 @@ export default function Hero() {
       />
 
       {/* Content layer — always starts below the navbar (pt-20 = 80px > h-16 = 64px) */}
-      <div className="absolute inset-0 flex flex-col justify-center pt-20 pb-8">
+      <div className="absolute inset-0 flex flex-col justify-center pt-32 pb-10">
       <div className="relative w-full max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] gap-10 xl:gap-16 lg:items-center">
         {/* Left: Copy */}
         <div>
