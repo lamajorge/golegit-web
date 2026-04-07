@@ -116,17 +116,17 @@ export default function Hero() {
 
       {/* Content layer — always starts below the navbar (pt-20 = 80px > h-16 = 64px) */}
       <div className="absolute inset-0 flex flex-col justify-center pt-32 pb-10">
-      <div className="relative w-full max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] gap-10 xl:gap-16 lg:items-center">
+      <div className="relative w-full max-w-6xl mx-auto px-4 lg:px-6 grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] gap-8 xl:gap-16 lg:items-center">
         {/* Left: Copy */}
         <div>
           {/* Badge — just above the headline */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-white/65 text-xs font-medium mb-4 animate-fade-up">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-white/65 text-xs font-medium mb-3 animate-fade-up">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-400" />
             1 mes gratis · Sin tarjeta de crédito
           </div>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.05] tracking-tight mb-6 animate-fade-up animate-delay-100">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.05] tracking-tight mb-4 animate-fade-up animate-delay-100">
             El contrato de tu
             <br />
             trabajadora de casa particular,
@@ -135,7 +135,7 @@ export default function Hero() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg text-white/70 leading-relaxed max-w-lg mb-10 animate-fade-up animate-delay-200">
+          <p className="text-base lg:text-lg text-white/70 leading-relaxed max-w-lg mb-7 animate-fade-up animate-delay-200">
             GoLegit genera contratos legales, calcula liquidaciones y mantiene
             el historial laboral de tu trabajadora de casa particular.
             Sin apps, sin formularios.
@@ -161,7 +161,7 @@ export default function Hero() {
           </div>
 
           {/* Stats row */}
-          <div className="mt-14 grid grid-cols-3 gap-6 border-t border-white/8 pt-10 animate-fade-up animate-delay-400">
+          <div className="mt-8 grid grid-cols-3 gap-4 border-t border-white/8 pt-6 animate-fade-up animate-delay-400">
             {[
               { value: "$9.990", label: "al mes" },
               { value: "0", label: "apps que instalar" },
