@@ -114,11 +114,11 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative w-full max-w-6xl mx-auto px-6 pt-24 pb-10 lg:py-0 grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] gap-10 xl:gap-16 lg:items-center">
+      <div className="relative w-full max-w-6xl mx-auto px-6 pt-28 pb-10 lg:py-0 grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] gap-10 xl:gap-16 lg:items-center">
         {/* Left: Copy */}
         <div>
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-white/65 text-xs font-medium mb-8 animate-fade-up">
+          {/* Badge — hidden on mobile to save vertical space */}
+          <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-white/65 text-xs font-medium mb-8 animate-fade-up">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-400" />
             1 mes gratis · Sin tarjeta de crédito
           </div>
