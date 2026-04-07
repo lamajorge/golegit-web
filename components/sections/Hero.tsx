@@ -119,20 +119,20 @@ export default function Hero() {
       <div className="relative w-full max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] gap-10 xl:gap-16 lg:items-center">
         {/* Left: Copy */}
         <div>
+          {/* Badge — just above the headline */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-white/65 text-xs font-medium mb-4 animate-fade-up">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-400" />
+            1 mes gratis · Sin tarjeta de crédito
+          </div>
+
           {/* Headline */}
-          <h1 className="text-[2.75rem] sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.0] tracking-tight mb-5 animate-fade-up">
+          <h1 className="text-[2.75rem] sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.0] tracking-tight mb-6 animate-fade-up animate-delay-100">
             El contrato de tu
             <br />
             trabajadora de casa particular,
             <br />
             <span className="text-brand-400">por WhatsApp.</span>
           </h1>
-
-          {/* Badge — below the title */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-white/65 text-xs font-medium mb-6 animate-fade-up animate-delay-100">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand-400" />
-            1 mes gratis · Sin tarjeta de crédito
-          </div>
 
           {/* Subtitle */}
           <p className="text-lg text-white/70 leading-relaxed max-w-lg mb-10 animate-fade-up animate-delay-200">
