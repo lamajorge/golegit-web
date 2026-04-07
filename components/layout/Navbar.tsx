@@ -50,26 +50,26 @@ function ProductSwitcher({ isDark }: { isDark: boolean }) {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs font-bold text-ink">GoLegit Home</p>
-              <p className="text-[10px] text-ink-light">Personal doméstico · TCP</p>
+              <p className="text-[10px] text-ink-light">Trabajadoras de casa particular</p>
             </div>
             <span className="w-1.5 h-1.5 rounded-full bg-brand-500 flex-shrink-0" />
           </Link>
 
           <div className="h-px bg-gray-100 mx-4" />
 
-          {/* Business — bloqueado */}
-          <div className="flex items-center gap-3 px-4 py-3.5 opacity-40 cursor-not-allowed">
-            <div className="w-7 h-7 rounded-lg bg-gray-200 flex items-center justify-center flex-shrink-0">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          {/* Business — próximamente */}
+          <div className="flex items-center gap-3 px-4 py-3.5 cursor-not-allowed">
+            <div className="w-7 h-7 rounded-lg bg-zinc-900 flex items-center justify-center flex-shrink-0">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="7" width="20" height="14" rx="2" />
                 <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
               </svg>
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs font-bold text-ink">GoLegit Business</p>
-              <p className="text-[10px] text-ink-light">Equipos y PYMEs</p>
+              <p className="text-[10px] text-ink-muted">Empleados de empresa · Pronto</p>
             </div>
-            <span className="text-[9px] font-semibold text-ink-light bg-gray-100 px-1.5 py-0.5 rounded-full flex-shrink-0">
+            <span className="text-[9px] font-semibold text-brand-700 bg-brand-50 border border-brand-200 px-1.5 py-0.5 rounded-full flex-shrink-0">
               Pronto
             </span>
           </div>
