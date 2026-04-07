@@ -261,7 +261,11 @@ export default function LiquidacionPage() {
               onClick={() => setModo(key)}
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                 modo === key
-                  ? "bg-white text-ink shadow-sm"
+                  ? key === "liquido"
+                    ? "bg-brand-600 text-white shadow-sm"
+                    : "bg-white text-ink shadow-sm"
+                  : key === "liquido"
+                  ? "text-brand-700 hover:text-brand-600"
                   : "text-ink-muted hover:text-ink"
               }`}
             >
