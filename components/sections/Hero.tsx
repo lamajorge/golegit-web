@@ -98,7 +98,7 @@ function ChatMockup() {
 
 export default function Hero() {
   return (
-    <section className="relative h-[100dvh] flex items-center overflow-hidden bg-zinc-950">
+    <section className="relative h-[100svh] lg:h-[100dvh] flex items-center overflow-hidden bg-zinc-950">
       {/* Ambient glow — top left */}
       <div
         className="absolute top-0 left-0 w-[700px] h-[700px] pointer-events-none"
@@ -114,7 +114,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative w-full max-w-6xl mx-auto px-6 pt-16 pb-8 grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] gap-10 xl:gap-16 items-center h-full">
+      <div className="relative w-full max-w-6xl mx-auto px-6 pt-20 pb-12 grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] gap-10 xl:gap-16 items-center">
         {/* Left: Copy */}
         <div>
           {/* Badge */}
