@@ -98,7 +98,7 @@ function ChatMockup() {
 
 export default function Hero() {
   return (
-    <section className="relative h-[100svh] lg:h-[100dvh] lg:flex lg:items-center overflow-hidden bg-zinc-950">
+    <section className="relative h-[100svh] lg:h-[100dvh] overflow-hidden bg-zinc-950">
       {/* Ambient glow — top left */}
       <div
         className="absolute top-0 left-0 w-[700px] h-[700px] pointer-events-none"
@@ -114,7 +114,9 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative w-full max-w-6xl mx-auto px-6 pt-28 pb-10 lg:py-0 grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] gap-10 xl:gap-16 lg:items-center">
+      {/* Content layer — always starts below the navbar (pt-20 = 80px > h-16 = 64px) */}
+      <div className="absolute inset-0 flex flex-col justify-center pt-20 pb-8">
+      <div className="relative w-full max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[1fr_280px] xl:grid-cols-[1fr_300px] gap-10 xl:gap-16 lg:items-center">
         {/* Left: Copy */}
         <div>
           {/* Badge — hidden on mobile to save vertical space */}
@@ -177,6 +179,7 @@ export default function Hero() {
         <div className="hidden lg:flex justify-end animate-fade-up animate-delay-200">
           <ChatMockup />
         </div>
+      </div>
       </div>
     </section>
   );
