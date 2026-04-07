@@ -482,6 +482,29 @@ GoLegit será una suite de productos bajo subdominios:
 
 ---
 
+## Reglas de oro de seguridad
+
+Estas reglas aplican a **todos los repos** del ecosistema GoLegit. Antes de hacer push, verificar que ninguna se viola.
+
+### Web (landing + simuladores)
+
+- **Nunca secretos en el bundle del cliente.** `NEXT_PUBLIC_` solo para valores realmente públicos. Tokens de APIs externas (Analytics, Notion, etc.) solo en Server Components o API routes.
+- **Nunca open redirect.** Cualquier parámetro de URL usado en redirecciones debe validarse como path relativo.
+- **Sanitizar inputs de simuladores.** Los simuladores de liquidación reciben números del usuario — validar rangos y tipos antes de calcular. No mostrar inputs sin sanitizar en el HTML.
+- **Sin XSS.** Contenido de Notion/CMS nunca va a `dangerouslySetInnerHTML` sin sanitización previa.
+- **Edge Route `/[code]`** (URL shortener): solo redirige a URLs de Supabase Storage propias. Nunca redirigir a URLs externas arbitrarias — validar que el destino es `*.supabase.co` o `golegit.cl`.
+
+### General
+
+- **Logs sin datos sensibles.** Nunca loguear tokens, emails, RUTs.
+- **Secretos solo en env vars.** Nunca hardcodeados en código.
+
+### Regla general
+
+> Si algo nuevo toca redirecciones con parámetros externos, inputs de usuario, o secretos → **parar y revisar** antes de commitear.
+
+---
+
 ## Contexto del producto
 
 GoLegit automatiza la burocracia legal de contratar TCP en Chile: contrato, anexos, liquidación mensual e historial probatorio — todo por WhatsApp, sin app, sin portal.
