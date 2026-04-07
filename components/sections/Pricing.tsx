@@ -142,7 +142,7 @@ export default function Pricing() {
                   <p className={`text-base font-extrabold mb-0.5 ${plan.featured ? "text-white" : "text-ink"}`}>
                     {plan.name}
                   </p>
-                  <p className={`text-xs ${plan.featured ? "text-white/40" : "text-ink-light"}`}>
+                  <p className={`text-xs ${plan.featured ? "text-white/60" : "text-ink-light"}`}>
                     {plan.sublabel}
                   </p>
                 </div>
@@ -151,7 +151,7 @@ export default function Pricing() {
                   <span className={`text-4xl font-extrabold tracking-tight ${plan.featured ? "text-white" : "text-ink"}`}>
                     {formatPrice(displayMonthly)}
                   </span>
-                  <span className={`text-sm pb-1 ${plan.featured ? "text-white/40" : "text-ink-light"}`}>
+                  <span className={`text-sm pb-1 ${plan.featured ? "text-white/60" : "text-ink-light"}`}>
                     /mes
                   </span>
                 </div>
@@ -162,7 +162,7 @@ export default function Pricing() {
                   </p>
                 )}
 
-                <p className={`text-sm mb-6 mt-2 flex-1 ${plan.featured ? "text-white/50" : "text-ink-muted"}`}>
+                <p className={`text-sm mb-6 mt-2 flex-1 ${plan.featured ? "text-white/70" : "text-ink-muted"}`}>
                   {plan.description}
                 </p>
 
@@ -221,7 +221,7 @@ export default function Pricing() {
                   <p className={`text-sm font-bold ${plan.featured ? "text-white" : "text-ink"}`}>
                     {plan.name}
                   </p>
-                  <p className={`text-xs mt-0.5 ${plan.featured ? "text-white/40" : "text-ink-light"}`}>
+                  <p className={`text-xs mt-0.5 ${plan.featured ? "text-white/60" : "text-ink-light"}`}>
                     {plan.disabled ? "Próximamente" : formatPrice(annual ? Math.round(plan.monthlyPrice * 0.8) : plan.monthlyPrice) + "/mes"}
                   </p>
                 </div>

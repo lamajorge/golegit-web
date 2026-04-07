@@ -13,7 +13,7 @@ export default function Solution() {
               <br />
               desde tu WhatsApp.
             </h2>
-            <p className="text-lg text-white/50 leading-relaxed mb-10">
+            <p className="text-lg text-white/70 leading-relaxed mb-10">
               Sin instalar nada. Sin crear una cuenta. Le escribes a GoLegit
               por WhatsApp y el sistema te guía paso a paso para generar
               todos los documentos que necesitas.
@@ -32,7 +32,7 @@ export default function Solution() {
                       <path d="M2 6l3 3 5-5" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <p className="text-white/60 text-sm leading-relaxed">{item}</p>
+                  <p className="text-white/75 text-sm leading-relaxed">{item}</p>
                 </div>
               ))}
             </div>
@@ -55,8 +55,8 @@ export default function Solution() {
             ].map((stat, i) => (
               <div key={i} className="p-5 rounded-2xl bg-white/5 border border-white/8 hover:bg-white/8 transition-colors">
                 <p className="text-3xl font-extrabold text-white tracking-tight mb-1">{stat.value}</p>
-                <p className="text-sm font-semibold text-white/50 mb-1">{stat.label}</p>
-                <p className="text-xs text-white/30">{stat.sub}</p>
+                <p className="text-sm font-semibold text-white/65 mb-1">{stat.label}</p>
+                <p className="text-xs text-white/50">{stat.sub}</p>
               </div>
             ))}
           </div>

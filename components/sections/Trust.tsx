@@ -61,7 +61,7 @@ export default function Trust() {
             </div>
             <div className="flex-1">
               <h3 className="text-xl font-bold text-white mb-2">Construido por un abogado</h3>
-              <p className="text-white/50 leading-relaxed">
+              <p className="text-white/70 leading-relaxed">
                 GoLegit fue diseñado por un abogado especializado en derecho laboral chileno. Las plantillas cumplen
                 con el Art. 10 del Código del Trabajo y la Ley 20.786. No son formularios genéricos de internet.
               </p>
