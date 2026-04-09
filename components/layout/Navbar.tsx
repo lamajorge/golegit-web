@@ -147,6 +147,14 @@ export default function Navbar() {
           >
             Novedades
           </Link>
+          <a
+            href="https://app.golegit.cl/login"
+            className={`text-sm font-medium transition-colors ${
+              isDark ? "text-white/60 hover:text-white" : "text-ink-muted hover:text-ink"
+            }`}
+          >
+            Ingresar
+          </a>
           <CtaButton
             className={`inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg transition-colors ${
               isDark
@@ -194,6 +202,9 @@ export default function Navbar() {
           <Link href="/novedades" className="text-sm font-medium text-ink-muted" onClick={() => setMenuOpen(false)}>
             Novedades
           </Link>
+          <a href="https://app.golegit.cl/login" className="text-sm font-medium text-ink-muted text-center">
+            Ingresar a mi portal
+          </a>
           <CtaButton className="inline-flex items-center justify-center gap-2 bg-ink text-white text-sm font-semibold px-4 py-3 rounded-lg">
             Empieza gratis — 1 mes sin costo
           </CtaButton>
