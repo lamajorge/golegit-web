@@ -61,7 +61,7 @@ const features = [
       </svg>
     ),
     title: "Recordatorios automáticos",
-    description: "Aviso mensual para pagar cotizaciones en Previred antes del plazo. Y alerta 7 y 3 días antes del vencimiento de contratos a plazo fijo.",
+    description: "Aviso mensual de cotizaciones: el plazo legal es el día 10, Previred lo extiende hasta el 13 para pagos electrónicos. Y alerta 7 y 3 días antes del vencimiento de contratos a plazo fijo.",
   },
   {
     icon: (
