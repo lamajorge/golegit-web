@@ -57,12 +57,11 @@ const features = [
   {
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-        <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
-        <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/>
       </svg>
     ),
-    title: "Alerta de vencimiento",
-    description: "Contratos a plazo fijo: aviso automático 7 y 3 días antes del vencimiento para que puedas renovar o terminar correctamente.",
+    title: "Recordatorios automáticos",
+    description: "Aviso mensual para pagar cotizaciones en Previred antes del plazo. Y alerta 7 y 3 días antes del vencimiento de contratos a plazo fijo.",
   },
   {
     icon: (
@@ -71,7 +70,7 @@ const features = [
         <path d="M9 12l2 2 4-4"/>
       </svg>
     ),
-    title: "Certificados a demanda",
+    title: "Certificados laborales",
     description: "Certificado de vacaciones con saldo exacto y certificado de antigüedad laboral. La trabajadora los solicita desde su portal.",
   },
 ];
@@ -175,6 +174,25 @@ export default function Features() {
               <p className="text-sm text-ink-muted leading-relaxed">{feature.description}</p>
             </div>
           ))}
+
+          {/* Próximamente — libro laboral */}
+          <div className="p-6 rounded-2xl border border-gray-100 bg-gray-50/60 opacity-70">
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-10 h-10 rounded-xl bg-gray-100 text-gray-400 flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+                  <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+                </svg>
+              </div>
+              <span className="text-[10px] font-semibold text-ink-light bg-gray-100 px-2 py-0.5 rounded-full">
+                Próximamente
+              </span>
+            </div>
+            <h3 className="font-bold text-ink mb-2">Libro laboral electrónico</h3>
+            <p className="text-sm text-ink-muted leading-relaxed">
+              Generación del archivo mensual para la Dirección del Trabajo. Cumplimiento de la obligación sin trámites manuales.
+            </p>
+          </div>
         </div>
 
       </div>
