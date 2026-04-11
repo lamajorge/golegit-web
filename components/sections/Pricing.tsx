@@ -242,23 +242,7 @@ export default function Pricing() {
           Primer mes gratis con las funciones de Pro · Sin tarjeta de crédito · Sin permanencia
         </p>
 
-        {/* Feature matrix toggle */}
-        <div className="text-center mb-4">
-          <button
-            onClick={() => setShowMatrix(!showMatrix)}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-muted hover:text-ink transition-colors"
-          >
-            {showMatrix ? "Ocultar" : "Ver"} comparativa completa
-            <svg
-              width="14" height="14" viewBox="0 0 14 14" fill="none"
-              className={`transition-transform ${showMatrix ? "rotate-180" : ""}`}
-            >
-              <path d="M2 4l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </div>
-
-        {/* Feature matrix — siempre visible, truncada con fade hasta que se expande */}
+        {/* Feature matrix — siempre parcialmente visible, se expande con la flechita */}
         <div className="relative">
           <div
             className={`bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all duration-300 ${
@@ -303,13 +287,36 @@ export default function Pricing() {
             ))}
           </div>
 
-          {/* Gradient fade cuando está colapsada */}
+          {/* Fade + botón cuando está colapsada */}
           {!showMatrix && (
-            <div
-              className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#fafaf8] to-transparent pointer-events-none rounded-b-2xl"
-            />
+            <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center pb-3 pt-10 bg-gradient-to-t from-[#fafaf8] via-[#fafaf8]/80 to-transparent rounded-b-2xl">
+              <button
+                onClick={() => setShowMatrix(true)}
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-muted hover:text-ink transition-colors"
+              >
+                Ver comparativa completa
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 4l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
           )}
         </div>
+
+        {/* Botón ocultar cuando está expandida */}
+        {showMatrix && (
+          <div className="text-center mt-4">
+            <button
+              onClick={() => setShowMatrix(false)}
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-muted hover:text-ink transition-colors"
+            >
+              Ocultar comparativa
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="rotate-180">
+                <path d="M2 4l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
