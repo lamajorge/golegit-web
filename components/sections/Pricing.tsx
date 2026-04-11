@@ -162,17 +162,9 @@ export default function Pricing() {
                   </p>
                 )}
 
-                <p className={`text-sm mb-4 mt-2 ${plan.featured ? "text-white/70" : "text-ink-muted"}`}>
+                <p className={`text-sm mb-6 mt-2 flex-1 ${plan.featured ? "text-white/70" : "text-ink-muted"}`}>
                   {plan.description}
                 </p>
-
-                {plan.featured && (
-                  <div className="border border-brand-600/40 bg-brand-600/10 rounded-xl px-3 py-2.5 mb-4 flex-1 text-xs text-brand-400 leading-relaxed">
-                    Tu trabajadora recibe un enlace, firma desde su celular y el contrato queda con validez legal — sin imprimir nada.
-                  </div>
-                )}
-
-                {!plan.featured && <div className="flex-1" />}
 
                 {plan.disabled ? (
                   <div className="text-center text-sm font-semibold py-2.5 px-4 rounded-xl bg-gray-200 text-gray-400 cursor-not-allowed">
