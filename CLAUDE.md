@@ -289,8 +289,8 @@ Calculadora de liquidación para TCP. Lógica enteramente client-side.
 - **Descuentos trabajadora:** AFP (tasa + comisión según AFP elegida) + Fonasa 7%. No descuenta AFC.
 - **Aportes empleador (Previred TCP):** SIS 1,54% · AFC TCP 3,00% · Mutual 0,93% · Cotización adicional 1,00% · Indemnización todo evento 1,11%.
 - **Dos modos:** sueldo base → calcula líquido; o desde líquido pactado → calcula sueldo base necesario.
-- **AFPs:** 7 opciones con tasas de comisión vigentes (1,27%–1,45%).
-- **Constantes clave:** IMM $530.000, Tope imponible AFP $3.300.000.
+- **AFPs:** 7 opciones con tasas de comisión vigentes (0,49%–1,45%).
+- **Constantes clave:** IMM $539.000 (se actualiza cada julio), Tope imponible AFP $3.585.755 (se actualiza mensualmente desde Previred). Los valores reales los lee el sistema desde `parametros_legales` en Supabase — los que están aquí son referencia, no los que usa el cálculo.
 - La lógica legal está documentada en `reglas liquidación.txt` en la raíz del proyecto.
 
 ### Jornada (`/simulador/jornada`)
