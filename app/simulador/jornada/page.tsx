@@ -14,6 +14,9 @@ const FECHA_42H = new Date("2026-04-26");
 const JORNADA_MAX = () => (new Date() < FECHA_42H ? 44 : 42);
 const COLACION_MIN = 30;
 const COLACION_MAX = 120;
+// Puertas adentro — Art. 146 CT
+const LIMITE_DIARIO_ADENTRO = 12; // horas máx por día
+const DESCANSO_MIN_ADENTRO = 12;  // horas continuas entre jornadas
 
 const DIAS = [
   { nombre: "Lunes", corto: "lunes" },
@@ -56,7 +59,11 @@ interface DiaSchedule {
   salida: string;
 }
 
-function generarTextoJornada(dias: DiaSchedule[], colacion: number): string {
+function generarTextoJornada(
+  dias: DiaSchedule[],
+  colacion: number,
+  modalidad: "afuera" | "adentro"
+): string {
   const activos = dias
     .map((d, i) => ({ ...d, idx: i }))
     .filter((d) => d.activo && d.entrada && d.salida);
@@ -87,8 +94,38 @@ function generarTextoJornada(dias: DiaSchedule[], colacion: number): string {
     return `${dayStr} de ${first.entrada} a ${last.salida} hrs.`;
   });
 
+  if (modalidad === "adentro") {
+    const colTexto = colacion > 0
+      ? `, con ${colacion} minutos de colación dentro de la jornada`
+      : "";
+    return (
+      partes.join(", ") +
+      colTexto +
+      ". La trabajadora gozará de un descanso continuo de 12 horas entre jornadas, del cual al menos 9 horas serán nocturnas e ininterrumpidas, en conformidad con el Art. 146 del Código del Trabajo."
+    );
+  }
+
   const colacionTexto = `con ${colacion} minutos de descanso diario no imputables a la jornada`;
   return partes.join(", ") + ", " + colacionTexto + ".";
+}
+
+// ─────────────────────────────────────────────────────────────
+// VERIFICADOR DE DESCANSO ENTRE DÍAS (puertas adentro)
+// Retorna los índices de días donde el descanso hacia el día
+// siguiente es menor a 12 horas.
+// ─────────────────────────────────────────────────────────────
+function calcDescansosInsuficientes(dias: DiaSchedule[]): number[] {
+  const result: number[] = [];
+  for (let i = 0; i < dias.length - 1; i++) {
+    if (dias[i].activo && dias[i + 1].activo && dias[i].salida && dias[i + 1].entrada) {
+      const salidaMins = toMins(dias[i].salida);
+      const entradaMins = toMins(dias[i + 1].entrada);
+      // Gap = tiempo desde salida del día i hasta entrada del día i+1 (siguiente día)
+      const gapMins = (entradaMins - salidaMins + 24 * 60) % (24 * 60);
+      if (gapMins > 0 && gapMins < DESCANSO_MIN_ADENTRO * 60) result.push(i);
+    }
+  }
+  return result;
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -105,6 +142,7 @@ const DEFAULT_DIAS: DiaSchedule[] = [
 ];
 
 export default function JornadaPage() {
+  const [modalidad, setModalidad] = useState<"afuera" | "adentro">("afuera");
   const [colacion, setColacion] = useState(30);
   const [dias, setDias] = useState<DiaSchedule[]>(DEFAULT_DIAS);
   const [copied, setCopied] = useState(false);
@@ -116,24 +154,40 @@ export default function JornadaPage() {
     Math.ceil((FECHA_42H.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
   );
   const antesDelCambio = new Date() < FECHA_42H;
+  const esAdentro = modalidad === "adentro";
 
   function updateDia(i: number, field: keyof DiaSchedule, val: string | boolean) {
     setDias((prev) => prev.map((d, idx) => (idx === i ? { ...d, [field]: val } : d)));
   }
 
   const horasPorDia = useMemo(
-    () => dias.map((d) => (d.activo ? calcHoras(d.entrada, d.salida, colacion) : 0)),
-    [dias, colacion]
+    () => dias.map((d) => (d.activo ? calcHoras(d.entrada, d.salida, esAdentro ? 0 : colacion) : 0)),
+    [dias, colacion, esAdentro]
   );
 
   const totalHoras = horasPorDia.reduce((a, b) => a + b, 0);
+
+  // Puertas afuera: límite semanal
   const horasExtra = Math.max(0, totalHoras - jornadaMax);
   const horasExtra42 = antesDelCambio ? Math.max(0, totalHoras - 42) : null;
-  const dentroDelLimite = horasExtra === 0;
+
+  // Puertas adentro: límite diario de 12h
+  const diasExceden12h = useMemo(
+    () => dias.map((d, i) => d.activo && horasPorDia[i] > LIMITE_DIARIO_ADENTRO),
+    [dias, horasPorDia]
+  );
+  const descansosInsuficientes = useMemo(
+    () => (esAdentro ? calcDescansosInsuficientes(dias) : []),
+    [esAdentro, dias]
+  );
+
+  const dentroDelLimite = esAdentro
+    ? !diasExceden12h.some(Boolean)
+    : horasExtra === 0;
 
   const textoJornada = useMemo(
-    () => generarTextoJornada(dias, colacion),
-    [dias, colacion]
+    () => generarTextoJornada(dias, colacion, modalidad),
+    [dias, colacion, modalidad]
   );
 
   async function handleCopy() {
@@ -213,13 +267,46 @@ export default function JornadaPage() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 items-start">
           {/* ── Inputs ── */}
           <div className="space-y-5">
+
+            {/* Modalidad */}
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+              <p className="text-sm font-semibold text-ink mb-3">Modalidad</p>
+              <div className="flex gap-1 bg-gray-100 rounded-xl p-1">
+                {([
+                  { key: "afuera", label: "Puertas afuera" },
+                  { key: "adentro", label: "Puertas adentro (cama adentro)" },
+                ] as const).map(({ key, label }) => (
+                  <button
+                    key={key}
+                    onClick={() => setModalidad(key)}
+                    className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                      modalidad === key
+                        ? "bg-white text-ink shadow-sm"
+                        : "text-ink-muted hover:text-ink"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              {esAdentro && (
+                <p className="text-xs text-ink-muted mt-3 leading-relaxed bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
+                  Régimen especial Art. 146 CT — máx. 12 h/día · 12 h de descanso continuo entre jornadas · Sin límite semanal fijo (Ley 20.786)
+                </p>
+              )}
+            </div>
+
             {/* Colación */}
             <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
               <div className="flex items-start justify-between gap-4 mb-1">
                 <div>
-                  <p className="text-sm font-semibold text-ink">Tiempo de colación</p>
+                  <p className="text-sm font-semibold text-ink">
+                    {esAdentro ? "Colación (opcional)" : "Tiempo de colación"}
+                  </p>
                   <p className="text-xs text-ink-muted mt-0.5">
-                    No imputable a la jornada (Art. 34 CT)
+                    {esAdentro
+                      ? "Sin mínimo legal fijo para puertas adentro"
+                      : "No imputable a la jornada (Art. 34 CT)"}
                   </p>
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
@@ -228,22 +315,31 @@ export default function JornadaPage() {
                     inputMode="numeric"
                     value={colacion}
                     onChange={(e) => {
-                      const raw = parseInt(e.target.value.replace(/\D/g, "")) || COLACION_MIN;
-                      setColacion(Math.min(COLACION_MAX, Math.max(COLACION_MIN, raw)));
+                      const raw = parseInt(e.target.value.replace(/\D/g, "")) || 0;
+                      const min = esAdentro ? 0 : COLACION_MIN;
+                      setColacion(Math.min(COLACION_MAX, Math.max(min, raw)));
                     }}
                     className="w-20 text-center bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm font-semibold text-ink focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-400"
                   />
                   <span className="text-sm text-ink-muted">min</span>
                 </div>
               </div>
-              {(colacion < COLACION_MIN || colacion > COLACION_MAX) && (
+              {!esAdentro && colacion < COLACION_MIN && (
                 <p className="text-xs text-red-500 mt-2 flex items-center gap-1.5">
                   <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
-                  {colacion < COLACION_MIN ? "El mínimo legal es 30 minutos" : "El máximo habitual es 120 minutos (2 horas)"}
+                  El mínimo legal para puertas afuera es 30 minutos (Art. 34 CT)
+                </p>
+              )}
+              {colacion > COLACION_MAX && (
+                <p className="text-xs text-amber-600 mt-2 flex items-center gap-1.5">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
+                  El máximo habitual es 120 minutos (2 horas)
                 </p>
               )}
               <p className="text-xs text-ink-light mt-3 leading-relaxed bg-gray-50 rounded-lg px-3 py-2">
-                Mín. legal: 30 min — Máx. habitual: 120 min (2 h). Para trabajadoras puertas adentro, el descanso diario es de 2 horas (no contabilizadas en la jornada).
+                {esAdentro
+                  ? "Para puertas adentro no hay mínimo legal de colación (Art. 34 CT no aplica). Lo que sí exige la ley son 12 horas de descanso continuo entre jornadas, incluyendo al menos 9 horas nocturnas ininterrumpidas."
+                  : "Mín. legal: 30 min — Máx. habitual: 120 min (2 h). No se descuenta del cálculo de horas semanales."}
               </p>
             </div>
 
@@ -308,7 +404,9 @@ export default function JornadaPage() {
                           </div>
                           {/* Horas */}
                           <span className={`text-sm font-medium flex-shrink-0 w-12 text-right tabular-nums ${
-                            horasPorDia[i] > 10 ? "text-amber-600" : "text-brand-700"
+                            esAdentro
+                              ? horasPorDia[i] > LIMITE_DIARIO_ADENTRO ? "text-red-600" : "text-brand-700"
+                              : horasPorDia[i] > 10 ? "text-amber-600" : "text-brand-700"
                           }`}>
                             {horasPorDia[i] > 0 ? horasPorDia[i].toFixed(1) + "h" : "—"}
                           </span>
@@ -378,7 +476,7 @@ export default function JornadaPage() {
               }`}
             >
               <p className="text-[11px] font-semibold uppercase tracking-widest mb-2 opacity-70">
-                Total semanal
+                {esAdentro ? "Total semanal (referencial)" : "Total semanal"}
               </p>
               <div className="flex items-end gap-2 mb-3">
                 <p
@@ -393,12 +491,16 @@ export default function JornadaPage() {
                 {dentroDelLimite ? (
                   <>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-                    Dentro del límite legal ({jornadaMax} h/sem)
+                    {esAdentro
+                      ? `Ningún día supera ${LIMITE_DIARIO_ADENTRO} h`
+                      : `Dentro del límite legal (${jornadaMax} h/sem)`}
                   </>
                 ) : (
                   <>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
-                    {horasExtra.toFixed(1)} h extra sobre el límite ({jornadaMax} h/sem)
+                    {esAdentro
+                      ? `${diasExceden12h.filter(Boolean).length} día(s) superan ${LIMITE_DIARIO_ADENTRO} h`
+                      : `${horasExtra.toFixed(1)} h extra sobre el límite (${jornadaMax} h/sem)`}
                   </>
                 )}
               </div>
@@ -419,7 +521,9 @@ export default function JornadaPage() {
                           {dias[i].entrada} → {dias[i].salida}
                         </span>
                         <span className={`text-sm font-medium tabular-nums w-10 text-right ${
-                          horasPorDia[i] > 10 ? "text-amber-600" : "text-ink"
+                          esAdentro
+                            ? diasExceden12h[i] ? "text-red-600" : "text-ink"
+                            : horasPorDia[i] > 10 ? "text-amber-600" : "text-ink"
                         }`}>
                           {horasPorDia[i].toFixed(1)}h
                         </span>
@@ -440,45 +544,96 @@ export default function JornadaPage() {
               <p className="text-[11px] font-semibold text-ink-light uppercase tracking-widest mb-4">
                 Estado legal
               </p>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${dentroDelLimite ? "bg-brand-500" : "bg-red-500"}`} />
-                  <div>
-                    <p className="text-sm font-medium text-ink">
-                      Jornada máxima actual: {jornadaMax} h/semana
-                    </p>
-                    <p className="text-xs text-ink-muted mt-0.5">
-                      {dentroDelLimite
-                        ? `Disponible: ${(jornadaMax - totalHoras).toFixed(1)} h`
-                        : `Exceso: ${horasExtra.toFixed(1)} h (recargo 50% por hora extra)`}
-                    </p>
-                  </div>
-                </div>
-                {antesDelCambio && (
-                  <div className="flex items-start gap-3 pt-3 border-t border-gray-100">
-                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${horasExtra42! > 0 ? "bg-amber-500" : "bg-gray-300"}`} />
+              {esAdentro ? (
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${dentroDelLimite ? "bg-brand-500" : "bg-red-500"}`} />
                     <div>
                       <p className="text-sm font-medium text-ink">
-                        Desde el 26 de abril de 2026: 42 h/semana
+                        Máx. {LIMITE_DIARIO_ADENTRO} h/día (Art. 146 CT)
                       </p>
                       <p className="text-xs text-ink-muted mt-0.5">
-                        {horasExtra42! > 0
-                          ? `Con esta jornada habrá ${horasExtra42!.toFixed(1)} h extra`
-                          : "Esta jornada cumplirá el nuevo límite"}
-                        {" · "}Faltan {diasParaCambio} días
+                        {dentroDelLimite
+                          ? "Todos los días están dentro del límite"
+                          : `${diasExceden12h.filter(Boolean).length} día(s) superan ${LIMITE_DIARIO_ADENTRO} h`}
                       </p>
                     </div>
                   </div>
-                )}
-              </div>
+                  <div className="flex items-start gap-3 pt-3 border-t border-gray-100">
+                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${descansosInsuficientes.length === 0 ? "bg-brand-500" : "bg-red-500"}`} />
+                    <div>
+                      <p className="text-sm font-medium text-ink">
+                        Descanso mínimo: {DESCANSO_MIN_ADENTRO} h entre jornadas
+                      </p>
+                      <p className="text-xs text-ink-muted mt-0.5">
+                        {descansosInsuficientes.length === 0
+                          ? "Todos los descansos son suficientes"
+                          : `${descansosInsuficientes.length} transición(es) con menos de 12 h de descanso`}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${dentroDelLimite ? "bg-brand-500" : "bg-red-500"}`} />
+                    <div>
+                      <p className="text-sm font-medium text-ink">
+                        Jornada máxima actual: {jornadaMax} h/semana
+                      </p>
+                      <p className="text-xs text-ink-muted mt-0.5">
+                        {dentroDelLimite
+                          ? `Disponible: ${(jornadaMax - totalHoras).toFixed(1)} h`
+                          : `Exceso: ${horasExtra.toFixed(1)} h (recargo 50% por hora extra)`}
+                      </p>
+                    </div>
+                  </div>
+                  {antesDelCambio && (
+                    <div className="flex items-start gap-3 pt-3 border-t border-gray-100">
+                      <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${horasExtra42! > 0 ? "bg-amber-500" : "bg-gray-300"}`} />
+                      <div>
+                        <p className="text-sm font-medium text-ink">
+                          Desde el 26 de abril de 2026: 42 h/semana
+                        </p>
+                        <p className="text-xs text-ink-muted mt-0.5">
+                          {horasExtra42! > 0
+                            ? `Con esta jornada habrá ${horasExtra42!.toFixed(1)} h extra`
+                            : "Esta jornada cumplirá el nuevo límite"}
+                          {" · "}Faltan {diasParaCambio} días
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
-            {horasExtra > 0 && (
+            {!esAdentro && horasExtra > 0 && (
               <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
                 <p className="text-xs font-semibold text-amber-800 mb-1">Horas extraordinarias</p>
                 <p className="text-xs text-amber-700 leading-relaxed">
                   Recargo mínimo del 50% sobre el valor hora ordinaria (Art. 32 CT).
                   Deben pactarse por escrito. Máximo 2 horas extra por día.
+                </p>
+              </div>
+            )}
+
+            {esAdentro && !dentroDelLimite && (
+              <div className="bg-red-50 border border-red-200 rounded-2xl p-4">
+                <p className="text-xs font-semibold text-red-800 mb-1">Jornada diaria excesiva</p>
+                <p className="text-xs text-red-700 leading-relaxed">
+                  El Art. 146 CT limita la jornada de trabajadoras puertas adentro a 12 horas diarias.
+                  Reduce el horario de los días marcados en rojo.
+                </p>
+              </div>
+            )}
+
+            {esAdentro && descansosInsuficientes.length > 0 && (
+              <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
+                <p className="text-xs font-semibold text-amber-800 mb-1">Descanso insuficiente entre jornadas</p>
+                <p className="text-xs text-amber-700 leading-relaxed">
+                  La ley exige 12 horas continuas de descanso entre jornadas, incluyendo al menos 9 horas nocturnas ininterrumpidas (Art. 146 CT).
+                  Revisa los horarios de los días indicados.
                 </p>
               </div>
             )}

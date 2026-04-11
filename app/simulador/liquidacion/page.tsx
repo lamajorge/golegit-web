@@ -10,8 +10,8 @@ import CtaButton from "@/components/CtaButton";
 // ─────────────────────────────────────────────────────────────
 // CONSTANTES LEGALES — actualizar cuando cambien
 // ─────────────────────────────────────────────────────────────
-const IMM = 530_000;
-const TOPE_IMPONIBLE = 3_300_000;
+const IMM = 539_000;
+const TOPE_IMPONIBLE = 3_585_755;
 
 const AFPS = [
   { nombre: "AFP Capital",   comision: 1.44 },
@@ -99,6 +99,7 @@ function calcDesdeBase({
 }) {
   const f = dias / 30;
   const topeAplicado = sueldoBase > TOPE_IMPONIBLE;
+  const sueldoBaseProp = Math.round(sueldoBase * f);
   const sueldoImponible = Math.round(Math.min(sueldoBase, TOPE_IMPONIBLE) * f);
   const movilizacionProp = Math.round(movilizacion * f);
   const colacionProp = Math.round(colacion * f);
@@ -115,7 +116,8 @@ function calcDesdeBase({
   const afcTcp       = Math.round(sueldoImponible * TASAS_EMP.afcTcp);
   const mutual       = Math.round(sueldoImponible * TASAS_EMP.mutual);
   const cotAdicional = Math.round(sueldoImponible * TASAS_EMP.cotAdicional);
-  const indem        = Math.round(sueldoImponible * TASAS_EMP.indemnizacion);
+  // Indemnización a todo evento TCP: base es sueldo_base proporcional, no el imponible (Art. 163 bis CT)
+  const indem        = Math.round(sueldoBaseProp * TASAS_EMP.indemnizacion);
   const totalEmp     = sis + afcTcp + mutual + cotAdicional + indem;
 
   return {
@@ -386,8 +388,8 @@ export default function LiquidacionPage() {
             </div>
 
             <p className="text-xs text-ink-light leading-relaxed px-1">
-              Valores referenciales. IMM: {clp(IMM)} · Tope imponible: {clp(TOPE_IMPONIBLE)}.
-              Tasas Previred vigentes a marzo 2026 — verificar antes de emitir liquidaciones oficiales.
+              Valores referenciales. IMM: {clp(IMM)} · Tope imponible AFP: {clp(TOPE_IMPONIBLE)} (se actualiza mensualmente desde Previred).
+              Tasas Previred vigentes abril 2026 — verificar antes de emitir liquidaciones oficiales.
             </p>
           </div>
 
