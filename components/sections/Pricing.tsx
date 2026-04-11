@@ -24,7 +24,13 @@ const features = [
   { label: "2 o más trabajadoras", lite: false, pro: false, plus: true },
 ];
 
-const plans = [
+type KeyFeature = { text: string; highlight?: boolean }
+
+const plans: {
+  name: string; monthlyPrice: number; featured: boolean
+  description: string; sublabel: string; cta: string
+  disabled: boolean; keyFeatures: KeyFeature[]
+}[] = [
   {
     name: "Lite",
     monthlyPrice: 4990,
@@ -33,6 +39,12 @@ const plans = [
     sublabel: "1 trabajadora",
     cta: "Empezar gratis",
     disabled: false,
+    keyFeatures: [
+      { text: "Contrato, anexo, finiquito, carta de aviso" },
+      { text: "Liquidación de sueldo completa" },
+      { text: "Ausencias, licencias, vacaciones" },
+      { text: "Certificados y días especiales Art. 150" },
+    ],
   },
   {
     name: "Pro",
@@ -42,6 +54,12 @@ const plans = [
     sublabel: "1 trabajadora",
     cta: "Empezar gratis",
     disabled: false,
+    keyFeatures: [
+      { text: "Todo lo de Lite" },
+      { text: "Recordatorios y ciclo mensual proactivo", highlight: true },
+      { text: "Firma digital FES (Ley 19.799)", highlight: true },
+      { text: "Portal trabajadora + verificación de identidad", highlight: true },
+    ],
   },
   {
     name: "Plus",
@@ -51,10 +69,14 @@ const plans = [
     sublabel: "2 o más trabajadoras",
     cta: "Empezar gratis",
     disabled: false,
+    keyFeatures: [
+      { text: "Trabajadoras ilimitadas" },
+      { text: "Todo lo de Pro" },
+    ],
   },
 ];
 
-function Check({ on, lite }: { on: boolean; lite?: boolean }) {
+function CheckIcon({ on, dark }: { on: boolean; dark?: boolean }) {
   if (!on) {
     return (
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="mx-auto opacity-25">
@@ -64,7 +86,15 @@ function Check({ on, lite }: { on: boolean; lite?: boolean }) {
   }
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="mx-auto">
-      <path d="M2 7l4 4 6-6" stroke={lite ? "#9ca3af" : "#16a34a"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M2 7l4 4 6-6" stroke={dark ? "#9ca3af" : "#16a34a"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function FeatureCheck({ className }: { className?: string }) {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={`shrink-0 mt-0.5 ${className}`}>
+      <path d="M2 7l4 4 6-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -138,7 +168,7 @@ export default function Pricing() {
                   </span>
                 )}
 
-                <div className="mb-5">
+                <div className="mb-4">
                   <p className={`text-base font-extrabold mb-0.5 ${plan.featured ? "text-white" : "text-ink"}`}>
                     {plan.name}
                   </p>
@@ -162,9 +192,30 @@ export default function Pricing() {
                   </p>
                 )}
 
-                <p className={`text-sm mb-6 mt-2 flex-1 ${plan.featured ? "text-white/70" : "text-ink-muted"}`}>
+                <p className={`text-sm mt-2 mb-4 ${plan.featured ? "text-white/70" : "text-ink-muted"}`}>
                   {plan.description}
                 </p>
+
+                {/* Key features */}
+                <ul className="space-y-2 mb-6 flex-1">
+                  {plan.keyFeatures.map((f) => (
+                    <li
+                      key={f.text}
+                      className={`flex items-start gap-2 text-xs ${
+                        f.highlight
+                          ? plan.featured
+                            ? "pl-2 border-l-2 border-brand-500 text-white font-semibold"
+                            : "pl-2 border-l-2 border-brand-500 text-ink font-semibold"
+                          : plan.featured
+                          ? "text-white/60"
+                          : "text-ink-muted"
+                      }`}
+                    >
+                      <FeatureCheck className={f.highlight ? (plan.featured ? "text-brand-400" : "text-brand-600") : (plan.featured ? "text-white/40" : "text-brand-600")} />
+                      {f.text}
+                    </li>
+                  ))}
+                </ul>
 
                 {plan.disabled ? (
                   <div className="text-center text-sm font-semibold py-2.5 px-4 rounded-xl bg-gray-200 text-gray-400 cursor-not-allowed">
@@ -207,9 +258,13 @@ export default function Pricing() {
           </button>
         </div>
 
-        {/* Feature matrix */}
-        {showMatrix && (
-          <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+        {/* Feature matrix — siempre visible, truncada con fade hasta que se expande */}
+        <div className="relative">
+          <div
+            className={`bg-white rounded-2xl border border-gray-100 overflow-hidden transition-all duration-300 ${
+              showMatrix ? "" : "max-h-[220px]"
+            }`}
+          >
             {/* Header */}
             <div className="grid grid-cols-4 border-b border-gray-100">
               <div className="p-4" />
@@ -236,18 +291,25 @@ export default function Pricing() {
               >
                 <div className="px-4 py-3 text-sm text-ink-muted">{f.label}</div>
                 <div className="px-4 py-3 text-center border-l border-gray-100">
-                  <Check on={f.lite} lite />
+                  <CheckIcon on={f.lite} dark />
                 </div>
                 <div className="px-4 py-3 text-center border-l border-gray-100 bg-zinc-950/2">
-                  <Check on={f.pro} />
+                  <CheckIcon on={f.pro} />
                 </div>
                 <div className="px-4 py-3 text-center border-l border-gray-100">
-                  <Check on={f.plus} />
+                  <CheckIcon on={f.plus} />
                 </div>
               </div>
             ))}
           </div>
-        )}
+
+          {/* Gradient fade cuando está colapsada */}
+          {!showMatrix && (
+            <div
+              className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#fafaf8] to-transparent pointer-events-none rounded-b-2xl"
+            />
+          )}
+        </div>
       </div>
     </section>
   );
