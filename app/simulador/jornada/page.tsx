@@ -15,8 +15,9 @@ const JORNADA_MAX = () => (new Date() < FECHA_42H ? 44 : 42);
 const COLACION_MIN = 30;
 const COLACION_MAX = 120;
 // Puertas adentro — Art. 146 CT
-const LIMITE_DIARIO_ADENTRO = 12; // horas máx por día
-const DESCANSO_MIN_ADENTRO = 12;  // horas continuas entre jornadas
+const LIMITE_DIARIO_ADENTRO = 12;   // horas máx por día
+const LIMITE_SEMANAL_ADENTRO = 72;  // 6 días × 12 h máx
+const DESCANSO_MIN_ADENTRO = 12;    // horas continuas entre jornadas
 
 const DIAS = [
   { nombre: "Lunes", corto: "lunes" },
@@ -181,8 +182,9 @@ export default function JornadaPage() {
     [esAdentro, dias]
   );
 
+  const horasExtraAdentro = Math.max(0, totalHoras - LIMITE_SEMANAL_ADENTRO);
   const dentroDelLimite = esAdentro
-    ? !diasExceden12h.some(Boolean)
+    ? !diasExceden12h.some(Boolean) && horasExtraAdentro === 0
     : horasExtra === 0;
 
   const textoJornada = useMemo(
@@ -274,7 +276,7 @@ export default function JornadaPage() {
               <div className="flex gap-1 bg-gray-100 rounded-xl p-1">
                 {([
                   { key: "afuera", label: "Puertas afuera" },
-                  { key: "adentro", label: "Puertas adentro (cama adentro)" },
+                  { key: "adentro", label: "Puertas adentro" },
                 ] as const).map(({ key, label }) => (
                   <button
                     key={key}
@@ -291,7 +293,7 @@ export default function JornadaPage() {
               </div>
               {esAdentro && (
                 <p className="text-xs text-ink-muted mt-3 leading-relaxed bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
-                  Régimen especial Art. 146 CT — máx. 12 h/día · 12 h de descanso continuo entre jornadas · Sin límite semanal fijo (Ley 20.786)
+                  Régimen especial Art. 146 CT — máx. 12 h/día · máx. 72 h/semana · 12 h de descanso continuo entre jornadas. La reducción a 42 h de Ley 21.561 no aplica a este régimen.
                 </p>
               )}
             </div>
@@ -492,14 +494,16 @@ export default function JornadaPage() {
                   <>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
                     {esAdentro
-                      ? `Ningún día supera ${LIMITE_DIARIO_ADENTRO} h`
+                      ? `Dentro del límite (12 h/día · 72 h/sem)`
                       : `Dentro del límite legal (${jornadaMax} h/sem)`}
                   </>
                 ) : (
                   <>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
                     {esAdentro
-                      ? `${diasExceden12h.filter(Boolean).length} día(s) superan ${LIMITE_DIARIO_ADENTRO} h`
+                      ? diasExceden12h.some(Boolean)
+                        ? `${diasExceden12h.filter(Boolean).length} día(s) superan ${LIMITE_DIARIO_ADENTRO} h`
+                        : `${horasExtraAdentro.toFixed(1)} h sobre límite semanal (${LIMITE_SEMANAL_ADENTRO} h)`
                       : `${horasExtra.toFixed(1)} h extra sobre el límite (${jornadaMax} h/sem)`}
                   </>
                 )}
@@ -547,15 +551,28 @@ export default function JornadaPage() {
               {esAdentro ? (
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
-                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${dentroDelLimite ? "bg-brand-500" : "bg-red-500"}`} />
+                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${!diasExceden12h.some(Boolean) ? "bg-brand-500" : "bg-red-500"}`} />
                     <div>
                       <p className="text-sm font-medium text-ink">
                         Máx. {LIMITE_DIARIO_ADENTRO} h/día (Art. 146 CT)
                       </p>
                       <p className="text-xs text-ink-muted mt-0.5">
-                        {dentroDelLimite
-                          ? "Todos los días están dentro del límite"
+                        {!diasExceden12h.some(Boolean)
+                          ? "Todos los días dentro del límite"
                           : `${diasExceden12h.filter(Boolean).length} día(s) superan ${LIMITE_DIARIO_ADENTRO} h`}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 pt-3 border-t border-gray-100">
+                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${horasExtraAdentro === 0 ? "bg-brand-500" : "bg-amber-500"}`} />
+                    <div>
+                      <p className="text-sm font-medium text-ink">
+                        Máx. {LIMITE_SEMANAL_ADENTRO} h/semana (Art. 146 CT)
+                      </p>
+                      <p className="text-xs text-ink-muted mt-0.5">
+                        {horasExtraAdentro === 0
+                          ? `Disponible: ${(LIMITE_SEMANAL_ADENTRO - totalHoras).toFixed(1)} h`
+                          : `Exceso: ${horasExtraAdentro.toFixed(1)} h sobre el tope semanal`}
                       </p>
                     </div>
                   </div>
@@ -563,12 +580,12 @@ export default function JornadaPage() {
                     <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${descansosInsuficientes.length === 0 ? "bg-brand-500" : "bg-red-500"}`} />
                     <div>
                       <p className="text-sm font-medium text-ink">
-                        Descanso mínimo: {DESCANSO_MIN_ADENTRO} h entre jornadas
+                        Descanso continuo: {DESCANSO_MIN_ADENTRO} h entre jornadas
                       </p>
                       <p className="text-xs text-ink-muted mt-0.5">
                         {descansosInsuficientes.length === 0
                           ? "Todos los descansos son suficientes"
-                          : `${descansosInsuficientes.length} transición(es) con menos de 12 h de descanso`}
+                          : `${descansosInsuficientes.length} transición(es) con menos de 12 h`}
                       </p>
                     </div>
                   </div>

@@ -76,9 +76,9 @@ export default function Problem() {
           {problems.map((problem, i) => (
             <div
               key={i}
-              className="group p-6 rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-sm transition-all bg-white"
+              className="group p-6 rounded-2xl border border-red-100/60 hover:border-red-200 hover:shadow-md hover:shadow-red-600/5 transition-all bg-white"
             >
-              <div className="w-10 h-10 rounded-xl bg-gray-50 text-ink-muted flex items-center justify-center mb-4 group-hover:bg-gray-100 transition-colors">
+              <div className="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center mb-4 group-hover:bg-red-100 transition-colors">
                 {problem.icon}
               </div>
               <h3 className="font-bold text-ink mb-2">{problem.title}</h3>
