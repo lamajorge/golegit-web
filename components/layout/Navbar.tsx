@@ -157,8 +157,10 @@ export default function Navbar() {
           </Link>
           <a
             href="https://app.golegit.cl/login"
-            className={`text-sm font-medium transition-colors ${
-              isDark ? "text-white/60 hover:text-white" : "text-ink-muted hover:text-ink"
+            className={`inline-flex items-center text-sm font-semibold px-4 py-2 rounded-lg border transition-colors ${
+              isDark
+                ? "border-white/20 text-white/80 hover:bg-white/10 hover:text-white hover:border-white/40"
+                : "border-gray-200 text-ink-muted hover:bg-gray-50 hover:text-ink hover:border-gray-300"
             }`}
           >
             Ingresar
