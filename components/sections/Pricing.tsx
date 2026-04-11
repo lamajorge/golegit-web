@@ -29,7 +29,7 @@ const plans = [
     name: "Lite",
     monthlyPrice: 4990,
     featured: false,
-    description: "Todo el control, sin automatismos",
+    description: "Todo el control, firma en papel",
     sublabel: "1 trabajadora",
     cta: "Empezar gratis",
     disabled: false,
