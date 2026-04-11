@@ -9,6 +9,7 @@ import type {
 // ─────────────────────────────────────────────────────────────
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const DB_ID = process.env.NOTION_DB_ID ?? "";
+const RECURSOS_DB_ID = process.env.NOTION_RECURSOS_DB_ID ?? "";
 
 // ─────────────────────────────────────────────────────────────
 // Tipos
@@ -155,6 +156,115 @@ export async function getBlocks(pageId: string): Promise<Block[]> {
   }
 
   return blocks;
+}
+
+// ─────────────────────────────────────────────────────────────
+// Centro de Conocimiento — Recursos
+// ─────────────────────────────────────────────────────────────
+export interface Recurso {
+  id: string;
+  slug: string;
+  titulo: string;
+  resumen: string;
+  categoria: string;
+  tipo: string;
+  nivel: string;
+  fecha: string;
+  portada: string | null;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function pageToRecurso(page: any): Recurso {
+  const props = page.properties;
+
+  const titulo =
+    props["Título"]?.title?.map((t: RichTextItemResponse) => t.plain_text).join("") ?? "Sin título";
+
+  const slugRaw =
+    richTextToString(props["Slug"]?.rich_text ?? []).trim() || page.id.replace(/-/g, "");
+
+  const resumen = richTextToString(props["Resumen"]?.rich_text ?? []);
+  const categoria = props["Categoría"]?.select?.name ?? "Guías";
+  const tipo = props["Tipo"]?.select?.name ?? "";
+  const nivel = props["Nivel"]?.select?.name ?? "";
+  const fecha = props["Fecha"]?.date?.start ?? page.created_time?.split("T")[0] ?? "";
+
+  let portada: string | null = null;
+  if (page.cover?.type === "external") portada = page.cover.external.url;
+  else if (page.cover?.type === "file") portada = page.cover.file.url;
+  if (!portada) {
+    const imgProp = props["Imagen"];
+    if (imgProp?.type === "url") portada = imgProp.url ?? null;
+    else if (imgProp?.files?.[0]) {
+      const f = imgProp.files[0];
+      portada = f.type === "external" ? f.external.url : f.file?.url ?? null;
+    }
+  }
+
+  return { id: page.id, slug: slugRaw, titulo, resumen, categoria, tipo, nivel, fecha, portada };
+}
+
+export async function getRecursos(categoria?: string): Promise<Recurso[]> {
+  if (!RECURSOS_DB_ID) return [];
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const filter: any =
+    categoria && categoria !== "Todas"
+      ? {
+          and: [
+            { property: "Publicado", checkbox: { equals: true } },
+            { property: "Categoría", select: { equals: categoria } },
+          ],
+        }
+      : { property: "Publicado", checkbox: { equals: true } };
+
+  const res = await notion.databases.query({
+    database_id: RECURSOS_DB_ID,
+    filter,
+    sorts: [{ property: "Fecha", direction: "descending" }],
+  });
+
+  return res.results.filter(isFullPage).map(pageToRecurso);
+}
+
+export async function getRecurso(slug: string): Promise<Recurso | null> {
+  if (!RECURSOS_DB_ID) return null;
+
+  try {
+    const bySlug = await notion.databases.query({
+      database_id: RECURSOS_DB_ID,
+      filter: { property: "Slug", rich_text: { equals: slug } },
+    });
+
+    if (bySlug.results.length > 0 && isFullPage(bySlug.results[0])) {
+      return pageToRecurso(bySlug.results[0]);
+    }
+
+    const allRes = await notion.databases.query({
+      database_id: RECURSOS_DB_ID,
+      filter: { property: "Publicado", checkbox: { equals: true } },
+    });
+
+    const match = allRes.results
+      .filter(isFullPage)
+      .find((p: { id: string }) => p.id.replace(/-/g, "") === slug);
+
+    return match ? pageToRecurso(match) : null;
+  } catch (err) {
+    console.error("[Notion] getRecurso error:", err);
+    return null;
+  }
+}
+
+export async function getRecursoCategorias(): Promise<string[]> {
+  if (!RECURSOS_DB_ID) return [];
+  const schema = await notion.databases.retrieve({ database_id: RECURSOS_DB_ID });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const catProp = (schema as any).properties?.["Categoría"];
+  if (catProp?.type === "select") {
+    return ["Todas", ...catProp.select.options.map((o: { name: string }) => o.name)];
+  }
+  return ["Todas"];
 }
 
 export async function getCategories(): Promise<string[]> {

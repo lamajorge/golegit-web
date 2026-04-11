@@ -147,6 +147,14 @@ export default function Navbar() {
           >
             Novedades
           </Link>
+          <Link
+            href="/recursos"
+            className={`text-sm font-medium transition-colors ${
+              isDark ? "text-white/60 hover:text-white" : "text-ink-muted hover:text-ink"
+            }`}
+          >
+            Recursos
+          </Link>
           <a
             href="https://app.golegit.cl/login"
             className={`text-sm font-medium transition-colors ${
@@ -201,6 +209,9 @@ export default function Navbar() {
           </Link>
           <Link href="/novedades" className="text-sm font-medium text-ink-muted" onClick={() => setMenuOpen(false)}>
             Novedades
+          </Link>
+          <Link href="/recursos" className="text-sm font-medium text-ink-muted" onClick={() => setMenuOpen(false)}>
+            Recursos
           </Link>
           <a href="https://app.golegit.cl/login" className="text-sm font-medium text-ink-muted text-center">
             Ingresar a mi portal

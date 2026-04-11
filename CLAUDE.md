@@ -48,8 +48,10 @@ No hay tests configurados (ni Jest, ni Vitest, ni Playwright).
 | `/simulador` | Landing de simuladores |
 | `/simulador/liquidacion` | Calculadora de liquidación TCP |
 | `/simulador/jornada` | Calculadora de jornada laboral |
-| `/novedades` | Blog (CMS Notion) |
+| `/novedades` | Blog de alertas legales (CMS Notion) |
 | `/novedades/[slug]` | Artículo individual |
+| `/recursos` | Centro de Conocimiento — guías y referencias (CMS Notion) |
+| `/recursos/[slug]` | Guía o recurso individual |
 | `/[code]` | Edge Function — URL shortener (go.golegit.cl/XXXXX) |
 | `/privacidad` | Política de privacidad (placeholder, pendiente) |
 | `/terminos` | Términos de servicio (placeholder, pendiente) |
@@ -245,7 +247,8 @@ Se configuran en Vercel → Settings → Environment Variables. No existe `.env.
 | Variable | Descripción |
 |---|---|
 | `NOTION_TOKEN` | Internal Integration Secret de la integración GoLegit |
-| `NOTION_DB_ID` | `b844dffae5ca4ee8983d5ee3d098a70b` (fijo) |
+| `NOTION_DB_ID` | `b844dffae5ca4ee8983d5ee3d098a70b` (fijo) — Novedades CMS |
+| `NOTION_RECURSOS_DB_ID` | `fb8a6638e12e4d6abc288856a0ea4640` (fijo) — Centro de Conocimiento CMS |
 | `NEXT_PUBLIC_SUPABASE_URL` | URL del proyecto Supabase |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Clave anon de Supabase |
 
