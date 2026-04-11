@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import type { Recurso } from "@/lib/notion";
-import { categoriaColor, nivelColor, tipoIconPath } from "./utils";
+import { categoriaColor, nivelColor, tipoIconPath, formatFecha } from "./utils";
 
 interface Props {
   recursos: Recurso[];
@@ -48,6 +48,9 @@ function RecursoCard({ recurso }: { recurso: Recurso }) {
             <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${nivelColor(recurso.nivel)}`}>
               {recurso.nivel}
             </span>
+          )}
+          {recurso.fecha && (
+            <span className="text-[11px] text-ink-light">{formatFecha(recurso.fecha)}</span>
           )}
         </div>
 
