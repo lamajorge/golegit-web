@@ -13,15 +13,27 @@ const faqData = [
   },
   {
     q: "¿Cómo le llega el contrato a mi trabajadora?",
-    a: "El sistema le envía el PDF por WhatsApp y por email directamente a ella. No pasa por ti — queda registro de que lo recibió.",
+    a: "En los planes Pro y Plus, el sistema le envía el PDF por email directamente a ella con un enlace para revisar y firmar digitalmente. En el plan Lite, tú imprimes el documento y lo firman en papel.",
+  },
+  {
+    q: "¿La firma electrónica tiene valor legal?",
+    a: "Sí. GoLegit usa Firma Electrónica Simple (FES) bajo la Ley 19.799. Cada firma queda registrada con la identidad del firmante, la fecha, la hora y la IP. Ese registro tiene valor probatorio ante la Inspección del Trabajo.",
   },
   {
     q: "¿Puedo calcular la liquidación aunque no sepa de cotizaciones?",
-    a: "Sí. GoLegit aplica automáticamente las tasas vigentes de AFP, Fonasa, AFC y los aportes del empleador. Tú solo confirmas los días trabajados si hubo ausencias.",
+    a: "Sí. GoLegit aplica automáticamente las tasas vigentes de AFP, Isapre, AFC, cotización adicional y los aportes del empleador. Tú solo confirmas los días trabajados si hubo ausencias.",
   },
   {
-    q: "¿Qué pasa si un mes no pago?",
-    a: "Tu cuenta queda en modo lectura — puedes consultar documentos anteriores, pero no generar nuevos. Se reactiva apenas regularizas el pago.",
+    q: "¿GoLegit hace el finiquito también?",
+    a: "Sí. Soporta 8 causales de término (Arts. 159, 160 y 161 del Código del Trabajo), calcula automáticamente las indemnizaciones, vacaciones pendientes y proporcionales, y genera el PDF listo para firmar.",
+  },
+  {
+    q: "¿Qué pasa después del mes gratis?",
+    a: "Eliges el plan que necesitas y pagas desde el portal web. Si decides no continuar, tu cuenta se suspende pero no pierdes tus documentos — se reactiva apenas regularizas.",
+  },
+  {
+    q: "¿Cuál es la diferencia entre Lite y Pro?",
+    a: "Ambos planes generan los mismos documentos. La diferencia es que Pro incluye firma digital (sin imprimir nada), portal web para tu trabajadora, verificación de identidad y recordatorios automáticos del ciclo mensual.",
   },
   {
     q: "¿Puedo modificar el contrato después?",
