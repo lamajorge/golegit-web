@@ -25,7 +25,7 @@ const features = [
       </svg>
     ),
     title: "Finiquito",
-    description: "Seis causales de término (Arts. 159, 160 y 161 CT), cálculo automático de indemnizaciones y días pendientes. PDF listo para firmar.",
+    description: "Ocho causales de término (Arts. 159, 160 y 161 CT), cálculo automático de indemnizaciones y días pendientes. PDF listo para firmar.",
   },
   {
     icon: (

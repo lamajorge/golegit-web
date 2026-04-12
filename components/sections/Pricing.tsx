@@ -7,7 +7,7 @@ import CtaButton from "@/components/CtaButton";
 const features = [
   { label: "Contrato de trabajo", lite: true, pro: true, plus: true },
   { label: "Anexos de modificación", lite: true, pro: true, plus: true },
-  { label: "Finiquito (7 causales)", lite: true, pro: true, plus: true },
+  { label: "Finiquito (8 causales)", lite: true, pro: true, plus: true },
   { label: "Carta de aviso", lite: true, pro: true, plus: true },
   { label: "Liquidación de sueldo (cálculo completo)", lite: true, pro: true, plus: true },
   { label: "Registro de ausencias y licencias", lite: true, pro: true, plus: true },
@@ -50,7 +50,7 @@ const plans: {
     name: "Pro",
     monthlyPrice: 9990,
     featured: true,
-    description: "Gestión proactiva con portal",
+    description: "Firma digital y portal trabajadora",
     sublabel: "1 trabajadora",
     cta: "Empezar gratis",
     disabled: false,

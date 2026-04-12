@@ -27,7 +27,7 @@ const trustItems = [
       </svg>
     ),
     title: "Datos seguros",
-    body: "Los datos se almacenan en infraestructura certificada. Los documentos PDF tienen enlaces con tiempo limitado. Sin terceros con acceso a tu información.",
+    body: "Los datos se almacenan en infraestructura certificada con cifrado en reposo y en tránsito. Cada documento queda asociado a su contrato y no es accesible sin autenticación.",
   },
 ];
 
