@@ -226,7 +226,7 @@ export default function BusinessLanding() {
             </p>
 
             {/* CTA */}
-            <div className="animate-fade-up animate-delay-300" id="waitlist">
+            <div className="animate-fade-up animate-delay-300">
               <WaitlistForm dark />
               <p className="text-xs text-white/30 mt-3">
                 Sin compromiso. Te avisamos cuando esté listo.
@@ -468,7 +468,7 @@ export default function BusinessLanding() {
       </section>
 
       {/* ── CTA final ──────────────────────────────────────────── */}
-      <section className="py-24 bg-zinc-950 relative overflow-hidden">
+      <section id="waitlist" className="py-24 bg-zinc-950 relative overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{

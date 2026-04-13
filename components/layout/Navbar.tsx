@@ -127,7 +127,6 @@ export default function Navbar() {
   const businessNavLinks = [
     { href: "/business#funcionalidades", label: "Funcionalidades" },
     { href: "/business#rubros", label: "Rubros" },
-    { href: "/business#waitlist", label: "Early access" },
   ];
 
   const navLinks = isBusiness ? businessNavLinks : homeNavLinks;
@@ -178,6 +177,18 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          {isBusiness && (
+            <a
+              href="/business#waitlist"
+              className={`inline-flex items-center text-sm font-semibold px-4 py-2 rounded-lg transition-colors ${
+                isDark
+                  ? "bg-indigo-500 text-white hover:bg-indigo-400"
+                  : "bg-indigo-600 text-white hover:bg-indigo-700"
+              }`}
+            >
+              Early access
+            </a>
+          )}
           {!isBusiness && (
             <>
               <a
@@ -231,6 +242,13 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <a
+                href="/business#waitlist"
+                className="inline-flex items-center justify-center text-sm font-semibold px-4 py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700"
+                onClick={() => setMenuOpen(false)}
+              >
+                Early access
+              </a>
             </>
           ) : (
             <>
