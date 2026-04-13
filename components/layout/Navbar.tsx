@@ -57,8 +57,12 @@ function ProductSwitcher({ isDark }: { isDark: boolean }) {
 
           <div className="h-px bg-gray-100 mx-4" />
 
-          {/* Business — próximamente */}
-          <div className="flex items-center gap-3 px-4 py-3.5 cursor-not-allowed">
+          {/* Business */}
+          <Link
+            href="/business"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 transition-colors"
+          >
             <div className="w-7 h-7 rounded-lg bg-zinc-900 flex items-center justify-center flex-shrink-0">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="7" width="20" height="14" rx="2" />
@@ -67,12 +71,12 @@ function ProductSwitcher({ isDark }: { isDark: boolean }) {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs font-bold text-ink">GoLegit Business</p>
-              <p className="text-[10px] text-ink-muted">Empleados de empresa · Pronto</p>
+              <p className="text-[10px] text-ink-muted">RRHH para empresas</p>
             </div>
-            <span className="text-[9px] font-semibold text-brand-700 bg-brand-50 border border-brand-200 px-1.5 py-0.5 rounded-full flex-shrink-0">
+            <span className="text-[9px] font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200 px-1.5 py-0.5 rounded-full flex-shrink-0">
               Pronto
             </span>
-          </div>
+          </Link>
         </div>
       )}
     </div>
