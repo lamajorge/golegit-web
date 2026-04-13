@@ -44,7 +44,8 @@ No hay tests configurados (ni Jest, ni Vitest, ni Playwright).
 
 | Ruta | Descripción |
 |---|---|
-| `/` | Landing page (10 secciones) |
+| `/` | Landing page GoLegit Home — TCP (10 secciones) |
+| `/business` | Landing page GoLegit Business — RRHH para empresas (producto en desarrollo) |
 | `/simulador` | Landing de simuladores |
 | `/simulador/liquidacion` | Calculadora de liquidación TCP |
 | `/simulador/jornada` | Calculadora de jornada laboral |
@@ -64,8 +65,11 @@ No hay tests configurados (ni Jest, ni Vitest, ni Playwright).
 app/
   layout.tsx              # Root layout, metadata global, favicon
   icon.svg                # Favicon adaptivo (light/dark via prefers-color-scheme)
-  page.tsx                # Landing (ensambla secciones)
+  page.tsx                # Landing Home (ensambla secciones)
   globals.css             # Estilos globales y fuentes
+  business/
+    page.tsx              # Landing Business (Navbar + BusinessLanding + Footer)
+    BusinessLanding.tsx   # Contenido de la landing Business (client component)
   [code]/route.ts         # Edge Function — URL shortener
   novedades/
     page.tsx              # Listado de artículos
@@ -111,6 +115,8 @@ public/
     golegit-icon.svg          # Ícono con fondo verde (referencia/backup)
     golegit-icon-light.svg    # Ícono outline verde, sin fondo (fondos claros)
     golegit-icon-dark.svg     # Ícono trazo blanco + checkmark brand-400 (fondos oscuros)
+    golegit-business-logo.svg     # Logo Business horizontal — fondos claros (indigo)
+    golegit-business-logo-dark.svg # Logo Business horizontal — fondos oscuros (indigo)
     golegit-icon-512.png      # PNG 512x512 del ícono oficial
     golegit-whatsapp.svg      # Avatar WhatsApp Business (outline, fondo blanco)
     golegit-whatsapp-512.png  # PNG 512x512 para subir a WhatsApp Business
@@ -162,8 +168,10 @@ El ícono de GoLegit es una **burbuja de chat rectangular** (no circular como Wh
 
 | Archivo | Cuándo usar |
 |---|---|
-| `golegit-logo.svg` | Navbar (fondo claro), documentos, emails |
-| `golegit-logo-dark.svg` | Navbar (hero oscuro), footer, fondos oscuros |
+| `golegit-logo.svg` | Navbar Home (fondo claro), documentos, emails |
+| `golegit-logo-dark.svg` | Navbar Home (hero oscuro), footer, fondos oscuros |
+| `golegit-business-logo.svg` | Navbar Business (fondo claro) — "Go" indigo, checkmark indigo |
+| `golegit-business-logo-dark.svg` | Navbar Business (hero oscuro) — "Go" indigo-400, checkmark indigo-400 |
 | `golegit-icon-light.svg` | Ícono solo sobre fondo claro (sin wordmark) |
 | `golegit-icon-dark.svg` | Ícono solo sobre fondo oscuro (sin wordmark) |
 | `golegit-icon.svg` | Referencia/backup. No usar directamente en la UI |
@@ -185,11 +193,13 @@ El ícono de GoLegit es una **burbuja de chat rectangular** (no circular como Wh
 
 El hero y el FinalCTA son `bg-zinc-950` (oscuro) — enmarcan la página. Las secciones intermedias alternan entre `bg-white` y `bg-[#fafaf8]` (paper).
 
-### Navbar
+### Navbar (multi-producto)
 
-- Transparente con texto blanco solo en homepage antes de hacer scroll (`isDark = isHome && !scrolled`)
-- Al hacer scroll o en cualquier subpágina: `bg-white/95 backdrop-blur-md border-b border-gray-100` con texto oscuro
-- Logo: `<img>` con src condicional (`golegit-logo-dark.svg` vs `golegit-logo.svg`) según `isDark`
+- Transparente con texto blanco en homepage y `/business` antes de hacer scroll (`isDark = (isHome || isBusiness) && !scrolled`)
+- Al hacer scroll o en subpáginas internas: `bg-white/95 backdrop-blur-md border-b border-gray-100` con texto oscuro
+- **Product Switcher:** badge que muestra "Home" o "Business" según la ruta actual. Dropdown permite navegar entre productos. En Home muestra verde (brand), en Business muestra indigo.
+- **Logo condicional por producto:** `/business` usa `golegit-business-logo*.svg` (indigo). El resto usa `golegit-logo*.svg` (verde).
+- **Nav links por producto:** Home muestra Cómo funciona, Precios, Simuladores, Novedades, Recursos + botones Ingresar/CTA. Business muestra Funcionalidades, Rubros, Early access.
 - Altura: `h-16` (64px)
 
 ### Hero
@@ -463,25 +473,28 @@ Este repo es el escaparate del producto — lo que se promete aquí debe estar i
 
 ---
 
-## Arquitectura multi-producto (pendiente)
+## Arquitectura multi-producto
 
-GoLegit será una suite de productos bajo subdominios:
+GoLegit es una suite de dos productos bajo el mismo dominio:
 
-| Subdominio | Producto | Estado |
+| Ruta | Producto | Estado |
 |---|---|---|
-| `golegit.cl` / `home.golegit.cl` | GoLegit Home (TCP) | Live |
-| `business.golegit.cl` | GoLegit Business (PYMEs) | En desarrollo |
+| `golegit.cl/` | GoLegit Home (TCP — trabajadoras de casa particular) | Live |
+| `golegit.cl/business` | GoLegit Business (RRHH para empresas) | En desarrollo |
 
-**Pasos para activar Business cuando esté listo:**
+**Decisión arquitectónica:** un solo repo/deploy, rutas bajo el mismo dominio — no subdominios separados. Esto simplifica el deploy y permite compartir componentes (Navbar, Footer) entre productos.
 
-1. Crear `app/business/page.tsx` (landing Business)
-2. Descomentar el bloque `business` en `middleware.ts`
-3. Agregar `business.golegit.cl` en Vercel → Settings → Domains
-4. Actualizar el card de Business en `components/sections/ProductSuite.tsx` (quitar opacity, activar link)
+**Landing Business (`/business`):**
+- `page.tsx` ensambla `<Navbar /> + <BusinessLanding /> + <Footer />` — misma estructura que Home
+- `BusinessLanding.tsx` — client component con hero, pain points, features, rubros, rota preview y CTA waitlist
+- Paleta indigo (no verde) para diferenciar de Home
+- Logos propios: `golegit-business-logo.svg` / `golegit-business-logo-dark.svg`
+- Navbar detecta `/business` via `pathname` y adapta logo, nav links y ProductSwitcher
 
-**`middleware.ts`** ya está creado con el routing skeleton. En producción detecta el subdominio desde el header `host` y hace rewrite. En local/Vercel preview el middleware no actúa (bypass explícito).
-
-**Decisión arquitectónica:** un solo repo/deploy, subdominios vía middleware rewrite — no repos separados. Esto simplifica el deploy y permite compartir componentes entre productos.
+**Backlog — reestructura de dominio:**
+- `golegit.cl` debería ser un landing genérico del ecosistema GoLegit (ambos productos)
+- El contenido actual de Home TCP se movería a `/home`
+- Pendiente de implementar — no urgente
 
 ---
 
@@ -529,12 +542,10 @@ GoLegit automatiza la burocracia legal de contratar TCP en Chile: contrato, anex
 | | Lite | Pro | Plus |
 |--|------|-----|------|
 | Trabajadoras | 1 | 1 | 2 o más |
-| Contrato, finiquito, carta de aviso | ✓ | ✓ | ✓ |
-| Liquidación manual (pregunta ausencias siempre) | ✓ | — | — |
-| Liquidación automatizada (pre-carga ausencias/licencias) | ✗ | ✓ | ✓ |
-| Registro ausencias, licencias, amonestaciones, vacaciones | ✗ | ✓ | ✓ |
-| Portal Trabajadora + firma digital | ✗ | ✓ | ✓ |
-| Certificados (vacaciones, antigüedad) | ✗ | ✓ | ✓ |
+| Todos los módulos empleador (contrato, liquidación, ausencias, vacaciones, etc.) | ✓ | ✓ | ✓ |
+| Recordatorios y gestión proactiva del ciclo mensual | ✗ | ✓ | ✓ |
+| Firma digital FES (Ley 19.799) | ✗ | ✓ | ✓ |
+| Portal trabajadora + verificación de identidad | ✗ | ✓ | ✓ |
 | Precio mensual | $4.990 | $9.990 | $17.990 |
 
 - **Mes de prueba gratuita** para todos los usuarios nuevos (features de Pro)

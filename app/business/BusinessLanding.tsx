@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 
 /* ── Waitlist form ─────────────────────────────────────────────── */
 
@@ -19,7 +18,7 @@ function WaitlistForm({ dark = false }: { dark?: boolean }) {
 
   if (sent) {
     return (
-      <p className={`text-sm font-medium ${dark ? "text-emerald-400" : "text-indigo-600"}`}>
+      <p className={`text-sm font-medium ${dark ? "text-indigo-400" : "text-indigo-600"}`}>
         Listo — te avisaremos cuando lancemos.
       </p>
     );
@@ -93,6 +92,35 @@ function PainPoint({ text }: { text: string }) {
   );
 }
 
+/* ── Vertical card ─────────────────────────────────────────────── */
+
+function VerticalCard({
+  icon,
+  title,
+  description,
+  badge,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  badge?: string;
+}) {
+  return (
+    <div className="relative bg-gray-50 rounded-2xl border border-gray-100 p-6 hover:border-indigo-200 transition-all">
+      {badge && (
+        <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-100 px-2 py-0.5 rounded-full">
+          {badge}
+        </span>
+      )}
+      <div className="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 mb-4">
+        {icon}
+      </div>
+      <h3 className="text-base font-bold text-gray-900 mb-2">{title}</h3>
+      <p className="text-sm text-gray-500 leading-relaxed">{description}</p>
+    </div>
+  );
+}
+
 /* ── Icons ─────────────────────────────────────────────────────── */
 
 const IconCalendar = (
@@ -140,44 +168,24 @@ const IconBell = (
   </svg>
 );
 
+const IconBuilding = (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="4" y="2" width="16" height="20" rx="2" />
+    <path d="M9 22v-4h6v4M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01" />
+  </svg>
+);
+
+const IconUtensils = (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2M7 2v20M21 15V2v0a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3zm0 0v7" />
+  </svg>
+);
+
 /* ── Main component ────────────────────────────────────────────── */
 
 export default function BusinessLanding() {
   return (
-    <div className="min-h-screen bg-white">
-      {/* ── Navbar ─────────────────────────────────────────────── */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/95 backdrop-blur-md border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link href="/" className="flex items-center">
-              <img
-                src="/logo/golegit-logo-dark.svg"
-                alt="GoLegit"
-                height={28}
-                style={{ height: 28, width: "auto" }}
-              />
-            </Link>
-            <span className="text-[10px] font-bold text-indigo-400 bg-indigo-400/10 border border-indigo-400/25 px-2 py-0.5 rounded-full tracking-wide">
-              Business
-            </span>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link
-              href="/"
-              className="hidden sm:inline-flex text-sm text-white/50 hover:text-white transition-colors"
-            >
-              GoLegit Home
-            </Link>
-            <a
-              href="#waitlist"
-              className="text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 px-4 py-2 rounded-lg transition-colors"
-            >
-              Early access
-            </a>
-          </div>
-        </div>
-      </header>
-
+    <>
       {/* ── Hero ───────────────────────────────────────────────── */}
       <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-zinc-950">
         {/* Ambient glow — indigo */}
@@ -204,17 +212,17 @@ export default function BusinessLanding() {
 
             {/* Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] tracking-tight mb-5 animate-fade-up animate-delay-100">
-              La gestión laboral
+              Gestión de RRHH
               <br />
-              que tu empresa necesita.
+              para tu empresa.
               <br />
-              <span className="text-indigo-400">Sin el dolor de cabeza.</span>
+              <span className="text-indigo-400">Simple y legal.</span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-lg text-white/60 leading-relaxed max-w-xl mb-8 animate-fade-up animate-delay-200">
               Contratos, liquidaciones, turnos y firma digital desde un solo portal.
-              Diseñado para empresas de servicios y gastronomía en Chile.
+              Diseñado para resolver los dolores reales de cada rubro.
             </p>
 
             {/* CTA */}
@@ -257,18 +265,18 @@ export default function BusinessLanding() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <PainPoint text="Turnos rotativos con cortes de mañana, noche y doble que nadie logra organizar bien." />
+            <PainPoint text="Contratos y finiquitos constantes por alta rotación de personal." />
             <PainPoint text="Horas extra no registradas que terminan en demandas laborales." />
-            <PainPoint text="Alta rotación: contratos, finiquitos y liquidaciones cada mes." />
-            <PainPoint text="Propinas sin tratamiento legal claro ni registro." />
-            <PainPoint text="Feriados trabajados sin compensación correcta dentro de los 90 días." />
+            <PainPoint text="Liquidaciones manuales con errores en tasas previsionales." />
             <PainPoint text="Cotizaciones Previred que siempre se pagan con retraso." />
+            <PainPoint text="Feriados trabajados sin compensación correcta dentro de los 90 días." />
+            <PainPoint text="Documentos sin firma que no tienen valor probatorio ante la Inspección del Trabajo." />
           </div>
         </div>
       </section>
 
       {/* ── Features ───────────────────────────────────────────── */}
-      <section className="py-24 bg-gray-50">
+      <section id="funcionalidades" className="py-24 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Funcionalidades</p>
@@ -283,12 +291,6 @@ export default function BusinessLanding() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             <FeatureCard
-              icon={IconCalendar}
-              title="Rota y turnos"
-              description="Organiza turnos rotativos con cortes, visualiza la semana completa y comparte horarios por WhatsApp o link."
-              tag="Gancho"
-            />
-            <FeatureCard
               icon={IconDoc}
               title="Contratos y documentos"
               description="Genera contratos, anexos, finiquitos y cartas de aviso con un par de clics. Plantillas actualizadas a la ley vigente."
@@ -297,6 +299,11 @@ export default function BusinessLanding() {
               icon={IconCalculator}
               title="Liquidaciones y Previred"
               description="Calcula liquidaciones con todas las tasas previsionales correctas. Exporta planillas para Previred."
+            />
+            <FeatureCard
+              icon={IconCalendar}
+              title="Turnos y rota"
+              description="Organiza turnos rotativos con cortes, visualiza la semana completa y comparte horarios por WhatsApp o link."
             />
             <FeatureCard
               icon={IconShield}
@@ -317,30 +324,66 @@ export default function BusinessLanding() {
         </div>
       </section>
 
-      {/* ── Vertical gastronomía ───────────────────────────────── */}
-      <section className="py-24 bg-white">
+      {/* ── Rubros ─────────────────────────────────────────────── */}
+      <section id="rubros" className="py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">
+              Por rubro
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+              Adaptado a los dolores de cada sector.
+            </h2>
+            <p className="text-gray-500 leading-relaxed">
+              Cada rubro tiene particularidades legales y operativas.
+              GoLegit Business las resuelve de raíz.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <VerticalCard
+              icon={IconUtensils}
+              title="Gastronomía"
+              description="Turnos rotativos con cortes, propinas, Art. 38 CT, feriados trabajados y alta rotación. Uno de los primeros rubros en lanzar."
+              badge="Primer vertical"
+            />
+            <VerticalCard
+              icon={IconBuilding}
+              title="Servicios y retail"
+              description="Jornadas variables, contratos a plazo fijo frecuentes, horas extra por temporada alta y equipos distribuidos."
+            />
+            <VerticalCard
+              icon={IconUsers}
+              title="Otros rubros"
+              description="Cualquier empresa con equipos que necesite contratos, liquidaciones, firma y gestión de documentos laborales al día."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Rota preview (feature destacado) ───────────────────── */}
+      <section className="py-24 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">
-                Primer sector
+                Turnos y rota
               </p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-5">
-                Pensado para gastronomía.
+                Organiza los turnos de tu equipo.
               </h2>
               <p className="text-gray-500 leading-relaxed mb-8">
-                Restaurantes, cafés y bares tienen dolores específicos que los SaaS genéricos
-                de RRHH no resuelven. GoLegit Business está diseñado desde cero para este sector.
+                Planificación visual de turnos rotativos con validación legal automática.
+                Sin planillas, sin errores, sin mensajes al grupo de WhatsApp.
               </p>
 
               <div className="space-y-4">
                 {[
                   "Turnos rotativos con cortes (mañana / noche / doble / franco)",
-                  "Validación automática contra el contrato (horas máx, descansos, Art. 38 CT)",
+                  "Validación automática contra el contrato (horas máx, descansos)",
                   "Intercambio de turnos entre trabajadores con validación legal",
-                  "Registro de horas extra y propinas",
-                  "Feriados trabajados con compensación dentro de 90 días",
-                  "Contratos y finiquitos frecuentes por alta rotación",
+                  "Registro de horas extra vinculado a la liquidación",
+                  "Comparte la rota por WhatsApp o link — sin instalar nada",
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <div className="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -445,35 +488,6 @@ export default function BusinessLanding() {
           </div>
         </div>
       </section>
-
-      {/* ── Footer ─────────────────────────────────────────────── */}
-      <footer className="bg-zinc-950 border-t border-white/5 py-8">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <img
-              src="/logo/golegit-logo-dark.svg"
-              alt="GoLegit"
-              height={22}
-              style={{ height: 22, width: "auto" }}
-            />
-            <span className="text-[10px] font-bold text-indigo-400/60 tracking-wide">Business</span>
-          </div>
-          <p className="text-xs text-white/30">
-            &copy; {new Date().getFullYear()} Cubillos Lama SpA &middot; RUT 78.393.969-K
-          </p>
-          <div className="flex items-center gap-5">
-            <Link href="/" className="text-xs text-white/40 hover:text-white/70 transition-colors">
-              GoLegit Home
-            </Link>
-            <Link href="/privacidad" className="text-xs text-white/40 hover:text-white/70 transition-colors">
-              Privacidad
-            </Link>
-            <Link href="/terminos" className="text-xs text-white/40 hover:text-white/70 transition-colors">
-              Términos
-            </Link>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </>
   );
 }
