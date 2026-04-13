@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bg-ink text-ink-faint">
       <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="col-span-1">
             <div className="mb-4">
@@ -23,34 +23,56 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Links */}
+          {/* Producto */}
           <div>
             <h4 className="text-white text-sm font-medium mb-4">Producto</h4>
             <ul className="space-y-2.5">
               <li>
-                <a href="#como-funciona" className="text-sm hover:text-white transition-colors">
+                <a href="/#como-funciona" className="text-sm hover:text-white transition-colors">
                   Cómo funciona
                 </a>
               </li>
               <li>
-                <a href="#precios" className="text-sm hover:text-white transition-colors">
+                <a href="/#precios" className="text-sm hover:text-white transition-colors">
                   Precios
                 </a>
               </li>
               <li>
-                <a href="#faq" className="text-sm hover:text-white transition-colors">
+                <a href="/#faq" className="text-sm hover:text-white transition-colors">
                   Preguntas frecuentes
                 </a>
               </li>
+            </ul>
+          </div>
+
+          {/* Herramientas */}
+          <div>
+            <h4 className="text-white text-sm font-medium mb-4">Herramientas</h4>
+            <ul className="space-y-2.5">
               <li>
-                <Link href="/simulador" className="text-sm hover:text-white transition-colors">
-                  Simuladores
+                <Link href="/simulador/liquidacion" className="text-sm hover:text-white transition-colors">
+                  Simulador de liquidación
+                </Link>
+              </li>
+              <li>
+                <Link href="/simulador/jornada" className="text-sm hover:text-white transition-colors">
+                  Simulador de jornada
+                </Link>
+              </li>
+              <li>
+                <Link href="/recursos" className="text-sm hover:text-white transition-colors">
+                  Centro de conocimiento
+                </Link>
+              </li>
+              <li>
+                <Link href="/novedades" className="text-sm hover:text-white transition-colors">
+                  Novedades legales
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contacto */}
           <div>
             <h4 className="text-white text-sm font-medium mb-4">Contacto</h4>
             <ul className="space-y-2.5">
