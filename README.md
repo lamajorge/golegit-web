@@ -81,4 +81,4 @@ El repo está preparado para crecer. Rutas sugeridas para fases futuras:
 
 ---
 
-Operado por **Cubillos y Compañía Limitada** · RUT 78.048.033-5 · golegit.cl
+Operado por **Cubillos Lama SpA** · RUT 78.393.969-K · golegit.cl

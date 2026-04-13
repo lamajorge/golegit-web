@@ -350,7 +350,7 @@ Edge Function (Vercel Edge Network — sin cold starts). Consulta la tabla `url_
   - Datos recopilados: nombre, RUT, domicilio, teléfono WhatsApp, email
   - **Datos biométricos sensibles** (cuando se implemente verificación de identidad): selfie, hash facial, liveness score, IP, timestamp — requiere consentimiento explícito, finalidad declarada y plazo de retención definido (Ley 21.719, Art. 16 letra b)
   - Finalidad del tratamiento: generación de documentos laborales, firma electrónica simple (Ley 19.799)
-  - Responsable del tratamiento: Cubillos y Compañía Limitada, RUT 78.048.033-5
+  - Responsable del tratamiento: Cubillos Lama SpA, RUT 78.393.969-K
   - Transferencia a terceros: Supabase (almacenamiento), Resend (email), Meta/WhatsApp (canal)
   - Derechos ARCOP: acceso, rectificación, cancelación, oposición, portabilidad
   - Contacto: soporte@golegit.cl
@@ -363,7 +363,7 @@ Edge Function (Vercel Edge Network — sin cold starts). Consulta la tabla `url_
   - Responsabilidad del empleador: la veracidad de los datos ingresados es responsabilidad del usuario
   - Limitación de responsabilidad: GoLegit genera documentos basados en los datos proporcionados; la validez legal depende de la exactitud de esos datos
   - Jurisdicción: tribunales de Santiago, ley chilena
-  - Operado por: Cubillos y Compañía Limitada, RUT 78.048.033-5
+  - Operado por: Cubillos Lama SpA, RUT 78.393.969-K
 - [ ] Configurar dominio `golegit.cl` en Vercel
 - [ ] Activar analytics (Vercel Analytics o similar)
 - [x] **`Pricing.tsx`** actualizado con Lite/Pro/Plus, precios y feature matrix completa (6 abril 2026)

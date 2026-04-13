@@ -50,7 +50,7 @@ const jsonLd = {
       name: "GoLegit",
       url: "https://golegit.cl",
       logo: "https://golegit.cl/logo/golegit-icon-512.png",
-      legalName: "Cubillos y Compañía Limitada",
+      legalName: "Cubillos Lama SpA",
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "customer support",

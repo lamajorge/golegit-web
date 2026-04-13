@@ -24,8 +24,8 @@ export default function PrivacidadPage() {
             <strong>Última actualización:</strong> Marzo 2026
           </p>
           <p>
-            Este documento describe cómo Cubillos y Compañía Limitada (RUT
-            78.048.033-5), operadora de GoLegit, trata los datos personales de
+            Este documento describe cómo Cubillos Lama SpA (RUT
+            78.393.969-K), operadora de GoLegit, trata los datos personales de
             sus usuarios, en cumplimiento de la Ley 19.628 sobre Protección de
             la Vida Privada y la Ley 21.719.
           </p>

@@ -25,8 +25,8 @@ export default function TerminosPage() {
           </p>
           <p>
             Al utilizar GoLegit, el usuario acepta los presentes Términos de
-            Servicio establecidos por Cubillos y Compañía Limitada (RUT
-            78.048.033-5).
+            Servicio establecidos por Cubillos Lama SpA (RUT
+            78.393.969-K).
           </p>
           <p className="text-ink-light text-xs border border-amber-200 bg-amber-50 rounded-lg p-3">
             ⚠️ Este documento está en preparación. Se publicará la versión
