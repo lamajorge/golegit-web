@@ -38,29 +38,30 @@ async function fetchIndicadores(): Promise<{ ind: Indicador | null; afps: AfpTas
     const headers = { apikey: ANON_KEY, Authorization: `Bearer ${ANON_KEY}` }
     const sel = 'mes,uf_valor,imm,tope_imponible_afp,tasa_sis,asig_familiar_tramo_a,asig_familiar_tope_a,asig_familiar_tramo_b,asig_familiar_tope_b,asig_familiar_tramo_c,asig_familiar_tope_c'
 
-    const [indRes, _afpRes] = await Promise.all([
-      fetch(`${SUPABASE_URL}/rest/v1/indicadores_previsionales?vigente=eq.true&select=${sel}&limit=1`, { headers, next: { revalidate: 3600 } }),
-      fetch(`${SUPABASE_URL}/rest/v1/afps_tasas?select=nombre,tasa_cotizacion,comision_dependiente&order=nombre`, { headers, next: { revalidate: 3600 } }),
-    ])
-
-    const [indData, afpData] = await Promise.all([
-      indRes.ok ? indRes.json() : [],
-      _afpRes.ok ? _afpRes.json() : [],
-    ])
-
+    const indRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/indicadores_previsionales?vigente=eq.true&select=${sel}&limit=1`,
+      { headers, next: { revalidate: 3600 } }
+    )
+    const indData = indRes.ok ? await indRes.json() : []
     const ind: Indicador | null = Array.isArray(indData) && indData.length > 0 ? indData[0] : null
 
-    // afps_tasas tiene mes → filtrar por el mes del indicador
+    // Filtrar afps_tasas por el mes del indicador vigente directamente en la query
     const mesActivo = ind?.mes
-    const afpsFiltered: AfpTasa[] = Array.isArray(afpData)
-      ? afpData
-          .filter((r: any) => !mesActivo || r.mes === mesActivo || r.mes === undefined)
-          .map((r: any) => ({
+    let afpsFiltered: AfpTasa[] = []
+    if (mesActivo) {
+      const afpRes = await fetch(
+        `${SUPABASE_URL}/rest/v1/afps_tasas?mes=eq.${mesActivo}&select=nombre,tasa_cotizacion,comision_dependiente&order=nombre`,
+        { headers, next: { revalidate: 3600 } }
+      )
+      const afpData = afpRes.ok ? await afpRes.json() : []
+      afpsFiltered = Array.isArray(afpData)
+        ? afpData.map((r: any) => ({
             nombre: r.nombre,
             tasa_cotizacion: Number(r.tasa_cotizacion),
             comision_dependiente: Number(r.comision_dependiente),
           }))
-      : []
+        : []
+    }
 
     return { ind, afps: afpsFiltered }
   } catch {
