@@ -109,34 +109,37 @@ function Row({
 // ─────────────────────────────────────────────────────────────
 // CÁLCULO — desde sueldo base hacia líquido
 // ─────────────────────────────────────────────────────────────
+type Tasas = { sis: number; afcTcp: number; mutual: number; cotAdicional: number; indemnizacion: number }
+
 function calcDesdeBase({
-  sueldoBase, movilizacion, colacion, afpIdx, dias, cargas,
+  sueldoBase, movilizacion, colacion, afpIdx, dias, cargas, tope, tasas, afps,
 }: {
   sueldoBase: number; movilizacion: number; colacion: number;
   afpIdx: number; dias: number; cargas: number;
+  tope: number; tasas: Tasas; afps: AfpData[];
 }) {
   const f = dias / 30;
-  const topeAplicado = sueldoBase > TOPE_IMPONIBLE;
+  const topeAplicado = sueldoBase > tope;
   const sueldoBaseProp = Math.round(sueldoBase * f);
-  const sueldoImponible = Math.round(Math.min(sueldoBase, TOPE_IMPONIBLE) * f);
+  const sueldoImponible = Math.round(Math.min(sueldoBase, tope) * f);
   const movilizacionProp = Math.round(movilizacion * f);
   const colacionProp = Math.round(colacion * f);
   const asigFamiliar = calcAsigFamiliar(sueldoImponible, cargas);
   const bruto = sueldoImponible + movilizacionProp + colacionProp + asigFamiliar;
 
-  const afp = AFPS[afpIdx];
+  const afp = afps[afpIdx];
   const tasaAfp = 10 + afp.comision;
   const descAfp   = Math.round((sueldoImponible * tasaAfp) / 100);
   const descSalud = Math.round(sueldoImponible * 0.07);
   const totalDesc = descAfp + descSalud;
   const liquido   = bruto - totalDesc;
 
-  const sis          = Math.round(sueldoImponible * TASAS_EMP.sis);
-  const afcTcp       = Math.round(sueldoImponible * TASAS_EMP.afcTcp);
-  const mutual       = Math.round(sueldoImponible * TASAS_EMP.mutual);
-  const cotAdicional = Math.round(sueldoImponible * TASAS_EMP.cotAdicional);
+  const sis          = Math.round(sueldoImponible * tasas.sis);
+  const afcTcp       = Math.round(sueldoImponible * tasas.afcTcp);
+  const mutual       = Math.round(sueldoImponible * tasas.mutual);
+  const cotAdicional = Math.round(sueldoImponible * tasas.cotAdicional);
   // Indemnización a todo evento TCP: base es sueldo_base proporcional, no el imponible (Art. 163 bis CT)
-  const indem        = Math.round(sueldoBaseProp * TASAS_EMP.indemnizacion);
+  const indem        = Math.round(sueldoBaseProp * tasas.indemnizacion);
   // El empleador recupera la asig. familiar descontándola de Previred
   const totalEmp     = sis + afcTcp + mutual + cotAdicional + indem - asigFamiliar;
 
@@ -159,13 +162,14 @@ function calcDesdeBase({
 //   sueldoImponible = (liquido − mov − col) / (1 − tasaTotal)
 // ─────────────────────────────────────────────────────────────
 function calcDesdeLiquido({
-  liquidoPactado, movilizacion, colacion, afpIdx, dias, cargas,
+  liquidoPactado, movilizacion, colacion, afpIdx, dias, cargas, tope, tasas, afps,
 }: {
   liquidoPactado: number; movilizacion: number; colacion: number;
   afpIdx: number; dias: number; cargas: number;
+  tope: number; tasas: Tasas; afps: AfpData[];
 }) {
   const f = dias / 30;
-  const afp = AFPS[afpIdx];
+  const afp = afps[afpIdx];
   const tasaAfp = 10 + afp.comision;
   const tasaTotal = tasaAfp / 100 + 0.07; // AFP + Fonasa
 
@@ -179,7 +183,7 @@ function calcDesdeLiquido({
 
   // Sueldo base mensual (sin proporcionar)
   const sueldoBaseMensual = dias < 30 ? Math.round(sueldoImponible / f) : sueldoImponible;
-  const topeAplicado = sueldoBaseMensual > TOPE_IMPONIBLE;
+  const topeAplicado = sueldoBaseMensual > tope;
 
   const bruto = sueldoImponible + movilizacionProp + colacionProp + asigFamiliar;
   const descAfp   = Math.round((sueldoImponible * tasaAfp) / 100);
@@ -187,11 +191,11 @@ function calcDesdeLiquido({
   const totalDesc = descAfp + descSalud;
   const liquidoReal = bruto - totalDesc;
 
-  const sis          = Math.round(sueldoImponible * TASAS_EMP.sis);
-  const afcTcp       = Math.round(sueldoImponible * TASAS_EMP.afcTcp);
-  const mutual       = Math.round(sueldoImponible * TASAS_EMP.mutual);
-  const cotAdicional = Math.round(sueldoImponible * TASAS_EMP.cotAdicional);
-  const indem        = Math.round(sueldoImponible * TASAS_EMP.indemnizacion);
+  const sis          = Math.round(sueldoImponible * tasas.sis);
+  const afcTcp       = Math.round(sueldoImponible * tasas.afcTcp);
+  const mutual       = Math.round(sueldoImponible * tasas.mutual);
+  const cotAdicional = Math.round(sueldoImponible * tasas.cotAdicional);
+  const indem        = Math.round(sueldoImponible * tasas.indemnizacion);
   const totalEmp     = sis + afcTcp + mutual + cotAdicional + indem - asigFamiliar;
 
   return {
@@ -240,13 +244,15 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
   const colacion     = Math.max(0, parseInt(colacionRaw.replace(/\D/g, ""))      || 0);
 
   const rBase = useMemo(
-    () => calcDesdeBase({ sueldoBase, movilizacion, colacion, afpIdx, dias, cargas }),
-    [sueldoBase, movilizacion, colacion, afpIdx, dias, cargas]
+    () => calcDesdeBase({ sueldoBase, movilizacion, colacion, afpIdx, dias, cargas, tope: TOPE_IMPONIBLE, tasas: TASAS_EMP, afps: AFPS }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [sueldoBase, movilizacion, colacion, afpIdx, dias, cargas, TOPE_IMPONIBLE, TASAS_EMP.sis, AFPS]
   );
 
   const rLiq = useMemo(
-    () => calcDesdeLiquido({ liquidoPactado: liquidoPact, movilizacion, colacion, afpIdx, dias, cargas }),
-    [liquidoPact, movilizacion, colacion, afpIdx, dias, cargas]
+    () => calcDesdeLiquido({ liquidoPactado: liquidoPact, movilizacion, colacion, afpIdx, dias, cargas, tope: TOPE_IMPONIBLE, tasas: TASAS_EMP, afps: AFPS }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [liquidoPact, movilizacion, colacion, afpIdx, dias, cargas, TOPE_IMPONIBLE, TASAS_EMP.sis, AFPS]
   );
 
   const r = modo === "base" ? null : null; // usamos rBase / rLiq directamente
