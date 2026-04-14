@@ -11,7 +11,7 @@ import CtaButton from "@/components/CtaButton";
 // CONSTANTES LEGALES — actualizar cuando cambien
 // ─────────────────────────────────────────────────────────────
 const IMM = 539_000;
-const TOPE_IMPONIBLE = 3_585_755;
+const TOPE_IMPONIBLE = 3_610_818;
 
 const AFPS = [
   { nombre: "AFP Capital",   comision: 1.44 },
@@ -24,7 +24,7 @@ const AFPS = [
 ];
 
 const TASAS_EMP = {
-  sis:          0.0154,
+  sis:          0.0162,
   afcTcp:       0.0300,
   mutual:       0.0093,
   cotAdicional: 0.0100,
@@ -430,7 +430,7 @@ export default function LiquidacionPage() {
             </div>
 
             <p className="text-xs text-ink-light leading-relaxed px-1">
-              Valores referenciales. IMM: {clp(IMM)} · Tope imponible AFP: {clp(TOPE_IMPONIBLE)} (se actualiza mensualmente desde Previred).
+              Valores referenciales. IMM: {clp(IMM)} · Tope imponible AFP: {clp(TOPE_IMPONIBLE)} · UF ref: $40.120,20.
               Tasas Previred vigentes abril 2026 — verificar antes de emitir liquidaciones oficiales.
             </p>
           </div>
