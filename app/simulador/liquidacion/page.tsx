@@ -31,6 +31,24 @@ const TASAS_EMP = {
   indemnizacion: 0.0111,
 };
 
+// Asignación familiar (DFL 150/1981) — tramos abril 2026
+// El tramo se determina por el total imponible del trabajador
+const ASIG_FAMILIAR = [
+  { tramo: 'A', monto: 22_007, tope: 631_976 },
+  { tramo: 'B', monto: 13_505, tope: 923_067 },
+  { tramo: 'C', monto:  4_267, tope: 1_439_668 },
+  { tramo: 'D', monto:      0, tope: Infinity },
+];
+
+function calcAsigFamiliar(imponible: number, cargas: number): number {
+  const tramo = ASIG_FAMILIAR.find((t) => imponible <= t.tope) ?? ASIG_FAMILIAR[3];
+  return tramo.monto * cargas;
+}
+
+function getTramoLabel(imponible: number): string {
+  return ASIG_FAMILIAR.find((t) => imponible <= t.tope)?.tramo ?? 'D';
+}
+
 // ─────────────────────────────────────────────────────────────
 // HELPERS
 // ─────────────────────────────────────────────────────────────
@@ -92,10 +110,10 @@ function Row({
 // CÁLCULO — desde sueldo base hacia líquido
 // ─────────────────────────────────────────────────────────────
 function calcDesdeBase({
-  sueldoBase, movilizacion, colacion, afpIdx, dias,
+  sueldoBase, movilizacion, colacion, afpIdx, dias, cargas,
 }: {
   sueldoBase: number; movilizacion: number; colacion: number;
-  afpIdx: number; dias: number;
+  afpIdx: number; dias: number; cargas: number;
 }) {
   const f = dias / 30;
   const topeAplicado = sueldoBase > TOPE_IMPONIBLE;
@@ -103,7 +121,8 @@ function calcDesdeBase({
   const sueldoImponible = Math.round(Math.min(sueldoBase, TOPE_IMPONIBLE) * f);
   const movilizacionProp = Math.round(movilizacion * f);
   const colacionProp = Math.round(colacion * f);
-  const bruto = sueldoImponible + movilizacionProp + colacionProp;
+  const asigFamiliar = calcAsigFamiliar(sueldoImponible, cargas);
+  const bruto = sueldoImponible + movilizacionProp + colacionProp + asigFamiliar;
 
   const afp = AFPS[afpIdx];
   const tasaAfp = 10 + afp.comision;
@@ -118,14 +137,16 @@ function calcDesdeBase({
   const cotAdicional = Math.round(sueldoImponible * TASAS_EMP.cotAdicional);
   // Indemnización a todo evento TCP: base es sueldo_base proporcional, no el imponible (Art. 163 bis CT)
   const indem        = Math.round(sueldoBaseProp * TASAS_EMP.indemnizacion);
-  const totalEmp     = sis + afcTcp + mutual + cotAdicional + indem;
+  // El empleador recupera la asig. familiar descontándola de Previred
+  const totalEmp     = sis + afcTcp + mutual + cotAdicional + indem - asigFamiliar;
 
   return {
-    sueldoImponible, movilizacionProp, colacionProp, bruto,
+    sueldoImponible, movilizacionProp, colacionProp, asigFamiliar, bruto,
     descAfp, tasaAfp, descSalud, totalDesc, liquido,
     sis, afcTcp, mutual, cotAdicional, indem, totalEmp,
     costoTotal: bruto + totalEmp,
     afpNombre: afp.nombre, topeAplicado,
+    tramoAsig: getTramoLabel(sueldoImponible),
   };
 }
 
@@ -138,10 +159,10 @@ function calcDesdeBase({
 //   sueldoImponible = (liquido − mov − col) / (1 − tasaTotal)
 // ─────────────────────────────────────────────────────────────
 function calcDesdeLiquido({
-  liquidoPactado, movilizacion, colacion, afpIdx, dias,
+  liquidoPactado, movilizacion, colacion, afpIdx, dias, cargas,
 }: {
   liquidoPactado: number; movilizacion: number; colacion: number;
-  afpIdx: number; dias: number;
+  afpIdx: number; dias: number; cargas: number;
 }) {
   const f = dias / 30;
   const afp = AFPS[afpIdx];
@@ -149,16 +170,18 @@ function calcDesdeLiquido({
   const tasaTotal = tasaAfp / 100 + 0.07; // AFP + Fonasa
 
   // Despejar imponible mensual desde el líquido proporcional
+  // La asig. familiar no afecta el imponible, así que se excluye del despeje
   const movilizacionProp = Math.round(movilizacion * f);
   const colacionProp = Math.round(colacion * f);
   const baseNetoSinHab = liquidoPactado - movilizacionProp - colacionProp;
   const sueldoImponible = Math.round(baseNetoSinHab / (1 - tasaTotal));
+  const asigFamiliar = calcAsigFamiliar(sueldoImponible, cargas);
 
   // Sueldo base mensual (sin proporcionar)
   const sueldoBaseMensual = dias < 30 ? Math.round(sueldoImponible / f) : sueldoImponible;
   const topeAplicado = sueldoBaseMensual > TOPE_IMPONIBLE;
 
-  const bruto = sueldoImponible + movilizacionProp + colacionProp;
+  const bruto = sueldoImponible + movilizacionProp + colacionProp + asigFamiliar;
   const descAfp   = Math.round((sueldoImponible * tasaAfp) / 100);
   const descSalud = Math.round(sueldoImponible * 0.07);
   const totalDesc = descAfp + descSalud;
@@ -169,14 +192,15 @@ function calcDesdeLiquido({
   const mutual       = Math.round(sueldoImponible * TASAS_EMP.mutual);
   const cotAdicional = Math.round(sueldoImponible * TASAS_EMP.cotAdicional);
   const indem        = Math.round(sueldoImponible * TASAS_EMP.indemnizacion);
-  const totalEmp     = sis + afcTcp + mutual + cotAdicional + indem;
+  const totalEmp     = sis + afcTcp + mutual + cotAdicional + indem - asigFamiliar;
 
   return {
-    sueldoBaseMensual, sueldoImponible, movilizacionProp, colacionProp, bruto,
+    sueldoBaseMensual, sueldoImponible, movilizacionProp, colacionProp, asigFamiliar, bruto,
     descAfp, tasaAfp, descSalud, totalDesc, liquidoReal,
     sis, afcTcp, mutual, cotAdicional, indem, totalEmp,
     costoTotal: bruto + totalEmp,
     afpNombre: afp.nombre, topeAplicado,
+    tramoAsig: getTramoLabel(sueldoImponible),
   };
 }
 
@@ -196,6 +220,7 @@ export default function LiquidacionPage() {
   const [colacionRaw,     setColacionRaw]     = useState("0");
   const [afpIdx,          setAfpIdx]          = useState(2); // Habitat
   const [dias,            setDias]            = useState(30);
+  const [cargas,          setCargas]          = useState(0);
 
   const sueldoBase  = Math.max(0, parseInt(sueldoRaw.replace(/\D/g, ""))         || 0);
   const liquidoPact = Math.max(0, parseInt(liquidoRaw.replace(/\D/g, ""))        || 0);
@@ -203,13 +228,13 @@ export default function LiquidacionPage() {
   const colacion     = Math.max(0, parseInt(colacionRaw.replace(/\D/g, ""))      || 0);
 
   const rBase = useMemo(
-    () => calcDesdeBase({ sueldoBase, movilizacion, colacion, afpIdx, dias }),
-    [sueldoBase, movilizacion, colacion, afpIdx, dias]
+    () => calcDesdeBase({ sueldoBase, movilizacion, colacion, afpIdx, dias, cargas }),
+    [sueldoBase, movilizacion, colacion, afpIdx, dias, cargas]
   );
 
   const rLiq = useMemo(
-    () => calcDesdeLiquido({ liquidoPactado: liquidoPact, movilizacion, colacion, afpIdx, dias }),
-    [liquidoPact, movilizacion, colacion, afpIdx, dias]
+    () => calcDesdeLiquido({ liquidoPactado: liquidoPact, movilizacion, colacion, afpIdx, dias, cargas }),
+    [liquidoPact, movilizacion, colacion, afpIdx, dias, cargas]
   );
 
   const r = modo === "base" ? null : null; // usamos rBase / rLiq directamente
@@ -352,6 +377,23 @@ export default function LiquidacionPage() {
                   <p className="text-sm text-ink">Salud</p>
                   <span className="text-sm font-medium text-ink-muted">Fonasa — 7% del imponible</span>
                 </div>
+
+                <div>
+                  <label className={labelCls}>Cargas familiares reconocidas por IPS</label>
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="range" min={0} max={10} value={cargas}
+                      onChange={(e) => setCargas(Number(e.target.value))}
+                      className="flex-1 accent-brand-600"
+                    />
+                    <span className="w-6 text-center text-sm font-medium text-ink">{cargas}</span>
+                  </div>
+                  {cargas > 0 && (
+                    <p className="text-xs text-brand-700 mt-1.5 bg-brand-50 border border-brand-100 rounded-lg px-3 py-2">
+                      Tramo {(modo === "base" ? rBase : rLiq).tramoAsig} — {clp(calcAsigFamiliar((modo === "base" ? rBase : rLiq).sueldoImponible, 1))}/carga · DFL 150/1981
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -427,6 +469,14 @@ export default function LiquidacionPage() {
                 {(modo === "base" ? rBase.colacionProp : rLiq.colacionProp) > 0 && (
                   <Row label="Colación" value={clp(modo === "base" ? rBase.colacionProp : rLiq.colacionProp)} muted />
                 )}
+                {(modo === "base" ? rBase.asigFamiliar : rLiq.asigFamiliar) > 0 && (
+                  <Row
+                    label={`Asignación familiar — ${cargas} carga${cargas !== 1 ? "s" : ""} (Tramo ${(modo === "base" ? rBase : rLiq).tramoAsig})`}
+                    value={clp(modo === "base" ? rBase.asigFamiliar : rLiq.asigFamiliar)}
+                    muted
+                    sub="No imponible · DFL 150/1981 · recuperado de Previred"
+                  />
+                )}
                 <div className="h-px bg-gray-100" />
                 <Row label="Sueldo bruto" value={clp(modo === "base" ? rBase.bruto : rLiq.bruto)} bold />
               </div>
@@ -480,8 +530,16 @@ export default function LiquidacionPage() {
                     <Row label={`Mutual Acc. Trabajo y Enf. Prof. (${pct(TASAS_EMP.mutual)})`}         value={clp(x.mutual)} />
                     <Row label={`Cot. adicional empleador (${pct(TASAS_EMP.cotAdicional)}: 0,9%+0,1%)`} value={clp(x.cotAdicional)} />
                     <Row label={`Indem. a todo evento TCP (${pct(TASAS_EMP.indemnizacion)} — AFC Chile)`} value={clp(x.indem)} />
+                    {x.asigFamiliar > 0 && (
+                      <Row
+                        label={`Comp. asig. familiar (${cargas} carga${cargas !== 1 ? "s" : ""}, Tramo ${x.tramoAsig})`}
+                        value={`−${clp(x.asigFamiliar)}`}
+                        negative
+                        sub="El empleador la pagó al trabajador y la descuenta de Previred"
+                      />
+                    )}
                     <div className="h-px bg-gray-100" />
-                    <Row label="Total aportes empleador" value={clp(x.totalEmp)} bold />
+                    <Row label="Total Previred (neto)" value={clp(x.totalEmp)} bold />
                   </div>
                 );
               })()}
