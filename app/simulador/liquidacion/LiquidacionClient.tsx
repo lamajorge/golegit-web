@@ -461,7 +461,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
                   <span className="text-sm font-normal text-amber-700 ml-2">/mes</span>
                 </p>
                 <p className="text-xs text-amber-700 mt-1">
-                  Este es el imponible mensual a pactar en el contrato
+                  Este es el sueldo base a indicar en el contrato de trabajo
                   {rLiq.topeAplicado && " — supera el tope imponible"}
                 </p>
               </div>
@@ -475,7 +475,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
                   <Row label="Sueldo base (imponible)" value={clp(rBase.sueldoImponible)}
                     sub={rBase.topeAplicado ? `Tope legal aplicado (${clp(TOPE_IMPONIBLE)}/mes)` : undefined} />
                 ) : (
-                  <Row label="Sueldo imponible (proporcional)" value={clp(rLiq.sueldoImponible)}
+                  <Row label="Sueldo base (proporcional)" value={clp(rLiq.sueldoImponible)}
                     sub={rLiq.topeAplicado ? `Supera tope (${clp(TOPE_IMPONIBLE)}/mes)` : undefined} />
                 )}
                 {(modo === "base" ? rBase.movilizacionProp : rLiq.movilizacionProp) > 0 && (
