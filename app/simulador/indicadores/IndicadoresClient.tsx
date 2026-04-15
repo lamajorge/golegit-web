@@ -144,7 +144,8 @@ export default function IndicadoresClient({ indicadores, afpTasas }: Props) {
         )) : (
           <Row label="AFP (referencial)" value="~11,27%–11,54%" sub="10% cuenta individual + comisión según AFP elegida" />
         )}
-        <Row label="Salud" value="7,00%" sub="Fonasa o isapre · base: total imponible" />
+        <Row label="Salud — Fonasa" value="7,00%" sub="Descuento fijo sobre total imponible" />
+        <Row label="Salud — Isapre" value="Según plan pactado" sub="Mínimo 7% · el exceso sobre el 7% puede ser cargo del empleador" />
       </Section>
 
       {/* ── 4. Asignación familiar ── */}
