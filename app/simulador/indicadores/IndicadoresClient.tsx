@@ -157,7 +157,7 @@ export default function IndicadoresClient({ indicadores, afpTasas }: Props) {
             Tramo según renta imponible del trabajador.
           </p>
           <div className="grid grid-cols-3 gap-2 text-xs font-semibold text-ink-light uppercase tracking-wider pb-2">
-            <span>Tramo</span><span className="text-right">Por carga</span><span className="text-right">Renta imponible</span>
+            <span>Tramo</span><span className="text-right">Renta imponible</span><span className="text-right">Por carga</span>
           </div>
           {[
             { tramo: 'A', monto: ind.asig_familiar_tramo_a, desde: null, hasta: ind.asig_familiar_tope_a },
@@ -167,13 +167,13 @@ export default function IndicadoresClient({ indicadores, afpTasas }: Props) {
           ].map(({ tramo, monto, desde, hasta }) => (
             <div key={tramo} className="grid grid-cols-3 gap-2 py-2 border-t border-gray-50 text-sm">
               <span className="font-medium text-ink">Tramo {tramo}</span>
-              <span className="text-right tabular-nums text-ink-muted">
-                {monto ? clp(monto) : '$0'}
-              </span>
               <span className="text-right tabular-nums text-ink-light text-xs leading-snug">
                 {!desde && hasta ? `≤ ${clp(hasta)}` : ''}
                 {desde && hasta ? `${clp(desde + 1)} – ${clp(hasta)}` : ''}
                 {desde && !hasta ? `> ${clp(desde)}` : ''}
+              </span>
+              <span className="text-right tabular-nums text-ink-muted">
+                {monto ? clp(monto) : '$0'}
               </span>
             </div>
           ))}
