@@ -20,6 +20,12 @@ interface VerificacionResult {
   nombre_trabajador?: string;
 }
 
+interface Firmante {
+  rol: "empleador" | "trabajador";
+  nombre: string;
+  firmado_en: string;
+}
+
 const TIPO_DOC_LABEL: Record<string, string> = {
   contrato: "Contrato de trabajo",
   anexo: "Anexo de modificaci\u00f3n",
@@ -133,107 +139,127 @@ export default function VerificarCliente() {
         </div>
       )}
 
-      {result?.encontrado && (
-        <div className="border border-green-200 bg-green-50 rounded-xl p-6 space-y-4">
-          <div className="flex items-center gap-2 mb-2">
-            <svg
-              className="w-5 h-5 text-green-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <span className="text-green-700 font-semibold text-sm">
-              Documento verificado
-            </span>
+      {result?.encontrado && (() => {
+        // Construir lista de firmantes a partir de los datos del RPC
+        const firmantes: Firmante[] = []
+        if (result.firmado_empleador_en && result.nombre_empleador)
+          firmantes.push({ rol: "empleador", nombre: result.nombre_empleador, firmado_en: result.firmado_empleador_en })
+        if (result.firmado_trabajador_en && result.nombre_trabajador)
+          firmantes.push({ rol: "trabajador", nombre: result.nombre_trabajador, firmado_en: result.firmado_trabajador_en })
+        const n_firmas = firmantes.length
+
+        return (
+          <div className="border border-green-200 bg-green-50 rounded-xl p-6 space-y-4">
+            <div className="flex items-center gap-2 mb-2">
+              <svg
+                className="w-5 h-5 text-green-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span className="text-green-700 font-semibold text-sm">
+                Documento verificado
+              </span>
+            </div>
+
+            <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
+              <dt className="text-ink-muted">Tipo</dt>
+              <dd className="text-ink font-medium">
+                {TIPO_DOC_LABEL[result.tipo_documento ?? ""] ??
+                  result.tipo_documento}
+              </dd>
+
+              {result.nombre_documento && (
+                <>
+                  <dt className="text-ink-muted">Documento</dt>
+                  <dd className="text-ink">{result.nombre_documento}</dd>
+                </>
+              )}
+
+              {result.nombre_empleador && (
+                <>
+                  <dt className="text-ink-muted">Empleador</dt>
+                  <dd className="text-ink">{result.nombre_empleador}</dd>
+                </>
+              )}
+
+              {result.nombre_trabajador && (
+                <>
+                  <dt className="text-ink-muted">Trabajador/a</dt>
+                  <dd className="text-ink">{result.nombre_trabajador}</dd>
+                </>
+              )}
+
+              {result.creado_en && (
+                <>
+                  <dt className="text-ink-muted">Generado</dt>
+                  <dd className="text-ink">{formatFecha(result.creado_en)}</dd>
+                </>
+              )}
+            </dl>
+
+            {/* ── Sección de firmas ── */}
+            <div className="border-t border-green-200 pt-4 mt-2">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-sm font-semibold text-ink">
+                  Firmas electr&oacute;nicas
+                </span>
+                <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${
+                  n_firmas === 0 ? "bg-gray-100 text-gray-500" :
+                  n_firmas === 1 ? "bg-amber-100 text-amber-700" :
+                  "bg-green-100 text-green-700"
+                }`}>
+                  {n_firmas} de 2 firmante{n_firmas !== 1 ? "s" : ""}
+                </span>
+              </div>
+
+              {n_firmas === 0 ? (
+                <p className="text-sm text-ink-muted">
+                  Sin firma electr&oacute;nica registrada.
+                </p>
+              ) : (
+                <div className="space-y-2">
+                  {firmantes.map((f) => (
+                    <div
+                      key={f.rol}
+                      className="border border-green-300 bg-white rounded-lg px-4 py-3"
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <p className="text-sm font-medium text-ink">{f.nombre}</p>
+                          <p className="text-xs text-ink-muted capitalize">{f.rol === "empleador" ? "Empleador/a" : "Trabajador/a"}</p>
+                        </div>
+                        <span className="shrink-0 text-xs font-mono bg-green-50 border border-green-200 text-green-700 px-2 py-0.5 rounded">
+                          ✓ FES
+                        </span>
+                      </div>
+                      <p className="mt-1.5 text-xs text-ink-muted">
+                        {formatFecha(f.firmado_en)} &middot; Hora de Chile
+                      </p>
+                      <p className="text-xs text-ink-light mt-0.5">
+                        PIN &middot; identidad biom&eacute;tricamente verificada &middot; Ley 19.799
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <p className="text-xs text-ink-light border-t border-green-200 pt-3">
+              Este documento fue generado por GoLegit y su autenticidad ha sido
+              verificada. La firma electr&oacute;nica simple (FES) tiene validez
+              legal conforme a la Ley 19.799.
+            </p>
           </div>
-
-          <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
-            <dt className="text-ink-muted">Tipo</dt>
-            <dd className="text-ink font-medium">
-              {TIPO_DOC_LABEL[result.tipo_documento ?? ""] ??
-                result.tipo_documento}
-            </dd>
-
-            {result.nombre_documento && (
-              <>
-                <dt className="text-ink-muted">Documento</dt>
-                <dd className="text-ink">{result.nombre_documento}</dd>
-              </>
-            )}
-
-            {result.nombre_empleador && (
-              <>
-                <dt className="text-ink-muted">Empleador</dt>
-                <dd className="text-ink">{result.nombre_empleador}</dd>
-              </>
-            )}
-
-            {result.nombre_trabajador && (
-              <>
-                <dt className="text-ink-muted">Trabajador/a</dt>
-                <dd className="text-ink">{result.nombre_trabajador}</dd>
-              </>
-            )}
-
-            {result.creado_en && (
-              <>
-                <dt className="text-ink-muted">Generado</dt>
-                <dd className="text-ink">{formatFecha(result.creado_en)}</dd>
-              </>
-            )}
-
-            <dt className="text-ink-muted">Firma</dt>
-            <dd
-              className={`font-medium ${ESTADO_FIRMA_LABEL[result.estado_firma ?? ""]?.color ?? "text-ink"}`}
-            >
-              {ESTADO_FIRMA_LABEL[result.estado_firma ?? ""]?.label ??
-                result.estado_firma}
-            </dd>
-
-            {result.firmado_empleador_en && (
-              <>
-                <dt className="text-ink-muted pl-4">Empleador</dt>
-                <dd className="text-ink text-xs">
-                  {formatFecha(result.firmado_empleador_en)}
-                </dd>
-              </>
-            )}
-
-            {result.firmado_trabajador_en && (
-              <>
-                <dt className="text-ink-muted pl-4">Trabajador/a</dt>
-                <dd className="text-ink text-xs">
-                  {formatFecha(result.firmado_trabajador_en)}
-                </dd>
-              </>
-            )}
-
-            {result.metodo_firma && result.metodo_firma !== "ninguno" && (
-              <>
-                <dt className="text-ink-muted">M&eacute;todo</dt>
-                <dd className="text-ink">
-                  {result.metodo_firma === "PIN"
-                    ? "PIN FES (Ley 19.799)"
-                    : result.metodo_firma}
-                </dd>
-              </>
-            )}
-          </dl>
-
-          <p className="text-xs text-ink-light border-t border-green-200 pt-3 mt-3">
-            Este documento fue generado por GoLegit y su autenticidad ha sido
-            verificada. La firma electr&oacute;nica simple (FES) tiene validez
-            legal conforme a la Ley 19.799.
-          </p>
-        </div>
-      )}
+        )
+      })()}
     </div>
   );
 }
