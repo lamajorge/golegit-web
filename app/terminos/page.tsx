@@ -24,7 +24,7 @@ export default function TerminosPage() {
           Última actualización: 16 de abril de 2026 · Versión 1.0
         </p>
 
-        <article className="prose prose-sm max-w-none text-ink-muted space-y-4 prose-headings:text-ink prose-headings:font-medium prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-3 prose-h3:text-base prose-h3:mt-6 prose-h3:mb-2 prose-strong:text-ink prose-a:text-brand-600 prose-table:text-xs prose-th:bg-ink/5 prose-th:px-2 prose-th:py-1 prose-td:px-2 prose-td:py-1 prose-td:align-top">
+        <article className="prose prose-sm max-w-none text-ink-muted space-y-4 prose-headings:text-ink prose-h2:text-lg prose-h2:font-bold prose-h2:mt-14 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-ink/10 prose-h3:text-base prose-h3:font-semibold prose-h3:mt-6 prose-h3:mb-2 prose-strong:text-ink-soft prose-strong:font-semibold prose-a:text-brand-600 prose-table:text-xs prose-th:bg-ink/5 prose-th:px-2 prose-th:py-1 prose-td:px-2 prose-td:py-1 prose-td:align-top prose-td:border-b prose-td:border-ink/5">
 
           <p>
             Los presentes Términos y Condiciones (en adelante, los <strong>“Términos”</strong>) rigen el
