@@ -40,7 +40,7 @@ REVALIDATE_SECRET         ← para invalidar ISR manualmente
 | `/simulador/jornada` | Calculadora de jornada y horas extras |
 | `/novedades` + `/novedades/[slug]` | Blog con Notion CMS |
 | `/recursos` + `/recursos/[slug]` | Knowledge base con Notion CMS |
-| `/business` | Landing B2B (RRHH) |
+| `/business` | Landing B2B — 3 pilares: Laboral, Corporativo, Contratos & Docs |
 | `/verificar` | Verificador de documentos por código |
 | `/[code]` | Shortener → redirige desde `url_cortas` |
 | `api/revalidate` | ISR manual (requiere `REVALIDATE_SECRET`) |
@@ -90,3 +90,4 @@ Este repo **no escribe en la DB**. Solo lee `url_cortas` para el shortener. No c
 
 - CMS Notion + ISR → `.claude/rules/cms.md`
 - Simuladores legales → `.claude/rules/simuladores.md`
+- GoLegit Business (copy, audiencia, estructura) → `.claude/rules/business.md`
