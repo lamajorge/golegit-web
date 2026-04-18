@@ -405,6 +405,57 @@ export default function BusinessLanding() {
         </div>
       </section>
 
+      {/* ── Herramientas operativas ────────────────────────────── */}
+      <section className="py-20 bg-white border-t border-gray-100">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="max-w-2xl mb-12">
+            <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Operación diaria</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+              Herramientas para gestionar el equipo día a día.
+            </h2>
+            <p className="text-gray-500 leading-relaxed">
+              Más allá de los contratos y las liquidaciones, tu equipo necesita
+              que alguien resuelva el día a día: quién trabaja cuándo, cuántas
+              horas lleva, cuándo se acaba su contrato. GoLegit Business lo
+              tiene resuelto.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              {
+                icon: IconCalendar,
+                title: "Rota de turnos",
+                desc: "Planificación visual con validación automática de horas máximas y descansos.",
+              },
+              {
+                icon: IconDoc,
+                title: "Control de jornada",
+                desc: "Registro de asistencia digital obligatorio por Ley 21.561 (Ley 40 Horas).",
+              },
+              {
+                icon: IconCalculator,
+                title: "Horas extra",
+                desc: "Cálculo automático de horas extra vinculado a la liquidación del mes.",
+              },
+              {
+                icon: IconBell,
+                title: "Alertas de vencimientos",
+                desc: "Finiquitos, cotizaciones y contratos a punto de vencer — aviso anticipado.",
+              },
+            ].map((item, i) => (
+              <div key={i} className="bg-gray-50 rounded-2xl border border-gray-100 p-5">
+                <div className="w-8 h-8 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600 mb-3">
+                  {item.icon}
+                </div>
+                <p className="text-sm font-semibold text-gray-900 mb-1">{item.title}</p>
+                <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Rota spotlight ─────────────────────────────────────── */}
       <section className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-6">
@@ -640,8 +691,8 @@ export default function BusinessLanding() {
             />
             <VerticalCard
               icon={IconHandshake}
-              title="Empresas con socios y directorio"
-              description="SpA y SA que necesitan documentar juntas, modificar estatutos, operar con acciones y mantener su carpeta societaria al día."
+              title="Empresas con socios"
+              description="Cualquier sociedad que necesite documentar juntas, modificar estatutos, ceder participaciones y mantener su carpeta societaria al día."
             />
           </div>
         </div>
