@@ -465,7 +465,7 @@ export default function BusinessLanding() {
                 Rota de turnos
               </p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-5">
-                Organiza los turnos sin grupos de WhatsApp.
+                Organiza los turnos sin planillas ni grupos de WhatsApp.
               </h2>
               <p className="text-gray-500 leading-relaxed mb-8">
                 Planificación visual de turnos rotativos con validación legal
