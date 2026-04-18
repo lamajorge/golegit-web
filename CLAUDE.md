@@ -86,8 +86,13 @@ Este repo **no escribe en la DB**. Solo lee `url_cortas` para el shortener. No c
 
 ---
 
-## Más contexto por área
+## Reglas por área
 
 - CMS Notion + ISR → `.claude/rules/cms.md`
 - Simuladores legales → `.claude/rules/simuladores.md`
 - GoLegit Business (copy, audiencia, estructura) → `.claude/rules/business.md`
+
+## Referencia cruzada (repo golegit)
+
+- Anti-patrones recurrentes → `golegit/.claude/rules/anti-patterns.md`
+- Base legal CT → `golegit/.claude/rules/legal.md`
