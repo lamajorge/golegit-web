@@ -1,25 +1,24 @@
 import Link from "next/link";
 import { SITE_CONFIG } from "@/lib/config";
-import CtaButton from "@/components/CtaButton";
 
-export default function Footer() {
+export default function FooterBusiness() {
   return (
-    <footer className="bg-ink text-ink-faint">
+    <footer className="bg-zinc-950 text-white/40">
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="col-span-1">
             <div className="mb-4">
               <img
-                src="/logo/golegit-logo-dark.svg"
-                alt="GoLegit — Contratos y liquidaciones para trabajadoras de casa particular"
+                src="/logo/golegit-business-logo-dark.svg"
+                alt="GoLegit Business — Gestión de RRHH para empresas"
                 height={28}
                 style={{ height: 28, width: "auto" }}
               />
             </div>
-            <p className="text-sm leading-relaxed text-ink-light">
-              Gestión laboral legal para trabajadoras de casa particular.
-              Todo por WhatsApp.
+            <p className="text-sm leading-relaxed text-white/50">
+              Contratos, liquidaciones, turnos y firma digital
+              para equipos de trabajo en Chile.
             </p>
           </div>
 
@@ -28,26 +27,23 @@ export default function Footer() {
             <h4 className="text-white text-sm font-medium mb-4">Producto</h4>
             <ul className="space-y-2.5">
               <li>
-                <a href="/#como-funciona" className="text-sm hover:text-white transition-colors">
-                  Cómo funciona
+                <a href="/business#funcionalidades" className="text-sm hover:text-white transition-colors">
+                  Funcionalidades
                 </a>
               </li>
               <li>
-                <a href="/#precios" className="text-sm hover:text-white transition-colors">
-                  Precios
+                <a href="/business#rubros" className="text-sm hover:text-white transition-colors">
+                  Por rubro
                 </a>
               </li>
               <li>
-                <a href="/#faq" className="text-sm hover:text-white transition-colors">
-                  Preguntas frecuentes
+                <a href="/business#waitlist" className="text-sm hover:text-white transition-colors">
+                  Early access
                 </a>
               </li>
               <li>
-                <Link href="/business" className="text-sm hover:text-white transition-colors">
-                  GoLegit Business
-                  <span className="ml-1.5 text-[9px] font-semibold text-indigo-400 bg-indigo-400/10 border border-indigo-400/20 px-1.5 py-0.5 rounded-full">
-                    Early access
-                  </span>
+                <Link href="/" className="text-sm hover:text-white transition-colors">
+                  GoLegit Hogar
                 </Link>
               </li>
             </ul>
@@ -85,9 +81,12 @@ export default function Footer() {
             <h4 className="text-white text-sm font-medium mb-4">Contacto</h4>
             <ul className="space-y-2.5">
               <li>
-                <CtaButton className="text-sm hover:text-white transition-colors">
-                  WhatsApp
-                </CtaButton>
+                <a
+                  href={`mailto:${SITE_CONFIG.email}`}
+                  className="text-sm hover:text-white transition-colors"
+                >
+                  {SITE_CONFIG.email}
+                </a>
               </li>
               <li>
                 <a
@@ -102,7 +101,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <p className="text-xs text-ink-light">
+          <p className="text-xs text-white/30">
             © {new Date().getFullYear()} Cubillos Lama SpA · RUT 78.393.969-K
           </p>
           <div className="flex items-center gap-6">

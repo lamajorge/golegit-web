@@ -75,13 +75,13 @@ function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: 
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs font-bold text-ink">GoLegit Business</p>
-              <p className="text-[10px] text-ink-muted">RRHH para empresas</p>
+              <p className="text-[10px] text-ink-muted">Legal & RRHH para empresas</p>
             </div>
             {isBusiness ? (
               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0" />
             ) : (
               <span className="text-[9px] font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200 px-1.5 py-0.5 rounded-full flex-shrink-0">
-                Pronto
+                Early access
               </span>
             )}
           </Link>
@@ -111,7 +111,7 @@ export default function Navbar() {
   const logoLight = isBusiness ? "/logo/golegit-business-logo.svg" : "/logo/golegit-logo.svg";
   const logoDark = isBusiness ? "/logo/golegit-business-logo-dark.svg" : "/logo/golegit-logo-dark.svg";
   const logoAlt = isBusiness
-    ? "GoLegit Business — Gestión de RRHH para empresas"
+    ? "GoLegit Business — Legal & RRHH para empresas"
     : "GoLegit — Contratos y liquidaciones para trabajadoras de casa particular";
 
   // Nav links differ by product
@@ -125,8 +125,9 @@ export default function Navbar() {
     { href: "/recursos", label: "Recursos" },
   ];
   const businessNavLinks = [
-    { href: "/business#funcionalidades", label: "Funcionalidades" },
-    { href: "/business#rubros", label: "Rubros" },
+    { href: "/business#laboral", label: "Laboral" },
+    { href: "/business#corporativo", label: "Corporativo" },
+    { href: "/business#contratos", label: "Contratos" },
   ];
 
   const navLinks = isBusiness ? businessNavLinks : homeNavLinks;

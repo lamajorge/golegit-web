@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import FooterBusiness from "@/components/layout/FooterBusiness";
 import BusinessLanding from "./BusinessLanding";
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default function BusinessPage() {
     <main className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
       <BusinessLanding />
-      <Footer />
+      <FooterBusiness />
     </main>
   );
 }
