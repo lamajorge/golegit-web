@@ -177,7 +177,7 @@ export default function Pricing() {
                   </p>
                 </div>
 
-                <div className="flex items-end gap-1 mb-1">
+                <div className="flex items-end gap-1 mb-0.5">
                   <span className={`text-4xl font-extrabold tracking-tight ${plan.featured ? "text-white" : "text-ink"}`}>
                     {formatPrice(displayMonthly)}
                   </span>
@@ -185,6 +185,7 @@ export default function Pricing() {
                     /mes
                   </span>
                 </div>
+                <p className={`text-[10px] mb-1 ${plan.featured ? "text-white/40" : "text-ink-faint"}`}>IVA incluido</p>
 
                 {annual && (
                   <p className={`text-xs mb-2 ${plan.featured ? "text-brand-400" : "text-brand-600"}`}>
