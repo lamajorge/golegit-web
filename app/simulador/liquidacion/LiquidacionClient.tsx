@@ -237,6 +237,22 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
   const [afpIdx,          setAfpIdx]          = useState(2); // Habitat
   const [dias,            setDias]            = useState(30);
   const [cargas,          setCargas]          = useState(0);
+  const [horasRaw,        setHorasRaw]        = useState("44");
+
+  // Ley 21.561 — jornada máxima: 44h hasta 25-abr-2026, 42h luego, 40h desde 26-abr-2028
+  const MAX_HORAS = (() => {
+    const hoy = new Date()
+    if (hoy >= new Date('2028-04-26')) return 40
+    if (hoy >= new Date('2026-04-26')) return 42
+    return 44
+  })()
+  const horasSemanales = Math.min(MAX_HORAS, Math.max(1, parseInt(horasRaw.replace(/\D/g, "")) || MAX_HORAS))
+  // Art. 44 inc. 3° CT — sueldo no puede ser menor al IMM proporcional.
+  // Parcial (≤30h): proporcional con ceil. Completa: IMM íntegro.
+  const immMinimo = horasSemanales <= 30
+    ? Math.ceil((IMM * horasSemanales) / MAX_HORAS)
+    : IMM
+  const esJornadaParcial = horasSemanales <= 30
 
   const sueldoBase  = Math.max(0, parseInt(sueldoRaw.replace(/\D/g, ""))         || 0);
   const liquidoPact = Math.max(0, parseInt(liquidoRaw.replace(/\D/g, ""))        || 0);
@@ -335,10 +351,10 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
                   <div>
                     <label className={labelCls}>Sueldo base (imponible)</label>
                     <MoneyInput value={sueldoRaw} onChange={setSueldoRaw} placeholder="700000" />
-                    {sueldoBase > 0 && sueldoBase < IMM && (
+                    {sueldoBase > 0 && sueldoBase < immMinimo && (
                       <p className="text-xs text-amber-600 mt-1.5 flex items-center gap-1.5">
                         <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
-                        Por debajo del IMM ({clp(IMM)})
+                        Bajo el mínimo legal ({clp(immMinimo)}{esJornadaParcial ? ` — parcial ${horasSemanales}h/sem` : ""}) — Art. 44 CT
                       </p>
                     )}
                   </div>
@@ -349,8 +365,35 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
                     <p className="text-xs text-ink-light mt-1.5 leading-relaxed bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
                       Ingresa el monto total que recibirá la trabajadora, <strong>incluyendo</strong> movilización y colación. El sistema descontará esos haberes antes de calcular el imponible.
                     </p>
+                    {liquidoPact > 0 && rLiq.sueldoImponible > 0 && rLiq.sueldoImponible < immMinimo && (
+                      <p className="text-xs text-amber-600 mt-1.5 flex items-center gap-1.5">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
+                        El bruto implícito ({clp(rLiq.sueldoImponible)}) queda bajo el mínimo legal ({clp(immMinimo)}{esJornadaParcial ? ` — parcial ${horasSemanales}h/sem` : ""}) — Art. 44 CT
+                      </p>
+                    )}
                   </div>
                 )}
+
+                <div className="h-px bg-gray-100" />
+                <div className="grid grid-cols-[1fr_140px] gap-3 items-end">
+                  <div>
+                    <label className={labelCls}>Horas semanales pactadas</label>
+                    <input
+                      type="number" min={1} max={MAX_HORAS} value={horasRaw}
+                      onChange={(e) => setHorasRaw(e.target.value)}
+                      className={inputCls}
+                      placeholder={String(MAX_HORAS)}
+                    />
+                  </div>
+                  <div className="pb-2 text-xs text-ink-light leading-tight">
+                    {esJornadaParcial
+                      ? <>Jornada <strong>parcial</strong> (≤30h) · IMM proporcional</>
+                      : <>Jornada <strong>completa</strong> · IMM íntegro</>}
+                  </div>
+                </div>
+                <p className="text-[11px] text-ink-light leading-relaxed">
+                  Máx. legal hoy: {MAX_HORAS}h (Ley 21.561). Mínimo aplicable a este contrato: <strong>{clp(immMinimo)}</strong>.
+                </p>
 
                 <div className="h-px bg-gray-100" />
                 <p className="text-xs font-medium text-ink-muted">
@@ -448,7 +491,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
             </div>
 
             <p className="text-xs text-ink-light leading-relaxed px-1">
-              Valores referenciales. IMM: {clp(IMM)} · Tope AFP: {clp(TOPE_IMPONIBLE)}.{" "}
+              Valores referenciales. IMM: {clp(IMM)} · Mín. aplicable: {clp(immMinimo)} · Tope AFP: {clp(TOPE_IMPONIBLE)}.{" "}
               <Link href="/simulador/indicadores" className="underline underline-offset-2 hover:text-ink transition-colors">
                 Indicadores Previred{mesLabel ? ` ${mesLabel}` : ""}
               </Link>
