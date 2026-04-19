@@ -22,6 +22,12 @@ export type Indicador = {
   tasa_sis: number | null
   tasa_afc_trabajador: number | null
   tasa_afc_empleador: number | null
+  // BIZ-06 — 4 tasas AFC diferenciadas
+  afc_tcp: number | null
+  afc_pf_empleador: number | null
+  afc_pi_empleador: number | null
+  afc_pi_trabajador: number | null
+  afc_pi_11_empleador: number | null
   asig_familiar_tramo_a: number | null
   asig_familiar_tope_a: number | null
   asig_familiar_tramo_b: number | null
@@ -119,8 +125,8 @@ export default function IndicadoresClient({ indicadores, afpTasas }: Props) {
           <Row label="SIS — Seguro de Invalidez y Sobrevivencia" value={ind.tasa_sis ? pct(Number(ind.tasa_sis)) : '—'} />
           <Row
             label="AFC — Seguro de Cesantía TCP"
-            value="3,00%"
-            sub="2,20% cuenta individual + 0,80% fondo solidario · fijo por ley"
+            value={ind.afc_tcp ? pct(Number(ind.afc_tcp)) : '3,00%'}
+            sub="Empleador paga el 3% completo · Art. 163 CT"
           />
           <Row label="Mutual — Accidentes del trabajo y enf. profesional" value="0,93%" sub="0,90% accidentes + 0,03% Ley SANNA" />
           <Row label="Cotización adicional" value="1,00%" sub="0,90% seguro social + 0,10% cuenta individual" />
@@ -131,6 +137,39 @@ export default function IndicadoresClient({ indicadores, afpTasas }: Props) {
           />
         </div>
       </div>
+
+      {/* ── 2b. Comparación AFC por régimen (info Ley 19.728 / 21.269) ── */}
+      <Section title="AFC — comparación por régimen (Ley 19.728 / 21.269)">
+        <p className="text-xs text-ink-light pb-3">
+          GoLegit es para Trabajadores de Casa Particular (TCP). Estos son los otros regímenes para referencia.
+        </p>
+        <Row
+          label="TCP — Trabajador de Casa Particular"
+          value={ind.afc_tcp ? pct(Number(ind.afc_tcp)) : '3,00%'}
+          sub="Empleador completo · trabajador 0% · Art. 163 CT"
+          highlight
+        />
+        <Row
+          label="Plazo Fijo (régimen general)"
+          value={ind.afc_pf_empleador ? pct(Number(ind.afc_pf_empleador)) : '3,00%'}
+          sub="Empleador completo · trabajador 0%"
+        />
+        <Row
+          label="Indefinido ≤11 años (régimen general) — empleador"
+          value={ind.afc_pi_empleador ? pct(Number(ind.afc_pi_empleador)) : '2,40%'}
+          sub="1,6% cuenta individual + 0,8% fondo solidario"
+        />
+        <Row
+          label="Indefinido ≤11 años — trabajador"
+          value={ind.afc_pi_trabajador ? pct(Number(ind.afc_pi_trabajador)) : '0,60%'}
+          sub="Descuento por liquidación"
+        />
+        <Row
+          label="Indefinido >11 años — empleador"
+          value={ind.afc_pi_11_empleador ? pct(Number(ind.afc_pi_11_empleador)) : '0,80%'}
+          sub="Art. 5 Ley 19.728: cesa cuenta individual, solo FSC"
+        />
+      </Section>
 
       {/* ── 3. Cotizaciones del trabajador ── */}
       <Section title="Cotizaciones del trabajador">
