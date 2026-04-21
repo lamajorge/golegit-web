@@ -83,10 +83,26 @@ export default function AttendanceSpotlight() {
               ))}
             </ul>
 
-            <p className="text-xs text-ink-light leading-relaxed max-w-md">
-              Sistema auxiliar al libro de asistencia físico — no lo reemplaza
-              hasta obtener la certificación de la Dirección del Trabajo.
-            </p>
+            <div className="flex items-start gap-3 max-w-md">
+              <svg
+                className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+              <p className="text-sm text-ink-muted leading-relaxed">
+                <span className="font-semibold text-ink">Sistema auxiliar.</span>{" "}
+                No reemplaza el libro de asistencia físico hasta obtener la
+                certificación de la Dirección del Trabajo.
+              </p>
+            </div>
           </div>
 
           {/* Calendario — flotando, sin card padre */}
