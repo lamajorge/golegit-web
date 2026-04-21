@@ -73,6 +73,16 @@ const features = [
     title: "Certificados laborales",
     description: "Certificado de vacaciones con saldo exacto y certificado de antigüedad laboral. La trabajadora los solicita desde su portal.",
   },
+  {
+    icon: (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2"/>
+        <path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/>
+      </svg>
+    ),
+    title: "Control de asistencia",
+    description: "Marcación diaria con timestamp y geolocalización opcional. Vista calendario mensual y los 4 reportes del Art. 27 Res. 38 DT. Sistema auxiliar.",
+  },
 ];
 
 export default function Features() {

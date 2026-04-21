@@ -21,6 +21,8 @@ const features = [
   { label: "Portal trabajadora + acceso a documentos", lite: false, pro: true, plus: true },
   { label: "Verificación de identidad (OCR + biometría)", lite: false, pro: true, plus: true },
   { label: "Notificaciones directas a la trabajadora", lite: false, pro: true, plus: true },
+  { label: "Control de asistencia (marcación diaria)", lite: false, pro: true, plus: true },
+  { label: "Reportes legales Art. 27 Res. 38 DT", lite: false, pro: true, plus: true },
   { label: "2 o más trabajadoras", lite: false, pro: false, plus: true },
 ];
 
@@ -56,9 +58,9 @@ const plans: {
     disabled: false,
     keyFeatures: [
       { text: "Todo lo de Lite" },
-      { text: "Recordatorios y ciclo mensual proactivo", highlight: true },
       { text: "Firma digital FES (Ley 19.799)", highlight: true },
       { text: "Portal trabajadora + verificación de identidad", highlight: true },
+      { text: "Control de asistencia + reportes DT", highlight: true },
     ],
   },
   {
