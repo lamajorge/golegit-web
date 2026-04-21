@@ -18,7 +18,16 @@ import { fileURLToPath } from "url";
 // ─────────────────────────────────────────────────────────────
 // CONFIG
 // ─────────────────────────────────────────────────────────────
-const OAI_KEY = fs.readFileSync("/tmp/oai_key.txt", "utf-8").trim();
+const OAI_KEY = (() => {
+  if (process.env.OPENAI_API_KEY) return process.env.OPENAI_API_KEY.trim();
+  if (fs.existsSync("/tmp/oai_key.txt")) {
+    return fs.readFileSync("/tmp/oai_key.txt", "utf-8").trim();
+  }
+  throw new Error(
+    "No OpenAI key found. Set OPENAI_API_KEY env var, or put the key at /tmp/oai_key.txt.\n" +
+    "Tip: `vercel env pull .env.local && export $(grep OPENAI_API_KEY .env.local)`",
+  );
+})();
 const SUPABASE_URL = "https://domdefqcsiqkdpuchjtu.supabase.co";
 const SUPABASE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRvbWRlZnFjc2lxa2RwdWNoanR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI3MjIzMDgsImV4cCI6MjA4ODI5ODMwOH0.hS7vLoamKNGtVYdd5Pg3u4t_ZjM8QcqbdWnatKVDA1o";

@@ -5,6 +5,7 @@ import Solution from "@/components/sections/Solution";
 import HowItWorks from "@/components/sections/HowItWorks";
 import Features from "@/components/sections/Features";
 import AttendanceSpotlight from "@/components/sections/AttendanceSpotlight";
+import TechTrust from "@/components/sections/TechTrust";
 import Pricing from "@/components/sections/Pricing";
 import Trust from "@/components/sections/Trust";
 import FAQ from "@/components/sections/FAQ";
@@ -21,6 +22,7 @@ export default function Home() {
       <HowItWorks />
       <Features />
       <AttendanceSpotlight />
+      <TechTrust />
       <Pricing />
       <Trust />
       <FAQ />
