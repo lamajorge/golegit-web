@@ -89,6 +89,7 @@ Este repo **no escribe en la DB**. Solo lee `url_cortas` para el shortener. No c
 ## Reglas por área
 
 - CMS Notion + ISR → `.claude/rules/cms.md`
+- Estilo editorial de /novedades y /recursos → `.claude/rules/novedades-style.md`
 - Simuladores legales → `.claude/rules/simuladores.md`
 - GoLegit Business (copy, audiencia, estructura) → `.claude/rules/business.md`
 
