@@ -101,6 +101,10 @@ const IMAGES = [
     filename: "novedad-imm-calendario.jpg",
     prompt: `Annual planning calendar spread open on a desk with financial wage figures, organized year view, highlighted important dates, professional planning concept. ${SUFFIX}`,
   },
+  {
+    filename: "novedad-entrega-liquidacion.jpg",
+    prompt: `A monthly payroll document being physically handed from one person to another across a wooden desk, focus on the act of delivery, warm natural window light, a pen and a calendar in the background, Chilean home or small office setting, sense of formal transaction and mutual acknowledgement. ${SUFFIX}`,
+  },
 ];
 
 // ─────────────────────────────────────────────────────────────
