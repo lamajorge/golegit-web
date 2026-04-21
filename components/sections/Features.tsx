@@ -139,6 +139,131 @@ export default function Features() {
           </div>
         </div>
 
+        {/* Control de asistencia — card destacada con calendario */}
+        <div className="relative rounded-3xl bg-zinc-950 p-8 lg:p-10 mb-4 overflow-hidden">
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundImage: "radial-gradient(ellipse 50% 80% at 100% 50%, rgba(34,197,94,0.08) 0%, transparent 60%)",
+            }}
+          />
+          <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+            {/* Columna texto */}
+            <div>
+              <div className="flex items-center gap-2 mb-3 flex-wrap">
+                <div className="w-10 h-10 rounded-2xl bg-brand-600/20 border border-brand-500/30 flex items-center justify-center">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                    <path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4" />
+                  </svg>
+                </div>
+                <span className="text-[10px] font-semibold text-brand-400 bg-brand-400/10 border border-brand-400/20 px-2 py-0.5 rounded-full">
+                  Auxiliar · Res. 38 DT
+                </span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">Control de asistencia y reportes legales</h3>
+              <p className="text-white/70 leading-relaxed mb-5">
+                Marcación de entrada y salida desde el celular de la trabajadora,
+                con geolocalización opcional. Vista calendario mes a mes y los
+                cuatro reportes que exige el Art. 27 de la Resolución 38 exenta
+                de la Dirección del Trabajo.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {[
+                  "Marcación diaria con timestamp",
+                  "Geolocalización configurable",
+                  "Reporte asistencia diaria",
+                  "Reporte jornada, domingos e incidentes",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs text-white/60">
+                    <span className="w-1.5 h-1.5 rounded-full bg-brand-400 flex-shrink-0" />
+                    {item}
+                  </div>
+                ))}
+              </div>
+              <p className="text-[10px] text-white/40 mt-4 leading-relaxed">
+                Sistema auxiliar — no reemplaza el libro físico hasta obtener la certificación de la DT.
+              </p>
+            </div>
+
+            {/* Columna calendario — mockup mensual */}
+            <div className="relative">
+              <div className="absolute -inset-3 bg-brand-500/5 rounded-3xl blur-2xl" />
+              <div className="relative bg-white rounded-2xl border border-gray-200 shadow-xl overflow-hidden">
+                <div className="bg-zinc-900 px-5 py-3 flex items-center justify-between">
+                  <div>
+                    <p className="text-white text-xs font-bold">Abril 2026</p>
+                    <p className="text-white/40 text-[10px]">María L. · Puertas afuera</p>
+                  </div>
+                  <span className="text-[9px] font-bold text-brand-400 bg-brand-400/10 border border-brand-400/25 px-1.5 py-0.5 rounded-full">
+                    Vista previa
+                  </span>
+                </div>
+
+                <div className="p-3">
+                  <div className="grid grid-cols-7 gap-1 text-[9px] font-semibold text-gray-400 text-center mb-1.5">
+                    {["L", "M", "M", "J", "V", "S", "D"].map((d, i) => (
+                      <div key={i}>{d}</div>
+                    ))}
+                  </div>
+
+                  <div className="grid grid-cols-7 gap-1">
+                    {(() => {
+                      const dayStates: Record<number, string> = {
+                        1: "ok", 2: "ok", 3: "feriado",
+                        6: "ok", 7: "ok", 8: "ok", 9: "ok", 10: "ok",
+                        13: "ok", 14: "ok", 15: "licencia", 16: "licencia", 17: "licencia",
+                        20: "ok", 21: "ok", 22: "vacaciones", 23: "vacaciones", 24: "vacaciones",
+                        27: "ok", 28: "ausencia", 29: "ok", 30: "ok",
+                      };
+                      const colors: Record<string, string> = {
+                        ok: "bg-emerald-100 text-emerald-700",
+                        feriado: "bg-gray-200 text-gray-600",
+                        licencia: "bg-amber-100 text-amber-700",
+                        vacaciones: "bg-sky-100 text-sky-700",
+                        ausencia: "bg-red-100 text-red-700",
+                        finde: "bg-gray-50 text-gray-300",
+                      };
+                      const cells: React.ReactNode[] = [];
+                      for (let i = 0; i < 2; i++) {
+                        cells.push(<div key={`e-${i}`} className="h-7" />);
+                      }
+                      for (let d = 1; d <= 30; d++) {
+                        const dow = (2 + (d - 1)) % 7;
+                        let state = dayStates[d];
+                        if (!state) state = dow >= 5 ? "finde" : "ok";
+                        cells.push(
+                          <div
+                            key={d}
+                            className={`h-7 rounded-md text-[9px] font-semibold flex items-center justify-center ${colors[state]}`}
+                          >
+                            {d}
+                          </div>,
+                        );
+                      }
+                      return cells;
+                    })()}
+                  </div>
+
+                  <div className="flex items-center gap-3 mt-3 pt-2.5 border-t border-gray-100 flex-wrap">
+                    {[
+                      { label: "Trabajado", color: "bg-emerald-400" },
+                      { label: "Licencia", color: "bg-amber-400" },
+                      { label: "Vacaciones", color: "bg-sky-400" },
+                      { label: "Ausencia", color: "bg-red-400" },
+                    ].map((l) => (
+                      <div key={l.label} className="flex items-center gap-1">
+                        <div className={`w-1.5 h-1.5 rounded-full ${l.color}`} />
+                        <span className="text-[9px] text-gray-500">{l.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Verificación de identidad — card secundaria destacada */}
         <div className="relative rounded-2xl border border-brand-100 bg-brand-50 p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center gap-5">
           <div className="w-10 h-10 rounded-xl bg-brand-100 flex items-center justify-center flex-shrink-0">
