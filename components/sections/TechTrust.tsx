@@ -45,8 +45,8 @@ const compliance = [
     detail: "Trabajadoras de casa particular",
   },
   {
-    label: "Supabase · sa-east-1",
-    detail: "Cifrado en reposo y en tránsito",
+    label: "Sello de tiempo",
+    detail: "Cada firma con fecha y hora certificadas (RFC 3161)",
   },
 ];
 
