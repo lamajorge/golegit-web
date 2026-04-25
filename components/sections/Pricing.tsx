@@ -123,7 +123,7 @@ export default function Pricing() {
             Menos de lo que imaginas.
           </h2>
           <p className="text-ink-muted">
-            La competencia cobra $24.000/mes. GoLegit cuesta menos y hace más.
+            Todo lo que necesitas para gestionar trabajo doméstico, sin papel y desde WhatsApp.
           </p>
 
           {/* Toggle */}
