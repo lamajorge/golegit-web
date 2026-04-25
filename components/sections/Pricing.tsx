@@ -258,13 +258,13 @@ export default function Pricing() {
               showMatrix ? "" : "max-h-[220px]"
             }`}
           >
-            {/* Header */}
+            {/* Header — mismo padding horizontal que las filas para alinear las columnas verticalmente */}
             <div className="grid grid-cols-[1.5fr_repeat(3,1fr)] md:grid-cols-4 border-b border-gray-100">
-              <div className="p-3 md:p-4" />
+              <div className="px-2 md:px-4 py-3 md:py-4" />
               {plans.map((plan) => (
                 <div
                   key={plan.name}
-                  className={`p-3 md:p-4 text-center border-l border-gray-100 ${plan.featured ? "bg-zinc-950" : ""}`}
+                  className={`px-2 md:px-4 py-3 md:py-4 text-center border-l border-gray-100 ${plan.featured ? "bg-zinc-950" : ""}`}
                 >
                   <p className={`text-xs md:text-sm font-bold ${plan.featured ? "text-white" : "text-ink"}`}>
                     {plan.name}
