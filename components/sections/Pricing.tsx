@@ -4,25 +4,27 @@ import { useState } from "react";
 import CtaButton from "@/components/CtaButton";
 
 // Feature matrix según definición 11 abril 2026
+// Labels cortos pensados para móvil (sin perder claridad). El detalle largo va
+// en hint (visible al hacer hover/long-press como tooltip nativo via title).
 const features = [
   { label: "Contrato de trabajo", lite: true, pro: true, plus: true },
   { label: "Anexos de modificación", lite: true, pro: true, plus: true },
   { label: "Finiquito (8 causales)", lite: true, pro: true, plus: true },
   { label: "Carta de aviso", lite: true, pro: true, plus: true },
-  { label: "Liquidación de sueldo (cálculo completo)", lite: true, pro: true, plus: true },
-  { label: "Registro de ausencias y licencias", lite: true, pro: true, plus: true },
-  { label: "Vacaciones y días libres acumulados", lite: true, pro: true, plus: true },
+  { label: "Liquidación de sueldo", hint: "Cálculo completo: AFP, Isapre/Fonasa, IATCE, etc.", lite: true, pro: true, plus: true },
+  { label: "Ausencias y licencias", lite: true, pro: true, plus: true },
+  { label: "Vacaciones y días libres", lite: true, pro: true, plus: true },
   { label: "Amonestaciones escritas", lite: true, pro: true, plus: true },
   { label: "Certificados laborales", lite: true, pro: true, plus: true },
-  { label: "Días especiales Art. 150 CT (sábados y feriados)", lite: true, pro: true, plus: true },
+  { label: "Sábados y feriados", hint: "Días especiales Art. 150 CT", lite: true, pro: true, plus: true },
   { label: "PDF descargable", lite: true, pro: true, plus: true },
-  { label: "Recordatorios y gestión proactiva del ciclo mensual", lite: false, pro: true, plus: true },
-  { label: "Firma electrónica (FES) — Ley 19.799", lite: false, pro: true, plus: true },
-  { label: "Portal trabajadora + acceso a documentos", lite: false, pro: true, plus: true },
-  { label: "Verificación de identidad (OCR + biometría)", lite: false, pro: true, plus: true },
-  { label: "Notificaciones directas a la trabajadora", lite: false, pro: true, plus: true },
-  { label: "Control de asistencia (marcación diaria)", lite: false, pro: true, plus: true },
-  { label: "Reportes legales Art. 27 Res. 38 DT", lite: false, pro: true, plus: true },
+  { label: "Recordatorios proactivos", hint: "Gestión proactiva del ciclo mensual", lite: false, pro: true, plus: true },
+  { label: "Firma electrónica FES", hint: "Ley 19.799", lite: false, pro: true, plus: true },
+  { label: "Portal trabajadora", hint: "Acceso a documentos y solicitudes", lite: false, pro: true, plus: true },
+  { label: "Verificación de identidad", hint: "OCR cédula + biometría", lite: false, pro: true, plus: true },
+  { label: "Notificaciones a la trabajadora", lite: false, pro: true, plus: true },
+  { label: "Control de asistencia", hint: "Marcación diaria — Res. 38 EXENTA DT", lite: false, pro: true, plus: true },
+  { label: "Reportes asistencia DT", hint: "Art. 27 Res. 38 EXENTA DT", lite: false, pro: true, plus: true },
   { label: "2 o más trabajadoras", lite: false, pro: false, plus: true },
 ];
 
@@ -257,17 +259,17 @@ export default function Pricing() {
             }`}
           >
             {/* Header */}
-            <div className="grid grid-cols-4 border-b border-gray-100">
-              <div className="p-4" />
+            <div className="grid grid-cols-[1.5fr_repeat(3,1fr)] md:grid-cols-4 border-b border-gray-100">
+              <div className="p-3 md:p-4" />
               {plans.map((plan) => (
                 <div
                   key={plan.name}
-                  className={`p-4 text-center border-l border-gray-100 ${plan.featured ? "bg-zinc-950" : ""}`}
+                  className={`p-3 md:p-4 text-center border-l border-gray-100 ${plan.featured ? "bg-zinc-950" : ""}`}
                 >
-                  <p className={`text-sm font-bold ${plan.featured ? "text-white" : "text-ink"}`}>
+                  <p className={`text-xs md:text-sm font-bold ${plan.featured ? "text-white" : "text-ink"}`}>
                     {plan.name}
                   </p>
-                  <p className={`text-xs mt-0.5 ${plan.featured ? "text-white/60" : "text-ink-light"}`}>
+                  <p className={`text-[10px] md:text-xs mt-0.5 ${plan.featured ? "text-white/60" : "text-ink-light"}`}>
                     {plan.disabled ? "Próximamente" : formatPrice(annual ? plan.annualMonthlyPrice : plan.monthlyPrice) + "/mes"}
                   </p>
                 </div>
@@ -278,16 +280,21 @@ export default function Pricing() {
             {features.map((f, i) => (
               <div
                 key={i}
-                className={`grid grid-cols-4 border-b border-gray-50 last:border-0 ${i % 2 === 0 ? "" : "bg-gray-50/50"}`}
+                className={`grid grid-cols-[1.5fr_repeat(3,1fr)] md:grid-cols-4 border-b border-gray-50 last:border-0 ${i % 2 === 0 ? "" : "bg-gray-50/50"}`}
               >
-                <div className="px-4 py-3 text-sm text-ink-muted">{f.label}</div>
-                <div className="px-4 py-3 text-center border-l border-gray-100">
+                <div
+                  className="px-2 md:px-4 py-2.5 md:py-3 text-[11px] md:text-sm text-ink-muted leading-tight md:leading-normal"
+                  title={"hint" in f && f.hint ? `${f.label} — ${f.hint}` : f.label}
+                >
+                  {f.label}
+                </div>
+                <div className="px-2 md:px-4 py-2.5 md:py-3 text-center border-l border-gray-100">
                   <CheckIcon on={f.lite} dark />
                 </div>
-                <div className="px-4 py-3 text-center border-l border-gray-100 bg-zinc-950/2">
+                <div className="px-2 md:px-4 py-2.5 md:py-3 text-center border-l border-gray-100 bg-zinc-950/2">
                   <CheckIcon on={f.pro} />
                 </div>
-                <div className="px-4 py-3 text-center border-l border-gray-100">
+                <div className="px-2 md:px-4 py-2.5 md:py-3 text-center border-l border-gray-100">
                   <CheckIcon on={f.plus} />
                 </div>
               </div>
