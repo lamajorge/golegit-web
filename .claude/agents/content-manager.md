@@ -28,7 +28,7 @@ Si cambian los planes en `golegit`:
 2. Actualizar en `/app/business/page.tsx` si aplica
 3. Verificar que el texto de features por plan sigue siendo correcto
 
-Planes actuales: Lite $4.990/mes, Pro $9.990/mes, Plus $17.990/mes.
+Planes actuales (mensual / anual): Lite $6.990 / $5.990, Pro $11.990 / $9.990, Plus $21.990 / $17.990. Anual ahorra hasta 18%.
 
 ## Actualizar tasas en los simuladores
 

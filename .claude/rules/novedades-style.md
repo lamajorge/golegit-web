@@ -56,7 +56,7 @@ Patrón: *Fuente + una oración de cómo GoLegit lo aplica, o qué automatiza, o
 ## Qué NO hacer — errores recurrentes
 
 - ❌ Sección tipo "Cómo te ayuda GoLegit" con bullets de features y botón de call-to-action.
-- ❌ Mencionar el precio ($9.990, etc.) dentro del artículo.
+- ❌ Mencionar precios ($6.990, $11.990, etc.) dentro del artículo.
 - ❌ Blockquotes como gancho emocional. Blockquotes solo para **cláusulas tipo** o citas de la ley.
 - ❌ "¿La razón?", "¡lo increíble es que…!", "pero hay más…". Nada de suspenso narrativo.
 - ❌ Subtítulos como "La regla que sienta el fallo" cuando puede ser simplemente "Lo que establece el fallo".

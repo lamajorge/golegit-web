@@ -28,14 +28,16 @@ const features = [
 
 type KeyFeature = { text: string; highlight?: boolean }
 
+// Precios canónicos (mantener sincronizado con golegit-app/api/suscripcion/* y bot)
 const plans: {
-  name: string; monthlyPrice: number; featured: boolean
+  name: string; monthlyPrice: number; annualMonthlyPrice: number; featured: boolean
   description: string; sublabel: string; cta: string
   disabled: boolean; keyFeatures: KeyFeature[]
 }[] = [
   {
     name: "Lite",
-    monthlyPrice: 4990,
+    monthlyPrice: 6990,
+    annualMonthlyPrice: 5990,
     featured: false,
     description: "Todo el control, firma en papel",
     sublabel: "1 trabajadora",
@@ -50,7 +52,8 @@ const plans: {
   },
   {
     name: "Pro",
-    monthlyPrice: 9990,
+    monthlyPrice: 11990,
+    annualMonthlyPrice: 9990,
     featured: true,
     description: "Firma digital y portal trabajadora",
     sublabel: "1 trabajadora",
@@ -65,7 +68,8 @@ const plans: {
   },
   {
     name: "Plus",
-    monthlyPrice: 17990,
+    monthlyPrice: 21990,
+    annualMonthlyPrice: 17990,
     featured: false,
     description: "Para más de una trabajadora",
     sublabel: "2 o más trabajadoras",
@@ -140,7 +144,7 @@ export default function Pricing() {
             >
               Anual
               <span className={`text-xs font-bold px-1.5 py-0.5 rounded-md ${annual ? "bg-brand-500 text-white" : "bg-brand-100 text-brand-700"}`}>
-                −20%
+                Ahorra hasta 18%
               </span>
             </button>
           </div>
@@ -149,8 +153,8 @@ export default function Pricing() {
         {/* Plan cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           {plans.map((plan) => {
-            const displayMonthly = annual ? Math.round(plan.monthlyPrice * 0.8) : plan.monthlyPrice;
-            const annualTotal = Math.round(plan.monthlyPrice * 12 * 0.8);
+            const displayMonthly = annual ? plan.annualMonthlyPrice : plan.monthlyPrice;
+            const annualTotal = plan.annualMonthlyPrice * 12;
             const savings = plan.monthlyPrice * 12 - annualTotal;
 
             return (
@@ -264,7 +268,7 @@ export default function Pricing() {
                     {plan.name}
                   </p>
                   <p className={`text-xs mt-0.5 ${plan.featured ? "text-white/60" : "text-ink-light"}`}>
-                    {plan.disabled ? "Próximamente" : formatPrice(annual ? Math.round(plan.monthlyPrice * 0.8) : plan.monthlyPrice) + "/mes"}
+                    {plan.disabled ? "Próximamente" : formatPrice(annual ? plan.annualMonthlyPrice : plan.monthlyPrice) + "/mes"}
                   </p>
                 </div>
               ))}

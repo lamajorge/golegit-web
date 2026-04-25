@@ -68,9 +68,9 @@ const jsonLd = {
       description:
         "GoLegit genera contratos legales, calcula liquidaciones y mantiene el historial laboral de trabajadoras de casa particular. Todo por WhatsApp, sin apps ni formularios.",
       offers: [
-        { "@type": "Offer", name: "Plan Lite", price: "4990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "4990", priceCurrency: "CLP", unitText: "MONTH" } },
-        { "@type": "Offer", name: "Plan Pro", price: "9990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "9990", priceCurrency: "CLP", unitText: "MONTH" } },
-        { "@type": "Offer", name: "Plan Plus", price: "17990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "17990", priceCurrency: "CLP", unitText: "MONTH" } },
+        { "@type": "Offer", name: "Plan Lite", price: "6990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "6990", priceCurrency: "CLP", unitText: "MONTH" } },
+        { "@type": "Offer", name: "Plan Pro", price: "11990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "11990", priceCurrency: "CLP", unitText: "MONTH" } },
+        { "@type": "Offer", name: "Plan Plus", price: "21990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "21990", priceCurrency: "CLP", unitText: "MONTH" } },
       ],
       publisher: { "@id": "https://golegit.cl/#organization" },
       inLanguage: "es-CL",

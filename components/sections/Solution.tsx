@@ -48,7 +48,7 @@ export default function Solution() {
           {/* Right: Key stats */}
           <div className="grid grid-cols-2 gap-3">
             {[
-              { value: "$9.990", label: "al mes", sub: "vs $24.000 de la competencia" },
+              { value: "$11.990", label: "al mes", sub: "vs $24.000 de la competencia" },
               { value: "1 mes", label: "de prueba gratis", sub: "Sin tarjeta de crédito" },
               { value: "0 apps", label: "que instalar", sub: "Solo necesitas WhatsApp" },
               { value: "100%", label: "automatizado", sub: "Sin intermediarios humanos" },
