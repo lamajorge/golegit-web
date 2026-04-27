@@ -190,7 +190,7 @@ function JornadaPage() {
   const horasExtra = Math.max(0, totalHoras - jornadaMax);
   const horasExtra42 = antesDelCambio ? Math.max(0, totalHoras - 42) : null;
 
-  // Puertas adentro: límite diario de 12h
+  // Puertas adentro: límite diario de 12h (Art. 146 CT)
   const diasExceden12h = useMemo(
     () => dias.map((d, i) => d.activo && horasPorDia[i] > LIMITE_DIARIO_ADENTRO),
     [dias, horasPorDia]
@@ -200,10 +200,17 @@ function JornadaPage() {
     [esAdentro, dias]
   );
 
+  // Puertas afuera: límite diario de 10h (Art. 28 inc. 2° CT, incluyendo extras)
+  const diasExceden10hAfuera = useMemo(
+    () => dias.map((d, i) => d.activo && horasPorDia[i] > 10),
+    [dias, horasPorDia]
+  );
+  const algunDiaExcede10h = !esAdentro && diasExceden10hAfuera.some(Boolean);
+
   const horasExtraAdentro = Math.max(0, totalHoras - LIMITE_SEMANAL_ADENTRO);
   const dentroDelLimite = esAdentro
     ? !diasExceden12h.some(Boolean) && horasExtraAdentro === 0
-    : horasExtra === 0;
+    : horasExtra === 0 && !algunDiaExcede10h;
 
   const textoJornada = useMemo(
     () => generarTextoJornada(dias, colacion, modalidad),
@@ -472,7 +479,7 @@ function JornadaPage() {
                           <span className={`text-sm font-medium flex-shrink-0 w-12 text-right tabular-nums ${
                             esAdentro
                               ? horasPorDia[i] > LIMITE_DIARIO_ADENTRO ? "text-red-600" : "text-brand-700"
-                              : horasPorDia[i] > 10 ? "text-amber-600" : "text-brand-700"
+                              : horasPorDia[i] > 10 ? "text-red-600" : "text-brand-700"
                           }`}>
                             {horasPorDia[i] > 0 ? horasPorDia[i].toFixed(1) + "h" : "—"}
                           </span>
@@ -591,7 +598,7 @@ function JornadaPage() {
                         <span className={`text-sm font-medium tabular-nums w-10 text-right ${
                           esAdentro
                             ? diasExceden12h[i] ? "text-red-600" : "text-ink"
-                            : horasPorDia[i] > 10 ? "text-amber-600" : "text-ink"
+                            : horasPorDia[i] > 10 ? "text-red-600" : "text-ink"
                         }`}>
                           {horasPorDia[i].toFixed(1)}h
                         </span>
@@ -657,13 +664,26 @@ function JornadaPage() {
               ) : (
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
-                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${dentroDelLimite ? "bg-brand-500" : "bg-red-500"}`} />
+                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${!algunDiaExcede10h ? "bg-brand-500" : "bg-red-500"}`} />
+                    <div>
+                      <p className="text-sm font-medium text-ink">
+                        Máx. 10 h/día (Art. 28 inc. 2° CT)
+                      </p>
+                      <p className="text-xs text-ink-muted mt-0.5">
+                        {!algunDiaExcede10h
+                          ? "Todos los días dentro del límite"
+                          : `${diasExceden10hAfuera.filter(Boolean).length} día(s) superan 10 h`}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 pt-3 border-t border-gray-100">
+                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${horasExtra === 0 ? "bg-brand-500" : "bg-red-500"}`} />
                     <div>
                       <p className="text-sm font-medium text-ink">
                         Jornada máxima actual: {jornadaMax} h/semana
                       </p>
                       <p className="text-xs text-ink-muted mt-0.5">
-                        {dentroDelLimite
+                        {horasExtra === 0
                           ? `Disponible: ${(jornadaMax - totalHoras).toFixed(1)} h`
                           : `Exceso: ${horasExtra.toFixed(1)} h (recargo 50% por hora extra)`}
                       </p>
