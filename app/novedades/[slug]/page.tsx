@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
@@ -16,13 +17,36 @@ export async function generateStaticParams() {
   return [];
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPost(slug);
   if (!post) return {};
+  const url = `https://golegit.cl/novedades/${post.slug}`;
+  const images = post.portada
+    ? [{ url: post.portada, width: 1200, height: 630, alt: post.titulo }]
+    : undefined;
   return {
     title: `${post.titulo} — GoLegit`,
     description: post.resumen,
+    alternates: { canonical: url },
+    openGraph: {
+      title: post.titulo,
+      description: post.resumen,
+      url,
+      siteName: "GoLegit",
+      locale: "es_CL",
+      type: "article",
+      publishedTime: post.fecha ?? undefined,
+      authors: ["GoLegit"],
+      tags: post.categoria ? [post.categoria] : undefined,
+      images,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.titulo,
+      description: post.resumen,
+      images: post.portada ? [post.portada] : undefined,
+    },
   };
 }
 

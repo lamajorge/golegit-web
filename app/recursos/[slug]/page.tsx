@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
@@ -14,14 +15,35 @@ export async function generateStaticParams() {
   return [];
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const recurso = await getRecurso(slug);
   if (!recurso) return {};
+  const url = `https://golegit.cl/recursos/${recurso.slug}`;
+  const images = recurso.portada
+    ? [{ url: recurso.portada, width: 1200, height: 630, alt: recurso.titulo }]
+    : undefined;
   return {
     title: `${recurso.titulo} — GoLegit`,
     description: recurso.resumen,
-    alternates: { canonical: `https://golegit.cl/recursos/${recurso.slug}` },
+    alternates: { canonical: url },
+    openGraph: {
+      title: recurso.titulo,
+      description: recurso.resumen,
+      url,
+      siteName: "GoLegit",
+      locale: "es_CL",
+      type: "article",
+      authors: ["GoLegit"],
+      tags: [recurso.categoria, recurso.tipo, recurso.nivel].filter(Boolean) as string[],
+      images,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: recurso.titulo,
+      description: recurso.resumen,
+      images: recurso.portada ? [recurso.portada] : undefined,
+    },
   };
 }
 
