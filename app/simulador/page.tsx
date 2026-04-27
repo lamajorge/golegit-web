@@ -38,6 +38,42 @@ export default function SimuladorLanding() {
 
       {/* Cards */}
       <section className="max-w-5xl mx-auto px-6 pb-28">
+        {/* Destacado: Anexo Jornada 42h (Ley 21.561) */}
+        <Link
+          href="/simulador/anexo-jornada-42h"
+          className="group relative flex flex-col md:flex-row gap-6 bg-gradient-to-br from-amber-50 via-white to-amber-50/40 border-2 border-amber-300 rounded-3xl p-8 hover:border-amber-400 hover:shadow-xl hover:shadow-amber-600/10 transition-all duration-300 mb-8"
+        >
+          <div className="absolute -top-3 left-8">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-amber-600 px-3 py-1 rounded-full shadow">
+              Nuevo · Ley 21.561 vigente desde hoy
+            </span>
+          </div>
+          <div className="flex-shrink-0">
+            <div className="w-16 h-16 bg-amber-100 border border-amber-200 rounded-2xl flex items-center justify-center">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="1.7">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+              </svg>
+            </div>
+          </div>
+          <div className="flex-1">
+            <h2 className="text-2xl font-light text-ink mb-2 leading-tight" style={{ fontFamily: "var(--font-fraunces)" }}>
+              Genera el anexo de jornada de 42 horas
+            </h2>
+            <p className="text-ink-muted leading-relaxed mb-3">
+              Desde el <strong>26 de abril de 2026</strong> rige la jornada de 42 horas semanales.
+              Genera el anexo para tu trabajadora de casa particular puertas afuera y descárgalo en PDF.
+              <strong className="text-amber-700"> Gratis, sin registro.</strong>
+            </p>
+            <div className="inline-flex items-center gap-2 text-sm font-semibold text-amber-700 group-hover:gap-3 transition-all">
+              Generar anexo gratis
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </div>
+          </div>
+        </Link>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Liquidación */}
           <Link
