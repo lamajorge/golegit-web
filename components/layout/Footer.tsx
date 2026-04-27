@@ -103,7 +103,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <p className="text-xs text-ink-light">
-            © {new Date().getFullYear()} Cubillos Lama SpA · RUT 78.393.969-K
+            © {new Date().getFullYear()} GoLegit. Todos los derechos reservados.
           </p>
           <div className="flex items-center gap-6">
             <Link href="/privacidad" className="text-xs hover:text-white transition-colors">
