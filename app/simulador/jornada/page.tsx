@@ -381,6 +381,16 @@ function JornadaPage() {
               )}
             </div>
 
+            {/* Cuando es Puertas adentro: NO hay simulación de horario, mostrar info legal + cláusula. */}
+            {esAdentro && (
+              <PuertasAdentroInfo
+                ep={"EMPLEADOR/A"}
+                tp={"TRABAJADOR/A"}
+              />
+            )}
+
+            {/* Cuando NO es Puertas adentro: simulador de horario tradicional. */}
+            {!esAdentro && (<>
             {/* Colación */}
             <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
               <div className="flex items-start justify-between gap-4 mb-1">
@@ -555,18 +565,20 @@ function JornadaPage() {
                 ))}
               </div>
             </div>
+            </>)}
           </div>
 
           {/* ── Resultados (sticky) ── */}
           <div className="lg:sticky lg:top-24 space-y-3">
-            {/* Resumen horas */}
+            {/* Resumen horas — solo cuando hay simulación de horario (puertas afuera). */}
+            {!esAdentro && (<>
             <div
               className={`rounded-2xl p-6 text-white ${
                 dentroDelLimite ? "bg-brand-600" : "bg-red-600"
               }`}
             >
               <p className="text-[11px] font-semibold uppercase tracking-widest mb-2 opacity-70">
-                {esAdentro ? "Total semanal (referencial)" : "Total semanal"}
+                Total semanal
               </p>
               <div className="flex items-end gap-2 mb-3">
                 <p
@@ -581,18 +593,12 @@ function JornadaPage() {
                 {dentroDelLimite ? (
                   <>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-                    {esAdentro
-                      ? `Dentro del límite (12 h/día · 72 h/sem)`
-                      : `Dentro del límite legal (${jornadaMax} h/sem)`}
+                    Dentro del límite legal ({jornadaMax} h/sem)
                   </>
                 ) : (
                   <>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.5L20.5 19h-17L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>
-                    {esAdentro
-                      ? diasExceden12h.some(Boolean)
-                        ? `${diasExceden12h.filter(Boolean).length} día(s) superan ${LIMITE_DIARIO_ADENTRO} h`
-                        : `${horasExtraAdentro.toFixed(1)} h sobre límite semanal (${LIMITE_SEMANAL_ADENTRO} h)`
-                      : `${horasExtra.toFixed(1)} h extra sobre el límite (${jornadaMax} h/sem)`}
+                    {horasExtra.toFixed(1)} h extra sobre el límite ({jornadaMax} h/sem)
                   </>
                 )}
               </div>
@@ -630,6 +636,7 @@ function JornadaPage() {
                 </div>
               </div>
             </div>
+            </>)}
 
             {/* Estado legal */}
             <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
@@ -871,5 +878,72 @@ function JornadaPage() {
 
       <Footer />
     </main>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────
+// Componente — Información PA (puertas adentro)
+// PA no se rige por jornada semanal → mostrar reglas, descansos,
+// días libres, compensaciones y una cláusula tipo lista para copiar.
+// ─────────────────────────────────────────────────────────────
+function PuertasAdentroInfo({ ep, tp }: { ep: string; tp: string }) {
+  const clausula = `La jornada de ${tp} se rige por el régimen especial del Art. 149 inciso 2° del Código del Trabajo: no existe horario fijo de entrada y salida, ni jornada semanal en horas. ${ep} determinará la distribución de las labores según la naturaleza del servicio, respetando los siguientes límites legales:
+
+(a) Descanso continuo entre jornadas: mínimo 12 horas, de las cuales al menos 9 horas deben ser ininterrumpidas (Art. 149 inc. 2°).
+(b) Descanso semanal: un día completo a la semana, preferentemente el domingo, además de los días festivos del año calendario. Los festivos que no coincidan con el descanso semanal podrán compensarse dentro de los 90 días siguientes (Art. 150 letra b).
+(c) Descanso del día sábado: podrá acumularse, fraccionarse o canjearse por otro día de descanso dentro del mismo mes calendario, de común acuerdo entre las partes (Art. 150 letra c).
+(d) Días libres de libre disposición: ${tp} tendrá derecho a 2 días al mes, remunerados y no compensables en dinero mientras dure el contrato. Se acordarán entre las partes considerando las necesidades del hogar (Art. 150 letra d).
+
+Las partes dejan constancia que la alimentación y el alojamiento son de cargo del/a empleador/a y no constituyen remuneración (Art. 151 CT).`;
+
+  const [copied, setCopied] = useState(false);
+  async function copy() {
+    try { await navigator.clipboard.writeText(clausula); } catch { /* fallback noop */ }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
+
+  return (
+    <>
+      <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+        <p className="text-sm font-semibold text-ink mb-4">Régimen legal — Puertas adentro</p>
+        <div className="space-y-3 text-sm text-ink-muted leading-relaxed">
+          <p><strong className="text-ink">No hay jornada semanal fija.</strong> El Art. 149 inc. 2° CT establece un régimen especial: el/la empleador/a determina la distribución de las labores según la naturaleza del servicio, respetando los descansos mínimos legales.</p>
+          <p><strong className="text-ink">Sin horas extra ni recargos.</strong> No aplican los Arts. 32 y 28 (jornada ordinaria + extraordinarias) ni la reducción a 42 h de la Ley 21.561. Tampoco hay un mínimo legal de colación (Art. 34 no aplica).</p>
+        </div>
+      </div>
+
+      <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+        <p className="text-sm font-semibold text-ink mb-4">Reglas que sí debes respetar</p>
+        <ul className="space-y-3 text-sm text-ink-muted">
+          <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">12 h de descanso continuo</strong> entre el fin de una jornada y el inicio de la siguiente. Al menos <strong className="text-ink">9 h ininterrumpidas</strong> dentro de ese bloque.</span></li>
+          <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">1 día de descanso semanal</strong> (preferentemente domingo) + todos los festivos del año.</span></li>
+          <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">Festivos trabajados</strong> (Art. 150 b CT): se compensan con día libre dentro de los 90 días siguientes.</span></li>
+          <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">Sábados</strong> (Art. 150 c CT): pueden acumularse, fraccionarse o canjearse dentro del mismo mes calendario, de común acuerdo.</span></li>
+          <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">Días libres de libre disposición</strong> (Art. 150 d CT): 2 al mes, <strong>remunerados y no compensables en dinero</strong> mientras dure el contrato.</span></li>
+          <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">Sueldo mínimo</strong> aplica completo (no proporcional). Alimentación y alojamiento son de cargo del/a empleador/a y no constituyen remuneración (Art. 151 CT).</span></li>
+        </ul>
+      </div>
+
+      <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+        <div className="flex items-center justify-between mb-3 gap-3 flex-wrap">
+          <p className="text-sm font-semibold text-ink">Cláusula tipo para tu contrato</p>
+          <button
+            onClick={copy}
+            className="inline-flex items-center gap-1.5 text-xs font-medium bg-brand-600 hover:bg-brand-700 text-white rounded-lg px-3 py-1.5 transition-colors"
+          >
+            {copied ? "✓ Copiado" : "Copiar texto"}
+          </button>
+        </div>
+        <textarea
+          readOnly
+          value={clausula}
+          className="w-full h-72 text-xs font-mono bg-gray-50 border border-gray-200 rounded-lg p-3 resize-none focus:outline-none"
+        />
+        <p className="text-xs text-ink-light mt-2 leading-relaxed">
+          Este texto está alineado con la plantilla canónica de contratos GoLegit. Puedes pegarlo en la cláusula de jornada del contrato o usarlo como referencia.
+        </p>
+      </div>
+    </>
   );
 }
