@@ -26,6 +26,15 @@ export default function AlertBanner() {
     }
   }, [])
 
+  // Toggle clase en <body> para que CSS desplace navbar y main hacia abajo
+  // mientras el banner está visible (evita solapamiento con el navbar fixed).
+  useEffect(() => {
+    if (typeof document === "undefined") return
+    if (visible) document.body.classList.add("alert-banner-visible")
+    else document.body.classList.remove("alert-banner-visible")
+    return () => document.body.classList.remove("alert-banner-visible")
+  }, [visible])
+
   function dismiss() {
     setVisible(false)
     try {
@@ -38,7 +47,7 @@ export default function AlertBanner() {
   if (!visible) return null
 
   return (
-    <div className="bg-amber-500 text-amber-950 print:hidden">
+    <div className="fixed top-0 left-0 right-0 z-[60] bg-amber-500 text-amber-950 print:hidden">
       <div className="max-w-6xl mx-auto px-4 py-2.5 flex items-center justify-between gap-3">
         <p className="text-xs sm:text-sm flex-1">
           <span className="font-bold">Hoy 26-abr</span> entró en vigor la jornada de{" "}

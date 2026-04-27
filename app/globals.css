@@ -36,6 +36,22 @@
   }
 }
 
+/* AlertBanner global — desplaza navbar fixed y reserva espacio en main
+   cuando el componente AlertBanner está visible (toggle clase via JS).
+   Altura del banner: ~40px en mobile (text-xs + py-2.5), ~44px desktop (text-sm). */
+body.alert-banner-visible nav.fixed {
+  top: 40px;
+}
+@media (min-width: 640px) {
+  body.alert-banner-visible nav.fixed { top: 44px; }
+}
+body.alert-banner-visible main {
+  padding-top: 40px;
+}
+@media (min-width: 640px) {
+  body.alert-banner-visible main { padding-top: 44px; }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
