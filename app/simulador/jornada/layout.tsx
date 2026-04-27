@@ -42,7 +42,7 @@ const howToSchema = {
     {
       "@type": "HowToStep",
       name: "Verifica el cumplimiento legal",
-      text: "La calculadora suma las horas semanales y alerta si se supera el límite legal vigente (44 horas hasta el 26 de abril de 2026, luego 42 horas según Ley 21.561).",
+      text: "La calculadora suma las horas semanales y alerta si se supera el límite legal vigente (42 horas semanales para puertas afuera desde el 26 de abril de 2026, según Ley 21.561). En puertas adentro no aplica un máximo semanal: solo descansos diarios mínimos del Art. 149 inciso 2° CT.",
     },
     {
       "@type": "HowToStep",

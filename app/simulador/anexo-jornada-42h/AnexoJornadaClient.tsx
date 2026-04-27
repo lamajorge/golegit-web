@@ -333,7 +333,7 @@ export default function AnexoJornadaClient() {
             href="/#early-access"
             className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors"
           >
-            Pide early access →
+            Early access →
           </Link>
         </div>
       </div>

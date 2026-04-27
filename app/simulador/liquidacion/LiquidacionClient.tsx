@@ -237,8 +237,6 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
   const [afpIdx,          setAfpIdx]          = useState(2); // Habitat
   const [dias,            setDias]            = useState(30);
   const [cargas,          setCargas]          = useState(0);
-  const [horasRaw,        setHorasRaw]        = useState("44");
-
   // Ley 21.561 — jornada máxima: 44h hasta 25-abr-2026, 42h luego, 40h desde 26-abr-2028
   const MAX_HORAS = (() => {
     const hoy = new Date()
@@ -246,6 +244,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
     if (hoy >= new Date('2026-04-26')) return 42
     return 44
   })()
+  const [horasRaw,        setHorasRaw]        = useState(String(MAX_HORAS));
   const horasSemanales = Math.min(MAX_HORAS, Math.max(1, parseInt(horasRaw.replace(/\D/g, "")) || MAX_HORAS))
   // Art. 44 inc. 3° CT — sueldo no puede ser menor al IMM proporcional.
   // Parcial (≤30h): proporcional con ceil. Completa: IMM íntegro.

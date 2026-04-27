@@ -18,10 +18,14 @@ const FECHA_42H = new Date("2026-04-26");
 const JORNADA_MAX = () => (new Date() < FECHA_42H ? 44 : 42);
 const COLACION_MIN = 30;
 const COLACION_MAX = 120;
-// Puertas adentro — Art. 146 CT
-const LIMITE_DIARIO_ADENTRO = 12;   // horas máx por día
-const LIMITE_SEMANAL_ADENTRO = 72;  // 6 días × 12 h máx
-const DESCANSO_MIN_ADENTRO = 12;    // horas continuas entre jornadas
+// Puertas adentro — Art. 149 inc. 2° CT
+// El régimen PA NO fija un máximo semanal de horas trabajadas. La ley solo exige:
+//  · Descanso ABSOLUTO mínimo de 12 horas diarias (interpretado prácticamente
+//    como 12 h diarias máximas trabajadas en un período de 24 h).
+//  · Descanso ININTERRUMPIDO entre jornadas: mínimo 9 horas (el resto de las 12
+//    puede fraccionarse durante la jornada).
+const LIMITE_DIARIO_ADENTRO = 12;        // horas máx trabajadas por día
+const DESCANSO_CONTINUO_ADENTRO = 9;     // horas ininterrumpidas entre jornadas
 
 const DIAS = [
   { nombre: "Lunes", corto: "lunes" },
@@ -106,7 +110,7 @@ function generarTextoJornada(
     return (
       partes.join(", ") +
       colTexto +
-      ". La trabajadora gozará de un descanso continuo de 12 horas entre jornadas, del cual al menos 9 horas serán nocturnas e ininterrumpidas, en conformidad con el Art. 146 del Código del Trabajo."
+      ". La trabajadora gozará de un descanso absoluto mínimo de 12 horas diarias y, entre el término de una jornada y el inicio de la siguiente, de un descanso ininterrumpido mínimo de 9 horas, conforme al Art. 149 inciso 2° del Código del Trabajo."
     );
   }
 
@@ -116,8 +120,9 @@ function generarTextoJornada(
 
 // ─────────────────────────────────────────────────────────────
 // VERIFICADOR DE DESCANSO ENTRE DÍAS (puertas adentro)
-// Retorna los índices de días donde el descanso hacia el día
-// siguiente es menor a 12 horas.
+// Retorna los índices de días donde el descanso ininterrumpido hacia
+// el día siguiente es menor al mínimo legal de 9 horas
+// (Art. 149 inc. 2° CT).
 // ─────────────────────────────────────────────────────────────
 function calcDescansosInsuficientes(dias: DiaSchedule[]): number[] {
   const result: number[] = [];
@@ -127,7 +132,7 @@ function calcDescansosInsuficientes(dias: DiaSchedule[]): number[] {
       const entradaMins = toMins(dias[i + 1].entrada);
       // Gap = tiempo desde salida del día i hasta entrada del día i+1 (siguiente día)
       const gapMins = (entradaMins - salidaMins + 24 * 60) % (24 * 60);
-      if (gapMins > 0 && gapMins < DESCANSO_MIN_ADENTRO * 60) result.push(i);
+      if (gapMins > 0 && gapMins < DESCANSO_CONTINUO_ADENTRO * 60) result.push(i);
     }
   }
   return result;
@@ -196,7 +201,8 @@ function JornadaPage() {
   const horasExtra = Math.max(0, totalHoras - jornadaMax);
   const horasExtra42 = antesDelCambio ? Math.max(0, totalHoras - 42) : null;
 
-  // Puertas adentro: límite diario de 12h (Art. 146 CT)
+  // Puertas adentro: límite diario de 12h trabajadas (Art. 149 inc. 2° CT —
+  // descanso absoluto mínimo de 12 h diarias).
   const diasExceden12h = useMemo(
     () => dias.map((d, i) => d.activo && horasPorDia[i] > LIMITE_DIARIO_ADENTRO),
     [dias, horasPorDia]
@@ -213,9 +219,8 @@ function JornadaPage() {
   );
   const algunDiaExcede10h = !esAdentro && diasExceden10hAfuera.some(Boolean);
 
-  const horasExtraAdentro = Math.max(0, totalHoras - LIMITE_SEMANAL_ADENTRO);
   const dentroDelLimite = esAdentro
-    ? !diasExceden12h.some(Boolean) && horasExtraAdentro === 0
+    ? !diasExceden12h.some(Boolean) && descansosInsuficientes.length === 0
     : horasExtra === 0 && !algunDiaExcede10h;
 
   const textoJornada = useMemo(
@@ -649,7 +654,7 @@ function JornadaPage() {
                     <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${!diasExceden12h.some(Boolean) ? "bg-brand-500" : "bg-red-500"}`} />
                     <div>
                       <p className="text-sm font-medium text-ink">
-                        Máx. {LIMITE_DIARIO_ADENTRO} h/día (Art. 146 CT)
+                        Máx. {LIMITE_DIARIO_ADENTRO} h trabajadas/día (Art. 149 inc. 2° CT)
                       </p>
                       <p className="text-xs text-ink-muted mt-0.5">
                         {!diasExceden12h.some(Boolean)
@@ -659,28 +664,18 @@ function JornadaPage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3 pt-3 border-t border-gray-100">
-                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${horasExtraAdentro === 0 ? "bg-brand-500" : "bg-amber-500"}`} />
-                    <div>
-                      <p className="text-sm font-medium text-ink">
-                        Máx. {LIMITE_SEMANAL_ADENTRO} h/semana (Art. 146 CT)
-                      </p>
-                      <p className="text-xs text-ink-muted mt-0.5">
-                        {horasExtraAdentro === 0
-                          ? `Disponible: ${(LIMITE_SEMANAL_ADENTRO - totalHoras).toFixed(1)} h`
-                          : `Exceso: ${horasExtraAdentro.toFixed(1)} h sobre el tope semanal`}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 pt-3 border-t border-gray-100">
                     <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${descansosInsuficientes.length === 0 ? "bg-brand-500" : "bg-red-500"}`} />
                     <div>
                       <p className="text-sm font-medium text-ink">
-                        Descanso continuo: {DESCANSO_MIN_ADENTRO} h entre jornadas
+                        Descanso ininterrumpido mín. {DESCANSO_CONTINUO_ADENTRO} h entre jornadas
                       </p>
                       <p className="text-xs text-ink-muted mt-0.5">
                         {descansosInsuficientes.length === 0
                           ? "Todos los descansos son suficientes"
-                          : `${descansosInsuficientes.length} transición(es) con menos de 12 h`}
+                          : `${descansosInsuficientes.length} transición(es) con menos de ${DESCANSO_CONTINUO_ADENTRO} h`}
+                      </p>
+                      <p className="text-[10px] text-ink-light mt-0.5 leading-snug">
+                        El Art. 149 inc. 2° no fija un máximo de horas semanales para puertas adentro: el régimen se rige por descansos mínimos diarios.
                       </p>
                     </div>
                   </div>
@@ -743,12 +738,11 @@ function JornadaPage() {
               </div>
             )}
 
-            {esAdentro && !dentroDelLimite && (
+            {esAdentro && diasExceden12h.some(Boolean) && (
               <div className="bg-red-50 border border-red-200 rounded-2xl p-4">
                 <p className="text-xs font-semibold text-red-800 mb-1">Jornada diaria excesiva</p>
                 <p className="text-xs text-red-700 leading-relaxed">
-                  El Art. 146 CT limita la jornada de trabajadoras puertas adentro a 12 horas diarias.
-                  Reduce el horario de los días marcados en rojo.
+                  El Art. 149 inciso 2° del Código del Trabajo exige un descanso absoluto mínimo de 12 horas diarias para trabajadoras puertas adentro, lo que se traduce en un máximo de 12 horas diarias trabajadas. Reduce el horario de los días marcados en rojo.
                 </p>
               </div>
             )}
@@ -757,8 +751,7 @@ function JornadaPage() {
               <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
                 <p className="text-xs font-semibold text-amber-800 mb-1">Descanso insuficiente entre jornadas</p>
                 <p className="text-xs text-amber-700 leading-relaxed">
-                  La ley exige 12 horas continuas de descanso entre jornadas, incluyendo al menos 9 horas nocturnas ininterrumpidas (Art. 146 CT).
-                  Revisa los horarios de los días indicados.
+                  El Art. 149 inciso 2° del Código del Trabajo exige un descanso ininterrumpido mínimo de 9 horas entre el término de una jornada y el inicio de la siguiente. Revisa los horarios de los días indicados.
                 </p>
               </div>
             )}

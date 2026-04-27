@@ -18,7 +18,7 @@ interface Props {
 export default function CtaButton({
   className = "",
   children,
-  disabledLabel = "Pide early access",
+  disabledLabel = "Early access",
 }: Props) {
   if (!SITE_CONFIG.whatsappEnabled) {
     return (

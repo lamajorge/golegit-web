@@ -163,9 +163,16 @@ export default function TerminosPage() {
             <h3>4.4 Renovación automática</h3>
             <p>
               Las suscripciones se renuevan automáticamente al vencimiento de cada período,
-              cargando el medio de pago registrado, salvo cancelación expresa del Cliente con al
-              menos 24 horas de anticipación al vencimiento. Las renovaciones son notificadas por
-              correo electrónico con anticipación razonable.
+              cargando el medio de pago registrado, salvo cancelación expresa del Cliente. La
+              cancelación puede ejercerse en cualquier momento desde el portal del Cliente o
+              comunicándola a <strong>soporte@golegit.cl</strong>; surtirá efecto al término del
+              período de facturación vigente y no se cobrarán períodos posteriores.
+            </p>
+            <p>
+              GoLegit notificará por correo electrónico, con anticipación razonable, las
+              próximas renovaciones, así como cualquier modificación de precios u otras
+              condiciones que afecten el cobro siguiente, en los términos del numeral 4.5 y del
+              artículo 12 A de la Ley N° 19.496.
             </p>
 
             <h3>4.5 Ajuste de precios</h3>

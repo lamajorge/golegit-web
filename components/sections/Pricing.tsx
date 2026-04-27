@@ -16,7 +16,7 @@ const features = [
   { label: "Vacaciones y días libres", lite: true, pro: true, plus: true },
   { label: "Amonestaciones escritas", lite: true, pro: true, plus: true },
   { label: "Certificados laborales", lite: true, pro: true, plus: true },
-  { label: "Sábados y feriados", hint: "Días especiales Art. 150 CT", lite: true, pro: true, plus: true },
+  { label: "Sábados y feriados", hint: "Días especiales — Art. 150 letras b) (sábados) y c) (feriados) CT", lite: true, pro: true, plus: true },
   { label: "PDF descargable", lite: true, pro: true, plus: true },
   { label: "Recordatorios proactivos", hint: "Gestión proactiva del ciclo mensual", lite: false, pro: true, plus: true },
   { label: "Firma electrónica FES", hint: "Ley 19.799", lite: false, pro: true, plus: true },
