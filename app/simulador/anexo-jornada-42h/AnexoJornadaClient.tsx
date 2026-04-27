@@ -204,6 +204,9 @@ export default function AnexoJornadaClient() {
     if (!data.fecha_contrato_original) errs.fecha_contrato_original = "Fecha obligatoria"
     if (totalHoras === 0) errs.dias = "Configura al menos un día con horario"
     if (excede42) errs.dias = "El total semanal supera las 42 horas"
+    if (data.vigencia_desde < "2026-04-26") {
+      errs.vigencia_desde = "La nueva jornada de 42 hrs rige desde el 26 de abril de 2026 — no puede aplicarse antes."
+    }
     if (Object.keys(errs).length > 0) {
       setErrors(errs)
       return
@@ -523,14 +526,16 @@ export default function AnexoJornadaClient() {
       </Section>
 
       {/* Vigencia */}
-      <Section title="Vigencia del cambio">
+      <Section title="Vigencia de la nueva jornada">
         <div className="grid md:grid-cols-2 gap-4">
           <Input
             label="Vigencia desde"
             type="date"
             value={data.vigencia_desde}
             onChange={(v) => update("vigencia_desde", v)}
-            help="La Ley 21.561 entra en vigor el 26 de abril de 2026."
+            min="2026-04-26"
+            error={errors.vigencia_desde}
+            help="La nueva jornada de 42 horas rige por ley desde el 26 de abril de 2026. Si firmas el anexo después, la vigencia debe seguir siendo el 26-abr-2026 (no la fecha de firma)."
           />
         </div>
       </Section>
@@ -569,6 +574,8 @@ function Input({
   error,
   type = "text",
   help,
+  min,
+  max,
 }: {
   label: string
   placeholder?: string
@@ -578,6 +585,8 @@ function Input({
   error?: string
   type?: string
   help?: string
+  min?: string
+  max?: string
 }) {
   return (
     <div>
@@ -588,12 +597,14 @@ function Input({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onBlur={onBlur}
+        min={min}
+        max={max}
         className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none ${
           error ? "border-red-300 bg-red-50" : "border-gray-200"
         }`}
       />
       {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
-      {!error && help && <p className="text-xs text-ink-muted mt-1">{help}</p>}
+      {!error && help && <p className="text-xs text-ink-muted mt-1 leading-relaxed">{help}</p>}
     </div>
   )
 }
@@ -691,10 +702,16 @@ function PreviewAnexo({ data, distribucionTexto, totalHoras }: { data: FormData;
       </Clausula>
 
       <Clausula numero="CUARTO" titulo="">
+        Las partes dejan constancia que la nueva distribución de jornada acordada en este anexo
+        rige a partir del <strong>{fechaLarga(data.vigencia_desde)}</strong>, fecha en que entró
+        en vigor la jornada ordinaria de 42 horas semanales por imperio del Art. 22 del Código del
+        Trabajo, modificado por la Ley N° 21.561.
+      </Clausula>
+
+      <Clausula numero="QUINTO" titulo="">
         El presente anexo se firma en dos ejemplares del mismo tenor y fecha, quedando uno en poder del
         Empleador/a y el otro en poder del Trabajador/a, quien declara haberlo recibido en este acto a su entera
-        satisfacción y que es fiel reflejo de la relación laboral que une a las partes. Se deja constancia que
-        este anexo tiene vigencia a partir del <strong>{fechaLarga(data.vigencia_desde)}</strong>.
+        satisfacción y que es fiel reflejo de la relación laboral que une a las partes.
       </Clausula>
 
       <div className="firmas-bloque" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, marginTop: 50 }}>
