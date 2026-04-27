@@ -582,40 +582,26 @@ function PreviewAnexo({ data, distribucionTexto, totalHoras }: { data: FormData;
         </div>
       </div>
 
-      <h1 style={{ fontSize: "13pt", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.3px", textAlign: "center", marginBottom: 4 }}>
+      <h1 style={{ fontSize: "13pt", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.3px", textAlign: "center", marginBottom: 24 }}>
         Anexo de Contrato de Trabajo
       </h1>
-      <h2 style={{ fontSize: "10pt", textAlign: "center", color: "#6b7280", fontWeight: 400, marginBottom: 24 }}>
-        Adecuación de jornada laboral a 42 horas semanales (Ley N° 21.561)
-      </h2>
 
       <p style={{ fontSize: "11pt", textAlign: "justify", marginBottom: 16 }}>
-        En <strong>{data.ciudad || "—"}</strong>, a {fechaLarga(data.fecha_anexo)}, comparecen{" "}
-        <strong>{data.empleador_nombre || "—"}</strong>, cédula de identidad N° {data.empleador_rut || "—"},
-        con domicilio en {data.empleador_domicilio || "—"}, en adelante <strong>"el/la Empleador/a"</strong>;
-        y <strong>{data.trabajador_nombre || "—"}</strong>, cédula de identidad N° {data.trabajador_rut || "—"},
-        en adelante <strong>"el/la Trabajador/a"</strong>, ambas partes del contrato de trabajo de{" "}
-        trabajador/a de casa particular puertas afuera celebrado con fecha {fechaLarga(data.fecha_contrato_original)},
-        acuerdan modificar dicho contrato conforme a las siguientes cláusulas.
+        En <strong>{data.ciudad || "—"}</strong>, a {fechaLarga(data.fecha_anexo)}, entre{" "}
+        <strong>{data.empleador_nombre || "—"}</strong>, cédula nacional de identidad N° {data.empleador_rut || "—"},
+        con domicilio en {data.empleador_domicilio || "—"}, en adelante el <strong>"EMPLEADOR/A"</strong>;
+        y <strong>{data.trabajador_nombre || "—"}</strong>, cédula nacional de identidad N° {data.trabajador_rut || "—"},
+        en adelante el <strong>"TRABAJADOR/A"</strong>, se ha convenido el siguiente anexo de contrato de trabajo:
       </p>
 
-      <Clausula numero="PRIMERO" titulo="Marco legal">
-        Por la presente las partes adecuan el contrato a la jornada ordinaria semanal de{" "}
-        <strong>42 horas</strong>, conforme al inciso 1° del artículo 22 del Código del Trabajo,
-        modificado por la Ley N° 21.561 (D.O. 26.04.2023). De acuerdo al artículo segundo
-        transitorio de dicha ley, esta modificación se entiende incorporada al contrato por el
-        solo ministerio de la ley desde el 26 de abril de 2026, escriturándose en este acto
-        para efectos de prueba y certeza.
+      <Clausula numero="PRIMERO" titulo="">
+        Las partes declaran que con fecha <strong>{fechaLarga(data.fecha_contrato_original)}</strong> han suscrito un
+        contrato de trabajo de trabajador/a de casa particular puertas afuera, que se encuentra plenamente vigente.
       </Clausula>
 
-      <Clausula numero="SEGUNDO" titulo="Jornada anterior">
-        Hasta antes de la fecha de vigencia de este anexo, la jornada pactada era de{" "}
-        <strong>{data.jornada_actual_horas} horas semanales</strong>.
-      </Clausula>
-
-      <Clausula numero="TERCERO" titulo="Nueva jornada de 42 horas">
-        A partir del <strong>{fechaLarga(data.vigencia_desde)}</strong>, la jornada ordinaria
-        semanal queda en <strong>{totalHoras.toFixed(1)} horas semanales</strong>, distribuidas de la siguiente forma:
+      <Clausula numero="SEGUNDO" titulo="">
+        La jornada de trabajo tendrá una duración de <strong>{totalHoras.toFixed(1)} horas semanales</strong>,
+        distribuidas de la siguiente forma:
         <span style={{ display: "block", marginTop: 6, paddingLeft: 14, fontStyle: "italic" }}>
           {distribucionTexto || "—"}
         </span>
@@ -651,28 +637,32 @@ function PreviewAnexo({ data, distribucionTexto, totalHoras }: { data: FormData;
               </tr>
             </tbody>
           </table>
-          <p style={{ fontSize: "9pt", color: "#6b7280", marginTop: 6, fontStyle: "italic" }}>
-            Colación de {data.colacion} minutos diarios no imputables a la jornada (Art. 34 CT).
-          </p>
         </div>
       )}
 
-      <Clausula numero="CUARTO" titulo="Mantención de remuneraciones">
-        Conforme al artículo primero transitorio de la Ley N° 21.561, esta reducción de la
-        jornada <strong>no implica disminución alguna de las remuneraciones</strong> pactadas
-        en el contrato original. Todas las remuneraciones, beneficios y demás condiciones
-        económicas se mantienen íntegramente.
-      </Clausula>
-
-      <Clausula numero="QUINTO" titulo="Vigencia">
-        El presente anexo rige desde el {fechaLarga(data.vigencia_desde)}. En todo lo no
-        modificado por este instrumento, el contrato original continúa plenamente vigente.
-      </Clausula>
-
-      <p style={{ fontSize: "11pt", textAlign: "justify", marginTop: 28, marginBottom: 36 }}>
-        En señal de conformidad, las partes firman el presente anexo en dos ejemplares,
-        quedando uno en poder de cada una.
+      <p style={{ fontSize: "11pt", textAlign: "justify", marginBottom: 16 }}>
+        La jornada diaria será interrumpida por un descanso de <strong>{data.colacion} minutos</strong> destinados
+        a colación, tiempo que no forma parte de la jornada laboral conforme al artículo 34 del Código del Trabajo.
       </p>
+
+      <p style={{ fontSize: "11pt", textAlign: "justify", marginBottom: 16 }}>
+        Cuando las necesidades del servicio requieran la prestación de servicios en horario fuera de la jornada
+        ordinaria semanal, las horas trabajadas serán pactadas y pagadas como extraordinarias conforme a lo
+        establecido en el artículo 32 del Código del Trabajo.
+      </p>
+
+      <Clausula numero="TERCERO" titulo="">
+        Para todos los efectos legales, este anexo se entiende incorporado al contrato de trabajo individualizado
+        en la cláusula primera, pasando a formar parte integrante de aquél. En todo lo no modificado por este
+        instrumento, dicho contrato continúa plenamente vigente.
+      </Clausula>
+
+      <Clausula numero="CUARTO" titulo="">
+        El presente anexo se firma en dos ejemplares del mismo tenor y fecha, quedando uno en poder del
+        Empleador/a y el otro en poder del Trabajador/a, quien declara haberlo recibido en este acto a su entera
+        satisfacción y que es fiel reflejo de la relación laboral que une a las partes. Se deja constancia que
+        este anexo tiene vigencia a partir del <strong>{fechaLarga(data.vigencia_desde)}</strong>.
+      </Clausula>
 
       <div className="firmas-bloque" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, marginTop: 50 }}>
         <FirmaBloque rol="Empleador/a" nombre={data.empleador_nombre} rut={data.empleador_rut} />
