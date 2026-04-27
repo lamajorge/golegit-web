@@ -42,13 +42,15 @@ const DIAS_INFO = [
   { nombre: "Domingo", corto: "domingo" },
 ]
 
+// Default: 42h exactas con 30 min de colación.
+// Lun-Vie 09:00-17:30 = 8h netas × 5 = 40h. Sáb 09:00-11:30 = 2h. Total = 42h.
 const DIAS_DEFAULT: DiaSchedule[] = [
   { activo: true, entrada: "09:00", salida: "17:30" },
   { activo: true, entrada: "09:00", salida: "17:30" },
   { activo: true, entrada: "09:00", salida: "17:30" },
   { activo: true, entrada: "09:00", salida: "17:30" },
   { activo: true, entrada: "09:00", salida: "17:30" },
-  { activo: false, entrada: "09:00", salida: "13:00" },
+  { activo: true, entrada: "09:00", salida: "11:30" },
   { activo: false, entrada: "09:00", salida: "13:00" },
 ]
 
@@ -64,7 +66,7 @@ const INITIAL: FormData = {
   modalidad: "puertas_afuera",
   jornada_actual_horas: 44,
   vigencia_desde: "2026-04-26",
-  colacion: 60,
+  colacion: 30,
   dias: DIAS_DEFAULT,
 }
 
@@ -165,6 +167,10 @@ export default function AnexoJornadaClient() {
   const totalHoras = horasPorDia.reduce((a, b) => a + b, 0)
   const dentroDelLimite = totalHoras > 0 && totalHoras <= 42
   const excede42 = totalHoras > 42
+  const horasExtra = Math.max(0, totalHoras - 42)
+  // Art. 28 CT inciso 2°: jornada diaria máxima = 10 horas (incluyendo extras).
+  const diasExceden10h = horasPorDia.map((h) => h > 10)
+  const algunDiaExcede = diasExceden10h.some(Boolean)
   const distribucionTexto = useMemo(
     () => generarTextoJornada(data.dias, data.colacion),
     [data.dias, data.colacion]
@@ -416,8 +422,15 @@ export default function AnexoJornadaClient() {
                   disabled={!dia.activo}
                   className="flex-1 min-w-0 px-2 py-1.5 text-xs md:text-sm border border-gray-200 rounded-md disabled:bg-gray-100 disabled:text-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
                 />
-                <span className="text-xs text-ink-muted w-12 text-right tabular-nums">
-                  {dia.activo ? `${horasPorDia[i].toFixed(1)}h` : "—"}
+                <span
+                  className={`text-xs w-12 text-right tabular-nums font-medium ${
+                    !dia.activo ? "text-ink-muted" :
+                    diasExceden10h[i] ? "text-red-700" :
+                    "text-ink-muted"
+                  }`}
+                  title={diasExceden10h[i] ? "Excede el máximo legal diario de 10 horas (Art. 28 CT)" : undefined}
+                >
+                  {dia.activo ? `${horasPorDia[i].toFixed(1)}h${diasExceden10h[i] ? " ⚠" : ""}` : "—"}
                 </span>
               </div>
             ))}
@@ -450,32 +463,49 @@ export default function AnexoJornadaClient() {
         </div>
 
         {/* Total horas + estado */}
-        <div className={`rounded-xl p-3 mb-3 border flex items-center justify-between gap-3 ${
-          excede42 ? "bg-red-50 border-red-200" :
+        <div className={`rounded-xl p-3 mb-3 border ${
+          algunDiaExcede ? "bg-red-50 border-red-300" :
+          excede42 ? "bg-amber-50 border-amber-300" :
           dentroDelLimite ? "bg-emerald-50 border-emerald-200" :
           "bg-gray-50 border-gray-200"
         }`}>
-          <div>
-            <p className={`text-xs font-medium ${
-              excede42 ? "text-red-700" :
-              dentroDelLimite ? "text-emerald-700" :
-              "text-ink-muted"
-            }`}>Total semanal</p>
-            <p className={`text-xl font-bold tabular-nums ${
-              excede42 ? "text-red-700" :
-              dentroDelLimite ? "text-emerald-700" :
-              "text-ink"
-            }`}>
-              {totalHoras.toFixed(1)}h <span className="text-sm font-normal text-ink-muted">/ 42h máx.</span>
-            </p>
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <p className={`text-xs font-medium ${
+                algunDiaExcede ? "text-red-700" :
+                excede42 ? "text-amber-700" :
+                dentroDelLimite ? "text-emerald-700" :
+                "text-ink-muted"
+              }`}>Total semanal</p>
+              <p className={`text-xl font-bold tabular-nums ${
+                algunDiaExcede ? "text-red-700" :
+                excede42 ? "text-amber-700" :
+                dentroDelLimite ? "text-emerald-700" :
+                "text-ink"
+              }`}>
+                {totalHoras.toFixed(1)}h <span className="text-sm font-normal text-ink-muted">/ 42h ordinaria</span>
+              </p>
+            </div>
+            {dentroDelLimite && !algunDiaExcede && (
+              <p className="text-xs text-emerald-700 text-right">✓ Dentro del límite legal</p>
+            )}
           </div>
-          {excede42 && (
-            <p className="text-xs text-red-700 text-right max-w-[60%]">
-              Supera el máximo legal. Reduce {(totalHoras - 42).toFixed(1)}h para cumplir la Ley 21.561.
+
+          {/* Alerta máximo diario (10h Art. 28 CT) */}
+          {algunDiaExcede && (
+            <p className="text-xs text-red-700 mt-2 leading-relaxed">
+              <strong>⚠ Excede el máximo legal diario.</strong> Algún día supera las 10 horas, que es el tope absoluto
+              incluyendo horas extras (Art. 28 inciso 2° del Código del Trabajo). Ajusta el horario antes de continuar.
             </p>
           )}
-          {dentroDelLimite && (
-            <p className="text-xs text-emerald-700 text-right">✓ Dentro del límite legal</p>
+
+          {/* Alerta horas extras (cuando excede 42h pero no 10h por día) */}
+          {!algunDiaExcede && excede42 && (
+            <p className="text-xs text-amber-800 mt-2 leading-relaxed">
+              <strong>{horasExtra.toFixed(1)} horas serían extraordinarias.</strong> Las horas que superan la
+              jornada ordinaria de 42 horas semanales son extras y deben pagarse con un recargo mínimo del{" "}
+              <strong>50%</strong> sobre el sueldo (Art. 32 CT). El máximo legal es 2 horas extras por día.
+            </p>
           )}
         </div>
 
@@ -508,10 +538,13 @@ export default function AnexoJornadaClient() {
       <div className="pt-2">
         <button
           type="submit"
-          disabled={excede42}
+          disabled={algunDiaExcede || excede42 || totalHoras === 0}
           className="w-full bg-brand-600 hover:bg-brand-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold text-base py-3.5 rounded-xl transition-colors"
         >
-          {excede42 ? "Ajusta el horario para no superar 42h" : "Generar vista previa del anexo"}
+          {algunDiaExcede ? "Ajusta los días que superan 10h" :
+           excede42 ? "Reduce horas para no superar 42h semanales" :
+           totalHoras === 0 ? "Configura al menos un día" :
+           "Generar vista previa del anexo"}
         </button>
       </div>
     </form>

@@ -11,13 +11,16 @@ description: Gestiona el contenido del sitio web — publicación de posts en No
 
 ## Publicar un artículo en el blog
 
-1. Crear page en Notion (base de datos `b844dffae5ca4ee8983d5ee3d098a70b`)
-2. Completar propiedades: título, slug, categoría, fecha, publicado=true
-3. Agregar contenido en el cuerpo de la page
-4. Revalidar ISR: `POST /api/revalidate { secret: "...", path: "/novedades" }`
-5. Verificar en https://golegit.cl/novedades
+Protocolo paso a paso completo en `rules/novedades-publicar.md` (siempre cargado en contexto al trabajar en `app/novedades/**`). Estilo editorial en `rules/novedades-style.md`.
 
-Categorías disponibles: `Laboral`, `Remuneraciones`, `Contratos`, `Previsión`
+Resumen del flujo:
+1. Verificar slug único (búsqueda Notion).
+2. Generar imagen DALL-E (`scripts/generate-cms-images.mjs`).
+3. Crear page Notion vía MCP (`notion-create-pages`) con `Resumen` y `date:Fecha:start`.
+4. Revalidar ISR (`/api/revalidate?token=...`).
+5. Verificar en producción.
+
+Categorías disponibles: `Laboral`, `Remuneraciones`, `Contratos`, `Previsión`, `General`, `Novedades`.
 
 ## Actualizar precios en la landing
 
