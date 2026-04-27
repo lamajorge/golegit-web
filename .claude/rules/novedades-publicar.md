@@ -38,23 +38,58 @@ data_source_url="collection://<id-recursos>"  # Recursos: fb8a6638e12e4d6abc2888
 
 **Anti-patrón documentado (26-abr-2026)**: dos posts coexistiendo con slug `jornada-42-horas-abril-2026` (uno anticipatorio del 5-abr, otro de la fecha de vigencia el 26-abr) provocaron que la web mostrara siempre el viejo. Solución correcta: el post nuevo cambia su slug a `jornada-42-horas-vigente-2026`. **Nunca despublicar el post viejo para liberar el slug** — eso pierde SEO/contenido.
 
-## Paso 2 — Generar la imagen de portada
+## Paso 2 — Definir la imagen de portada
 
-Las imágenes se generan con DALL-E 3 vía script. **No usar Unsplash** (estilo inconsistente).
+**Regla #1: REUTILIZA antes de generar.** El bucket `cms-images` ya tiene 17
+imágenes editorial-style hechas con DALL-E 3 (se ven todas en
+`scripts/generate-cms-images.mjs`, array `IMAGES`). Si tu nuevo post comparte
+temática con uno existente, **reutiliza la misma URL** — no gastes API ni
+generes inconsistencia visual.
+
+Mapeo actual de imágenes disponibles (filename → temática):
+
+```
+contrato.jpg                       Contratos en general
+liquidacion.jpg                    Liquidación / cálculo mensual
+finiquito.jpg                      Finiquito / término
+finiquito-notario.jpg              Ratificación finiquito ante ministro de fe
+checklist.jpg                      Checklists / cumplimiento mensual
+vacaciones.jpg                     Vacaciones / feriado
+puertas.jpg                        Puertas adentro vs afuera
+ley-karin.jpg                      Ley Karin / acoso / clima laboral
+examenes.jpg                       Permisos médicos / Art. 66 bis
+firma-electronica.jpg              FES / firma digital
+novedad-jornada-42h.jpg            Cualquier post sobre Ley 21.561 / jornada
+novedad-imm-2026.jpg               IMM 2026 ($539.000)
+novedad-imm-mayo.jpg               Aumento IMM mayo 2025 ($529.000)
+novedad-imm-calendario.jpg         Ley 21.751 / calendario reajustes
+novedad-cotizaciones.jpg           Pago Previred / cotizaciones
+novedad-registro-dt.jpg            Registro de contrato en DT
+novedad-entrega-liquidacion.jpg    Caso Salcobrand / Art. 54 bis / entrega
+```
+
+URL pública (estable, no expira):
+
+```
+https://domdefqcsiqkdpuchjtu.supabase.co/storage/v1/object/public/cms-images/<filename>
+```
+
+**Solo si NO hay imagen reusable**, generar una nueva con el script:
 
 ```bash
 # Agregar entrada al array IMAGES en scripts/generate-cms-images.mjs
-# con filename y prompt (ver estilo en otras entradas)
+# con filename y prompt (ver estilo en otras entradas).
+# El SUFFIX común garantiza estilo editorial consistente.
 node scripts/generate-cms-images.mjs novedad-tu-slug.jpg
 ```
 
-Costo: ~$0.08 por imagen. Si la imagen ya existe en el bucket `cms-images`, reusa el archivo (no es necesario regenerar).
+Costo: ~$0.08 por imagen. Si el archivo ya existe en el bucket, hace upsert.
 
-URL pública resultante:
-
-```
-https://domdefqcsiqkdpuchjtu.supabase.co/storage/v1/object/public/cms-images/novedad-tu-slug.jpg
-```
+**Nunca subir una imagen como archivo directo en Notion** (campo Imagen tipo
+"file" o cover por upload). Notion las hostea en URLs S3 firmadas que
+**expiran cada 1 hora** — preview de WhatsApp, Twitter y Open Graph se
+rompen apenas pase ese plazo. Siempre Supabase Storage + URL pública en
+`cover` de la página.
 
 Detalles completos: ver memoria `reference_cms_workflow.md` (sección "Generación con DALL-E 3").
 
@@ -140,6 +175,8 @@ OpenAI key local:       /tmp/oai_key.txt (o env OPENAI_API_KEY)
 - ❌ **Usar `Fecha` en lugar de `date:Fecha:start`** → la propiedad no se setea, post sale sin fecha.
 - ❌ **Usar Unsplash o imágenes stock** en vez de DALL-E — estilo visual inconsistente con el resto del sitio.
 - ❌ **CTA comercial dentro del cuerpo** ("Trial gratis 30 días", botón al portal) — viola el estilo editorial. La footnote en cursiva con mención breve es la única referencia permitida a GoLegit.
+- ❌ **Crear una nota sin `cover`** → preview en WhatsApp/Twitter sale sin imagen, queda con el placeholder genérico del root layout. *27-abr-2026*: pasó con `jornada-42-horas-vigente-2026`. La nota se publicó sin cover; al compartirla por WhatsApp el preview salía con el OG genérico del sitio. Fix: setear `cover` con la URL pública del bucket `cms-images` ANTES de publicar.
+- ❌ **Subir imagen como archivo a Notion** (cover por upload o columna `Imagen` tipo file) → Notion devuelve URL S3 firmada que expira cada 1 hora; al refetchear el cache de Open Graph la imagen falla. Siempre `cover` con URL pública del bucket.
 
 ## Referencias
 
