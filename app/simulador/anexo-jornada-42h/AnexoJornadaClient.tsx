@@ -1,26 +1,56 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import Link from "next/link"
-import { Printer, RefreshCw, FileText, AlertCircle } from "lucide-react"
+import { Printer, RefreshCw, FileText, AlertCircle, Copy } from "lucide-react"
+
+// ─────────────────────────────────────────────────────────────
+// Tipos y constantes
+// ─────────────────────────────────────────────────────────────
+
+type DiaSchedule = {
+  activo: boolean
+  entrada: string
+  salida: string
+}
 
 type FormData = {
   ciudad: string
-  fecha_anexo: string  // YYYY-MM-DD
+  fecha_anexo: string
   empleador_nombre: string
   empleador_rut: string
   empleador_domicilio: string
   trabajador_nombre: string
   trabajador_rut: string
-  fecha_contrato_original: string  // YYYY-MM-DD
+  fecha_contrato_original: string
   modalidad: "puertas_afuera" | "puertas_adentro"
-  jornada_actual_horas: number  // 44, 45, etc.
-  distribucion_actual: string  // texto libre
-  distribucion_nueva: string  // texto libre, opcional
-  vigencia_desde: string  // YYYY-MM-DD
+  jornada_actual_horas: number
+  vigencia_desde: string
+  colacion: number
+  dias: DiaSchedule[]
 }
 
 const HOY = new Date().toISOString().split("T")[0]
+
+const DIAS_INFO = [
+  { nombre: "Lunes", corto: "lunes" },
+  { nombre: "Martes", corto: "martes" },
+  { nombre: "Miércoles", corto: "miércoles" },
+  { nombre: "Jueves", corto: "jueves" },
+  { nombre: "Viernes", corto: "viernes" },
+  { nombre: "Sábado", corto: "sábado" },
+  { nombre: "Domingo", corto: "domingo" },
+]
+
+const DIAS_DEFAULT: DiaSchedule[] = [
+  { activo: true, entrada: "09:00", salida: "17:30" },
+  { activo: true, entrada: "09:00", salida: "17:30" },
+  { activo: true, entrada: "09:00", salida: "17:30" },
+  { activo: true, entrada: "09:00", salida: "17:30" },
+  { activo: true, entrada: "09:00", salida: "17:30" },
+  { activo: false, entrada: "09:00", salida: "13:00" },
+  { activo: false, entrada: "09:00", salida: "13:00" },
+]
 
 const INITIAL: FormData = {
   ciudad: "",
@@ -33,12 +63,56 @@ const INITIAL: FormData = {
   fecha_contrato_original: "",
   modalidad: "puertas_afuera",
   jornada_actual_horas: 44,
-  distribucion_actual: "",
-  distribucion_nueva: "",
   vigencia_desde: "2026-04-26",
+  colacion: 60,
+  dias: DIAS_DEFAULT,
 }
 
-// Validador de RUT chileno con dígito verificador (módulo 11)
+// ─────────────────────────────────────────────────────────────
+// Helpers
+// ─────────────────────────────────────────────────────────────
+
+function toMins(t: string): number {
+  if (!t) return 0
+  const [h, m] = t.split(":").map(Number)
+  return h * 60 + (m || 0)
+}
+
+function calcHoras(entrada: string, salida: string, colacionMins: number): number {
+  if (!entrada || !salida) return 0
+  const diff = toMins(salida) - toMins(entrada) - colacionMins
+  return Math.max(0, diff / 60)
+}
+
+function generarTextoJornada(dias: DiaSchedule[], colacion: number): string {
+  const activos = dias
+    .map((d, i) => ({ ...d, idx: i }))
+    .filter((d) => d.activo && d.entrada && d.salida)
+  if (activos.length === 0) return ""
+  const grupos: (typeof activos)[] = []
+  let grupo = [activos[0]]
+  for (let i = 1; i < activos.length; i++) {
+    const prev = activos[i - 1]
+    const curr = activos[i]
+    if (curr.idx === prev.idx + 1 && curr.entrada === prev.entrada && curr.salida === prev.salida) {
+      grupo.push(curr)
+    } else {
+      grupos.push(grupo)
+      grupo = [curr]
+    }
+  }
+  grupos.push(grupo)
+  const partes = grupos.map((g, gi) => {
+    const first = g[0]
+    const last = g[g.length - 1]
+    const startName = gi === 0 ? DIAS_INFO[first.idx].nombre : DIAS_INFO[first.idx].corto
+    const endName = DIAS_INFO[last.idx].corto
+    const dayStr = g.length === 1 ? startName : `${startName} a ${endName}`
+    return `${dayStr} de ${first.entrada} a ${last.salida} hrs.`
+  })
+  return partes.join(", ") + `, con ${colacion} minutos de descanso diario no imputables a la jornada.`
+}
+
 function validarRut(rut: string): boolean {
   const limpio = rut.replace(/[.\-\s]/g, "").toUpperCase()
   if (!/^[0-9]+[0-9K]$/.test(limpio)) return false
@@ -70,19 +144,51 @@ function fechaLarga(iso: string): string {
   return `${parseInt(d)} de ${meses[parseInt(m)-1]} de ${y}`
 }
 
+// ─────────────────────────────────────────────────────────────
+// Componente
+// ─────────────────────────────────────────────────────────────
+
 export default function AnexoJornadaClient() {
   const [data, setData] = useState<FormData>(INITIAL)
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
+  const [errors, setErrors] = useState<Partial<Record<string, string>>>({})
   const [showPreview, setShowPreview] = useState(false)
 
-  const update = (k: keyof FormData, v: string | number) => {
-    setData((d) => ({ ...d, [k]: v }))
+  const update = (k: keyof FormData, v: unknown) => {
+    setData((d) => ({ ...d, [k]: v as never }))
     if (errors[k]) setErrors((e) => ({ ...e, [k]: undefined }))
+  }
+
+  const horasPorDia = useMemo(
+    () => data.dias.map((d) => (d.activo ? calcHoras(d.entrada, d.salida, data.colacion) : 0)),
+    [data.dias, data.colacion]
+  )
+  const totalHoras = horasPorDia.reduce((a, b) => a + b, 0)
+  const dentroDelLimite = totalHoras > 0 && totalHoras <= 42
+  const excede42 = totalHoras > 42
+  const distribucionTexto = useMemo(
+    () => generarTextoJornada(data.dias, data.colacion),
+    [data.dias, data.colacion]
+  )
+
+  function updateDia(i: number, field: keyof DiaSchedule, val: string | boolean) {
+    setData((prev) => ({
+      ...prev,
+      dias: prev.dias.map((d, idx) => (idx === i ? { ...d, [field]: val } : d)),
+    }))
+  }
+
+  function aplicarATodos() {
+    const primero = data.dias.find((d) => d.activo)
+    if (!primero) return
+    setData((prev) => ({
+      ...prev,
+      dias: prev.dias.map((d) => (d.activo ? { ...d, entrada: primero.entrada, salida: primero.salida } : d)),
+    }))
   }
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const errs: Partial<Record<keyof FormData, string>> = {}
+    const errs: Partial<Record<string, string>> = {}
     if (!data.ciudad.trim()) errs.ciudad = "Indica la ciudad"
     if (!data.empleador_nombre.trim()) errs.empleador_nombre = "Nombre obligatorio"
     if (!validarRut(data.empleador_rut)) errs.empleador_rut = "RUT inválido"
@@ -90,9 +196,8 @@ export default function AnexoJornadaClient() {
     if (!data.trabajador_nombre.trim()) errs.trabajador_nombre = "Nombre obligatorio"
     if (!validarRut(data.trabajador_rut)) errs.trabajador_rut = "RUT inválido"
     if (!data.fecha_contrato_original) errs.fecha_contrato_original = "Fecha obligatoria"
-    if (!data.distribucion_actual.trim()) errs.distribucion_actual = "Indica el horario actual del contrato"
-    if (data.jornada_actual_horas < 1 || data.jornada_actual_horas > 72) errs.jornada_actual_horas = "Entre 1 y 72"
-
+    if (totalHoras === 0) errs.dias = "Configura al menos un día con horario"
+    if (excede42) errs.dias = "El total semanal supera las 42 horas"
     if (Object.keys(errs).length > 0) {
       setErrors(errs)
       return
@@ -141,7 +246,6 @@ export default function AnexoJornadaClient() {
   if (showPreview) {
     return (
       <div>
-        {/* Botones (no se imprimen) */}
         <div className="flex flex-wrap gap-3 mb-6 print:hidden">
           <button
             onClick={handlePrint}
@@ -159,15 +263,13 @@ export default function AnexoJornadaClient() {
           </button>
         </div>
 
-        {/* Aviso pre-PDF (no se imprime) */}
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6 text-sm text-blue-900 print:hidden">
           <p className="font-semibold mb-1">Cómo descargar el PDF</p>
           <p>Al imprimir, elige <strong>"Guardar como PDF"</strong> como destino en el diálogo de impresión.</p>
         </div>
 
-        <PreviewAnexo data={data} />
+        <PreviewAnexo data={data} distribucionTexto={distribucionTexto} totalHoras={totalHoras} />
 
-        {/* CTA al portal (no se imprime) */}
         <div className="bg-brand-50 border border-brand-200 rounded-2xl p-6 mt-8 print:hidden">
           <h3 className="text-base font-semibold text-ink mb-2 flex items-center gap-2">
             <FileText className="w-5 h-5 text-brand-600" />
@@ -257,41 +359,137 @@ export default function AnexoJornadaClient() {
         </div>
       </Section>
 
-      {/* Contrato y jornada */}
+      {/* Contrato */}
       <Section title="Datos del contrato">
-        <div className="space-y-4">
-          <div className="grid md:grid-cols-2 gap-4">
-            <Input label="Fecha del contrato original" type="date" value={data.fecha_contrato_original} onChange={(v) => update("fecha_contrato_original", v)} error={errors.fecha_contrato_original} />
-            <div>
-              <label className="block text-xs font-medium text-ink mb-1.5">Jornada actual</label>
+        <div className="grid md:grid-cols-2 gap-4">
+          <Input label="Fecha del contrato original" type="date" value={data.fecha_contrato_original} onChange={(v) => update("fecha_contrato_original", v)} error={errors.fecha_contrato_original} />
+          <div>
+            <label className="block text-xs font-medium text-ink mb-1.5">Jornada actual</label>
+            <select
+              value={data.jornada_actual_horas}
+              onChange={(e) => update("jornada_actual_horas", Number(e.target.value))}
+              className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+            >
+              <option value={45}>45 horas semanales (anterior a Ley 21.561)</option>
+              <option value={44}>44 horas semanales (vigente hasta 25-abr-2026)</option>
+              <option value={42}>42 horas semanales (ya está adecuado)</option>
+              <option value={40}>40 horas semanales (anticipado)</option>
+            </select>
+          </div>
+        </div>
+      </Section>
+
+      {/* Nueva distribución horaria — simulador embebido */}
+      <Section title="Nueva distribución de la jornada (42 horas)">
+        <p className="text-xs text-ink-muted mb-3">
+          Define el horario día a día. La colación no se cuenta en la jornada (Art. 34 CT).
+        </p>
+
+        {/* Grilla de días */}
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-3 md:p-4 mb-3">
+          <div className="space-y-2">
+            {data.dias.map((dia, i) => (
+              <div key={i} className="flex items-center gap-2 md:gap-3">
+                <label className="flex items-center gap-2 w-24 md:w-28 shrink-0 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={dia.activo}
+                    onChange={(e) => updateDia(i, "activo", e.target.checked)}
+                    className="w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                  />
+                  <span className={`text-xs md:text-sm font-medium ${dia.activo ? "text-ink" : "text-ink-muted"}`}>
+                    {DIAS_INFO[i].nombre}
+                  </span>
+                </label>
+                <input
+                  type="time"
+                  value={dia.entrada}
+                  onChange={(e) => updateDia(i, "entrada", e.target.value)}
+                  disabled={!dia.activo}
+                  className="flex-1 min-w-0 px-2 py-1.5 text-xs md:text-sm border border-gray-200 rounded-md disabled:bg-gray-100 disabled:text-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+                />
+                <span className="text-xs text-ink-muted">a</span>
+                <input
+                  type="time"
+                  value={dia.salida}
+                  onChange={(e) => updateDia(i, "salida", e.target.value)}
+                  disabled={!dia.activo}
+                  className="flex-1 min-w-0 px-2 py-1.5 text-xs md:text-sm border border-gray-200 rounded-md disabled:bg-gray-100 disabled:text-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+                />
+                <span className="text-xs text-ink-muted w-12 text-right tabular-nums">
+                  {dia.activo ? `${horasPorDia[i].toFixed(1)}h` : "—"}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center justify-between mt-3 pt-3 border-t border-gray-200 gap-3 flex-wrap">
+            <div className="flex items-center gap-2">
+              <label className="text-xs font-medium text-ink-muted">Colación</label>
               <select
-                value={data.jornada_actual_horas}
-                onChange={(e) => update("jornada_actual_horas", Number(e.target.value))}
-                className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+                value={data.colacion}
+                onChange={(e) => update("colacion", Number(e.target.value))}
+                className="px-2 py-1 text-xs border border-gray-200 rounded-md focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
               >
-                <option value={45}>45 horas semanales (anterior a Ley 21.561)</option>
-                <option value={44}>44 horas semanales (vigente hasta 25-abr-2026)</option>
-                <option value={42}>42 horas semanales (ya está adecuado)</option>
-                <option value={40}>40 horas semanales (anticipado)</option>
+                <option value={30}>30 min</option>
+                <option value={45}>45 min</option>
+                <option value={60}>60 min</option>
+                <option value={90}>90 min</option>
+                <option value={120}>120 min</option>
               </select>
             </div>
+            <button
+              type="button"
+              onClick={aplicarATodos}
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-brand-700 hover:text-brand-800"
+            >
+              <Copy className="w-3 h-3" />
+              Aplicar el primer horario a todos los días activos
+            </button>
           </div>
-          <Textarea
-            label="Distribución horaria actual del contrato"
-            placeholder="Ej: Lunes a viernes de 09:00 a 18:00 (con 1 hora de colación)"
-            value={data.distribucion_actual}
-            onChange={(v) => update("distribucion_actual", v)}
-            error={errors.distribucion_actual}
-            help="Tal como está escrito en el contrato firmado."
-          />
-          <Textarea
-            label="Nueva distribución horaria (con 42 horas)"
-            placeholder="Ej: Lunes a viernes de 09:00 a 17:30 (con 1 hora de colación)"
-            value={data.distribucion_nueva}
-            onChange={(v) => update("distribucion_nueva", v)}
-            help="Cómo se redistribuirán las 42 horas. Opcional — si lo dejas vacío, el anexo dirá que se acordará por escrito."
-          />
         </div>
+
+        {/* Total horas + estado */}
+        <div className={`rounded-xl p-3 mb-3 border flex items-center justify-between gap-3 ${
+          excede42 ? "bg-red-50 border-red-200" :
+          dentroDelLimite ? "bg-emerald-50 border-emerald-200" :
+          "bg-gray-50 border-gray-200"
+        }`}>
+          <div>
+            <p className={`text-xs font-medium ${
+              excede42 ? "text-red-700" :
+              dentroDelLimite ? "text-emerald-700" :
+              "text-ink-muted"
+            }`}>Total semanal</p>
+            <p className={`text-xl font-bold tabular-nums ${
+              excede42 ? "text-red-700" :
+              dentroDelLimite ? "text-emerald-700" :
+              "text-ink"
+            }`}>
+              {totalHoras.toFixed(1)}h <span className="text-sm font-normal text-ink-muted">/ 42h máx.</span>
+            </p>
+          </div>
+          {excede42 && (
+            <p className="text-xs text-red-700 text-right max-w-[60%]">
+              Supera el máximo legal. Reduce {(totalHoras - 42).toFixed(1)}h para cumplir la Ley 21.561.
+            </p>
+          )}
+          {dentroDelLimite && (
+            <p className="text-xs text-emerald-700 text-right">✓ Dentro del límite legal</p>
+          )}
+        </div>
+
+        {/* Texto generado */}
+        {distribucionTexto && (
+          <div className="bg-white border border-gray-200 rounded-xl p-3">
+            <p className="text-[10px] uppercase tracking-wider text-ink-muted font-semibold mb-1.5">
+              Cláusula que aparecerá en el anexo
+            </p>
+            <p className="text-sm text-ink leading-relaxed italic">{distribucionTexto}</p>
+          </div>
+        )}
+
+        {errors.dias && <p className="text-xs text-red-600 mt-2">{errors.dias}</p>}
       </Section>
 
       {/* Vigencia */}
@@ -310,9 +508,10 @@ export default function AnexoJornadaClient() {
       <div className="pt-2">
         <button
           type="submit"
-          className="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold text-base py-3.5 rounded-xl transition-colors"
+          disabled={excede42}
+          className="w-full bg-brand-600 hover:bg-brand-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-semibold text-base py-3.5 rounded-xl transition-colors"
         >
-          Generar vista previa del anexo
+          {excede42 ? "Ajusta el horario para no superar 42h" : "Generar vista previa del anexo"}
         </button>
       </div>
     </form>
@@ -366,50 +565,16 @@ function Input({
   )
 }
 
-function Textarea({
-  label,
-  placeholder,
-  value,
-  onChange,
-  error,
-  help,
-}: {
-  label: string
-  placeholder?: string
-  value: string
-  onChange: (v: string) => void
-  error?: string
-  help?: string
-}) {
-  return (
-    <div>
-      <label className="block text-xs font-medium text-ink mb-1.5">{label}</label>
-      <textarea
-        rows={2}
-        placeholder={placeholder}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none resize-y ${
-          error ? "border-red-300 bg-red-50" : "border-gray-200"
-        }`}
-      />
-      {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
-      {!error && help && <p className="text-xs text-ink-muted mt-1">{help}</p>}
-    </div>
-  )
-}
-
-function PreviewAnexo({ data }: { data: FormData }) {
-  const distribucionNueva = data.distribucion_nueva.trim() ||
-    "Las partes acordarán por escrito la nueva distribución de la jornada de 42 horas semanales antes de la fecha de vigencia."
-
+function PreviewAnexo({ data, distribucionTexto, totalHoras }: { data: FormData; distribucionTexto: string; totalHoras: number }) {
+  const diasActivos = data.dias
+    .map((d, i) => ({ ...d, idx: i }))
+    .filter((d) => d.activo && d.entrada && d.salida)
   return (
     <div
       id="anexo-preview"
       className="bg-white border border-gray-200 rounded-2xl p-8 md:p-12 shadow-sm print:shadow-none print:border-0 print:p-0 print:rounded-none"
       style={{ fontFamily: "'Segoe UI', Arial, sans-serif", color: "#0d1117", lineHeight: 1.6 }}
     >
-      {/* Header solo visible al imprimir */}
       <div className="hidden print:block mb-8 pb-3 border-b-2 border-brand-600">
         <div className="flex items-center justify-between">
           <span style={{ fontSize: "11pt", fontWeight: 700, color: "#16a34a" }}>GoLegit</span>
@@ -445,19 +610,52 @@ function PreviewAnexo({ data }: { data: FormData }) {
 
       <Clausula numero="SEGUNDO" titulo="Jornada anterior">
         Hasta antes de la fecha de vigencia de este anexo, la jornada pactada era de{" "}
-        <strong>{data.jornada_actual_horas} horas semanales</strong>, distribuidas de la siguiente forma:
-        <span style={{ display: "block", marginTop: 6, paddingLeft: 14, fontStyle: "italic" }}>
-          {data.distribucion_actual || "—"}
-        </span>
+        <strong>{data.jornada_actual_horas} horas semanales</strong>.
       </Clausula>
 
       <Clausula numero="TERCERO" titulo="Nueva jornada de 42 horas">
         A partir del <strong>{fechaLarga(data.vigencia_desde)}</strong>, la jornada ordinaria
-        semanal queda reducida a <strong>42 horas</strong>, distribuidas de la siguiente forma:
+        semanal queda en <strong>{totalHoras.toFixed(1)} horas semanales</strong>, distribuidas de la siguiente forma:
         <span style={{ display: "block", marginTop: 6, paddingLeft: 14, fontStyle: "italic" }}>
-          {distribucionNueva}
+          {distribucionTexto || "—"}
         </span>
       </Clausula>
+
+      {/* Tabla detalle */}
+      {diasActivos.length > 0 && (
+        <div style={{ marginBottom: 16, marginLeft: 14 }}>
+          <table style={{ borderCollapse: "collapse", fontSize: "10pt", width: "100%", maxWidth: 480 }}>
+            <thead>
+              <tr style={{ borderBottom: "1.5px solid #0d1117", textAlign: "left" }}>
+                <th style={{ padding: "6px 10px", fontWeight: 700 }}>Día</th>
+                <th style={{ padding: "6px 10px", fontWeight: 700 }}>Entrada</th>
+                <th style={{ padding: "6px 10px", fontWeight: 700 }}>Salida</th>
+                <th style={{ padding: "6px 10px", fontWeight: 700, textAlign: "right" }}>Horas</th>
+              </tr>
+            </thead>
+            <tbody>
+              {diasActivos.map((d) => {
+                const horas = calcHoras(d.entrada, d.salida, data.colacion)
+                return (
+                  <tr key={d.idx} style={{ borderBottom: "1px solid #e5e7eb" }}>
+                    <td style={{ padding: "6px 10px" }}>{DIAS_INFO[d.idx].nombre}</td>
+                    <td style={{ padding: "6px 10px" }}>{d.entrada}</td>
+                    <td style={{ padding: "6px 10px" }}>{d.salida}</td>
+                    <td style={{ padding: "6px 10px", textAlign: "right" }}>{horas.toFixed(1)}h</td>
+                  </tr>
+                )
+              })}
+              <tr style={{ borderTop: "1.5px solid #0d1117", fontWeight: 700 }}>
+                <td style={{ padding: "6px 10px" }} colSpan={3}>Total semanal</td>
+                <td style={{ padding: "6px 10px", textAlign: "right" }}>{totalHoras.toFixed(1)}h</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style={{ fontSize: "9pt", color: "#6b7280", marginTop: 6, fontStyle: "italic" }}>
+            Colación de {data.colacion} minutos diarios no imputables a la jornada (Art. 34 CT).
+          </p>
+        </div>
+      )}
 
       <Clausula numero="CUARTO" titulo="Mantención de remuneraciones">
         Conforme al artículo primero transitorio de la Ley N° 21.561, esta reducción de la
@@ -476,12 +674,11 @@ function PreviewAnexo({ data }: { data: FormData }) {
         quedando uno en poder de cada una.
       </p>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, marginTop: 50 }}>
+      <div className="firmas-bloque" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, marginTop: 50 }}>
         <FirmaBloque rol="Empleador/a" nombre={data.empleador_nombre} rut={data.empleador_rut} />
         <FirmaBloque rol="Trabajador/a" nombre={data.trabajador_nombre} rut={data.trabajador_rut} />
       </div>
 
-      {/* Footer del PDF */}
       <div style={{ marginTop: 40, paddingTop: 12, borderTop: "1px solid #e5e7eb", textAlign: "center", fontSize: "8pt", color: "#9ca3af" }}>
         Documento generado en golegit.cl — Plataforma legal para empleadores de trabajadoras de casa particular
       </div>

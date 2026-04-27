@@ -19,14 +19,35 @@ export const metadata = {
 export default function AnexoJornada42hPage() {
   return (
     <main className="min-h-screen bg-paper">
-      {/* CSS @page para impresión limpia */}
+      {/* CSS print — solo el preview se imprime, todo lo demás oculto.
+          Visibility:hidden + revertir en #anexo-preview es más robusto
+          que toggle de display en cada elemento. */}
       <style>{`
         @media print {
           @page { size: A4; margin: 18mm 18mm 18mm 18mm; }
-          body { background: white; }
+          html, body { background: white !important; }
+          body * { visibility: hidden !important; }
+          #anexo-preview, #anexo-preview * { visibility: visible !important; }
+          #anexo-preview {
+            position: absolute !important;
+            left: 0; top: 0; right: 0;
+            width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            box-shadow: none !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+          }
+          /* Evitar que el bloque de firmas se corte entre páginas */
+          #anexo-preview .firmas-bloque {
+            page-break-inside: avoid;
+            break-inside: avoid;
+          }
         }
       `}</style>
-      <Navbar />
+      <div className="print:hidden">
+        <Navbar />
+      </div>
 
       <section className="relative pt-28 pb-10 overflow-hidden print:hidden">
         <div
