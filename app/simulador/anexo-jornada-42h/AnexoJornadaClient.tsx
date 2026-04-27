@@ -42,15 +42,15 @@ const DIAS_INFO = [
   { nombre: "Domingo", corto: "domingo" },
 ]
 
-// Default: 42h exactas con 30 min de colación.
-// Lun-Vie 09:00-17:30 = 8h netas × 5 = 40h. Sáb 09:00-11:30 = 2h. Total = 42h.
+// Default: 42h exactas con 30 min de colación, 5 días Lun-Vie.
+// 42h / 5 = 8.4h netas/día → 8h54m bruto → 09:00 a 17:54.
 const DIAS_DEFAULT: DiaSchedule[] = [
-  { activo: true, entrada: "09:00", salida: "17:30" },
-  { activo: true, entrada: "09:00", salida: "17:30" },
-  { activo: true, entrada: "09:00", salida: "17:30" },
-  { activo: true, entrada: "09:00", salida: "17:30" },
-  { activo: true, entrada: "09:00", salida: "17:30" },
-  { activo: true, entrada: "09:00", salida: "11:30" },
+  { activo: true, entrada: "09:00", salida: "17:54" },
+  { activo: true, entrada: "09:00", salida: "17:54" },
+  { activo: true, entrada: "09:00", salida: "17:54" },
+  { activo: true, entrada: "09:00", salida: "17:54" },
+  { activo: true, entrada: "09:00", salida: "17:54" },
+  { activo: false, entrada: "09:00", salida: "13:00" },
   { activo: false, entrada: "09:00", salida: "13:00" },
 ]
 
