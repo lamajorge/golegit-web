@@ -887,14 +887,24 @@ function JornadaPage() {
 // días libres, compensaciones y una cláusula tipo lista para copiar.
 // ─────────────────────────────────────────────────────────────
 function PuertasAdentroInfo({ ep, tp }: { ep: string; tp: string }) {
-  const clausula = `La jornada de ${tp} se rige por el régimen especial del Art. 149 inciso 2° del Código del Trabajo: no existe horario fijo de entrada y salida, ni jornada semanal en horas. ${ep} determinará la distribución de las labores según la naturaleza del servicio, respetando los siguientes límites legales:
+  // Wording alineado con la cláusula tipo de la Dirección del Trabajo
+  // (modelo contrato puertas adentro). Se conserva el "trabajador(a)" en
+  // minúscula del original DT para mantener fidelidad legal — el rol en
+  // mayúsculas (TRABAJADOR/A) vive en apertura/firma del contrato, no en
+  // las cláusulas operativas.
+  const _ep = ep, _tp = tp;
+  const clausula = `**Cláusula de jornada — Régimen puertas adentro**
 
-(a) Descanso continuo entre jornadas: mínimo 12 horas, de las cuales al menos 9 horas deben ser ininterrumpidas (Art. 149 inc. 2°).
-(b) Descanso semanal: un día completo a la semana, preferentemente el domingo, además de los días festivos del año calendario. Los festivos que no coincidan con el descanso semanal podrán compensarse dentro de los 90 días siguientes (Art. 150 letra b).
-(c) Descanso del día sábado: podrá acumularse, fraccionarse o canjearse por otro día de descanso dentro del mismo mes calendario, de común acuerdo entre las partes (Art. 150 letra c).
-(d) Días libres de libre disposición: ${tp} tendrá derecho a 2 días al mes, remunerados y no compensables en dinero mientras dure el contrato. Se acordarán entre las partes considerando las necesidades del hogar (Art. 150 letra d).
+El trabajador(a) prestará servicios en régimen "puertas adentro" (vive en la casa del empleador).
 
-Las partes dejan constancia que la alimentación y el alojamiento son de cargo del/a empleador/a y no constituyen remuneración (Art. 151 CT).`;
+Las partes dejan constancia que, atendida la naturaleza de los servicios y considerando además que el trabajador(a) vivirá en la casa del empleador, la jornada laboral no estará sujeta a horario, debiendo tener normalmente un descanso absoluto mínimo de 12 horas diarias. Entre el término de la jornada diaria y el inicio de la siguiente, el descanso será ininterrumpido y, normalmente, de un mínimo de 9 horas. El exceso podrá fraccionarse durante la jornada y en él se entenderá incluido el lapso destinado a las comidas del trabajador(a).
+
+Asimismo, el trabajador(a) tendrá derecho a descanso semanal los días domingos. También tendrá derecho a descanso los días sábado los cuales, de común acuerdo entre las partes, podrán acumularse, fraccionarse o intercambiarse por otros días de la semana. En caso de acumularse, dichos días deberán ser otorgados por el empleador dentro del respectivo mes calendario. Estos descansos no podrán ser compensados en dinero mientras la relación laboral se encuentre vigente.
+
+Además, tendrá derecho a descanso todos los días que la ley declare festivos. No obstante, las partes, con anterioridad a ellos, podrán pactar por escrito que el descanso se efectúe en un día distinto que no podrá fijarse más allá de los noventa días siguientes al respectivo festivo. De no ejercer este derecho en el plazo indicado caducará, no pudiendo ser compensado en dinero, mientras la relación laboral se encuentre vigente.
+
+A su vez, tendrá derecho a dos días de libre disposición en cada mes calendario, los que serán remunerados, le permitirán ausentarse de sus labores y no podrán compensarse en dinero. De común acuerdo estos días libres podrán acumularse dentro de un periodo de tres meses. Al término de la relación laboral, en caso de existir días pendientes de utilizar en el respectivo mes, se compensarán en conformidad a lo establecido en el artículo 73 del Código del Trabajo.`;
+  void _ep; void _tp;
 
   const [copied, setCopied] = useState(false);
   async function copy() {
@@ -918,9 +928,9 @@ Las partes dejan constancia que la alimentación y el alojamiento son de cargo d
         <ul className="space-y-3 text-sm text-ink-muted">
           <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">12 h de descanso continuo</strong> entre el fin de una jornada y el inicio de la siguiente. Al menos <strong className="text-ink">9 h ininterrumpidas</strong> dentro de ese bloque.</span></li>
           <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">1 día de descanso semanal</strong> (preferentemente domingo) + todos los festivos del año.</span></li>
-          <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">Festivos trabajados</strong> (Art. 150 b CT): se compensan con día libre dentro de los 90 días siguientes.</span></li>
-          <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">Sábados</strong> (Art. 150 c CT): pueden acumularse, fraccionarse o canjearse dentro del mismo mes calendario, de común acuerdo.</span></li>
-          <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">Días libres de libre disposición</strong> (Art. 150 d CT): 2 al mes, <strong>remunerados y no compensables en dinero</strong> mientras dure el contrato.</span></li>
+          <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">Festivos</strong> (Art. 150 b CT): descanso por defecto. Las partes pueden pactar <strong>por escrito y antes del festivo</strong> que se traslade a otro día, dentro de los 90 días siguientes. Si no se ejerce, el derecho caduca (no se compensa en dinero).</span></li>
+          <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">Sábados</strong> (Art. 150 c CT): pueden acumularse, fraccionarse o intercambiarse por otros días de la semana, de común acuerdo. Si se acumulan, se otorgan dentro del mismo mes calendario.</span></li>
+          <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">Días libres de libre disposición</strong> (Art. 150 d CT): 2 al mes, <strong>remunerados y no compensables en dinero</strong>. Pueden acumularse hasta 3 meses de común acuerdo. Al término del contrato, los días pendientes se compensan según Art. 73 CT.</span></li>
           <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">Sueldo mínimo</strong> aplica completo (no proporcional). Alimentación y alojamiento son de cargo del/a empleador/a y no constituyen remuneración (Art. 151 CT).</span></li>
         </ul>
       </div>
