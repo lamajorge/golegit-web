@@ -114,15 +114,63 @@ function renderBlock(block: Block, key: number) {
         <RichText items={b.quote.rich_text} />
       </blockquote>;
 
-    case "callout":
-      return <div key={key} className="flex gap-3 bg-brand-50 border border-brand-100 rounded-xl p-4 my-6">
-        {b.callout.icon?.emoji && (
-          <span className="text-xl flex-shrink-0 mt-0.5">{b.callout.icon.emoji}</span>
-        )}
-        <p className="text-sm text-ink-muted leading-relaxed">
-          <RichText items={b.callout.rich_text} />
-        </p>
-      </div>;
+    case "callout": {
+      const callRich = b.callout.rich_text as RichTextItemResponse[];
+      // Si el callout contiene un link → render como CTA prominente (botón verde grande).
+      // Patrón Notion: crear un callout, escribir el texto y agregarle un link.
+      // Útil para destacar acciones tipo "Genera el anexo gratis aquí →".
+      const linkItem = callRich.find(r => !!r.href);
+      if (linkItem?.href) {
+        const label = callRich.map(r => r.plain_text).join("").trim();
+        return (
+          <a
+            key={key}
+            href={linkItem.href}
+            className="not-prose group flex items-center gap-3 bg-brand-600 text-white rounded-2xl px-5 py-4 my-7 no-underline shadow-sm hover:bg-brand-700 hover:shadow-md transition-all"
+          >
+            {b.callout.icon?.emoji && (
+              <span className="text-2xl flex-shrink-0">{b.callout.icon.emoji}</span>
+            )}
+            <span className="font-semibold text-base sm:text-lg leading-snug flex-1">
+              {label}
+            </span>
+            <span className="text-xl flex-shrink-0 group-hover:translate-x-1 transition-transform">→</span>
+          </a>
+        );
+      }
+      // Callout sin link → caja informativa estándar.
+      return (
+        <div key={key} className="flex gap-3 bg-brand-50 border border-brand-100 rounded-xl p-4 my-6">
+          {b.callout.icon?.emoji && (
+            <span className="text-xl flex-shrink-0 mt-0.5">{b.callout.icon.emoji}</span>
+          )}
+          <p className="text-sm text-ink-muted leading-relaxed">
+            <RichText items={b.callout.rich_text} />
+          </p>
+        </div>
+      );
+    }
+
+    case "bookmark": {
+      const url = b.bookmark?.url;
+      if (!url) return null;
+      const caption = b.bookmark.caption?.map((t: RichTextItemResponse) => t.plain_text).join("").trim();
+      return (
+        <a
+          key={key}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="not-prose group flex items-center gap-3 bg-brand-600 text-white rounded-2xl px-5 py-4 my-7 no-underline shadow-sm hover:bg-brand-700 hover:shadow-md transition-all"
+        >
+          <span className="text-xl flex-shrink-0">🔗</span>
+          <span className="font-semibold text-base sm:text-lg leading-snug flex-1">
+            {caption || url}
+          </span>
+          <span className="text-xl flex-shrink-0 group-hover:translate-x-1 transition-transform">→</span>
+        </a>
+      );
+    }
 
     case "divider":
       return <hr key={key} className="my-8 border-gray-200" />;
