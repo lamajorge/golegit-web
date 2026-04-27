@@ -43,6 +43,13 @@ export default function AnexoJornada42hPage() {
             page-break-inside: avoid;
             break-inside: avoid;
           }
+          /* Bloque atómico: cláusula QUINTO + firmas. Si no entra en la
+             página actual, salta entero a la siguiente. Evita firmas huérfanas
+             en página aparte y cortes a media firma. */
+          #anexo-preview .bloque-cierre-firmas {
+            page-break-inside: avoid;
+            break-inside: avoid;
+          }
         }
       `}</style>
       <div className="print:hidden">

@@ -11,6 +11,7 @@ import Pricing from "@/components/sections/Pricing";
 import Trust from "@/components/sections/Trust";
 import FAQ from "@/components/sections/FAQ";
 import FinalCTA from "@/components/sections/FinalCTA";
+import EarlyAccess from "@/components/sections/EarlyAccess";
 import Footer from "@/components/layout/Footer";
 
 export default function Home() {
@@ -29,6 +30,7 @@ export default function Home() {
       <Trust />
       <FAQ />
       <FinalCTA />
+      <EarlyAccess />
       <Footer />
     </main>
   );

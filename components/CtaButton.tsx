@@ -5,32 +5,45 @@ import { SITE_CONFIG } from "@/lib/config";
 interface Props {
   className?: string;
   children: React.ReactNode;
-  /** Reemplaza "Próximamente" cuando está deshabilitado */
+  /** Texto que reemplaza al children cuando WhatsApp aún no está activo */
   disabledLabel?: string;
 }
 
 /**
  * Botón de CTA principal que apunta a WhatsApp.
- * Cuando SITE_CONFIG.whatsappEnabled === false muestra "Próximamente"
- * con la misma apariencia visual pero sin ser clicable.
- * Para reactivar: cambiar whatsappEnabled a true en lib/config.ts.
+ * Cuando SITE_CONFIG.whatsappEnabled === false el botón sigue siendo clicable
+ * pero lleva a la sección #early-access del home (form de captura de email).
+ * Para reactivar el flow real: cambiar whatsappEnabled a true en lib/config.ts.
  */
 export default function CtaButton({
   className = "",
   children,
-  disabledLabel = "Próximamente",
+  disabledLabel = "Pide early access",
 }: Props) {
   if (!SITE_CONFIG.whatsappEnabled) {
     return (
-      <span
-        aria-disabled="true"
-        className={`inline-flex items-center gap-2 cursor-default select-none opacity-70 ${className}`}
+      <a
+        href="/#early-access"
+        className={className}
+        onClick={(e) => {
+          // Smooth scroll si ya estamos en la home
+          if (typeof window !== "undefined" && window.location.pathname === "/") {
+            const el = document.getElementById("early-access");
+            if (el) {
+              e.preventDefault();
+              el.scrollIntoView({ behavior: "smooth", block: "start" });
+              const input = el.querySelector<HTMLInputElement>('input[type="email"]');
+              if (input) setTimeout(() => input.focus(), 600);
+            }
+          }
+        }}
       >
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+        {/* Icono sobre/sobreentender (early access, no candado) */}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="inline-block mr-1.5 -mt-0.5">
+          <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
         </svg>
         {disabledLabel}
-      </span>
+      </a>
     );
   }
 

@@ -19,6 +19,7 @@ type FormData = {
   fecha_anexo: string
   empleador_nombre: string
   empleador_rut: string
+  empleador_email: string
   empleador_domicilio: string
   trabajador_nombre: string
   trabajador_rut: string
@@ -28,6 +29,7 @@ type FormData = {
   vigencia_desde: string
   colacion: number
   dias: DiaSchedule[]
+  acepta_aviso: boolean
 }
 
 const HOY = new Date().toISOString().split("T")[0]
@@ -59,6 +61,7 @@ const INITIAL: FormData = {
   fecha_anexo: HOY,
   empleador_nombre: "",
   empleador_rut: "",
+  empleador_email: "",
   empleador_domicilio: "",
   trabajador_nombre: "",
   trabajador_rut: "",
@@ -68,6 +71,7 @@ const INITIAL: FormData = {
   vigencia_desde: "2026-04-26",
   colacion: 30,
   dias: DIAS_DEFAULT,
+  acepta_aviso: true,
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -199,6 +203,9 @@ export default function AnexoJornadaClient() {
     if (!data.empleador_nombre.trim()) errs.empleador_nombre = "Nombre obligatorio"
     if (!validarRut(data.empleador_rut)) errs.empleador_rut = "RUT inválido"
     if (!data.empleador_domicilio.trim()) errs.empleador_domicilio = "Domicilio obligatorio"
+    if (!data.empleador_email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.empleador_email)) {
+      errs.empleador_email = "Ingresa un email válido"
+    }
     if (!data.trabajador_nombre.trim()) errs.trabajador_nombre = "Nombre obligatorio"
     if (!validarRut(data.trabajador_rut)) errs.trabajador_rut = "RUT inválido"
     if (!data.fecha_contrato_original) errs.fecha_contrato_original = "Fecha obligatoria"
@@ -211,6 +218,20 @@ export default function AnexoJornadaClient() {
       setErrors(errs)
       return
     }
+    // Captura del email para Notion (fuente: anexo_42h). Fire-and-forget —
+    // si Notion falla, el usuario igual genera su PDF.
+    fetch("/api/leads", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: data.empleador_email.trim().toLowerCase(),
+        fuente: "anexo_42h",
+        consentimiento: data.acepta_aviso,
+        nombre: data.empleador_nombre.trim(),
+        rut_empleador: data.empleador_rut,
+        notas: `Modalidad: ${data.modalidad}. Trabajador/a: ${data.trabajador_nombre.trim()}. Vigencia: ${data.vigencia_desde}.`,
+      }),
+    }).catch(() => { /* noop — no bloquea la UX */ })
     setShowPreview(true)
     setTimeout(() => {
       const el = document.getElementById("anexo-preview")
@@ -350,6 +371,27 @@ export default function AnexoJornadaClient() {
             />
             <Input label="Domicilio" placeholder="Av. Apoquindo 1234, Las Condes" value={data.empleador_domicilio} onChange={(v) => update("empleador_domicilio", v)} error={errors.empleador_domicilio} />
           </div>
+          <Input
+            label="Tu email"
+            type="email"
+            placeholder="tu@ejemplo.cl"
+            value={data.empleador_email}
+            onChange={(v) => update("empleador_email", v)}
+            error={errors.empleador_email}
+            help="Te avisamos cuando GoLegit esté disponible (puedes pedir que lo borremos en cualquier momento)."
+          />
+          <label className="flex items-start gap-2.5 text-xs text-ink-muted cursor-pointer leading-relaxed">
+            <input
+              type="checkbox"
+              checked={data.acepta_aviso}
+              onChange={(e) => update("acepta_aviso", e.target.checked)}
+              className="mt-0.5 w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+            />
+            <span>
+              Acepto recibir un email cuando GoLegit lance la app por WhatsApp.
+              Sin spam. (Ley 19.628 / 21.719)
+            </span>
+          </label>
         </div>
       </Section>
 
@@ -723,15 +765,22 @@ function PreviewAnexo({ data, distribucionTexto, totalHoras }: { data: FormData;
         Trabajo, modificado por la Ley N° 21.561.
       </Clausula>
 
-      <Clausula numero="QUINTO" titulo="">
-        El presente anexo se firma en dos ejemplares del mismo tenor y fecha, quedando uno en poder del
-        Empleador/a y el otro en poder del Trabajador/a, quien declara haberlo recibido en este acto a su entera
-        satisfacción y que es fiel reflejo de la relación laboral que une a las partes.
-      </Clausula>
+      {/* Bloque cierre: cláusula QUINTO + firmas. En print queda como bloque
+          atómico — si no entra en la página actual, salta entero a la
+          siguiente. Garantiza que la cláusula QUINTO ("ejemplares + acuse")
+          y las firmas siempre vayan juntas, sin firmas huérfanas en página
+          aparte ni cortes a media firma. */}
+      <div className="bloque-cierre-firmas">
+        <Clausula numero="QUINTO" titulo="">
+          El presente anexo se firma en dos ejemplares del mismo tenor y fecha, quedando uno en poder del
+          Empleador/a y el otro en poder del Trabajador/a, quien declara haberlo recibido en este acto a su entera
+          satisfacción y que es fiel reflejo de la relación laboral que une a las partes.
+        </Clausula>
 
-      <div className="firmas-bloque" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, marginTop: 50 }}>
-        <FirmaBloque rol="Empleador/a" nombre={data.empleador_nombre} rut={data.empleador_rut} />
-        <FirmaBloque rol="Trabajador/a" nombre={data.trabajador_nombre} rut={data.trabajador_rut} />
+        <div className="firmas-bloque" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, marginTop: 50 }}>
+          <FirmaBloque rol="Empleador/a" nombre={data.empleador_nombre} rut={data.empleador_rut} />
+          <FirmaBloque rol="Trabajador/a" nombre={data.trabajador_nombre} rut={data.trabajador_rut} />
+        </div>
       </div>
 
       <div style={{ marginTop: 40, paddingTop: 12, borderTop: "1px solid #e5e7eb", textAlign: "center", fontSize: "8pt", color: "#9ca3af" }}>
