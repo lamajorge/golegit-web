@@ -136,12 +136,14 @@ function calcDescansosInsuficientes(dias: DiaSchedule[]): number[] {
 // ─────────────────────────────────────────────────────────────
 // PÁGINA
 // ─────────────────────────────────────────────────────────────
+// Default: 5 días Lun-Vie iguales 09:00-17:54, 30 min colación = 42h exactas (post Ley 21.561).
+// Cada día: 8h54min bruto - 30min colación = 8h24min netas × 5 = 42h.
 const DEFAULT_DIAS: DiaSchedule[] = [
-  { activo: true, entrada: "09:00", salida: "18:30" },
-  { activo: true, entrada: "09:00", salida: "18:30" },
-  { activo: true, entrada: "09:00", salida: "18:30" },
-  { activo: true, entrada: "09:00", salida: "18:30" },
-  { activo: true, entrada: "09:00", salida: "17:30" },
+  { activo: true, entrada: "09:00", salida: "17:54" },
+  { activo: true, entrada: "09:00", salida: "17:54" },
+  { activo: true, entrada: "09:00", salida: "17:54" },
+  { activo: true, entrada: "09:00", salida: "17:54" },
+  { activo: true, entrada: "09:00", salida: "17:54" },
   { activo: false, entrada: "09:00", salida: "13:00" },
   { activo: false, entrada: "09:00", salida: "13:00" },
 ];
@@ -157,8 +159,12 @@ export default function JornadaPageWrapper() {
 function JornadaPage() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
+  // Modalidad pre-seteada por el bot (`?m=adentro|afuera`). Si viene, el toggle queda bloqueado.
+  const modParam = searchParams.get("m");
+  const modalidadInicial: "afuera" | "adentro" = modParam === "adentro" ? "adentro" : "afuera";
+  const modalidadBloqueada = !!token && (modParam === "adentro" || modParam === "afuera");
 
-  const [modalidad, setModalidad] = useState<"afuera" | "adentro">("afuera");
+  const [modalidad, setModalidad] = useState<"afuera" | "adentro">(modalidadInicial);
   const [colacion, setColacion] = useState(30);
   const [dias, setDias] = useState<DiaSchedule[]>(DEFAULT_DIAS);
   const [copied, setCopied] = useState(false);
@@ -341,30 +347,36 @@ function JornadaPage() {
           {/* ── Inputs ── */}
           <div className="space-y-5">
 
-            {/* Modalidad */}
+            {/* Modalidad — bloqueada cuando viene del bot con &m=... */}
             <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
               <p className="text-sm font-semibold text-ink mb-3">Modalidad</p>
-              <div className="flex gap-1 bg-gray-100 rounded-xl p-1">
+              <div className={`flex gap-1 bg-gray-100 rounded-xl p-1 ${modalidadBloqueada ? "opacity-70 cursor-not-allowed" : ""}`}>
                 {([
                   { key: "afuera", label: "Puertas afuera" },
                   { key: "adentro", label: "Puertas adentro" },
                 ] as const).map(({ key, label }) => (
                   <button
                     key={key}
-                    onClick={() => setModalidad(key)}
+                    onClick={() => { if (!modalidadBloqueada) setModalidad(key); }}
+                    disabled={modalidadBloqueada}
                     className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                       modalidad === key
                         ? "bg-white text-ink shadow-sm"
-                        : "text-ink-muted hover:text-ink"
-                    }`}
+                        : "text-ink-muted hover:text-ink disabled:hover:text-ink-muted"
+                    } ${modalidadBloqueada ? "cursor-not-allowed" : ""}`}
                   >
                     {label}
                   </button>
                 ))}
               </div>
+              {modalidadBloqueada && (
+                <p className="text-xs text-ink-light mt-2">
+                  La modalidad está definida en tu contrato y no puede cambiarse desde aquí.
+                </p>
+              )}
               {esAdentro && (
                 <p className="text-xs text-ink-muted mt-3 leading-relaxed bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
-                  Régimen especial Art. 146 CT — máx. 12 h/día · máx. 72 h/semana · 12 h de descanso continuo entre jornadas. La reducción a 42 h de Ley 21.561 no aplica a este régimen.
+                  Régimen especial Art. 149 inc. 2° CT — sin jornada semanal fija. 12 h de descanso continuo entre jornadas (mín. 9 h ininterrumpidas). El simulador es informativo: la jornada PA no se mide en horas semanales sino por descansos, días libres (Art. 150d) y compensaciones (Art. 150b/c). La reducción a 42 h de Ley 21.561 no aplica.
                 </p>
               )}
             </div>
@@ -428,7 +440,7 @@ function JornadaPage() {
                       dias[i].activo ? "border-gray-200 bg-white" : "border-gray-100 bg-gray-50"
                     }`}
                   >
-                    <div className="flex items-center gap-3 p-3">
+                    <div className="flex items-center gap-2 sm:gap-3 p-3 flex-wrap sm:flex-nowrap">
                       {/* Toggle */}
                       <button
                         role="switch"
@@ -447,7 +459,7 @@ function JornadaPage() {
 
                       {/* Día */}
                       <span
-                        className={`text-sm font-medium flex-shrink-0 w-20 ${
+                        className={`text-sm font-medium flex-shrink-0 w-16 sm:w-20 ${
                           dias[i].activo ? "text-ink" : "text-ink-light"
                         }`}
                       >
@@ -456,27 +468,32 @@ function JornadaPage() {
 
                       {dias[i].activo ? (
                         <>
-                          {/* Entrada */}
-                          <div className="flex-1 min-w-0">
+                          {/* Horas (mobile: a la derecha del día, antes de los inputs) */}
+                          <span className={`sm:hidden ml-auto text-sm font-medium tabular-nums ${
+                            esAdentro
+                              ? horasPorDia[i] > LIMITE_DIARIO_ADENTRO ? "text-red-600" : "text-brand-700"
+                              : horasPorDia[i] > 10 ? "text-red-600" : "text-brand-700"
+                          }`}>
+                            {horasPorDia[i] > 0 ? horasPorDia[i].toFixed(1) + "h" : "—"}
+                          </span>
+                          {/* Inputs (mobile: row aparte ocupando ancho completo) */}
+                          <div className="flex items-center gap-2 w-full sm:w-auto sm:flex-1 mt-2 sm:mt-0 basis-full sm:basis-auto">
                             <input
                               type="time"
                               value={dias[i].entrada}
                               onChange={(e) => updateDia(i, "entrada", e.target.value)}
-                              className={inputTimeCls}
+                              className={`${inputTimeCls} flex-1 min-w-0`}
                             />
-                          </div>
-                          <span className="text-ink-light text-xs flex-shrink-0">→</span>
-                          {/* Salida */}
-                          <div className="flex-1 min-w-0">
+                            <span className="text-ink-light text-xs flex-shrink-0">→</span>
                             <input
                               type="time"
                               value={dias[i].salida}
                               onChange={(e) => updateDia(i, "salida", e.target.value)}
-                              className={inputTimeCls}
+                              className={`${inputTimeCls} flex-1 min-w-0`}
                             />
                           </div>
-                          {/* Horas */}
-                          <span className={`text-sm font-medium flex-shrink-0 w-12 text-right tabular-nums ${
+                          {/* Horas desktop */}
+                          <span className={`hidden sm:inline text-sm font-medium flex-shrink-0 w-12 text-right tabular-nums ${
                             esAdentro
                               ? horasPorDia[i] > LIMITE_DIARIO_ADENTRO ? "text-red-600" : "text-brand-700"
                               : horasPorDia[i] > 10 ? "text-red-600" : "text-brand-700"
