@@ -236,5 +236,14 @@ console.log(
   `\nImágenes guardadas localmente en ${OUT_DIR} (respaldo por si hay que resubir)`
 );
 console.log(
-  `Las covers de Notion ya apuntan a esas URLs — los cambios se verán al siguiente revalidate (1h).\n`
+  `\nURL pública (usar SIEMPRE esta forma, no la larga del bucket):`
+);
+for (const img of queue.slice(-Math.min(5, queue.length))) {
+  console.log(`  https://golegit.cl/i/${img.filename}`);
+}
+console.log(
+  `\nLas covers de Notion deben apuntar a https://golegit.cl/i/<archivo>.`
+);
+console.log(
+  `Después de actualizar Notion, gatillá un revalidate de ISR para que los cambios aparezcan en /novedades y /recursos sin esperar 1h.\n`
 );

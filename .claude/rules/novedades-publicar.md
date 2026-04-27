@@ -68,11 +68,21 @@ novedad-registro-dt.jpg            Registro de contrato en DT
 novedad-entrega-liquidacion.jpg    Caso Salcobrand / Art. 54 bis / entrega
 ```
 
-URL pública (estable, no expira):
+URL pública (estable, no expira) **siempre vía el dominio propio**:
 
 ```
-https://domdefqcsiqkdpuchjtu.supabase.co/storage/v1/object/public/cms-images/<filename>
+https://golegit.cl/i/<filename>
 ```
+
+El proxy `/i/*` está configurado en `next.config.ts` (rewrite a Vercel) y
+sirve la imagen desde el bucket sin revelar el project id de Supabase ni
+la ruta interna `/storage/v1/object/public/...`. Es un **rewrite** (no
+redirect), o sea: navegadores y crawlers de Open Graph (WhatsApp, Twitter,
+LinkedIn) ven 200 OK directo, no un 302.
+
+**Nunca usar la URL larga `domdefqcsiqkdpuchjtu.supabase.co/...` en
+contenido público** (Notion, og:image, links compartidos): filtra
+infraestructura. Solo `https://golegit.cl/i/<filename>`.
 
 **Solo si NO hay imagen reusable**, generar una nueva con el script:
 
@@ -176,7 +186,8 @@ OpenAI key local:       /tmp/oai_key.txt (o env OPENAI_API_KEY)
 - ❌ **Usar Unsplash o imágenes stock** en vez de DALL-E — estilo visual inconsistente con el resto del sitio.
 - ❌ **CTA comercial dentro del cuerpo** ("Trial gratis 30 días", botón al portal) — viola el estilo editorial. La footnote en cursiva con mención breve es la única referencia permitida a GoLegit.
 - ❌ **Crear una nota sin `cover`** → preview en WhatsApp/Twitter sale sin imagen, queda con el placeholder genérico del root layout. *27-abr-2026*: pasó con `jornada-42-horas-vigente-2026`. La nota se publicó sin cover; al compartirla por WhatsApp el preview salía con el OG genérico del sitio. Fix: setear `cover` con la URL pública del bucket `cms-images` ANTES de publicar.
-- ❌ **Subir imagen como archivo a Notion** (cover por upload o columna `Imagen` tipo file) → Notion devuelve URL S3 firmada que expira cada 1 hora; al refetchear el cache de Open Graph la imagen falla. Siempre `cover` con URL pública del bucket.
+- ❌ **Subir imagen como archivo a Notion** (cover por upload o columna `Imagen` tipo file) → Notion devuelve URL S3 firmada que expira cada 1 hora; al refetchear el cache de Open Graph la imagen falla. Siempre `cover` con URL pública del proxy.
+- ❌ **Pegar la URL larga del bucket** (`domdefqcsiqkdpuchjtu.supabase.co/storage/v1/object/public/cms-images/...`) en cualquier contenido público (Notion, og:image, anuncios, capturas). Filtra el project id de Supabase y la ruta interna. Siempre `https://golegit.cl/i/<filename>` — el rewrite en `next.config.ts` proxea sin filtrar nada.
 
 ## Referencias
 
