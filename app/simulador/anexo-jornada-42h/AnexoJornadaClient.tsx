@@ -398,7 +398,7 @@ export default function AnexoJornadaClient() {
         <div className="bg-gray-50 border border-gray-200 rounded-xl p-3 md:p-4 mb-3">
           <div className="space-y-2">
             {data.dias.map((dia, i) => (
-              <div key={i} className="flex items-center gap-2 md:gap-3">
+              <div key={i} className="flex items-center gap-2 md:gap-3 flex-wrap md:flex-nowrap">
                 <label className="flex items-center gap-2 w-24 md:w-28 shrink-0 cursor-pointer">
                   <input
                     type="checkbox"
@@ -410,23 +410,38 @@ export default function AnexoJornadaClient() {
                     {DIAS_INFO[i].nombre}
                   </span>
                 </label>
-                <input
-                  type="time"
-                  value={dia.entrada}
-                  onChange={(e) => updateDia(i, "entrada", e.target.value)}
-                  disabled={!dia.activo}
-                  className="flex-1 min-w-0 px-2 py-1.5 text-xs md:text-sm border border-gray-200 rounded-md disabled:bg-gray-100 disabled:text-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
-                />
-                <span className="text-xs text-ink-muted">a</span>
-                <input
-                  type="time"
-                  value={dia.salida}
-                  onChange={(e) => updateDia(i, "salida", e.target.value)}
-                  disabled={!dia.activo}
-                  className="flex-1 min-w-0 px-2 py-1.5 text-xs md:text-sm border border-gray-200 rounded-md disabled:bg-gray-100 disabled:text-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
-                />
+                {/* Horas (mobile: ml-auto para empujar al borde derecho) */}
                 <span
-                  className={`text-xs w-12 text-right tabular-nums font-medium ${
+                  className={`md:hidden ml-auto text-xs tabular-nums font-medium ${
+                    !dia.activo ? "text-ink-muted" :
+                    diasExceden10h[i] ? "text-red-700" :
+                    "text-ink-muted"
+                  }`}
+                  title={diasExceden10h[i] ? "Excede el máximo legal diario de 10 horas (Art. 28 CT)" : undefined}
+                >
+                  {dia.activo ? `${horasPorDia[i].toFixed(1)}h${diasExceden10h[i] ? " ⚠" : ""}` : "—"}
+                </span>
+                {/* Inputs (mobile: row aparte ocupando todo el ancho) */}
+                <div className="flex items-center gap-2 w-full md:w-auto md:flex-1 basis-full md:basis-auto mt-1 md:mt-0">
+                  <input
+                    type="time"
+                    value={dia.entrada}
+                    onChange={(e) => updateDia(i, "entrada", e.target.value)}
+                    disabled={!dia.activo}
+                    className="flex-1 min-w-0 px-2 py-1.5 text-xs md:text-sm border border-gray-200 rounded-md disabled:bg-gray-100 disabled:text-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+                  />
+                  <span className="text-xs text-ink-muted">a</span>
+                  <input
+                    type="time"
+                    value={dia.salida}
+                    onChange={(e) => updateDia(i, "salida", e.target.value)}
+                    disabled={!dia.activo}
+                    className="flex-1 min-w-0 px-2 py-1.5 text-xs md:text-sm border border-gray-200 rounded-md disabled:bg-gray-100 disabled:text-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+                  />
+                </div>
+                {/* Horas desktop */}
+                <span
+                  className={`hidden md:inline text-xs w-12 text-right tabular-nums font-medium ${
                     !dia.activo ? "text-ink-muted" :
                     diasExceden10h[i] ? "text-red-700" :
                     "text-ink-muted"
