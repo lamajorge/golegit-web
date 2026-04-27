@@ -300,20 +300,40 @@ export default function AnexoJornadaClient() {
 
         <PreviewAnexo data={data} distribucionTexto={distribucionTexto} totalHoras={totalHoras} />
 
+        {/* Repetir los CTAs principales bajo el preview — facilita acción
+            cuando el usuario terminó de revisar y no tiene que hacer scroll
+            arriba para descargar. */}
+        <div className="flex flex-wrap gap-3 mt-8 print:hidden">
+          <button
+            onClick={handlePrint}
+            className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors"
+          >
+            <Printer className="w-4 h-4" />
+            Descargar PDF / Imprimir
+          </button>
+          <button
+            onClick={() => setShowPreview(false)}
+            className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border border-gray-200 text-ink font-medium text-sm px-5 py-2.5 rounded-xl transition-colors"
+          >
+            <RefreshCw className="w-4 h-4" />
+            Editar datos
+          </button>
+        </div>
+
         <div className="bg-brand-50 border border-brand-200 rounded-2xl p-6 mt-8 print:hidden">
           <h3 className="text-base font-semibold text-ink mb-2 flex items-center gap-2">
             <FileText className="w-5 h-5 text-brand-600" />
-            ¿Querés firmar electrónicamente y mantener todo registrado?
+            ¿Quieres firmar electrónicamente y mantener todo registrado?
           </h3>
           <p className="text-sm text-ink-muted leading-relaxed mb-4">
             En GoLegit puedes generar contratos, anexos, liquidaciones y finiquitos con firma electrónica avanzada
             (FES). Tu trabajadora firma desde su celular, todo queda con valor probatorio y respaldado en la nube.
           </p>
           <Link
-            href="/"
+            href="/#early-access"
             className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-colors"
           >
-            Conoce GoLegit gratis 30 días →
+            Pide early access →
           </Link>
         </div>
       </div>
@@ -791,10 +811,13 @@ function PreviewAnexo({ data, distribucionTexto, totalHoras }: { data: FormData;
 }
 
 function Clausula({ numero, titulo, children }: { numero: string; titulo: string; children: React.ReactNode }) {
+  // Render: "QUINTO.- " si no hay título, "QUINTO.- Jornada de trabajo." si lo hay.
+  // Antes siempre se agregaba un punto extra → quedaba "QUINTO.- ." cuando titulo=''.
+  const encabezado = titulo ? `${numero}.- ${titulo}.` : `${numero}.-`
   return (
     <div style={{ marginBottom: 16 }}>
       <p style={{ fontSize: "11pt", textAlign: "justify" }}>
-        <span style={{ fontWeight: 700, color: "#0d1117" }}>{numero}.- {titulo}.</span>{" "}
+        <span style={{ fontWeight: 700, color: "#0d1117" }}>{encabezado}</span>{" "}
         {children}
       </p>
     </div>
