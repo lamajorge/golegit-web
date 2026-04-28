@@ -14,6 +14,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import sharp from "sharp";
 
 // ─────────────────────────────────────────────────────────────
 // CONFIG
@@ -155,15 +156,28 @@ async function downloadToBuffer(url) {
   return Buffer.from(arrayBuffer);
 }
 
+// Reduce a 1200×630 (estándar Open Graph), recomprime con mozjpeg q82.
+// DALL-E 3 entrega 1792×1024 ~2-3 MB; WhatsApp y Twitter rechazan o
+// fallan en cachear imágenes >1 MB. Post-sharp queda 60-120 KB.
+async function optimizeForOg(buffer) {
+  return sharp(buffer)
+    .resize(1200, 630, { fit: "cover", position: "center" })
+    .jpeg({ quality: 82, mozjpeg: true, progressive: true })
+    .toBuffer();
+}
+
 async function uploadToSupabase(buffer, filename) {
+  // PUT con upsert para sobrescribir si existe; Cache-Control 1 año
+  // (los nombres son estables — si cambia la imagen, cambia el filename).
   const res = await fetch(
     `${SUPABASE_URL}/storage/v1/object/${BUCKET}/${filename}`,
     {
-      method: "POST",
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${SUPABASE_KEY}`,
         "Content-Type": "image/jpeg",
         "x-upsert": "true",
+        "Cache-Control": "public, max-age=31536000, immutable",
       },
       body: buffer,
     }
@@ -209,17 +223,22 @@ for (let i = 0; i < queue.length; i++) {
     process.stdout.write("generada ... ");
 
     // 2. Descargar buffer
-    const buffer = await downloadToBuffer(imageUrl);
+    const original = await downloadToBuffer(imageUrl);
 
-    // 3. Guardar copia local (por si algo falla en la subida)
+    // 3. Optimizar para Open Graph (1200×630, mozjpeg q82)
+    const optimized = await optimizeForOg(original);
+    process.stdout.write("optimizada ... ");
+
+    // 4. Guardar copia local optimizada (por si falla la subida)
     const localPath = path.join(OUT_DIR, img.filename);
-    fs.writeFileSync(localPath, buffer);
+    fs.writeFileSync(localPath, optimized);
 
-    // 4. Subir a Supabase Storage
-    await uploadToSupabase(buffer, img.filename);
+    // 5. Subir a Supabase Storage con Cache-Control 1 año
+    await uploadToSupabase(optimized, img.filename);
 
-    const kb = (buffer.length / 1024) | 0;
-    console.log(`subida (${kb} KB)`);
+    const kbBefore = (original.length / 1024) | 0;
+    const kbAfter = (optimized.length / 1024) | 0;
+    console.log(`subida (${kbBefore} KB → ${kbAfter} KB)`);
     ok++;
 
     // Pausa entre llamadas para no saturar rate limits
