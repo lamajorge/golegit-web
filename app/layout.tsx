@@ -28,12 +28,21 @@ export const metadata: Metadata = {
     siteName: "GoLegit",
     locale: "es_CL",
     type: "website",
+    images: [
+      {
+        url: "https://golegit.cl/i/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "GoLegit — Contratos, liquidaciones y firma electrónica para trabajadoras de casa particular",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "GoLegit — El contrato de tu trabajadora, por WhatsApp",
     description:
       "Contratos legales y liquidaciones para trabajadoras de casa particular. Sin apps, sin formularios.",
+    images: ["https://golegit.cl/i/og-default.jpg"],
   },
   robots: {
     index: true,

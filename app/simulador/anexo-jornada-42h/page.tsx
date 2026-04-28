@@ -2,6 +2,11 @@ import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 import AnexoJornadaClient from "./AnexoJornadaClient"
 
+const OG_TITLE = "Anexo gratis de jornada 42h (Ley 21.561) — GoLegit"
+const OG_DESC = "Genera el anexo de adecuación de jornada laboral de tu trabajadora de casa particular a las 42 horas semanales (Ley 21.561). Gratis, sin registro, descarga directa a PDF."
+const OG_IMG = "https://golegit.cl/i/novedad-jornada-42h.jpg"
+const OG_URL = "https://golegit.cl/simulador/anexo-jornada-42h"
+
 export const metadata = {
   title: "Generador gratuito de anexo Ley 21.561 (jornada 42h) — GoLegit",
   description:
@@ -13,7 +18,22 @@ export const metadata = {
     "reducción jornada laboral chile",
     "asesora del hogar 42 horas",
   ],
-  alternates: { canonical: "https://golegit.cl/simulador/anexo-jornada-42h" },
+  alternates: { canonical: OG_URL },
+  openGraph: {
+    title: OG_TITLE,
+    description: OG_DESC,
+    url: OG_URL,
+    siteName: "GoLegit",
+    locale: "es_CL",
+    type: "website",
+    images: [{ url: OG_IMG, width: 1200, height: 630, alt: OG_TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: OG_TITLE,
+    description: OG_DESC,
+    images: [OG_IMG],
+  },
 }
 
 export default function AnexoJornada42hPage() {

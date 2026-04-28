@@ -15,6 +15,21 @@ export const metadata: Metadata = {
     siteName: "GoLegit",
     locale: "es_CL",
     type: "website",
+    images: [
+      {
+        url: "https://golegit.cl/i/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "GoLegit Business — Gestión de RRHH para empresas",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "GoLegit Business — RRHH para empresas",
+    description:
+      "Contratos, liquidaciones, turnos y firma digital para tu equipo. Gestión laboral completa adaptada a cada rubro.",
+    images: ["https://golegit.cl/i/og-default.jpg"],
   },
   robots: { index: true, follow: true },
 };

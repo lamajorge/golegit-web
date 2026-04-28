@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
 
+const OG_URL = "https://golegit.cl/simulador/jornada";
+const OG_TITLE = "Calculadora de jornada — GoLegit";
+const OG_DESC =
+  "Verifica si la jornada de tu trabajadora de casa particular cumple la ley y genera la cláusula lista para el contrato. Actualizado con la jornada de 42 horas (Ley 21.561).";
+const OG_IMG = "https://golegit.cl/i/novedad-jornada-42h.jpg";
+
 export const metadata: Metadata = {
   title: "Calculadora de jornada laboral trabajadora de casa particular — GoLegit",
   description:
@@ -11,7 +17,22 @@ export const metadata: Metadata = {
     "ley 21561 reducción jornada 42 horas",
     "cláusula jornada contrato TCP",
   ],
-  alternates: { canonical: "https://golegit.cl/simulador/jornada" },
+  alternates: { canonical: OG_URL },
+  openGraph: {
+    title: OG_TITLE,
+    description: OG_DESC,
+    url: OG_URL,
+    siteName: "GoLegit",
+    locale: "es_CL",
+    type: "website",
+    images: [{ url: OG_IMG, width: 1200, height: 630, alt: OG_TITLE }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: OG_TITLE,
+    description: OG_DESC,
+    images: [OG_IMG],
+  },
 };
 
 const howToSchema = {
