@@ -109,23 +109,32 @@ Usar `notion-create-pages` con MCP de Notion:
 
 ```yaml
 parent: { type: "data_source_id", data_source_id: "dc3931e2-054c-4bde-8f5e-85990e4c022b" }
-cover: <URL pública del paso 2>
+cover: https://golegit.cl/i/<archivo>.jpg     # OBLIGATORIO: URL del proxy /i/, NO la del bucket
 properties:
   Título: "Título del post"
-  Slug: "slug-unico-y-corto"          # verificado en paso 1
+  Slug: "slug-unico-y-corto"            # verificado en paso 1
   Categoría: "Laboral"                  # o Remuneraciones / Contratos / Previsión / General / Novedades
   Publicado: "__YES__"                  # string literal, NO booleano
   Resumen: "~200 caracteres del gancho..."   # NO olvidar — aparece en la tarjeta del listado
+  Imagen: "https://golegit.cl/i/<archivo>.jpg"  # misma URL que cover (mostrada en vista tabla Notion)
   date:Fecha:start: "2026-04-26"        # ISO date — usar la propiedad expandida (NO solo "Fecha")
 content: <markdown del artículo>
 ```
 
 **Notas críticas:**
 
-- `Resumen` debe completarse al crear; un post sin resumen aparece sin gancho en `/novedades`.
-- Usar **`date:Fecha:start`**, no `Fecha` (la API requiere la propiedad expandida).
+- `cover` y la columna `Imagen` deben quedar pobladas con la URL del
+  proxy `https://golegit.cl/i/<archivo>` (NO la URL larga del bucket).
+  Si dejás cover vacío, el preview de WhatsApp/Twitter sale con el OG
+  genérico del root layout (incidente 27-abr-2026).
+- `Resumen` debe completarse al crear; un post sin resumen aparece sin
+  gancho en `/novedades`.
+- Usar **`date:Fecha:start`**, no `Fecha` (la API requiere la propiedad
+  expandida).
 - Usar **`__YES__`** literal (string), no booleano `true`.
-- Notion Markdown soporta links `[texto](url)`, tablas con `<table header-row="true">`, blockquotes, listas. Ver spec: `notion://docs/enhanced-markdown-spec`.
+- Notion Markdown soporta links `[texto](url)`, tablas con
+  `<table header-row="true">`, blockquotes, listas. Ver spec:
+  `notion://docs/enhanced-markdown-spec`.
 
 ## Paso 4 — Revalidar ISR
 
@@ -165,8 +174,9 @@ Después revalidar ISR (paso 4).
 Notion DB Novedades:    b844dffae5ca4ee8983d5ee3d098a70b
 Notion DS Novedades:    collection://dc3931e2-054c-4bde-8f5e-85990e4c022b
 Notion DB Recursos:     fb8a6638e12e4d6abc288856a0ea4640
-Supabase bucket:        cms-images (público)
-URL imágenes:           https://domdefqcsiqkdpuchjtu.supabase.co/storage/v1/object/public/cms-images/<archivo>
+Supabase bucket:        cms-images (público, en proyecto domdefqcsiqkdpuchjtu)
+Origin del bucket:      https://domdefqcsiqkdpuchjtu.supabase.co/storage/v1/object/public/cms-images/<archivo>
+URL pública canónica:   https://golegit.cl/i/<archivo>   ← USAR ESTA SIEMPRE
 Endpoint revalidate:    https://golegit.cl/api/revalidate?token=REVALIDATE_SECRET
 Script imágenes:        web/scripts/generate-cms-images.mjs
 OpenAI key local:       /tmp/oai_key.txt (o env OPENAI_API_KEY)
