@@ -30,7 +30,7 @@ const faqs = [
   },
   {
     q: "¿GoLegit hace el finiquito también?",
-    a: "Sí. Soporta 8 causales de término (Arts. 159, 160 y 161 del Código del Trabajo), calcula automáticamente las indemnizaciones, vacaciones pendientes y proporcionales, y genera el PDF listo para firmar.",
+    a: "Sí. Soporta 8 causales de término (Arts. 159, 160 y 161 del Código del Trabajo), calcula automáticamente las indemnizaciones que correspondan, las vacaciones pendientes y las proporcionales, y genera el PDF listo para ratificarse ante ministro de fe (notario, Inspección del Trabajo, oficial del Registro Civil o secretario municipal) o firmarse en línea por Mi DT (tramites.dt.gob.cl). Esa ratificación es obligatoria para que el finiquito tenga mérito ejecutivo (Art. 177 del Código del Trabajo).",
   },
   {
     q: "¿Qué pasa después del mes gratis?",
