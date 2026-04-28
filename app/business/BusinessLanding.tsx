@@ -6,43 +6,77 @@ import { useState } from "react";
 
 function WaitlistForm({ dark = false }: { dark?: boolean }) {
   const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
+  const [estado, setEstado] = useState<"idle" | "enviando" | "ok" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email) return;
-    window.location.href = `mailto:hola@golegit.cl?subject=Waitlist%20Business&body=Quiero%20ser%20parte%20del%20early%20access.%20Mi%20email%3A%20${encodeURIComponent(email)}`;
-    setSent(true);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setEstado("error");
+      setErrorMsg("Ingresa un email válido");
+      return;
+    }
+    setEstado("enviando");
+    setErrorMsg(null);
+    try {
+      const r = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: email.trim().toLowerCase(),
+          fuente: "business",
+          consentimiento: true,
+        }),
+      });
+      const data = await r.json();
+      if (!r.ok || !data.ok) {
+        setEstado("error");
+        setErrorMsg(data?.error ?? "Algo falló — intenta nuevamente");
+        return;
+      }
+      setEstado("ok");
+    } catch {
+      setEstado("error");
+      setErrorMsg("Error de conexión — intenta nuevamente");
+    }
   }
 
-  if (sent) {
+  if (estado === "ok") {
     return (
       <p className={`text-sm font-medium ${dark ? "text-indigo-400" : "text-indigo-600"}`}>
-        Listo — te avisamos cuando lancemos.
+        Listo — te avisamos cuando lancemos GoLegit Business.
       </p>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full max-w-md">
-      <input
-        type="email"
-        required
-        placeholder="tu@empresa.cl"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className={`flex-1 px-4 py-3 rounded-xl text-sm border focus:outline-none focus:ring-2 ${
-          dark
-            ? "bg-white/10 border-white/20 text-white placeholder-white/40 focus:ring-indigo-400"
-            : "bg-white border-gray-200 text-ink placeholder-gray-400 focus:ring-indigo-500"
-        }`}
-      />
-      <button
-        type="submit"
-        className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold rounded-xl transition-colors whitespace-nowrap"
-      >
-        Quiero early access
-      </button>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-full max-w-md">
+      <div className="flex flex-col sm:flex-row gap-3">
+        <input
+          type="email"
+          required
+          placeholder="tu@empresa.cl"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={estado === "enviando"}
+          className={`flex-1 px-4 py-3 rounded-xl text-sm border focus:outline-none focus:ring-2 disabled:opacity-60 ${
+            dark
+              ? "bg-white/10 border-white/20 text-white placeholder-white/40 focus:ring-indigo-400"
+              : "bg-white border-gray-200 text-ink placeholder-gray-400 focus:ring-indigo-500"
+          }`}
+        />
+        <button
+          type="submit"
+          disabled={estado === "enviando"}
+          className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-400 text-white text-sm font-semibold rounded-xl transition-colors whitespace-nowrap"
+        >
+          {estado === "enviando" ? "Enviando..." : "Quiero early access"}
+        </button>
+      </div>
+      {errorMsg && (
+        <p className={`text-xs ${dark ? "text-red-300" : "text-red-600"}`}>{errorMsg}</p>
+      )}
     </form>
   );
 }

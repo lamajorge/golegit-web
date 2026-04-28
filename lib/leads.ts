@@ -1,13 +1,15 @@
 import "server-only";
 import { Client } from "@notionhq/client";
 
-// DB Notion: "Leads — Early Access + Anexo gratuito" (parent: Web golegit.cl)
+// DB Notion: "Leads — Early Access + Anexo gratuito + Business" (parent: Web golegit.cl)
 const NOTION_LEADS_DB_ID = process.env.NOTION_LEADS_DB_ID ?? "2395089ca0e242eb8f17ca49f4b6f383";
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
 
 const notion = NOTION_TOKEN ? new Client({ auth: NOTION_TOKEN }) : null;
 
-export type LeadFuente = "early_access" | "anexo_42h";
+// Cada fuente debe existir como opción del select "Fuente" en la DB de Notion;
+// si no existe, Notion devuelve 400 al crear la página.
+export type LeadFuente = "early_access" | "anexo_42h" | "business";
 
 export interface LeadInput {
   email: string;

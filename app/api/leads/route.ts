@@ -22,8 +22,11 @@ export async function POST(req: Request) {
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ ok: false, error: "Email inválido" }, { status: 400 });
   }
-  if (fuente !== "early_access" && fuente !== "anexo_42h") {
-    return NextResponse.json({ ok: false, error: "fuente debe ser early_access o anexo_42h" }, { status: 400 });
+  if (fuente !== "early_access" && fuente !== "anexo_42h" && fuente !== "business") {
+    return NextResponse.json(
+      { ok: false, error: "fuente debe ser early_access, anexo_42h o business" },
+      { status: 400 }
+    );
   }
 
   const ok = await saveLead({ email, fuente, consentimiento, nombre, rut_empleador, notas });
