@@ -2,14 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap');
-
 :root {
-  --font-display: 'Plus Jakarta Sans', sans-serif;
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
-  /* keep legacy var for any remaining inline styles */
-  --font-fraunces: 'Plus Jakarta Sans', sans-serif;
-  --font-instrument-sans: 'Plus Jakarta Sans', sans-serif;
+  /* --font-sans is injected by next/font (layout.tsx) via className en <html> */
+  --font-display: var(--font-sans);
+  /* legacy aliases que pueden quedar en componentes */
+  --font-fraunces: var(--font-sans);
+  --font-instrument-sans: var(--font-sans);
   --font-geist-mono: 'Geist Mono', monospace;
 }
 
