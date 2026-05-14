@@ -44,11 +44,6 @@ export const metadata: Metadata = {
     "software gestión trabajadora casa particular",
     "DT registrar contrato trabajadora",
   ],
-  verification: {
-    // Reemplazar por el token real de Google Search Console
-    // (Search Console → Property → Settings → Ownership verification → HTML tag)
-    google: "REPLACE_WITH_GSC_TOKEN",
-  },
   openGraph: {
     title: "GoLegit — El contrato de tu trabajadora de casa particular, por WhatsApp",
     description:
