@@ -21,15 +21,34 @@ export const metadata: Metadata = {
   description:
     "GoLegit genera contratos legales, calcula liquidaciones y mantiene el historial laboral de tu trabajadora de casa particular. Todo por WhatsApp. Primer mes gratis, sin contrato.",
   keywords: [
-    "contrato trabajadora de casa particular Chile",
-    "liquidación trabajadora de casa particular",
-    "contrato puertas adentro puertas afuera",
-    "ley 20786 trabajadora casa particular",
-    "calcular liquidación nana Chile",
-    "software gestión trabajadora de casa particular",
-    "cotizaciones empleada doméstica Chile",
-    "contrato asesora de hogar WhatsApp",
+    "contrato nana",
+    "contrato nana Chile",
+    "contrato trabajadora de casa particular",
+    "como hacer contrato a una nana",
+    "liquidación nana",
+    "calcular liquidación nana",
+    "finiquito nana",
+    "finiquito trabajadora casa particular",
+    "cuánto pagarle a una nana",
+    "sueldo nana puertas adentro",
+    "sueldo nana puertas afuera",
+    "previred nana",
+    "cotizaciones nana",
+    "AFP nana",
+    "vacaciones nana",
+    "contrato puertas adentro",
+    "contrato puertas afuera",
+    "ley 20786",
+    "asesora del hogar contrato",
+    "empleada doméstica Chile",
+    "software gestión trabajadora casa particular",
+    "DT registrar contrato trabajadora",
   ],
+  verification: {
+    // Reemplazar por el token real de Google Search Console
+    // (Search Console → Property → Settings → Ownership verification → HTML tag)
+    google: "REPLACE_WITH_GSC_TOKEN",
+  },
   openGraph: {
     title: "GoLegit — El contrato de tu trabajadora de casa particular, por WhatsApp",
     description:
