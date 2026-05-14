@@ -4,10 +4,31 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import BlockRenderer from "@/components/notion/BlockRenderer";
+import ArticleJsonLd from "@/components/ArticleJsonLd";
 import { getPost, getBlocks } from "@/lib/notion";
 import { categoriaColor, formatFecha } from "../utils";
 import { SITE_CONFIG } from "@/lib/config";
 import CtaButton from "@/components/CtaButton";
+
+// Mapea categoría → simulador relacionado para internal linking SEO.
+function relatedSimulator(categoria: string): { href: string; label: string; desc: string } | null {
+  const c = categoria.toLowerCase();
+  if (c.includes("remunera") || c.includes("previs")) {
+    return {
+      href: "/simulador/liquidacion",
+      label: "Calcular liquidación",
+      desc: "Sueldo, AFP, salud y aportes del empleador — actualizado a 2026.",
+    };
+  }
+  if (c.includes("laboral") || c.includes("jornada")) {
+    return {
+      href: "/simulador/jornada",
+      label: "Calcular jornada",
+      desc: "Distribución de horas y horas extra bajo Ley 21.561.",
+    };
+  }
+  return null;
+}
 
 export const revalidate = 3600;
 export const dynamicParams = true;
@@ -56,9 +77,19 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   if (!post) notFound();
 
   const blocks = await getBlocks(post.id);
+  const simulator = relatedSimulator(post.categoria);
+  const postUrl = `https://golegit.cl/novedades/${post.slug}`;
 
   return (
     <main className="min-h-screen bg-paper">
+      <ArticleJsonLd
+        url={postUrl}
+        headline={post.titulo}
+        description={post.resumen}
+        image={post.portada}
+        datePublished={post.fecha}
+        section={post.categoria}
+      />
       <Navbar />
 
       {/* Header artículo */}
@@ -145,22 +176,49 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </span>
           </CtaButton>
 
-          {/* Newsletter */}
-          <div className="flex flex-col gap-3 bg-brand-50 border border-brand-100 rounded-2xl p-6">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="1.8">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-            <div>
-              <p className="font-semibold text-sm text-ink mb-1">Recibe estas alertas</p>
-              <p className="text-xs text-ink-muted leading-relaxed">
-                Novedades laborales relevantes para tu hogar, sin ruido.
-              </p>
-            </div>
-            <CtaButton className="text-xs font-medium text-brand-700 hover:text-brand-800 transition-colors">
-              Suscribirse por WhatsApp →
-            </CtaButton>
-          </div>
+          {/* Simulador relacionado — internal linking por categoría */}
+          {simulator ? (
+            <Link
+              href={simulator.href}
+              className="flex flex-col gap-3 bg-brand-50 border border-brand-100 rounded-2xl p-6 hover:bg-brand-100 hover:border-brand-200 transition-colors group"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2" />
+                <line x1="8" y1="6" x2="16" y2="6" />
+                <line x1="8" y1="10" x2="10" y2="10" />
+                <line x1="12" y1="10" x2="14" y2="10" />
+                <line x1="8" y1="14" x2="10" y2="14" />
+                <line x1="12" y1="14" x2="14" y2="14" />
+                <line x1="8" y1="18" x2="14" y2="18" />
+              </svg>
+              <div>
+                <p className="font-semibold text-sm text-ink mb-1">{simulator.label}</p>
+                <p className="text-xs text-ink-muted leading-relaxed">{simulator.desc}</p>
+              </div>
+              <span className="text-xs font-medium text-brand-700 group-hover:text-brand-800 transition-colors">
+                Abrir simulador →
+              </span>
+            </Link>
+          ) : (
+            <Link
+              href="/recursos"
+              className="flex flex-col gap-3 bg-brand-50 border border-brand-100 rounded-2xl p-6 hover:bg-brand-100 hover:border-brand-200 transition-colors group"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" />
+              </svg>
+              <div>
+                <p className="font-semibold text-sm text-ink mb-1">Centro de conocimiento</p>
+                <p className="text-xs text-ink-muted leading-relaxed">
+                  Guías y plantillas para gestionar el contrato y la liquidación.
+                </p>
+              </div>
+              <span className="text-xs font-medium text-brand-700 group-hover:text-brand-800 transition-colors">
+                Ver recursos →
+              </span>
+            </Link>
+          )}
         </div>
 
         {/* Volver */}

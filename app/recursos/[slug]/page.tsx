@@ -4,9 +4,29 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import BlockRenderer from "@/components/notion/BlockRenderer";
+import ArticleJsonLd from "@/components/ArticleJsonLd";
 import { getRecurso, getBlocks } from "@/lib/notion";
 import { categoriaColor, nivelColor, tipoIconPath, formatFecha } from "../utils";
 import CtaButton from "@/components/CtaButton";
+
+function relatedSimulator(categoria: string): { href: string; label: string; desc: string } | null {
+  const c = categoria.toLowerCase();
+  if (c.includes("remunera") || c.includes("previs") || c.includes("liquid")) {
+    return {
+      href: "/simulador/liquidacion",
+      label: "Calcular liquidación",
+      desc: "Sueldo, AFP, salud y aportes del empleador — actualizado a 2026.",
+    };
+  }
+  if (c.includes("laboral") || c.includes("jornada") || c.includes("contrat")) {
+    return {
+      href: "/simulador/jornada",
+      label: "Calcular jornada",
+      desc: "Distribución de horas y horas extra bajo Ley 21.561.",
+    };
+  }
+  return null;
+}
 
 export const revalidate = 3600;
 export const dynamicParams = true;
@@ -54,9 +74,19 @@ export default async function RecursoPage({ params }: { params: Promise<{ slug: 
 
   const blocks = await getBlocks(recurso.id);
   const iconPath = tipoIconPath(recurso.tipo);
+  const simulator = relatedSimulator(recurso.categoria);
+  const recursoUrl = `https://golegit.cl/recursos/${recurso.slug}`;
 
   return (
     <main className="min-h-screen bg-paper">
+      <ArticleJsonLd
+        url={recursoUrl}
+        headline={recurso.titulo}
+        description={recurso.resumen}
+        image={recurso.portada}
+        datePublished={recurso.fecha}
+        section={recurso.categoria}
+      />
       <Navbar />
 
       {/* Header */}
@@ -153,20 +183,44 @@ export default async function RecursoPage({ params }: { params: Promise<{ slug: 
             </span>
           </CtaButton>
 
-          <div className="flex flex-col gap-3 bg-brand-50 border border-brand-100 rounded-2xl p-6">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="1.8">
-              <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <div>
-              <p className="font-semibold text-sm text-ink mb-1">Más recursos</p>
-              <p className="text-xs text-ink-muted leading-relaxed">
-                Guías, plantillas y referencias legales para empleadores.
-              </p>
-            </div>
-            <Link href="/recursos" className="text-xs font-medium text-brand-700 hover:text-brand-800 transition-colors">
-              Ver Centro de Conocimiento →
+          {simulator ? (
+            <Link
+              href={simulator.href}
+              className="flex flex-col gap-3 bg-brand-50 border border-brand-100 rounded-2xl p-6 hover:bg-brand-100 hover:border-brand-200 transition-colors group"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="4" y="2" width="16" height="20" rx="2" />
+                <line x1="8" y1="6" x2="16" y2="6" />
+                <line x1="8" y1="10" x2="10" y2="10" />
+                <line x1="12" y1="10" x2="14" y2="10" />
+                <line x1="8" y1="14" x2="10" y2="14" />
+                <line x1="12" y1="14" x2="14" y2="14" />
+                <line x1="8" y1="18" x2="14" y2="18" />
+              </svg>
+              <div>
+                <p className="font-semibold text-sm text-ink mb-1">{simulator.label}</p>
+                <p className="text-xs text-ink-muted leading-relaxed">{simulator.desc}</p>
+              </div>
+              <span className="text-xs font-medium text-brand-700 group-hover:text-brand-800 transition-colors">
+                Abrir simulador →
+              </span>
             </Link>
-          </div>
+          ) : (
+            <div className="flex flex-col gap-3 bg-brand-50 border border-brand-100 rounded-2xl p-6">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="1.8">
+                <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <div>
+                <p className="font-semibold text-sm text-ink mb-1">Más recursos</p>
+                <p className="text-xs text-ink-muted leading-relaxed">
+                  Guías, plantillas y referencias legales para empleadores.
+                </p>
+              </div>
+              <Link href="/recursos" className="text-xs font-medium text-brand-700 hover:text-brand-800 transition-colors">
+                Ver Centro de Conocimiento →
+              </Link>
+            </div>
+          )}
         </div>
 
         <Link href="/recursos"
