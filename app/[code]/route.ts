@@ -10,7 +10,11 @@ export async function GET(
 ) {
   const { code } = await params
 
-  if (!code || code.length > 20) {
+  // Rechaza paths que claramente no son short codes:
+  // - vacío o demasiado largo
+  // - contiene punto (file extensions: sitemap.xml, robots.txt, googlec1c6...html, etc.)
+  // - solo caracteres no alfanuméricos
+  if (!code || code.length > 20 || code.includes('.') || !/[a-zA-Z0-9]/.test(code)) {
     return NextResponse.redirect('https://golegit.cl', { status: 302 })
   }
 
