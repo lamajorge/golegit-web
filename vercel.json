@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "buildCommand": "next build",
+  "buildCommand": "next build && next-sitemap",
   "outputDirectory": ".next",
   "installCommand": "npm install",
   "headers": [
