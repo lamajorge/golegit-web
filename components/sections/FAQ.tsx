@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: "¿Cómo le llega el contrato a mi trabajadora?",
-    a: "En los planes Pro y Plus, el sistema le envía el PDF por email directamente a ella con un enlace para revisar y firmar digitalmente. En el plan Lite, tú imprimes el documento y lo firman en papel.",
+    a: "Si activas Firma Electrónica + Portal en el contrato (gratis, opcional), el sistema le envía el PDF por email directamente con un enlace para revisar y firmar digitalmente. Si prefieres no activarlo, tú imprimes el documento y lo firman en papel. La elección es por contrato.",
   },
   {
     q: "¿La firma electrónica tiene valor legal?",
@@ -33,12 +33,16 @@ const faqs = [
     a: "Sí. Soporta 8 causales de término (Arts. 159, 160 y 161 del Código del Trabajo), calcula automáticamente las indemnizaciones que correspondan, las vacaciones pendientes y las proporcionales, y genera el PDF listo para ratificarse ante ministro de fe (notario, Inspección del Trabajo, oficial del Registro Civil o secretario municipal) o firmarse en línea por Mi DT (tramites.dt.gob.cl). Esa ratificación es obligatoria para que el finiquito tenga mérito ejecutivo (Art. 177 del Código del Trabajo).",
   },
   {
-    q: "¿Qué pasa después del mes gratis?",
-    a: "Eliges el plan que necesitas y pagas desde el portal web. Si decides no continuar, tu cuenta se suspende pero no pierdes tus documentos — se reactiva apenas regularizas.",
+    q: "¿Tiene algún costo? ¿Hay tarjeta de crédito?",
+    a: "El software es gratis para siempre, sin tarjeta de crédito y sin permanencia. Solo pagas si decides activar el plan Asistido (operación mensual gestionada por nosotros, desde $14.990) o si necesitas servicios jurídicos puntuales con el abogado fundador.",
   },
   {
-    q: "¿Cuál es la diferencia entre Lite y Pro?",
-    a: "Ambos planes generan los mismos documentos. La diferencia es que Pro incluye firma digital (sin imprimir nada), portal web para tu trabajadora, verificación de identidad y recordatorios automáticos del ciclo mensual.",
+    q: "¿En qué consiste el plan Asistido?",
+    a: "Asistido es para quienes prefieren delegar la operación mensual. Nosotros pagamos Previred, registramos el Libro de Remuneraciones en Mi DT y mantenemos al día los contratos y anexos ante la Dirección del Trabajo. Tarifa plana mensual según número de trabajadoras: $14.990 (1), $24.990 (2-3) o $39.990 (4+).",
+  },
+  {
+    q: "¿Y los servicios jurídicos?",
+    a: "Jorge Lama, abogado fundador, está disponible para casos atípicos o conflictivos. Se cobran por servicio, sin suscripción: consulta asíncrona ($39.990), video 30 min ($69.990), revisión de contrato atípico, tramitación de licencias Compin, acompañamiento DT o defensa en juicio laboral (cuota litis).",
   },
   {
     q: "¿Puedo modificar el contrato después?",
@@ -46,7 +50,7 @@ const faqs = [
   },
   {
     q: "¿Cómo se identifica mi trabajadora en el sistema?",
-    a: "Mediante su RUT. Al registrarla, el sistema la vincula a tu contrato. En los planes Pro y Plus, ella también puede acceder a sus documentos desde su propio WhatsApp o desde el portal web.",
+    a: "Mediante su RUT. Al registrarla, el sistema la vincula a tu contrato. Si activas el Portal Trabajadora en el contrato (gratis, opcional), ella también puede acceder a sus documentos desde su propio WhatsApp o desde el portal web.",
   },
 ];
 

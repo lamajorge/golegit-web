@@ -18,9 +18,9 @@ export default function FinalCTA() {
         </p>
 
         <h2 className="text-5xl lg:text-7xl font-extrabold text-white leading-[1.0] tracking-tight mb-6">
-          El primer mes
+          Tu software laboral,
           <br />
-          <span className="text-brand-400">es gratis.</span>
+          <span className="text-brand-400">gratis para siempre.</span>
         </h2>
 
         <p className="text-xl text-white/50 mb-12 max-w-xl mx-auto leading-relaxed">
@@ -46,7 +46,7 @@ export default function FinalCTA() {
 
         {/* Reassurance */}
         <div className="flex flex-wrap justify-center gap-x-8 gap-y-2">
-          {["1 mes gratis", "Sin tarjeta", "Sin permanencia", "Cancela cuando quieras"].map((item, i) => (
+          {["Gratis para siempre", "Sin tarjeta", "Sin permanencia", "Multi-trabajadora ilimitado"].map((item, i) => (
             <span key={i} className="text-xs text-white/30 flex items-center gap-1.5">
               <svg width="9" height="9" viewBox="0 0 12 12" fill="none">
                 <path d="M2 6l3 3 5-5" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

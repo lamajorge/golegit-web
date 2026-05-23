@@ -131,25 +131,55 @@ export default function TerminosPage() {
             <h2>4. Planes, Precios y Suscripción</h2>
             <h3>4.1 Planes disponibles</h3>
             <p>
-              GoLegit ofrece actualmente tres Planes, cuyas características y precios vigentes se
-              publican en <Link href="/#planes">golegit.cl/#planes</Link>:
+              GoLegit ofrece actualmente tres capas de Servicio, cuyas características y precios
+              vigentes se publican en <Link href="/#precios">golegit.cl/#precios</Link>:
             </p>
             <ul>
-              <li><strong>Plan Lite:</strong> módulos de gestión del empleador, sin portal de Trabajador/a y sin firma FES.</li>
-              <li><strong>Plan Pro:</strong> Lite + portal de Trabajador/a, firma FES y recordatorios proactivos.</li>
-              <li><strong>Plan Plus:</strong> Pro + Trabajadores/as ilimitados/as por empleador.</li>
+              <li>
+                <strong>Home:</strong> uso gratuito e ilimitado del software, sin tarjeta de crédito
+                ni permanencia. Incluye contratos, anexos, finiquitos, cartas de aviso,
+                liquidaciones, registros de novedades laborales (ausencias, licencias, vacaciones,
+                amonestaciones, días especiales) y certificados. La firma electrónica FES (Ley N°
+                19.799), el portal de Trabajador/a, la asistencia electrónica (Res. 38 EXENTA DT)
+                y los recordatorios proactivos son opcionales por contrato (activables sin costo
+                adicional, con los anexos firmados que correspondan en los casos legalmente
+                exigidos).
+              </li>
+              <li>
+                <strong>Asistido:</strong> tarifa plana mensual que incorpora servicios
+                operacionales gestionados por Cubillos Lama SpA — pago de cotizaciones previsionales
+                vía Previred, carga del Libro de Remuneraciones Electrónico en Mi DT y registro de
+                contratos y anexos ante la Dirección del Trabajo. Tres bandas según número de
+                trabajadores/as activos/as: 1 trabajador/a, 2 a 3 trabajadores/as y 4 o más
+                trabajadores/as.
+              </li>
+              <li>
+                <strong>Servicios Jurídicos:</strong> asesoría legal específica y eventual prestada
+                por el abogado fundador, cobrada por servicio y sin obligación de suscripción
+                (consultas, revisiones de contratos atípicos, tramitaciones, acompañamiento en
+                fiscalizaciones de la Dirección del Trabajo y defensa en juicio laboral).
+              </li>
             </ul>
             <p>
               Los precios se expresan en pesos chilenos, IVA incluido cuando corresponda, y pueden
               ser ajustados en los términos del numeral 4.5 siguiente.
             </p>
 
-            <h3>4.2 Período de prueba</h3>
+            <h3>4.2 Uso gratuito y servicios opcionales pagados</h3>
             <p>
-              Al crear una Cuenta, el Cliente accede a un período de prueba gratuito con
-              funcionalidades equivalentes al Plan Pro, por un plazo de <strong>treinta (30) días
-              corridos</strong>, sin obligación de pago ni de suscripción posterior. Al vencimiento,
-              deberá contratar un Plan para continuar utilizando el Servicio.
+              El uso de la capa <strong>Home</strong> es gratuito y sin tarjeta de crédito. No
+              existe período de prueba con vencimiento: el Cliente puede continuar utilizando las
+              funcionalidades incluidas indefinidamente.
+            </p>
+            <p>
+              La contratación de la capa <strong>Asistido</strong> o de cualquier
+              <strong> Servicio Jurídico</strong> es opcional y solo se realiza cuando el Cliente
+              expresamente la solicita, debiendo aceptar los precios y condiciones vigentes al
+              momento de la contratación.
+            </p>
+            <p>
+              Los Clientes que hubieren contratado planes anteriores de GoLegit (Lite, Pro o Plus)
+              mantienen las condiciones acordadas conforme al numeral 13.
             </p>
 
             <h3>4.3 Procesador de pagos</h3>

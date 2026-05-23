@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   },
   title: "GoLegit — Contratos y liquidaciones para trabajadoras de casa particular",
   description:
-    "GoLegit genera contratos legales, calcula liquidaciones y mantiene el historial laboral de tu trabajadora de casa particular. Todo por WhatsApp. Primer mes gratis, sin contrato.",
+    "GoLegit genera contratos legales, calcula liquidaciones y mantiene el historial laboral de tu trabajadora de casa particular. Todo por WhatsApp. Gratis para siempre, sin tarjeta de crédito.",
   keywords: [
     "contrato nana",
     "contrato nana Chile",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "GoLegit — El contrato de tu trabajadora de casa particular, por WhatsApp",
     description:
-      "Contratos legales, liquidaciones y documentos laborales para trabajadoras de casa particular. Todo desde WhatsApp. Primer mes gratis.",
+      "Contratos legales, liquidaciones y documentos laborales para trabajadoras de casa particular. Todo desde WhatsApp. Gratis para siempre.",
     url: "https://golegit.cl",
     siteName: "GoLegit",
     locale: "es_CL",

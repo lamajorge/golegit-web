@@ -122,7 +122,7 @@ export default function Hero() {
           {/* Badge — just above the headline */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-white/65 text-xs font-medium mb-3 animate-fade-up">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-400" />
-            1 mes gratis · Sin tarjeta de crédito
+            Gratis para siempre · Sin tarjeta de crédito
           </div>
 
           {/* Headline */}
@@ -163,7 +163,7 @@ export default function Hero() {
           {/* Stats row */}
           <div className="mt-8 grid grid-cols-3 gap-4 border-t border-white/8 pt-6 animate-fade-up animate-delay-400">
             {[
-              { value: "Desde $5.990", label: "al mes" },
+              { value: "$0", label: "para empezar" },
               { value: "0", label: "apps que instalar" },
               { value: "100%", label: "automatizado" },
             ].map((s, i) => (

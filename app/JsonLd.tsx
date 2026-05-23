@@ -13,7 +13,7 @@ const faqData = [
   },
   {
     q: "¿Cómo le llega el contrato a mi trabajadora?",
-    a: "En los planes Pro y Plus, el sistema le envía el PDF por email directamente a ella con un enlace para revisar y firmar digitalmente. En el plan Lite, tú imprimes el documento y lo firman en papel.",
+    a: "Si activas Firma Electrónica + Portal en el contrato (gratis, opcional), el sistema le envía el PDF por email con enlace para revisar y firmar digitalmente. Si prefieres no activarlo, imprimes el documento y lo firman en papel.",
   },
   {
     q: "¿La firma electrónica tiene valor legal?",
@@ -28,12 +28,12 @@ const faqData = [
     a: "Sí. Soporta 8 causales de término (Arts. 159, 160 y 161 del Código del Trabajo), calcula automáticamente las indemnizaciones, vacaciones pendientes y proporcionales, y genera el PDF listo para firmar.",
   },
   {
-    q: "¿Qué pasa después del mes gratis?",
-    a: "Eliges el plan que necesitas y pagas desde el portal web. Si decides no continuar, tu cuenta se suspende pero no pierdes tus documentos — se reactiva apenas regularizas.",
+    q: "¿Tiene algún costo? ¿Hay tarjeta de crédito?",
+    a: "El software es gratis para siempre, sin tarjeta de crédito y sin permanencia. Solo pagas si decides activar el plan Asistido (operación mensual gestionada desde $14.990) o si necesitas servicios jurídicos puntuales con el abogado fundador.",
   },
   {
-    q: "¿Cuál es la diferencia entre Lite y Pro?",
-    a: "Ambos planes generan los mismos documentos. La diferencia es que Pro incluye firma digital (sin imprimir nada), portal web para tu trabajadora, verificación de identidad y recordatorios automáticos del ciclo mensual.",
+    q: "¿En qué consiste el plan Asistido?",
+    a: "Asistido es para quienes prefieren delegar la operación mensual. Pagamos Previred, registramos el Libro de Remuneraciones en Mi DT y mantenemos al día los contratos y anexos ante la Dirección del Trabajo. Tarifa plana según número de trabajadoras: $14.990 (1), $24.990 (2-3) o $39.990 (4+).",
   },
   {
     q: "¿Puedo modificar el contrato después?",
@@ -68,9 +68,10 @@ const jsonLd = {
       description:
         "GoLegit genera contratos legales, calcula liquidaciones y mantiene el historial laboral de trabajadoras de casa particular. Todo por WhatsApp, sin apps ni formularios.",
       offers: [
-        { "@type": "Offer", name: "Plan Lite", price: "6990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "6990", priceCurrency: "CLP", unitText: "MONTH" } },
-        { "@type": "Offer", name: "Plan Pro", price: "11990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "11990", priceCurrency: "CLP", unitText: "MONTH" } },
-        { "@type": "Offer", name: "Plan Plus", price: "21990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "21990", priceCurrency: "CLP", unitText: "MONTH" } },
+        { "@type": "Offer", name: "GoLegit Home", price: "0", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "0", priceCurrency: "CLP", unitText: "MONTH" }, description: "Software laboral gratis para siempre. Contratos, anexos, finiquitos, liquidaciones, firma electrónica y portal trabajadora opcionales." },
+        { "@type": "Offer", name: "GoLegit Asistido — 1 trabajadora", price: "14990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "14990", priceCurrency: "CLP", unitText: "MONTH" }, description: "Tarifa plana mensual: pago de Previred gestionado, carga Libro de Remuneraciones y registro de contratos en Mi DT." },
+        { "@type": "Offer", name: "GoLegit Asistido — 2 a 3 trabajadoras", price: "24990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "24990", priceCurrency: "CLP", unitText: "MONTH" } },
+        { "@type": "Offer", name: "GoLegit Asistido — 4 o más trabajadoras", price: "39990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "39990", priceCurrency: "CLP", unitText: "MONTH" } },
       ],
       publisher: { "@id": "https://golegit.cl/#organization" },
       inLanguage: "es-CL",
