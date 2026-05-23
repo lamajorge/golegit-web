@@ -29,7 +29,7 @@ const faqData = [
   },
   {
     q: "¿Tiene algún costo? ¿Hay tarjeta de crédito?",
-    a: "El software es gratis para siempre, sin tarjeta de crédito y sin permanencia. Solo pagas si decides activar el plan Asistido (operación mensual gestionada desde $14.990) o si necesitas servicios jurídicos puntuales con el abogado fundador.",
+    a: "El software es gratis para siempre, sin tarjeta de crédito y sin permanencia. Solo pagas si decides activar el plan Asistido (operación mensual gestionada desde $14.990) o si necesitas servicios jurídicos puntuales con nuestro equipo legal.",
   },
   {
     q: "¿En qué consiste el plan Asistido?",

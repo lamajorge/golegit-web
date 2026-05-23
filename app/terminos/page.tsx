@@ -155,9 +155,10 @@ export default function TerminosPage() {
               </li>
               <li>
                 <strong>Servicios Jurídicos:</strong> asesoría legal específica y eventual prestada
-                por el abogado fundador, cobrada por servicio y sin obligación de suscripción
-                (consultas, revisiones de contratos atípicos, tramitaciones, acompañamiento en
-                fiscalizaciones de la Dirección del Trabajo y defensa en juicio laboral).
+                por abogados habilitados colaboradores de Cubillos Lama SpA, cobrada por servicio y
+                sin obligación de suscripción (consultas, revisiones de contratos atípicos,
+                tramitaciones, acompañamiento en fiscalizaciones de la Dirección del Trabajo y
+                defensa en juicio laboral).
               </li>
             </ul>
             <p>

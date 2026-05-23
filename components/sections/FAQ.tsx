@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     q: "¿Tiene algún costo? ¿Hay tarjeta de crédito?",
-    a: "El software es gratis para siempre, sin tarjeta de crédito y sin permanencia. Solo pagas si decides activar el plan Asistido (operación mensual gestionada por nosotros, desde $14.990) o si necesitas servicios jurídicos puntuales con el abogado fundador.",
+    a: "El software es gratis para siempre, sin tarjeta de crédito y sin permanencia. Solo pagas si decides activar el plan Asistido (operación mensual gestionada por nosotros, desde $14.990) o si necesitas servicios jurídicos puntuales con nuestro equipo legal.",
   },
   {
     q: "¿En qué consiste el plan Asistido?",
@@ -42,7 +42,7 @@ const faqs = [
   },
   {
     q: "¿Y los servicios jurídicos?",
-    a: "Jorge Lama, abogado fundador, está disponible para casos atípicos o conflictivos. Se cobran por servicio, sin suscripción: consulta asíncrona ($39.990), video 30 min ($69.990), revisión de contrato atípico, tramitación de licencias Compin, acompañamiento DT o defensa en juicio laboral (cuota litis).",
+    a: "Contamos con abogados especialistas en derecho laboral chileno para casos atípicos o conflictivos. Se cobran por servicio, sin suscripción: consulta asíncrona ($39.990), video 30 min ($69.990), revisión de contrato atípico, tramitación de licencias Compin, acompañamiento DT o defensa en juicio laboral (cuota litis).",
   },
   {
     q: "¿Puedo modificar el contrato después?",

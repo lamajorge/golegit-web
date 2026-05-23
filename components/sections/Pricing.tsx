@@ -6,7 +6,7 @@ import CtaButton from "@/components/CtaButton";
 // Modelo 23-may-2026 (ver .claude/strategy/modelo-negocio.md):
 //   Home Free      — software completo gratis, toggles opcionales por contrato
 //   Asistido       — tarifa plana mensual con ops gestionadas (3 bandas)
-//   Servicios Jur. — abogado fundador a precio mercado
+//   Servicios Jur. — abogados especialistas a precio mercado
 
 type Banda = "1" | "2_3" | "4_plus";
 
@@ -70,7 +70,7 @@ export default function Pricing() {
             Software gratis. Servicio cuando lo necesites.
           </h2>
           <p className="text-ink-muted">
-            Formaliza a tu trabajadora sin costo. Suma asistencia operacional o abogado fundador
+            Formaliza a tu trabajadora sin costo. Suma asistencia operacional o asesoría legal
             solo si lo necesitas.
           </p>
         </div>
@@ -176,7 +176,7 @@ export default function Pricing() {
           <div className="relative rounded-2xl p-6 border bg-white border-gray-100 flex flex-col">
             <div className="mb-4">
               <p className="text-base font-extrabold mb-0.5 text-ink">Servicios jurídicos</p>
-              <p className="text-xs text-ink-light">Abogado fundador, cuando lo necesites</p>
+              <p className="text-xs text-ink-light">Abogados especialistas, cuando los necesites</p>
             </div>
 
             <div className="flex items-end gap-1 mb-1">
@@ -185,8 +185,8 @@ export default function Pricing() {
             <p className="text-[10px] mb-1 text-ink-faint">Sin suscripción · Solo pagas si lo usas</p>
 
             <p className="text-sm mt-3 mb-4 text-ink-muted">
-              Jorge Lama, abogado fundador, a un mensaje de distancia. Casos atípicos, conflictos y
-              defensa en juicio laboral.
+              Equipo legal especializado en derecho laboral chileno, a un mensaje de distancia.
+              Casos atípicos, conflictos y defensa en juicio.
             </p>
 
             <ul className="space-y-2 mb-6 flex-1">
@@ -211,14 +211,9 @@ export default function Pricing() {
               </li>
             </ul>
 
-            <a
-              href="https://wa.me/56934357024?text=Hola%20Jorge%2C%20necesito%20asesor%C3%ADa%20legal"
-              target="_blank"
-              rel="noopener"
-              className="block text-center text-sm font-semibold py-2.5 px-4 rounded-xl bg-ink text-white hover:bg-zinc-800 transition-colors"
-            >
+            <CtaButton className="block text-center text-sm font-semibold py-2.5 px-4 rounded-xl bg-ink text-white hover:bg-zinc-800 transition-colors">
               Hablar con un abogado
-            </a>
+            </CtaButton>
           </div>
         </div>
 
