@@ -216,8 +216,8 @@ export default function Pricing() {
                 </li>
               ))}
               <li className="flex items-center justify-between gap-4 px-5 md:px-6 py-2.5">
-                <span className="text-xs text-ink-muted">Defendemos tu juicio laboral</span>
-                <span className="text-xs font-semibold text-ink shrink-0">Cobramos al ganar</span>
+                <span className="text-xs text-ink-muted">Te defendemos en una demanda laboral</span>
+                <span className="text-xs font-semibold text-ink shrink-0">Cotizamos según el caso</span>
               </li>
             </ul>
           </div>

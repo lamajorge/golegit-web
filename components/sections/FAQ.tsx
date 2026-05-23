@@ -42,7 +42,7 @@ const faqs = [
   },
   {
     q: "¿Y los servicios jurídicos?",
-    a: "Cuando hay un caso difícil o necesitas opinión profesional, tienes abogados especialistas en trabajadoras de casa particular a un mensaje de distancia. Cobramos por servicio, sin suscripción: una consulta por escrito en menos de 24 horas ($39.990), una videollamada de 30 minutos ($69.990), revisar un contrato especial, tramitar tu licencia médica, acompañarte en una fiscalización o defender tu juicio laboral (en ese último caso, cobramos al ganar).",
+    a: "Cuando hay un caso difícil o necesitas opinión profesional, tienes abogados especialistas en trabajadoras de casa particular a un mensaje de distancia. Cobramos por servicio, sin suscripción: una consulta por escrito en menos de 24 horas ($39.990), una videollamada de 30 minutos ($69.990), revisar un contrato especial, tramitar tu licencia médica, o acompañarte en una fiscalización. Para una demanda laboral, cotizamos según la complejidad del caso.",
   },
   {
     q: "¿Puedo modificar el contrato después?",
