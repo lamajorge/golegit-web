@@ -21,7 +21,7 @@ export default function Solution() {
 
             <div className="flex flex-col gap-4 mb-10">
               {[
-                "Contratos con todas las cláusulas que pide la ley",
+                "Contratos con todas las cláusulas que exige la ley",
                 "Liquidaciones de sueldo calculadas automáticamente",
                 "Historial completo con fecha y hora de cada movimiento",
                 "Tu trabajadora también recibe sus documentos",
