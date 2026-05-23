@@ -17,7 +17,7 @@ const faqData = [
   },
   {
     q: "¿La firma electrónica tiene valor legal?",
-    a: "Sí. GoLegit usa Firma Electrónica Simple (FES) bajo la Ley 19.799. Cada firma queda registrada con la identidad del firmante, la fecha, la hora y la IP. Ese registro tiene valor probatorio ante la Inspección del Trabajo.",
+    a: "Sí. GoLegit usa Firma Electrónica Simple bajo la Ley 19.799. Cada firma queda registrada con quién firmó, cuándo y desde dónde. Ese registro sirve como prueba ante la Inspección del Trabajo.",
   },
   {
     q: "¿Puedo calcular la liquidación aunque no sepa de cotizaciones?",
@@ -29,15 +29,15 @@ const faqData = [
   },
   {
     q: "¿Tiene algún costo? ¿Hay tarjeta de crédito?",
-    a: "El software es gratis para siempre, sin tarjeta de crédito y sin permanencia. Solo pagas si decides activar el plan Asistido (operación mensual gestionada desde $14.990) o si necesitas servicios jurídicos puntuales con nuestro equipo legal.",
+    a: "El software es gratis para siempre, sin tarjeta de crédito ni permanencia. Solo pagas si quieres que nosotros nos encarguemos del papeleo cada mes (plan Asistido, desde $14.990) o si necesitas hablar con un abogado para un caso específico.",
   },
   {
     q: "¿En qué consiste el plan Asistido?",
-    a: "Asistido es para quienes prefieren delegar la operación mensual. Pagamos Previred, registramos el Libro de Remuneraciones en Mi DT y mantenemos al día los contratos y anexos ante la Dirección del Trabajo. Tarifa plana según número de trabajadoras: $14.990 (1), $24.990 (2-3) o $39.990 (4+).",
+    a: "Asistido es para quienes prefieren que nosotros nos encarguemos del papeleo cada mes. Pagamos Previred por ti, subimos el Libro de Remuneraciones a la Dirección del Trabajo y mantenemos al día los contratos y anexos ante la DT. Tarifa plana mensual: $14.990 (1 trabajadora), $24.990 (entre 2 y 3) o $39.990 (4 o más).",
   },
   {
     q: "¿Puedo modificar el contrato después?",
-    a: "Sí. Cualquier modificación se hace a través de un Anexo de Modificación, que es el mecanismo legal correcto. El contrato original no se toca y el historial queda completo.",
+    a: "Sí. Cualquier cambio se hace con un anexo — que es la forma legal correcta. El contrato original queda intacto y todos los cambios quedan registrados con fecha.",
   },
 ];
 

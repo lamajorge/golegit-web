@@ -136,9 +136,9 @@ export default function Hero() {
 
           {/* Subtitle */}
           <p className="text-base lg:text-lg text-white/70 leading-relaxed max-w-lg mb-7 animate-fade-up animate-delay-200">
-            GoLegit genera contratos legales, calcula liquidaciones y mantiene
-            el historial laboral de tu trabajadora de casa particular.
-            Sin apps, sin formularios.
+            Hacemos su contrato, calculamos su sueldo cada mes y guardamos todo
+            su historial laboral. Por WhatsApp. Sin apps que instalar ni
+            formularios que llenar.
           </p>
 
           {/* CTAs */}

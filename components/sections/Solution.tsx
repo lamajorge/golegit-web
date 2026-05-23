@@ -21,10 +21,10 @@ export default function Solution() {
 
             <div className="flex flex-col gap-4 mb-10">
               {[
-                "Contratos con cláusulas correctas por ley",
-                "Liquidaciones calculadas automáticamente",
-                "Historial completo con registro de fecha y hora",
-                "Los documentos le llegan a tu trabajadora también",
+                "Contratos con todas las cláusulas que pide la ley",
+                "Liquidaciones de sueldo calculadas automáticamente",
+                "Historial completo con fecha y hora de cada movimiento",
+                "Tu trabajadora también recibe sus documentos",
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <div className="w-5 h-5 rounded-md bg-brand-900/40 border border-brand-700/50 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -48,10 +48,10 @@ export default function Solution() {
           {/* Right: Key stats */}
           <div className="grid grid-cols-2 gap-3">
             {[
-              { value: "$0", label: "para empezar", sub: "Software gratis para siempre" },
-              { value: "Sin", label: "tarjeta de crédito", sub: "Ni datos de pago al registrarte" },
+              { value: "$0", label: "para empezar", sub: "Gratis para siempre" },
+              { value: "Sin", label: "tarjeta de crédito", sub: "Tampoco datos de pago al registrarte" },
               { value: "0 apps", label: "que instalar", sub: "Solo necesitas WhatsApp" },
-              { value: "100%", label: "automatizado", sub: "Sin intermediarios humanos" },
+              { value: "100%", label: "automatizado", sub: "Sin tener que llamar a nadie" },
             ].map((stat, i) => (
               <div key={i} className="p-5 rounded-2xl bg-white/5 border border-white/8 hover:bg-white/8 transition-colors">
                 <p className="text-3xl font-extrabold text-white tracking-tight mb-1">{stat.value}</p>

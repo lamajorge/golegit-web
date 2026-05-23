@@ -17,34 +17,34 @@ const ASISTIDO_BANDAS: Record<Banda, { precio: number; label: string; rango: str
 };
 
 const HOME_FEATURES = [
-  "Contrato, anexos, finiquito, carta de aviso",
-  "Liquidación de sueldo completa (AFP, Isapre, IATCE)",
-  "Ausencias, licencias, vacaciones, amonestaciones",
-  "Certificados y días especiales Art. 150",
-  "Multi-trabajadora ilimitado",
+  "Contratos, anexos, finiquitos y cartas de aviso",
+  "Liquidación de sueldo automática, con todas las cotizaciones",
+  "Vacaciones, licencias, ausencias y amonestaciones",
+  "Certificados laborales y días especiales (sábados, feriados)",
+  "Sin límite de trabajadoras",
 ];
 
 const HOME_FEATURES_TOGGLE = [
-  "Firma electrónica FES (Ley 19.799)",
-  "Portal y notificaciones a la trabajadora",
-  "Control de asistencia Res. 38 EXENTA DT",
-  "Recordatorios proactivos del ciclo mensual",
+  "Firma electrónica con validez legal",
+  "Portal y avisos por email para tu trabajadora",
+  "Control de asistencia digital",
+  "Recordatorios automáticos cada mes",
 ];
 
 const ASISTIDO_FEATURES = [
-  "Pago de Previred mensual gestionado",
-  "Carga Libro de Remuneraciones en Mi DT",
-  "Registro de contratos y anexos en Mi DT",
-  "Atención prioritaria operacional",
+  "Pagamos Previred por ti cada mes",
+  "Subimos tu Libro de Remuneraciones a la Dirección del Trabajo",
+  "Registramos contratos y anexos ante la DT",
+  "Atención preferente cuando lo necesites",
 ];
 
 const JURIDICOS = [
-  { item: "Consulta asíncrona < 24 h", precio: 39990 },
-  { item: "Sesión por video 30 min", precio: 69990 },
-  { item: "Revisión de contrato atípico", precio: 69990 },
-  { item: "Tramitación licencia Compin", precio: 29990 },
-  { item: "Asesoría finiquito conflictivo", precio: 149990, prefijo: "desde " },
-  { item: "Acompañamiento DT en fiscalización", precio: 199990, prefijo: "desde " },
+  { item: "Consulta por escrito en menos de 24 h", precio: 39990 },
+  { item: "Videollamada de 30 min", precio: 69990 },
+  { item: "Revisión de contrato especial", precio: 69990 },
+  { item: "Tramitamos tu licencia médica", precio: 29990 },
+  { item: "Te ayudamos con un finiquito complicado", precio: 149990, prefijo: "desde " },
+  { item: "Te acompañamos en una fiscalización", precio: 199990, prefijo: "desde " },
 ];
 
 function CheckIcon({ className }: { className?: string }) {
@@ -70,11 +70,12 @@ export default function Pricing() {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-xs font-semibold tracking-widest text-ink-light uppercase mb-4">Precios</p>
           <h2 className="text-3xl lg:text-4xl font-extrabold text-ink leading-tight tracking-tight mb-3">
-            Software gratis. Asistencia opcional.
+            Es gratis. Y si quieres, lo hacemos por ti.
           </h2>
           <p className="text-sm text-ink-muted">
-            Todo lo que necesitas para formalizar a tu trabajadora, sin costo.
-            Suma asistencia operacional solo si prefieres delegar el papeleo.
+            Todo el software para tu trabajadora del hogar, sin costo.
+            Y si prefieres que nosotros nos encarguemos del papeleo cada mes,
+            está ahí.
           </p>
         </div>
 
@@ -88,7 +89,7 @@ export default function Pricing() {
 
             <div className="mb-3 mt-1">
               <p className="text-lg font-extrabold text-white">Home</p>
-              <p className="text-xs text-white/60">Software laboral completo, sin costo</p>
+              <p className="text-xs text-white/60">Todo el software, sin costo</p>
             </div>
 
             <div className="flex items-end gap-1.5">
@@ -107,7 +108,7 @@ export default function Pricing() {
               ))}
             </ul>
 
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-white/80 mb-2">Activables por contrato</p>
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-white/80 mb-2">Lo activas cuando quieras</p>
             <ul className="space-y-1.5 mb-5 flex-1">
               {HOME_FEATURES_TOGGLE.map((f) => (
                 <li key={f} className="flex items-start gap-2 text-xs pl-2 border-l-2 border-brand-500 text-white">
@@ -159,7 +160,7 @@ export default function Pricing() {
               IVA incluido · {ASISTIDO_BANDAS[banda].label} · Cancela cuando quieras
             </p>
 
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-light mb-2">Todo lo de Home, además</p>
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-light mb-2">Incluye todo Home, y además</p>
             <ul className="space-y-1.5 mb-5 flex-1">
               {ASISTIDO_FEATURES.map((f) => (
                 <li key={f} className="flex items-start gap-2 text-xs pl-2 border-l-2 border-brand-500 text-ink font-medium">
@@ -185,14 +186,14 @@ export default function Pricing() {
                   Servicios jurídicos
                 </p>
                 <h3 className="text-lg font-extrabold text-ink leading-snug tracking-tight mb-2">
-                  ¿Necesitas un abogado para algo específico?
+                  ¿Necesitas un abogado?
                 </h3>
                 <p className="text-xs text-ink-muted leading-relaxed mb-2">
-                  Equipo legal especializado en derecho laboral chileno. Casos atípicos,
-                  conflictos, fiscalizaciones y defensa en juicio.
+                  Abogados especialistas en trabajadoras de casa particular,
+                  cuando hay un caso difícil o necesitas opinión profesional.
                 </p>
                 <p className="text-[10px] text-ink-light">
-                  Sin suscripción · Precios de mercado · Solo pagas si lo usas
+                  Sin suscripción · Solo pagas si lo usas
                 </p>
               </div>
               <CtaButton className="self-start inline-flex items-center justify-center gap-2 text-xs font-semibold py-2 px-4 rounded-lg bg-ink text-white hover:bg-zinc-800 transition-colors">
@@ -215,8 +216,8 @@ export default function Pricing() {
                 </li>
               ))}
               <li className="flex items-center justify-between gap-4 px-5 md:px-6 py-2.5">
-                <span className="text-xs text-ink-muted">Defensa en juicio laboral</span>
-                <span className="text-xs font-semibold text-ink shrink-0">20-30% cuota litis</span>
+                <span className="text-xs text-ink-muted">Defendemos tu juicio laboral</span>
+                <span className="text-xs font-semibold text-ink shrink-0">Cobramos al ganar</span>
               </li>
             </ul>
           </div>
@@ -224,8 +225,8 @@ export default function Pricing() {
 
         {/* Nota fina */}
         <p className="text-center text-[11px] text-ink-light mt-6 max-w-xl mx-auto leading-relaxed">
-          Home incluye todo lo que necesitas para cumplir con la ley.
-          Asistido es para quienes prefieren delegar la operación mensual.
+          Home tiene todo lo que necesitas para cumplir con la ley.
+          Asistido es para quienes prefieren que nosotros nos encarguemos cada mes.
         </p>
       </div>
     </section>
