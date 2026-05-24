@@ -16,8 +16,8 @@ const trustItems = [
         <polygon points="22,2 15,22 11,13 2,9"/>
       </svg>
     ),
-    title: "La trabajadora también recibe los documentos",
-    body: "GoLegit le envía los contratos y liquidaciones directamente a la trabajadora por WhatsApp y email. Transparencia que protege a ambas partes.",
+    title: "Tu trabajador/a también recibe los documentos",
+    body: "GoLegit le envía los contratos y liquidaciones directamente por WhatsApp y email. Transparencia que protege a ambas partes.",
   },
   {
     icon: (

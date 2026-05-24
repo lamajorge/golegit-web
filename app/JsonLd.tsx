@@ -33,7 +33,7 @@ const faqData = [
   },
   {
     q: "¿En qué consiste el plan Asistido?",
-    a: "Asistido es para quienes prefieren que nosotros nos encarguemos del papeleo cada mes. Pagamos Previred por ti, subimos el Libro de Remuneraciones a la Dirección del Trabajo y mantenemos al día los contratos y anexos ante la DT. Tarifa plana mensual: $14.990 (1 trabajadora), $24.990 (entre 2 y 3) o $39.990 (4 o más).",
+    a: "Asistido es para quienes prefieren que nosotros nos encarguemos del papeleo cada mes. Preparamos la planilla Previred mensual y te avisamos para que solo confirmes el pago, subimos el Libro de Remuneraciones a la Dirección del Trabajo y mantenemos al día los contratos y anexos ante la DT. Tarifa plana mensual: $14.990 (1 trabajadora), $24.990 (entre 2 y 3) o $39.990 (4 o más).",
   },
   {
     q: "¿Puedo modificar el contrato después?",

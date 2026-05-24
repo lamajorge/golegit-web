@@ -127,17 +127,17 @@ export default function Hero() {
 
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.05] tracking-tight mb-4 animate-fade-up animate-delay-100">
-            El contrato de tu
+            El contrato de quien
             <br />
-            trabajadora de casa particular,
+            trabaja en tu casa,
             <br />
             <span className="text-brand-400">por WhatsApp.</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-base lg:text-lg text-white/70 leading-relaxed max-w-lg mb-7 animate-fade-up animate-delay-200">
-            Hacemos su contrato, calculamos su sueldo cada mes y guardamos todo
-            su historial laboral. Por WhatsApp. Sin apps que instalar ni
+            Hacemos el contrato, calculamos el sueldo cada mes y guardamos todo
+            el historial laboral. Por WhatsApp. Sin apps que instalar ni
             formularios que llenar.
           </p>
 

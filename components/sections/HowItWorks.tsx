@@ -3,7 +3,7 @@ const steps = [
     number: "01",
     title: "Te registras por WhatsApp",
     description:
-      "Escríbenos por WhatsApp. Te pedimos tu nombre, RUT y los datos básicos de tu trabajadora. En minutos tu perfil está listo.",
+      "Escríbenos por WhatsApp. Te pedimos tu nombre, RUT y los datos básicos de tu trabajador/a. En minutos tu perfil está listo.",
     detail: "Sin formularios. Sin crear contraseña. Tu número de WhatsApp es tu cuenta.",
   },
   {
@@ -11,7 +11,7 @@ const steps = [
     title: "Generas el contrato",
     description:
       "GoLegit te hace las preguntas correctas: modalidad, sueldo, jornada, domicilio, AFP, Isapre. Tú respondes.",
-    detail: "El contrato llega en PDF a tu correo y al de tu trabajadora. Con cláusulas válidas según la Ley 20.786.",
+    detail: "El contrato llega en PDF a tu correo y al de tu trabajador/a. Con cláusulas válidas según la Ley 20.786.",
   },
   {
     number: "03",

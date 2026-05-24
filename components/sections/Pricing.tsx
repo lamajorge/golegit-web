@@ -26,13 +26,13 @@ const HOME_FEATURES = [
 
 const HOME_FEATURES_TOGGLE = [
   "Firma electrónica con validez legal",
-  "Portal y avisos por email para tu trabajadora",
+  "Portal y avisos por email para tu trabajador/a",
   "Control de asistencia digital",
   "Recordatorios automáticos cada mes",
 ];
 
 const ASISTIDO_FEATURES = [
-  "Pagamos Previred por ti cada mes",
+  "Dejamos lista la planilla Previred cada mes",
   "Subimos tu Libro de Remuneraciones a la Dirección del Trabajo",
   "Registramos contratos y anexos ante la DT",
   "Atención preferente cuando lo necesites",
@@ -70,12 +70,12 @@ export default function Pricing() {
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-xs font-semibold tracking-widest text-ink-light uppercase mb-4">Precios</p>
           <h2 className="text-3xl lg:text-4xl font-extrabold text-ink leading-tight tracking-tight mb-3">
-            Es gratis. Y si quieres, lo hacemos por ti.
+            Gratis siempre. Y si quieres, el papeleo lo hacemos nosotros.
           </h2>
           <p className="text-sm text-ink-muted">
-            Todo el software para tu trabajadora del hogar, sin costo.
-            Y si prefieres que nosotros nos encarguemos del papeleo cada mes,
-            está ahí.
+            Todo el software para gestionar a quien trabaja en tu casa, sin costo.
+            Si prefieres que nos encarguemos del papeleo cada mes,
+            existe el plan Asistido.
           </p>
         </div>
 

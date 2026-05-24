@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
-  title: "GoLegit — Contratos y liquidaciones para trabajadoras de casa particular",
+  title: "GoLegit — Contratos y liquidaciones para trabajadores/as de casa particular",
   description:
-    "GoLegit genera contratos legales, calcula liquidaciones y mantiene el historial laboral de tu trabajadora de casa particular. Todo por WhatsApp. Gratis para siempre, sin tarjeta de crédito.",
+    "GoLegit genera contratos legales, calcula liquidaciones y mantiene el historial laboral de tu trabajador/a de casa particular. Todo por WhatsApp. Gratis para siempre, sin tarjeta de crédito.",
   keywords: [
     "contrato nana",
     "contrato nana Chile",
@@ -45,9 +45,9 @@ export const metadata: Metadata = {
     "DT registrar contrato trabajadora",
   ],
   openGraph: {
-    title: "GoLegit — El contrato de tu trabajadora de casa particular, por WhatsApp",
+    title: "GoLegit — El contrato de quien trabaja en tu casa, por WhatsApp",
     description:
-      "Contratos legales, liquidaciones y documentos laborales para trabajadoras de casa particular. Todo desde WhatsApp. Gratis para siempre.",
+      "Contratos legales, liquidaciones y documentos laborales para trabajadores/as de casa particular. Todo desde WhatsApp. Gratis para siempre.",
     url: "https://golegit.cl",
     siteName: "GoLegit",
     locale: "es_CL",
@@ -63,9 +63,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GoLegit — El contrato de tu trabajadora, por WhatsApp",
+    title: "GoLegit — El contrato de quien trabaja en tu casa, por WhatsApp",
     description:
-      "Contratos legales y liquidaciones para trabajadoras de casa particular. Sin apps, sin formularios.",
+      "Contratos legales y liquidaciones para trabajadores/as de casa particular. Sin apps, sin formularios.",
     images: ["https://golegit.cl/i/og-default.jpg"],
   },
   robots: {

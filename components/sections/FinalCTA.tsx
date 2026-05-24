@@ -25,7 +25,7 @@ export default function FinalCTA() {
 
         <p className="text-xl text-white/50 mb-12 max-w-xl mx-auto leading-relaxed">
           Sin app, sin portal, sin contrato de permanencia. En 5 minutos tienes
-          el contrato de tu trabajadora generado y enviado.
+          el contrato de tu trabajador/a generado y enviado.
         </p>
 
         {/* CTAs */}

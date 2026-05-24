@@ -34,7 +34,7 @@ const features = [
       </svg>
     ),
     title: "Amonestaciones escritas",
-    description: "Registro formal de incumplimientos con PDF notificado a la trabajadora. Evidencia necesaria antes de un término por Art. 160.",
+    description: "Registro formal de incumplimientos con PDF notificado al trabajador/a. Evidencia necesaria antes de un término por Art. 160.",
   },
   {
     icon: (
@@ -96,12 +96,12 @@ export default function Features() {
           <h2 className="text-4xl lg:text-5xl font-extrabold text-ink leading-tight tracking-tight">
             Todo el ciclo laboral
             <br />
-            <span className="text-ink-muted font-bold">de tu trabajadora. Automatizado.</span>
+            <span className="text-ink-muted font-bold">en tu casa. Automatizado.</span>
           </h2>
         </div>
         <p className="text-ink-muted leading-relaxed max-w-2xl mb-14">
           Desde el contrato inicial hasta el finiquito, GoLegit gestiona cada etapa de la relación laboral
-          con tu trabajadora de casa particular. Cada acción queda registrada con fecha y hora —
+          con quien trabaja en tu casa. Cada acción queda registrada con fecha y hora —
           evidencia real ante la Inspección del Trabajo.
         </p>
 
