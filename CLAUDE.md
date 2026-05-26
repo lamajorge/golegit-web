@@ -84,6 +84,30 @@ Este repo **no escribe en la DB**. Solo lee `url_cortas` para el shortener. No c
 
 **Coordinación:** si se cambia la estructura de planes o precios en `golegit`, actualizar `/` sección Pricing y posiblemente `/business`.
 
+### Fuente canónica de precios (audit-26may Cluster 12)
+
+Tabla canónica de pricing Asistido vive en `golegit-app/lib/precios.ts`
+(PRECIOS + getPrecioByPlanCiclo). Esta web debe mantener los mismos
+valores en `components/sections/Pricing.tsx` + `app/JsonLd.tsx`. Si
+hay drift entre `web/` y `golegit-app/`, dim-08 cross-repo lo flag
+como P0.
+
+Asistido modelo 23-may con ciclo mensual/anual:
+- `asistido_1`: $18.990 mensual / $14.990 anual ($179.880 total/año)
+- `asistido_2_3`: $31.990 / $24.990 ($299.880/año)
+- `asistido_4_plus`: $49.990 / $39.990 ($479.880/año)
+
+Wording Previred en Asistido: "preparamos la planilla Previred" (NUNCA
+"pagamos tu Previred") hasta que GoLegit tenga Mandato Electrónico DT
+firmado + convenio Previred activo.
+
+### Inclusividad de género (audit-26may dim-13 Cluster 7)
+
+TCP puede ser hombre o mujer. Usar `trabajador/a` (o `el/la trabajador/a`)
+en wording de prosa que personalice. SEO keywords plural
+`trabajadoras de casa particular` se mantienen como término categórico
+(decisión consciente: ranking Google + término legal usado por DT).
+
 ---
 
 ## Reglas por área
