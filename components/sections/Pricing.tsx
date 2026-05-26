@@ -43,15 +43,17 @@ const ASISTIDO_FEATURES = [
   "Atención preferente cuando lo necesites",
 ];
 
-// Precios públicos (lo que paga home_free y Asistido mensual).
-// Asistido anual recibe descuento 20% que se muestra en el portal de servicios.
+// Precios públicos (home_free + Asistido mensual) y precio Asistido anual.
+// Descuento escalonado: ~20% servicios chicos, ~12% servicios caros (no encarecer
+// los caros para no perder clientes externos por precio).
+// SINCRONIZADO con golegit-app/lib/servicios-juridicos.ts § SERVICIOS.
 const JURIDICOS = [
-  { item: "Consulta por escrito en menos de 24 h", precio: 49990 },
-  { item: "Videollamada de 30 min", precio: 89990 },
-  { item: "Revisión de contrato especial", precio: 89990 },
-  { item: "Tramitamos tu licencia médica", precio: 39990 },
-  { item: "Te ayudamos con un finiquito complicado", precio: 189990, prefijo: "desde " },
-  { item: "Te acompañamos en una fiscalización", precio: 249990, prefijo: "desde " },
+  { item: "Consulta por escrito en menos de 24 h", precio: 49990, precioAsistido: 39990 },
+  { item: "Videollamada de 30 min", precio: 84990, precioAsistido: 69990 },
+  { item: "Revisión de contrato especial", precio: 84990, precioAsistido: 69990 },
+  { item: "Tramitamos tu licencia médica", precio: 37990, precioAsistido: 29990 },
+  { item: "Te ayudamos con un finiquito complicado", precio: 169990, precioAsistido: 149990, prefijo: "desde " },
+  { item: "Te acompañamos en una fiscalización", precio: 229990, precioAsistido: 199990, prefijo: "desde " },
 ];
 
 function CheckIcon({ className }: { className?: string }) {
@@ -231,27 +233,44 @@ export default function Pricing() {
                   Abogados especialistas en trabajadoras de casa particular,
                   cuando hay un caso difícil o necesitas opinión profesional.
                 </p>
-                <p className="text-[10px] text-ink-light">
+                <p className="text-[10px] text-ink-light mb-3">
                   Sin suscripción · Solo pagas si lo usas
                 </p>
+                <div className="bg-brand-50 border border-brand-200 rounded-lg p-2.5 mb-3">
+                  <p className="text-[10px] text-brand-800 leading-relaxed">
+                    <strong>Con plan Asistido anual:</strong> hasta <strong>20% descuento</strong> en
+                    cada servicio.
+                  </p>
+                </div>
               </div>
               <CtaButton className="self-start inline-flex items-center justify-center gap-2 text-xs font-semibold py-2 px-4 rounded-lg bg-ink text-white hover:bg-zinc-800 transition-colors">
                 Hablar con un abogado
               </CtaButton>
             </div>
 
-            {/* Lado derecho: tabla servicios — más compacta */}
+            {/* Lado derecho: tabla servicios con precio público + Asistido */}
             <ul className="divide-y divide-gray-100">
+              <li className="flex items-center justify-between gap-4 px-5 md:px-6 py-2 bg-gray-50/50">
+                <span className="text-[10px] font-semibold uppercase tracking-wide text-ink-light">Servicio</span>
+                <div className="flex items-center gap-3 shrink-0 text-[10px] font-semibold uppercase tracking-wide text-ink-light">
+                  <span className="w-20 text-right">Público</span>
+                  <span className="w-20 text-right text-brand-700">Asistido anual</span>
+                </div>
+              </li>
               {JURIDICOS.map((s) => (
                 <li
                   key={s.item}
                   className="flex items-center justify-between gap-4 px-5 md:px-6 py-2.5"
                 >
                   <span className="text-xs text-ink-muted">{s.item}</span>
-                  <span className="text-xs font-semibold text-ink shrink-0 font-mono">
-                    {s.prefijo ?? ""}
-                    {formatPrice(s.precio)}
-                  </span>
+                  <div className="flex items-center gap-3 shrink-0 text-xs font-mono">
+                    <span className="text-ink w-20 text-right">
+                      {s.prefijo ?? ""}{formatPrice(s.precio)}
+                    </span>
+                    <span className="text-brand-700 font-semibold w-20 text-right">
+                      {s.prefijo ?? ""}{formatPrice(s.precioAsistido)}
+                    </span>
+                  </div>
                 </li>
               ))}
               <li className="flex items-center justify-between gap-4 px-5 md:px-6 py-2.5">
