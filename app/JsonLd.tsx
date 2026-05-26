@@ -29,11 +29,11 @@ const faqData = [
   },
   {
     q: "¿Tiene algún costo? ¿Hay tarjeta de crédito?",
-    a: "El software es gratis para siempre, sin tarjeta de crédito ni permanencia. Solo pagas si quieres que nosotros nos encarguemos del papeleo cada mes (plan Asistido, desde $14.990) o si necesitas hablar con un abogado para un caso específico.",
+    a: "El software es gratis para siempre, sin tarjeta de crédito ni permanencia. Solo pagas si quieres que nosotros nos encarguemos del papeleo cada mes (plan Asistido, desde $14.990/mes con plan anual o $18.990/mes con plan mensual) o si necesitas hablar con un abogado para un caso específico.",
   },
   {
     q: "¿En qué consiste el plan Asistido?",
-    a: "Asistido es para quienes prefieren que nosotros nos encarguemos del papeleo cada mes. Preparamos la planilla Previred mensual y te avisamos para que solo confirmes el pago, subimos el Libro de Remuneraciones a la Dirección del Trabajo y mantenemos al día los contratos y anexos ante la DT. Tarifa plana mensual: $14.990 (1 trabajadora), $24.990 (entre 2 y 3) o $39.990 (4 o más).",
+    a: "Asistido es para quienes prefieren que nosotros nos encarguemos del papeleo cada mes. Preparamos la planilla Previred mensual y te avisamos para que solo confirmes el pago, subimos el Libro de Remuneraciones a la Dirección del Trabajo y mantenemos al día los contratos y anexos ante la DT. Pagando anual: $14.990/mes (1 trabajadora), $24.990/mes (2-3) o $39.990/mes (4 o más). Mensual: $18.990, $31.990 o $49.990 respectivamente.",
   },
   {
     q: "¿Puedo modificar el contrato después?",
@@ -69,9 +69,9 @@ const jsonLd = {
         "GoLegit genera contratos legales, calcula liquidaciones y mantiene el historial laboral de trabajadoras de casa particular. Todo por WhatsApp, sin apps ni formularios.",
       offers: [
         { "@type": "Offer", name: "GoLegit Home", price: "0", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "0", priceCurrency: "CLP", unitText: "MONTH" }, description: "Software laboral gratis para siempre. Contratos, anexos, finiquitos, liquidaciones, firma electrónica y portal trabajadora opcionales." },
-        { "@type": "Offer", name: "GoLegit Asistido — 1 trabajadora", price: "14990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "14990", priceCurrency: "CLP", unitText: "MONTH" }, description: "Tarifa plana mensual: pago de Previred gestionado, carga Libro de Remuneraciones y registro de contratos en Mi DT." },
-        { "@type": "Offer", name: "GoLegit Asistido — 2 a 3 trabajadoras", price: "24990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "24990", priceCurrency: "CLP", unitText: "MONTH" } },
-        { "@type": "Offer", name: "GoLegit Asistido — 4 o más trabajadoras", price: "39990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "39990", priceCurrency: "CLP", unitText: "MONTH" } },
+        { "@type": "Offer", name: "GoLegit Asistido — 1 trabajadora", price: "18990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "18990", priceCurrency: "CLP", unitText: "MONTH" }, description: "Tarifa plana mensual: planilla Previred lista cada mes, Libro de Remuneraciones a la DT y registro de contratos. Plan anual disponible a $14.990/mes (~20% descuento)." },
+        { "@type": "Offer", name: "GoLegit Asistido — 2 a 3 trabajadoras", price: "31990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "31990", priceCurrency: "CLP", unitText: "MONTH" }, description: "Plan anual disponible a $24.990/mes." },
+        { "@type": "Offer", name: "GoLegit Asistido — 4 o más trabajadoras", price: "49990", priceCurrency: "CLP", priceSpecification: { "@type": "UnitPriceSpecification", price: "49990", priceCurrency: "CLP", unitText: "MONTH" }, description: "Plan anual disponible a $39.990/mes." },
       ],
       publisher: { "@id": "https://golegit.cl/#organization" },
       inLanguage: "es-CL",

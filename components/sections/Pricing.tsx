@@ -9,11 +9,16 @@ import CtaButton from "@/components/CtaButton";
 //   Servicios Jur — abogados especialistas a precio mercado (sección aparte)
 
 type Banda = "1" | "2_3" | "4_plus";
+type Ciclo = "mensual" | "anual";
 
-const ASISTIDO_BANDAS: Record<Banda, { precio: number; label: string; rango: string }> = {
-  "1": { precio: 14990, label: "1 trabajadora", rango: "1" },
-  "2_3": { precio: 24990, label: "2 a 3 trabajadoras", rango: "2-3" },
-  "4_plus": { precio: 39990, label: "4 o más trabajadoras", rango: "4+" },
+// Precios canónicos modelo 23-may (decisión 25-may):
+//   mensual = precio público.
+//   anual = precio mensual equivalente al pagar plan anual (= totalAnual/12),
+//   descuento ~20% sobre mensual.
+const ASISTIDO_BANDAS: Record<Banda, { mensual: number; anual: number; totalAnual: number; label: string; rango: string }> = {
+  "1": { mensual: 18990, anual: 14990, totalAnual: 179880, label: "1 trabajadora", rango: "1" },
+  "2_3": { mensual: 31990, anual: 24990, totalAnual: 299880, label: "2 a 3 trabajadoras", rango: "2-3" },
+  "4_plus": { mensual: 49990, anual: 39990, totalAnual: 479880, label: "4 o más trabajadoras", rango: "4+" },
 };
 
 const HOME_FEATURES = [
@@ -38,13 +43,15 @@ const ASISTIDO_FEATURES = [
   "Atención preferente cuando lo necesites",
 ];
 
+// Precios públicos (lo que paga home_free y Asistido mensual).
+// Asistido anual recibe descuento 20% que se muestra en el portal de servicios.
 const JURIDICOS = [
-  { item: "Consulta por escrito en menos de 24 h", precio: 39990 },
-  { item: "Videollamada de 30 min", precio: 69990 },
-  { item: "Revisión de contrato especial", precio: 69990 },
-  { item: "Tramitamos tu licencia médica", precio: 29990 },
-  { item: "Te ayudamos con un finiquito complicado", precio: 149990, prefijo: "desde " },
-  { item: "Te acompañamos en una fiscalización", precio: 199990, prefijo: "desde " },
+  { item: "Consulta por escrito en menos de 24 h", precio: 49990 },
+  { item: "Videollamada de 30 min", precio: 89990 },
+  { item: "Revisión de contrato especial", precio: 89990 },
+  { item: "Tramitamos tu licencia médica", precio: 39990 },
+  { item: "Te ayudamos con un finiquito complicado", precio: 189990, prefijo: "desde " },
+  { item: "Te acompañamos en una fiscalización", precio: 249990, prefijo: "desde " },
 ];
 
 function CheckIcon({ className }: { className?: string }) {
@@ -61,7 +68,9 @@ function formatPrice(n: number) {
 
 export default function Pricing() {
   const [banda, setBanda] = useState<Banda>("1");
-  const precioAsistido = ASISTIDO_BANDAS[banda].precio;
+  const [ciclo, setCiclo] = useState<Ciclo>("anual");
+  const precioAsistido = ASISTIDO_BANDAS[banda][ciclo];
+  const totalAnual = ASISTIDO_BANDAS[banda].totalAnual;
 
   return (
     <section id="precios" className="py-24 bg-[#fafaf8]">
@@ -150,14 +159,44 @@ export default function Pricing() {
               </div>
             </div>
 
+            {/* Toggle ciclo */}
+            <div className="mb-2.5">
+              <p className="text-[10px] font-semibold uppercase tracking-wide text-ink-light mb-1">
+                Frecuencia de pago
+              </p>
+              <div className="inline-flex items-center bg-gray-100 border border-gray-200 rounded-lg p-0.5">
+                <button
+                  onClick={() => setCiclo("anual")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] font-semibold transition-colors ${
+                    ciclo === "anual" ? "bg-ink text-white" : "text-ink-muted hover:text-ink"
+                  }`}
+                >
+                  Anual <span className="text-brand-400">−20%</span>
+                </button>
+                <button
+                  onClick={() => setCiclo("mensual")}
+                  className={`px-2.5 py-1 rounded-md text-[11px] font-semibold transition-colors ${
+                    ciclo === "mensual" ? "bg-ink text-white" : "text-ink-muted hover:text-ink"
+                  }`}
+                >
+                  Mensual
+                </button>
+              </div>
+            </div>
+
             <div className="flex items-end gap-1.5">
               <span className="text-4xl font-extrabold tracking-tight text-ink">
                 {formatPrice(precioAsistido)}
               </span>
               <span className="text-xs pb-1.5 text-ink-light">/mes</span>
             </div>
-            <p className="text-[10px] mb-4 text-ink-faint">
+            <p className="text-[10px] mb-1 text-ink-faint">
               IVA incluido · {ASISTIDO_BANDAS[banda].label} · Cancela cuando quieras
+            </p>
+            <p className="text-[10px] mb-4 text-ink-faint">
+              {ciclo === "anual"
+                ? `Pago anual: ${formatPrice(totalAnual)}`
+                : `Cambia a Anual y ahorra ~20% (${formatPrice(ASISTIDO_BANDAS[banda].anual)}/mes equivalente)`}
             </p>
 
             <p className="text-[11px] font-semibold uppercase tracking-wide text-ink-light mb-2">Incluye todo Home, y además</p>

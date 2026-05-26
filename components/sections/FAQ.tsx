@@ -34,15 +34,15 @@ const faqs = [
   },
   {
     q: "¿Tiene algún costo? ¿Hay tarjeta de crédito?",
-    a: "El software es gratis para siempre, sin tarjeta de crédito ni permanencia. Solo pagas si quieres que nosotros nos encarguemos del papeleo cada mes (plan Asistido, desde $14.990) o si necesitas hablar con un abogado para un caso específico.",
+    a: "El software es gratis para siempre, sin tarjeta de crédito ni permanencia. Solo pagas si quieres que nosotros nos encarguemos del papeleo cada mes (plan Asistido, desde $14.990/mes con plan anual o $18.990/mes con plan mensual) o si necesitas hablar con un abogado para un caso específico.",
   },
   {
     q: "¿En qué consiste el plan Asistido?",
-    a: "Asistido es para quienes prefieren que nosotros nos encarguemos del papeleo cada mes. Preparamos la planilla Previred mensual y te avisamos para que solo confirmes el pago, subimos el Libro de Remuneraciones a la Dirección del Trabajo y mantenemos al día los contratos y anexos ante la DT. Tarifa plana mensual según cuántas trabajadoras tengas: $14.990 (1), $24.990 (entre 2 y 3) o $39.990 (4 o más).",
+    a: "Asistido es para quienes prefieren que nosotros nos encarguemos del papeleo cada mes. Preparamos la planilla Previred mensual y te avisamos para que solo confirmes el pago, subimos el Libro de Remuneraciones a la Dirección del Trabajo y mantenemos al día los contratos y anexos ante la DT. Tarifa según cuántas trabajadoras tengas — pagando anual: $14.990/mes (1), $24.990/mes (2-3) o $39.990/mes (4 o más). Mensual: $18.990, $31.990 o $49.990 respectivamente (~20% más).",
   },
   {
     q: "¿Y los servicios jurídicos?",
-    a: "Cuando hay un caso difícil o necesitas opinión profesional, tienes abogados especialistas en trabajadoras de casa particular a un mensaje de distancia. Cobramos por servicio, sin suscripción: una consulta por escrito en menos de 24 horas ($39.990), una videollamada de 30 minutos ($69.990), revisar un contrato especial, tramitar tu licencia médica, o acompañarte en una fiscalización. Para una demanda laboral, cotizamos según la complejidad del caso.",
+    a: "Cuando hay un caso difícil o necesitas opinión profesional, tienes abogados especialistas en trabajadoras de casa particular a un mensaje de distancia. Cobramos por servicio, sin suscripción: una consulta por escrito en menos de 24 horas ($49.990), una videollamada de 30 minutos ($89.990), revisar un contrato especial, tramitar tu licencia médica, o acompañarte en una fiscalización. Para una demanda laboral, cotizamos según la complejidad del caso. Clientes con plan Asistido anual reciben 20% de descuento.",
   },
   {
     q: "¿Puedo modificar el contrato después?",
