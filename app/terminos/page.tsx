@@ -52,7 +52,7 @@ export default function TerminosPage() {
               <li><strong>Servicio:</strong> la plataforma GoLegit, que permite al Cliente gestionar relaciones laborales con Trabajadores/as de casa particular (TCP) conforme a la legislación chilena, mediante mensajería WhatsApp y portales web.</li>
               <li><strong>Plataforma:</strong> el conjunto de software, interfaces, bases de datos, APIs y portales que componen el Servicio, incluyendo <em>app.golegit.cl</em>, <em>golegit.cl</em> y la cuenta oficial de WhatsApp de GoLegit.</li>
               <li><strong>Cuenta:</strong> el registro de identificación del Cliente en el Servicio, asociado a un número de teléfono móvil y a un correo electrónico.</li>
-              <li><strong>Plan:</strong> modalidad de suscripción contratada por el Cliente (Lite, Pro o Plus), que determina las funcionalidades, límites y precios aplicables.</li>
+              <li><strong>Plan:</strong> modalidad del Servicio contratada por el Cliente — <em>Home</em> (gratuito), <em>Asistido</em> en sus bandas según número de Trabajadores/as (1 / 2-3 / 4 o más), o cualquiera de los <em>Servicios Jurídicos</em> de pago por servicio — que determina las funcionalidades, límites y precios aplicables. Los Planes anteriores <em>Lite</em>, <em>Pro</em> y <em>Plus</em> se mantienen vigentes para Clientes que los hubieren contratado antes del 23 de mayo de 2026, en los términos del numeral 13.</li>
               <li><strong>Documento:</strong> cualquier instrumento generado por la Plataforma a partir de los datos ingresados por el Cliente, incluyendo —sin limitar— contrato de trabajo, anexo, liquidación de remuneraciones, finiquito, carta de aviso, amonestación, certificado de vacaciones, certificado de antigüedad y protocolo Ley Karin.</li>
               <li><strong>FES:</strong> firma electrónica simple en los términos del artículo 3° de la Ley N° 19.799 sobre documentos electrónicos, firma electrónica y servicios de certificación.</li>
               <li><strong>Trabajador/a:</strong> persona natural contratada por el Cliente para prestar servicios de casa particular conforme al Código del Trabajo (CT), cuyos datos son tratados en la Plataforma por encargo del Cliente.</li>
@@ -77,7 +77,7 @@ export default function TerminosPage() {
               <li>Calcular liquidaciones mensuales, cotizaciones previsionales, asignación familiar e IATCE conforme a los parámetros legales vigentes.</li>
               <li>Registrar ausencias, licencias médicas, amonestaciones, vacaciones y días especiales trabajados.</li>
               <li>Gestionar el protocolo de Ley Karin (Ley N° 21.643) obligatorio para empleadores.</li>
-              <li>Ofrecer un portal web autenticado al Cliente y —en los planes Pro y Plus— al/la Trabajador/a, con documentos históricos y firma electrónica FES.</li>
+              <li>Ofrecer un portal web autenticado al Cliente y, cuando el contrato tiene la firma electrónica FES y el canal con el/la Trabajador/a activados, también un portal para el/la Trabajador/a con sus documentos históricos.</li>
             </ul>
             <p>
               El Servicio <strong>no sustituye el asesoramiento legal especializado</strong> para
@@ -147,11 +147,14 @@ export default function TerminosPage() {
               </li>
               <li>
                 <strong>Asistido:</strong> tarifa plana mensual que incorpora servicios
-                operacionales gestionados por Cubillos Lama SpA — pago de cotizaciones previsionales
-                vía Previred, carga del Libro de Remuneraciones Electrónico en Mi DT y registro de
-                contratos y anexos ante la Dirección del Trabajo. Tres bandas según número de
-                trabajadores/as activos/as: 1 trabajador/a, 2 a 3 trabajadores/as y 4 o más
-                trabajadores/as.
+                operacionales gestionados por Cubillos Lama SpA — preparación mensual de la
+                planilla Previred para que el Cliente la pague, carga del Libro de Remuneraciones
+                Electrónico en Mi DT y registro de contratos y anexos ante la Dirección del Trabajo.
+                Tres bandas según número de trabajadores/as activos/as: 1 trabajador/a, 2 a 3
+                trabajadores/as y 4 o más trabajadores/as. El pago directo de las cotizaciones
+                quedará disponible cuando GoLegit cuente con Mandato Electrónico ante la Dirección
+                del Trabajo y convenio activo con Previred, lo que se informará oportunamente al
+                Cliente.
               </li>
               <li>
                 <strong>Servicios Jurídicos:</strong> asesoría legal específica y eventual prestada

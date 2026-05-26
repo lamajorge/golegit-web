@@ -13,11 +13,11 @@ const faqs = [
     a: "Sí. Las plantillas fueron diseñadas por un abogado y cumplen con la Ley 20.786 y el Código del Trabajo chileno. Incluyen las cláusulas obligatorias para trabajo de casa particular, con variantes específicas para puertas adentro y puertas afuera.",
   },
   {
-    q: "¿Y si mi trabajadora ya tiene contrato de antes?",
+    q: "¿Y si mi trabajador/a ya tiene contrato de antes?",
     a: "También funciona. Ingresas la relación laboral que ya tienen — incluyendo la fecha real en que ella empezó a trabajar contigo — y GoLegit arma un anexo que actualiza y formaliza todo. La antigüedad para sus vacaciones e indemnizaciones se cuenta desde el día real en que empezó, no desde que entras a GoLegit.",
   },
   {
-    q: "¿Cómo le llega el contrato a mi trabajadora?",
+    q: "¿Cómo le llega el contrato a mi trabajador/a?",
     a: "Si activas Firma Electrónica + Portal en el contrato (gratis, opcional), el sistema le envía el PDF por email directamente con un enlace para revisar y firmar digitalmente. Si prefieres no activarlo, tú imprimes el documento y lo firman en papel. La elección es por contrato.",
   },
   {
@@ -42,14 +42,14 @@ const faqs = [
   },
   {
     q: "¿Y los servicios jurídicos?",
-    a: "Cuando hay un caso difícil o necesitas opinión profesional, tienes abogados especialistas en trabajadoras de casa particular a un mensaje de distancia. Cobramos por servicio, sin suscripción: una consulta por escrito en menos de 24 horas ($49.990), una videollamada de 30 minutos ($89.990), revisar un contrato especial, tramitar tu licencia médica, o acompañarte en una fiscalización. Para una demanda laboral, cotizamos según la complejidad del caso. Clientes con plan Asistido anual reciben 20% de descuento.",
+    a: "Cuando hay un caso difícil o necesitas opinión profesional, tienes abogados especialistas en trabajadores/as de casa particular a un mensaje de distancia. Cobramos por servicio, sin suscripción: una consulta por escrito en menos de 24 horas ($49.990), una videollamada de 30 minutos ($84.990), revisar un contrato especial, tramitar la licencia médica del/la trabajador/a, o acompañarte en una fiscalización. Para una demanda laboral, cotizamos según la complejidad del caso. Clientes con plan Asistido anual reciben hasta 20% de descuento.",
   },
   {
     q: "¿Puedo modificar el contrato después?",
     a: "Sí. Cualquier cambio se hace con un anexo — que es la forma legal correcta. El contrato original queda intacto y todos los cambios quedan registrados con fecha.",
   },
   {
-    q: "¿Cómo se identifica mi trabajadora en el sistema?",
+    q: "¿Cómo se identifica mi trabajador/a en el sistema?",
     a: "Mediante su RUT. Al registrarla, el sistema la vincula a tu contrato. Si activas el Portal Trabajadora en el contrato (gratis, opcional), ella también puede acceder a sus documentos desde su propio WhatsApp o desde el portal web.",
   },
 ];

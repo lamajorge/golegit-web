@@ -12,7 +12,7 @@ const faqData = [
     a: "Sí. Las plantillas fueron diseñadas por un abogado y cumplen con la Ley 20.786 y el Código del Trabajo chileno. Incluyen las cláusulas obligatorias para trabajo de casa particular, con variantes específicas para puertas adentro y puertas afuera.",
   },
   {
-    q: "¿Cómo le llega el contrato a mi trabajadora?",
+    q: "¿Cómo le llega el contrato a mi trabajador/a?",
     a: "Si activas Firma Electrónica + Portal en el contrato (gratis, opcional), el sistema le envía el PDF por email con enlace para revisar y firmar digitalmente. Si prefieres no activarlo, imprimes el documento y lo firman en papel.",
   },
   {

@@ -85,7 +85,7 @@ export default async function RecursosPage({
           </h1>
           <p className="text-lg text-white/60 leading-relaxed max-w-xl">
             Guías prácticas, plantillas y referencias legales para gestionar
-            correctamente a tu trabajadora de casa particular.
+            correctamente a tu trabajador/a de casa particular.
           </p>
         </div>
       </section>

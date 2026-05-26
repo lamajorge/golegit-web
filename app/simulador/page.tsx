@@ -29,7 +29,7 @@ export default function SimuladorLanding() {
             <span className="text-brand-600">trabajadoras de casa particular</span>
           </h1>
           <p className="text-lg text-ink-muted leading-relaxed max-w-2xl">
-            Calcula la liquidación de sueldo y verifica la jornada laboral de tu trabajadora
+            Calcula la liquidación de sueldo y verifica la jornada laboral de tu trabajador/a
             de casa particular según la ley chilena vigente. Gratis, sin registrarse,
             sin instalar nada.
           </p>
@@ -62,7 +62,7 @@ export default function SimuladorLanding() {
             </h2>
             <p className="text-ink-muted leading-relaxed mb-3">
               Desde el <strong>26 de abril de 2026</strong> rige la jornada de 42 horas semanales.
-              Genera el anexo para tu trabajadora de casa particular puertas afuera y descárgalo en PDF.
+              Genera el anexo para tu trabajador/a de casa particular puertas afuera y descárgalo en PDF.
               <strong className="text-amber-700"> Gratis, sin registro.</strong>
             </p>
             <div className="inline-flex items-center gap-2 text-sm font-semibold text-amber-700 group-hover:gap-3 transition-all">

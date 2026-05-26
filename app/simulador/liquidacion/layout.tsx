@@ -3,13 +3,13 @@ import type { Metadata } from "next";
 const OG_URL = "https://golegit.cl/simulador/liquidacion";
 const OG_TITLE = "Calculadora de liquidación TCP — GoLegit";
 const OG_DESC =
-  "Calcula el sueldo líquido y el costo total para el empleador de tu trabajadora de casa particular. AFP, Fonasa, aportes patronales. Gratis, sin registrarse.";
+  "Calcula el sueldo líquido y el costo total para el empleador de tu trabajador/a de casa particular. AFP, Fonasa, aportes patronales. Gratis, sin registrarse.";
 const OG_IMG = "https://golegit.cl/i/liquidacion.jpg";
 
 export const metadata: Metadata = {
   title: "Calculadora de liquidación trabajadora de casa particular — GoLegit",
   description:
-    "Calcula el sueldo líquido y el costo total para el empleador de tu trabajadora de casa particular. AFP, Fonasa, aportes patronales y proporcional de días. Gratis, sin registrarse.",
+    "Calcula el sueldo líquido y el costo total para el empleador de tu trabajador/a de casa particular. AFP, Fonasa, aportes patronales y proporcional de días. Gratis, sin registrarse.",
   keywords: [
     "calculadora liquidación trabajadora de casa particular",
     "simulador sueldo asesora de hogar",
@@ -53,17 +53,17 @@ const howToSchema = {
     {
       "@type": "HowToStep",
       name: "Selecciona la AFP",
-      text: "Elige la AFP de la trabajadora. Cada AFP tiene una tasa de comisión distinta que afecta el descuento.",
+      text: "Elige la AFP de el/la trabajador/a. Cada AFP tiene una tasa de comisión distinta que afecta el descuento.",
     },
     {
       "@type": "HowToStep",
       name: "Indica los días trabajados",
-      text: "Si la trabajadora no trabajó el mes completo, ingresa los días efectivamente trabajados para calcular el proporcional.",
+      text: "Si el/la trabajador/a no trabajó el mes completo, ingresa los días efectivamente trabajados para calcular el proporcional.",
     },
     {
       "@type": "HowToStep",
       name: "Obtén el resultado",
-      text: "La calculadora muestra el sueldo líquido (lo que recibe la trabajadora), los descuentos legales (AFP + Fonasa) y el costo total para el empleador incluyendo aportes patronales (SIS, AFC TCP, Mutual).",
+      text: "La calculadora muestra el sueldo líquido (lo que recibe el/la trabajador/a), los descuentos legales (AFP + Fonasa) y el costo total para el empleador incluyendo aportes patronales (SIS, AFC TCP, Mutual).",
     },
   ],
   totalTime: "PT2M",

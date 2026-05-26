@@ -362,7 +362,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
                     <label className={labelCls}>Líquido a pagar</label>
                     <MoneyInput value={liquidoRaw} onChange={setLiquidoRaw} placeholder="600000" />
                     <p className="text-xs text-ink-light mt-1.5 leading-relaxed bg-amber-50 border border-amber-100 rounded-lg px-3 py-2">
-                      Ingresa el monto total que recibirá la trabajadora, <strong>incluyendo</strong> movilización y colación. El sistema descontará esos haberes antes de calcular el imponible.
+                      Ingresa el monto total que recibirá el/la trabajador/a, <strong>incluyendo</strong> movilización y colación. El sistema descontará esos haberes antes de calcular el imponible.
                     </p>
                     {liquidoPact > 0 && rLiq.sueldoImponible > 0 && rLiq.sueldoImponible < immMinimo && (
                       <p className="text-xs text-amber-600 mt-1.5 flex items-center gap-1.5">
@@ -573,7 +573,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
               <p className="text-5xl font-light text-white mb-1" style={{ fontFamily: "var(--font-fraunces)" }}>
                 {clp(modo === "base" ? rBase.liquido : rLiq.liquidoReal)}
               </p>
-              <p className="text-sm text-brand-200">Lo que recibe la trabajadora</p>
+              <p className="text-sm text-brand-200">Lo que recibe el/la trabajador/a</p>
             </div>
 
             {/* Aportes empleador */}
@@ -582,7 +582,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
                 Aportes del empleador — Previred
               </p>
               <p className="text-[11px] text-ink-light mb-4 leading-relaxed">
-                Pagados directamente por el empleador. No se descuentan del sueldo de la trabajadora.
+                Pagados directamente por el empleador. No se descuentan del sueldo de el/la trabajador/a.
               </p>
               {(() => {
                 const x = modo === "base" ? rBase : rLiq;

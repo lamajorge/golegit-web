@@ -3,13 +3,13 @@ import type { Metadata } from "next";
 const OG_URL = "https://golegit.cl/simulador/jornada";
 const OG_TITLE = "Calculadora de jornada — GoLegit";
 const OG_DESC =
-  "Verifica si la jornada de tu trabajadora de casa particular cumple la ley y genera la cláusula lista para el contrato. Actualizado con la jornada de 42 horas (Ley 21.561).";
+  "Verifica si la jornada de tu trabajador/a de casa particular cumple la ley y genera la cláusula lista para el contrato. Actualizado con la jornada de 42 horas (Ley 21.561).";
 const OG_IMG = "https://golegit.cl/i/novedad-jornada-42h.jpg";
 
 export const metadata: Metadata = {
   title: "Calculadora de jornada laboral trabajadora de casa particular — GoLegit",
   description:
-    "Verifica si la jornada de tu trabajadora de casa particular cumple la ley y genera la cláusula de jornada lista para el contrato. Actualizado con la reducción a 42 horas (Ley 21.561).",
+    "Verifica si la jornada de tu trabajador/a de casa particular cumple la ley y genera la cláusula de jornada lista para el contrato. Actualizado con la reducción a 42 horas (Ley 21.561).",
   keywords: [
     "calculadora jornada trabajadora de casa particular",
     "jornada laboral asesora de hogar Chile",

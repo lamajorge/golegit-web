@@ -337,8 +337,8 @@ export default function PrivacidadPage() {
               <li>Mediante las opciones disponibles en el portal web del Cliente o del/la Trabajador/a.</li>
             </ul>
             <p>
-              GoLegit responderá la solicitud en un plazo máximo de <strong>quince (15) días
-              hábiles</strong>, prorrogable fundadamente, conforme al artículo 16 ter de la Ley N°
+              GoLegit responderá la solicitud en un plazo máximo de <strong>treinta (30) días
+              corridos</strong>, prorrogable fundadamente, conforme al artículo 11 de la Ley N°
               21.719. La atención del derecho es gratuita, salvo los casos de solicitudes
               manifiestamente infundadas o excesivas, en que podrá exigirse una contraprestación
               razonable.
