@@ -386,9 +386,9 @@ export default function PrivacidadPage() {
               y representar un riesgo para los derechos de los titulares, GoLegit:
             </p>
             <ul>
-              <li>Notificará a la <strong>Agencia de Protección de Datos Personales</strong>, sin dilación indebida y, cuando sea posible, a más tardar dentro de las <strong>72 horas</strong> de haber tenido conocimiento del incidente, de conformidad con el artículo 32 de la Ley N° 21.719.</li>
-              <li>Notificará a los titulares afectados <strong>sin dilación indebida</strong> cuando la violación sea susceptible de producirles un perjuicio significativo, incluyendo las medidas adoptadas y las recomendaciones para mitigar los efectos.</li>
-              <li>Registrará internamente todo incidente, independientemente de la obligación de notificación, para fines de rendición de cuentas y mejora continua.</li>
+              <li>Notificará a la <strong>Agencia de Protección de Datos Personales</strong>, por los medios más expeditos posibles y sin dilaciones indebidas, en conformidad con el <strong>artículo 14 sexies</strong> de la Ley N° 21.719, y respetando el procedimiento específico que dicte la Agencia mediante reglamento una vez en vigencia plena la Ley.</li>
+              <li>Notificará a los titulares afectados <strong>sin dilación indebida</strong> cuando la violación sea susceptible de producirles un perjuicio significativo, incluyendo las medidas adoptadas y las recomendaciones para mitigar los efectos (artículo 14 septies Ley N° 21.719).</li>
+              <li>Registrará internamente todo incidente, independientemente de la obligación de notificación, para fines de rendición de cuentas (artículo 21 Ley N° 21.719) y mejora continua.</li>
             </ul>
           </section>
 
