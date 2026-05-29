@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
@@ -9,40 +9,34 @@ interface VerificacionResult {
   encontrado: boolean;
   error?: string;
   tipo_documento?: string;
-  nombre_documento?: string;
   estado?: string;
   estado_firma?: string;
   metodo_firma?: string;
   firmado_empleador_en?: string | null;
   firmado_trabajador_en?: string | null;
   creado_en?: string;
-  nombre_empleador?: string;
-  nombre_trabajador?: string;
+  // Material de verificación de integridad (ISS-002). NO se exponen nombres ni
+  // url del PDF — el endpoint público solo confirma integridad/firma.
+  hash_sha256?: string;
+  codigo_verificacion?: string;
+  tsa_token_disponible?: boolean;
 }
 
 interface Firmante {
   rol: "empleador" | "trabajador";
-  nombre: string;
   firmado_en: string;
 }
 
 const TIPO_DOC_LABEL: Record<string, string> = {
   contrato: "Contrato de trabajo",
-  anexo: "Anexo de modificaci\u00f3n",
-  liquidacion: "Liquidaci\u00f3n de sueldo",
+  anexo: "Anexo de modificación",
+  liquidacion: "Liquidación de sueldo",
   finiquito: "Finiquito",
   carta_aviso: "Carta de aviso",
-  amonestacion: "Amonestaci\u00f3n escrita",
+  amonestacion: "Amonestación escrita",
   certificado_vacaciones: "Certificado de vacaciones",
-  certificado_antiguedad: "Certificado de antig\u00fcedad",
+  certificado_antiguedad: "Certificado de antigüedad",
   protocolo_karin: "Protocolo Ley Karin",
-};
-
-const ESTADO_FIRMA_LABEL: Record<string, { label: string; color: string }> = {
-  sin_firma: { label: "Sin firma", color: "text-gray-500" },
-  simple: { label: "Firmado por una parte", color: "text-amber-600" },
-  completa: { label: "Firmado por ambas partes", color: "text-green-700" },
-  ninguno: { label: "Sin firma requerida", color: "text-gray-400" },
 };
 
 function formatFecha(iso: string): string {
@@ -61,21 +55,37 @@ function formatFecha(iso: string): string {
   }
 }
 
+// Calcula SHA-256 (hex) de un archivo, 100% en el navegador (Web Crypto).
+// No sube el archivo a ningún servidor — la verificación es local.
+async function sha256Hex(file: File): Promise<string> {
+  const buf = await file.arrayBuffer();
+  const digest = await crypto.subtle.digest("SHA-256", buf);
+  return Array.from(new Uint8Array(digest))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
 export default function VerificarCliente() {
   const [codigo, setCodigo] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<VerificacionResult | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
+  // Verificador por upload (compara hash de la copia del tenedor)
+  const [comparando, setComparando] = useState(false);
+  const [matchResult, setMatchResult] = useState<null | "match" | "mismatch">(null);
+  const [archivoNombre, setArchivoNombre] = useState("");
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setResult(null);
     setErrorMsg("");
+    setMatchResult(null);
+    setArchivoNombre("");
 
     const raw = codigo.trim().toUpperCase();
     if (!/^GL-[0-9A-F]{8}$/.test(raw)) {
       setErrorMsg(
-        'El c\u00f3digo debe tener el formato GL-XXXXXXXX (ejemplo: GL-1A2B3C4D).'
+        'El código debe tener el formato GL-XXXXXXXX (ejemplo: GL-1A2B3C4D).'
       );
       return;
     }
@@ -100,9 +110,27 @@ export default function VerificarCliente() {
       const data: VerificacionResult = await res.json();
       setResult(data);
     } catch {
-      setErrorMsg("Error de conexi\u00f3n. Intenta nuevamente.");
+      setErrorMsg("Error de conexión. Intenta nuevamente.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleArchivo(e: ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file || !result?.hash_sha256) return;
+    setArchivoNombre(file.name);
+    setMatchResult(null);
+    setComparando(true);
+    try {
+      const hex = await sha256Hex(file);
+      setMatchResult(
+        hex.toLowerCase() === result.hash_sha256.toLowerCase() ? "match" : "mismatch"
+      );
+    } catch {
+      setMatchResult("mismatch");
+    } finally {
+      setComparando(false);
     }
   }
 
@@ -140,12 +168,12 @@ export default function VerificarCliente() {
       )}
 
       {result?.encontrado && (() => {
-        // Construir lista de firmantes a partir de los datos del RPC
+        // Firmantes por ROL (sin nombres — minimización de datos ISS-002).
         const firmantes: Firmante[] = []
-        if (result.firmado_empleador_en && result.nombre_empleador)
-          firmantes.push({ rol: "empleador", nombre: result.nombre_empleador, firmado_en: result.firmado_empleador_en })
-        if (result.firmado_trabajador_en && result.nombre_trabajador)
-          firmantes.push({ rol: "trabajador", nombre: result.nombre_trabajador, firmado_en: result.firmado_trabajador_en })
+        if (result.firmado_empleador_en)
+          firmantes.push({ rol: "empleador", firmado_en: result.firmado_empleador_en })
+        if (result.firmado_trabajador_en)
+          firmantes.push({ rol: "trabajador", firmado_en: result.firmado_trabajador_en })
         const n_firmas = firmantes.length
 
         return (
@@ -176,36 +204,22 @@ export default function VerificarCliente() {
                   result.tipo_documento}
               </dd>
 
-              {result.nombre_documento && (
-                <>
-                  <dt className="text-ink-muted">Documento</dt>
-                  <dd className="text-ink">{result.nombre_documento}</dd>
-                </>
-              )}
-
-              {result.nombre_empleador && (
-                <>
-                  <dt className="text-ink-muted">Empleador</dt>
-                  <dd className="text-ink">{result.nombre_empleador}</dd>
-                </>
-              )}
-
-              {result.nombre_trabajador && (
-                <>
-                  <dt className="text-ink-muted">Trabajador/a</dt>
-                  <dd className="text-ink">{result.nombre_trabajador}</dd>
-                </>
-              )}
-
               {result.creado_en && (
                 <>
                   <dt className="text-ink-muted">Generado</dt>
                   <dd className="text-ink">{formatFecha(result.creado_en)}</dd>
                 </>
               )}
+
+              {result.tsa_token_disponible && (
+                <>
+                  <dt className="text-ink-muted">Sello de tiempo</dt>
+                  <dd className="text-ink">S&iacute; (TSA RFC 3161)</dd>
+                </>
+              )}
             </dl>
 
-            {/* ── Sección de firmas ── */}
+            {/* ── Sección de firmas (por rol, sin identidad) ── */}
             <div className="border-t border-green-200 pt-4 mt-2">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-sm font-semibold text-ink">
@@ -232,10 +246,9 @@ export default function VerificarCliente() {
                       className="border border-green-300 bg-white rounded-lg px-4 py-3"
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <p className="text-sm font-medium text-ink">{f.nombre}</p>
-                          <p className="text-xs text-ink-muted capitalize">{f.rol === "empleador" ? "Empleador/a" : "Trabajador/a"}</p>
-                        </div>
+                        <p className="text-sm font-medium text-ink capitalize">
+                          {f.rol === "empleador" ? "Empleador/a" : "Trabajador/a"}
+                        </p>
                         <span className="shrink-0 text-xs font-mono bg-green-50 border border-green-200 text-green-700 px-2 py-0.5 rounded">
                           ✓ FES
                         </span>
@@ -252,10 +265,55 @@ export default function VerificarCliente() {
               )}
             </div>
 
+            {/* ── Huella SHA-256 + verificador por upload ── */}
+            {result.hash_sha256 && (
+              <div className="border-t border-green-200 pt-4 mt-2">
+                <span className="text-sm font-semibold text-ink">
+                  Huella digital del documento (SHA-256)
+                </span>
+                <p className="mt-1.5 font-mono text-[11px] leading-snug break-all bg-white border border-green-200 rounded-lg px-3 py-2 text-ink-muted">
+                  {result.hash_sha256}
+                </p>
+
+                <div className="mt-3">
+                  <p className="text-xs text-ink-muted mb-2">
+                    &iquest;Tienes el PDF? S&uacute;belo para confirmar que es
+                    exactamente este documento. La comparaci&oacute;n ocurre en
+                    tu navegador &mdash; el archivo no se env&iacute;a a ning&uacute;n
+                    servidor.
+                  </p>
+                  <label className="inline-flex items-center gap-2 cursor-pointer bg-white border border-green-300 hover:border-green-500 rounded-lg px-4 py-2 text-sm text-ink transition-colors">
+                    <input
+                      type="file"
+                      accept="application/pdf,.pdf"
+                      className="hidden"
+                      onChange={handleArchivo}
+                    />
+                    {comparando ? "Comparando…" : "Subir mi copia del PDF"}
+                  </label>
+                  {archivoNombre && (
+                    <span className="ml-2 text-xs text-ink-light">{archivoNombre}</span>
+                  )}
+
+                  {matchResult === "match" && (
+                    <div className="mt-3 border border-green-300 bg-green-100 text-green-800 rounded-lg px-4 py-2.5 text-sm font-medium">
+                      ✓ Coincide &mdash; tu copia es exactamente el documento registrado, sin alteraciones.
+                    </div>
+                  )}
+                  {matchResult === "mismatch" && (
+                    <div className="mt-3 border border-red-300 bg-red-50 text-red-700 rounded-lg px-4 py-2.5 text-sm font-medium">
+                      ✗ No coincide &mdash; tu copia difiere del documento registrado. Puede ser una versi&oacute;n distinta (por ejemplo, firmada por una sola parte) o haber sido alterada.
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
             <p className="text-xs text-ink-light border-t border-green-200 pt-3">
               Este documento fue generado por GoLegit y su autenticidad ha sido
               verificada. La firma electr&oacute;nica simple (FES) tiene validez
-              legal conforme a la Ley 19.799.
+              legal conforme a la Ley 19.799. Por privacidad, no mostramos los
+              datos de las partes ni el documento; obt&eacute;nlos desde tu portal.
             </p>
           </div>
         )
