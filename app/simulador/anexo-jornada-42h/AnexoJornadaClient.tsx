@@ -326,7 +326,7 @@ export default function AnexoJornadaClient() {
             ¿Quieres firmar electrónicamente y mantener todo registrado?
           </h3>
           <p className="text-sm text-ink-muted leading-relaxed mb-4">
-            En GoLegit puedes generar contratos, anexos, liquidaciones y finiquitos con firma electrónica avanzada
+            En GoLegit puedes generar contratos, anexos, liquidaciones y finiquitos con firma electrónica simple
             (FES). Tu trabajadora firma desde su celular, todo queda con valor probatorio y respaldado en la nube.
           </p>
           <Link
