@@ -279,9 +279,14 @@ export default function PrivacidadPage() {
                     <td>Artículos 31 y 510 del Código del Trabajo.</td>
                   </tr>
                   <tr>
-                    <td>Evidencia biométrica (imagen de cédula y selfie) y evidencia de consentimiento.</td>
-                    <td>Duración del vínculo contractual + 5 años, o hasta que el titular solicite su eliminación conforme al numeral 10.</td>
-                    <td>Ley 21.719 Art. 2 lit. g · retención probatoria.</td>
+                    <td>Imágenes de verificación de identidad (cédula y selfie).</td>
+                    <td>Se destruyen de forma irreversible entre 90 y 120 días corridos tras el término de la relación laboral, o antes si el titular solicita su eliminación.</td>
+                    <td>Art. 57.4 Res. 38 EXENTA DT · principio de proporcionalidad, Ley 21.719 Art. 3 c) (los datos se conservan solo por el tiempo necesario al fin del tratamiento).</td>
+                  </tr>
+                  <tr>
+                    <td>Evidencia del acto de verificación (registro de que ocurrió: marca de tiempo, versión del texto aceptado e indicador de coincidencia, <em>sin</em> las imágenes).</td>
+                    <td>Cinco (5) años como respaldo probatorio del acto de consentimiento.</td>
+                    <td>Deber de rendición de cuentas, Ley 21.719 · retención probatoria.</td>
                   </tr>
                   <tr>
                     <td><em>Audit log</em> de firmas y acciones críticas.</td>
