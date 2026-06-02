@@ -9,7 +9,9 @@ export async function generateMetadata({ params }: { params: Promise<{ version: 
 export default async function PrivacidadVersionPage({ params }: { params: Promise<{ version: string }> }) {
   const { version } = await params
 
-  if (version === "1.0") {
+  // La versión vigente se sirve como permalink estable. Las versiones anteriores
+  // se solicitan al DPO (numeral 15 de la Política).
+  if (version === "1.1") {
     const PrivacidadPage = (await import("../page")).default
     return <PrivacidadPage />
   }

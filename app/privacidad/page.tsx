@@ -21,7 +21,7 @@ export default function PrivacidadPage() {
           Política de Privacidad
         </h1>
         <p className="text-sm text-ink-light mb-10">
-          Última actualización: 16 de abril de 2026 · Versión 1.0
+          Última actualización: 1 de junio de 2026 · Versión 1.1
         </p>
 
         <article className="prose prose-sm max-w-none text-ink-muted space-y-4 prose-headings:text-ink prose-h2:text-lg prose-h2:font-bold prose-h2:mt-14 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b prose-h2:border-ink/10 prose-h3:text-base prose-h3:font-semibold prose-h3:mt-6 prose-h3:mb-2 prose-strong:text-ink-soft prose-strong:font-semibold prose-a:text-brand-600 prose-table:text-xs prose-th:bg-ink/5 prose-th:px-2 prose-th:py-1 prose-td:px-2 prose-td:py-1 prose-td:align-top prose-td:border-b prose-td:border-ink/5">
@@ -49,11 +49,11 @@ export default function PrivacidadPage() {
 
             <h3>1.2 Delegado de Protección de Datos (DPO)</h3>
             <p>
-              GoLegit ha designado un <strong>Delegado de Protección de Datos</strong>, a cuya
-              función pueden dirigirse las consultas, solicitudes de ejercicio de derechos y
-              comunicaciones relativas al tratamiento de datos personales, al correo{" "}
-              <strong>dpo@golegit.cl</strong>. Su identidad se encuentra registrada internamente y
-              puede ser informada a solicitud fundada de autoridad competente.
+              La función de <strong>Delegado de Protección de Datos</strong> es ejercida por{" "}
+              <strong>Cubillos Lama SpA</strong>, operadora de GoLegit, en su calidad de responsable
+              del tratamiento. A esta función pueden dirigirse las consultas, solicitudes de
+              ejercicio de derechos y comunicaciones relativas al tratamiento de datos personales, al
+              correo <strong>dpo@golegit.cl</strong>.
             </p>
           </section>
 
@@ -211,6 +211,7 @@ export default function PrivacidadPage() {
                   <tr><td><strong>Supabase Inc.</strong></td><td>Brasil (sa-east-1)</td><td>Base de datos, autenticación, almacenamiento de archivos y funciones de servidor.</td></tr>
                   <tr><td><strong>Amazon Web Services, Inc.</strong></td><td>Estados Unidos</td><td>Comparación biométrica facial (AWS Rekognition) para verificación de identidad.</td></tr>
                   <tr><td><strong>Google LLC</strong></td><td>Estados Unidos / global</td><td>Reconocimiento óptico (OCR) de cédula de identidad a través de Cloud Vision API.</td></tr>
+                  <tr><td><strong>OpenAI, L.L.C.</strong></td><td>Estados Unidos</td><td>Estructuración del texto extraído de la cédula (no recibe la imagen, solo el texto reconocido) para ordenar los campos de identidad.</td></tr>
                   <tr><td><strong>Railway Corp.</strong> (Gotenberg)</td><td>Estados Unidos</td><td>Generación de documentos PDF a partir de plantillas HTML.</td></tr>
                   <tr><td><strong>Resend, Inc.</strong></td><td>Estados Unidos</td><td>Envío de correos electrónicos transaccionales (firma, recuperación, notificaciones).</td></tr>
                   <tr><td><strong>MercadoLibre Chile Ltda.</strong> (Mercado Pago)</td><td>Chile / región LATAM</td><td>Procesamiento de pagos y suscripciones.</td></tr>
@@ -329,7 +330,7 @@ export default function PrivacidadPage() {
             <ol>
               <li><strong>Acceso:</strong> solicitar y obtener información sobre qué datos se están tratando, con qué finalidad y a quién se comunican.</li>
               <li><strong>Rectificación:</strong> solicitar la corrección de datos inexactos, incompletos o desactualizados.</li>
-              <li><strong>Cancelación o supresión:</strong> solicitar la eliminación cuando los datos ya no sean necesarios, cuando se haya retirado el consentimiento o cuando hayan sido tratados ilícitamente, sin perjuicio de los plazos legales de conservación.</li>
+              <li><strong>Cancelación o supresión:</strong> solicitar la eliminación cuando los datos ya no sean necesarios, cuando se haya retirado el consentimiento o cuando hayan sido tratados ilícitamente, sin perjuicio de los plazos legales de conservación (ver el numeral 10.3).</li>
               <li><strong>Oposición:</strong> oponerse al tratamiento por motivos particulares, incluyendo el rechazo a decisiones automatizadas y al marketing directo.</li>
               <li><strong>Portabilidad:</strong> recibir los datos que le conciernen en formato estructurado y de uso común, o solicitar su transferencia a otro responsable.</li>
               <li><strong>Bloqueo y restricción del tratamiento:</strong> suspender temporalmente el tratamiento mientras se resuelve una controversia sobre su exactitud o licitud.</li>
@@ -354,6 +355,22 @@ export default function PrivacidadPage() {
               Si el titular estima que su solicitud no ha sido satisfecha adecuadamente, podrá
               reclamar ante la <strong>Agencia de Protección de Datos Personales</strong>, en los
               términos que dicha autoridad disponga.
+            </p>
+
+            <h3>10.3 Supresión y conservación obligatoria</h3>
+            <p>
+              El ejercicio del derecho de supresión se aplica sin perjuicio de los plazos de
+              conservación que impone la ley (numeral 9). En la práctica, cuando un titular solicita
+              la supresión de sus datos, GoLegit elimina o anonimiza la información que ya no resulta
+              necesaria, pero <strong>conserva de forma anonimizada</strong> aquellos registros cuya
+              guarda es legalmente obligatoria —en particular los <strong>documentos laborales
+              firmados</strong> (contrato, anexos, liquidaciones, finiquito, certificados), los{" "}
+              <strong>registros de asistencia</strong> y el <strong>registro de auditoría</strong> de
+              firmas— por el plazo legal correspondiente (en general cinco años, y hasta diez para los
+              documentos sujetos a la prescripción de acciones laborales). En estos registros se
+              disocia o reemplaza la información identificatoria del titular, de modo que se preserva
+              el valor probatorio del documento sin mantener un perfil personal activo. Cumplido el
+              plazo legal, estos datos se eliminan o anonimizan de forma irreversible.
             </p>
           </section>
 
