@@ -210,7 +210,7 @@ export default function PrivacidadPage() {
                 <tbody>
                   <tr><td><strong>Supabase Inc.</strong></td><td>Brasil (sa-east-1)</td><td>Base de datos, autenticación, almacenamiento de archivos y funciones de servidor.</td></tr>
                   <tr><td><strong>Amazon Web Services, Inc.</strong></td><td>Estados Unidos</td><td>Comparación biométrica facial (AWS Rekognition) para verificación de identidad.</td></tr>
-                  <tr><td><strong>Google LLC</strong></td><td>Estados Unidos / global</td><td>Reconocimiento óptico (OCR) de cédula de identidad a través de Cloud Vision API.</td></tr>
+                  <tr><td><strong>Google LLC</strong></td><td>Estados Unidos / global</td><td>Reconocimiento óptico (OCR) de cédula de identidad (Cloud Vision API) y geocodificación de la dirección del lugar de trabajo a coordenadas (Geocoding API), para el registro de asistencia.</td></tr>
                   <tr><td><strong>OpenAI, L.L.C.</strong></td><td>Estados Unidos</td><td>Estructuración del texto extraído de la cédula (no recibe la imagen, solo el texto reconocido) para ordenar los campos de identidad.</td></tr>
                   <tr><td><strong>Railway Corp.</strong> (Gotenberg)</td><td>Estados Unidos</td><td>Generación de documentos PDF a partir de plantillas HTML.</td></tr>
                   <tr><td><strong>Resend, Inc.</strong></td><td>Estados Unidos</td><td>Envío de correos electrónicos transaccionales (firma, recuperación, notificaciones).</td></tr>
