@@ -141,7 +141,7 @@ export default function PrivacidadPage() {
             </ul>
             <p>
               Los datos sensibles son tratados con medidas reforzadas (cifrado, acceso restringido,
-              evaluación de impacto previa en los términos del artículo 15 quáter de la Ley N°
+              evaluación de impacto previa en los términos del artículo 15 ter de la Ley N°
               21.719) y únicamente para las finalidades descritas en el numeral 5.
             </p>
           </section>

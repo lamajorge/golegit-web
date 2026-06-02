@@ -53,7 +53,7 @@ export default function EliminacionPage() {
           <h2 className="text-lg font-bold text-ink pt-4">Plazo de respuesta</h2>
 
           <p>
-            GoLegit responderá tu solicitud en un plazo máximo de 15 días hábiles, conforme al artículo 16 ter de la Ley N° 21.719.
+            GoLegit responderá tu solicitud en un plazo máximo de 30 días corridos desde su ingreso, conforme al artículo 11 de la Ley N° 21.719.
           </p>
 
           <h2 className="text-lg font-bold text-ink pt-4">Contacto</h2>
