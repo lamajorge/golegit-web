@@ -9,11 +9,11 @@ function ChatMockup() {
       style={{ height: "min(480px, calc(100dvh - 220px))", aspectRatio: "9/18" }}
     >
       {/* Glow — tasteful on dark bg */}
-      <div className="absolute -inset-6 bg-brand-500/15 rounded-[3.5rem] blur-3xl -z-10" />
+      <div className="absolute -inset-8 bg-brand-500/20 rounded-[3.5rem] blur-3xl -z-10" />
 
-      {/* Phone frame */}
+      {/* Phone frame — borde + rim de luz + sombra para separar del fondo evergreen */}
       <div
-        className="relative bg-[#1c1c1e] rounded-[2.8rem] shadow-2xl overflow-hidden border border-white/10 w-full h-full flex flex-col"
+        className="relative bg-[#1c1c1e] rounded-[2.8rem] overflow-hidden border border-white/20 w-full h-full flex flex-col shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_24px_60px_-12px_rgba(0,0,0,0.6)]"
       >
         {/* Dynamic island */}
         <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-[#1c1c1e] rounded-full z-20" />

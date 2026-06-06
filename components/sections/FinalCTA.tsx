@@ -17,7 +17,7 @@ export default function FinalCTA() {
           Empieza hoy
         </p>
 
-        <h2 className="text-5xl lg:text-7xl font-extrabold text-white leading-none tracking-tight mb-6">
+        <h2 className="text-5xl lg:text-7xl font-display font-semibold text-white leading-none tracking-tight mb-6">
           Tu software laboral,
           <br />
           <span className="text-brand-400">gratis para siempre.</span>

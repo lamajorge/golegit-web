@@ -46,7 +46,7 @@ export default function AttendanceSpotlight() {
             <p className="text-xs font-semibold tracking-widest text-brand-700 uppercase mb-5">
               Control de asistencia
             </p>
-            <h2 className="text-4xl lg:text-5xl font-extrabold text-ink leading-tight tracking-tight mb-6">
+            <h2 className="text-4xl lg:text-5xl font-display font-semibold text-ink leading-tight tracking-tight mb-6">
               Cada día registrado.
               <br />
               <span className="text-ink-muted font-bold">Cada reporte a la mano.</span>

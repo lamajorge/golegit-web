@@ -37,7 +37,7 @@ export default function Trust() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="max-w-2xl mb-14">
           <p className="text-xs font-semibold tracking-widest text-ink-light uppercase mb-5">Por qué confiar</p>
-          <h2 className="text-4xl lg:text-5xl font-extrabold text-ink leading-tight tracking-tight">
+          <h2 className="text-4xl lg:text-5xl font-display font-semibold text-ink leading-tight tracking-tight">
             Legal desde el diseño,
             <br />
             <span className="text-ink-muted font-bold">no desde el marketing.</span>

@@ -80,7 +80,7 @@ export default function Pricing() {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-xs font-semibold tracking-widest text-ink-light uppercase mb-4">Precios</p>
-          <h2 className="text-3xl lg:text-4xl font-extrabold text-ink leading-tight tracking-tight mb-3">
+          <h2 className="text-3xl lg:text-4xl font-display font-semibold text-ink leading-tight tracking-tight mb-3">
             Gratis siempre. Y si quieres, el papeleo lo hacemos nosotros.
           </h2>
           <p className="text-sm text-ink-muted">

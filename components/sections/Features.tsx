@@ -93,10 +93,10 @@ export default function Features() {
         {/* Header */}
         <div className="max-w-2xl mb-5">
           <p className="text-xs font-semibold tracking-widest text-ink-light uppercase mb-5">Qué incluye</p>
-          <h2 className="text-4xl lg:text-5xl font-extrabold text-ink leading-tight tracking-tight">
+          <h2 className="font-display text-4xl lg:text-5xl font-semibold text-ink leading-[1.1] tracking-tight">
             Todo el ciclo laboral
             <br />
-            <span className="text-ink-muted font-bold">en tu casa. Automatizado.</span>
+            <span className="text-ink-muted">en tu casa. Automatizado.</span>
           </h2>
         </div>
         <p className="text-ink-muted leading-relaxed max-w-2xl mb-14">
@@ -110,7 +110,7 @@ export default function Features() {
           {features.map((feature, i) => (
             <div
               key={i}
-              className="p-6 rounded-2xl border border-gray-100 bg-white hover:border-gray-200 hover:shadow-xs transition-all group"
+              className="p-6 rounded-2xl border border-gray-100 bg-white hover:border-brand-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 ease-[cubic-bezier(.34,1.56,.64,1)] group"
             >
               <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4 group-hover:bg-brand-100 transition-colors">
                 {feature.icon}

@@ -368,7 +368,7 @@ export default function BusinessLanding() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">El problema</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-white leading-tight mb-4">
               Gestionar una pyme en Chile es un laberinto legal.
             </h2>
             <p className="text-white/50 leading-relaxed">
@@ -394,7 +394,7 @@ export default function BusinessLanding() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-14">
             <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Gestión laboral</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Tu equipo al día con el Código del Trabajo.
             </h2>
             <p className="text-gray-500 leading-relaxed">
@@ -444,7 +444,7 @@ export default function BusinessLanding() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Operación diaria</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Herramientas para gestionar el equipo día a día.
             </h2>
             <p className="text-gray-500 leading-relaxed">
@@ -498,7 +498,7 @@ export default function BusinessLanding() {
               <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">
                 Rota de turnos
               </p>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-5">
+              <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-5">
                 Organiza los turnos sin planillas ni grupos de WhatsApp.
               </h2>
               <p className="text-gray-500 leading-relaxed mb-8">
@@ -599,7 +599,7 @@ export default function BusinessLanding() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-14">
             <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Gestión corporativa</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Tu SpA bien constituida y documentada.
             </h2>
             <p className="text-gray-500 leading-relaxed">
@@ -650,7 +650,7 @@ export default function BusinessLanding() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-14">
             <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Contratos & documentos</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Todos los papeles de tu operación, en regla.
             </h2>
             <p className="text-gray-500 leading-relaxed">
@@ -702,7 +702,7 @@ export default function BusinessLanding() {
             <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">
               Por rubro
             </p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Hecho para las pymes chilenas que más lo necesitan.
             </h2>
             <p className="text-gray-500 leading-relaxed">
@@ -741,7 +741,7 @@ export default function BusinessLanding() {
           }}
         />
         <div className="relative max-w-2xl mx-auto px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-display font-semibold text-white leading-tight mb-4">
             Sé de los primeros en probarlo.
           </h2>
           <p className="text-white/50 leading-relaxed mb-8">

@@ -24,20 +24,20 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section id="como-funciona" className="py-28 bg-[#fafaf8]">
+    <section id="como-funciona" className="py-28 bg-surface-sunken">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto mb-20">
           <p className="text-xs font-semibold tracking-widest text-ink-light uppercase mb-5">Cómo funciona</p>
-          <h2 className="text-4xl lg:text-5xl font-extrabold text-ink leading-tight tracking-tight">
+          <h2 className="font-display text-4xl lg:text-5xl font-semibold text-ink leading-[1.1] tracking-tight">
             Tres pasos para tener
             <br />
-            <span className="text-ink-muted font-bold">todo en regla.</span>
+            <span className="text-ink-muted">todo en regla.</span>
           </h2>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {steps.map((step, i) => (
-            <div key={i} className="relative bg-white rounded-3xl p-8 border border-gray-100 overflow-hidden">
+            <div key={i} className="group relative bg-white rounded-3xl p-8 border border-gray-100 overflow-hidden hover:-translate-y-1 hover:shadow-md transition-all duration-200 ease-[cubic-bezier(.34,1.56,.64,1)]">
               {/* Giant decorative number */}
               <span
                 className="absolute -top-4 -right-2 text-[9rem] font-extrabold leading-none select-none pointer-events-none"

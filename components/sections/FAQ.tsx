@@ -90,7 +90,7 @@ export default function FAQ() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           <div className="lg:col-span-1">
             <p className="text-xs font-semibold tracking-widest text-ink-light uppercase mb-5">FAQ</p>
-            <h2 className="text-3xl lg:text-4xl font-extrabold text-ink leading-tight tracking-tight mb-4">
+            <h2 className="text-3xl lg:text-4xl font-display font-semibold text-ink leading-tight tracking-tight mb-4">
               Preguntas frecuentes
             </h2>
             <p className="text-sm text-ink-muted leading-relaxed">
