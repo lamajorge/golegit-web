@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function ProductSuite() {
   return (
-    <section className="bg-zinc-950 pb-16">
+    <section className="bg-ink-deep pb-16">
       <div className="max-w-6xl mx-auto px-6">
         <div className="border-t border-white/8 pt-12">
           <p className="text-xs font-semibold tracking-widest text-white/20 uppercase mb-8 text-center">

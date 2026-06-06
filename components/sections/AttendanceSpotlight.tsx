@@ -115,7 +115,7 @@ export default function AttendanceSpotlight() {
               }}
             />
             <div className="relative rounded-2xl bg-white shadow-[0_20px_60px_-15px_rgba(15,23,42,0.15)] overflow-hidden ring-1 ring-black/5">
-              <div className="bg-zinc-950 px-6 py-4 flex items-center justify-between">
+              <div className="bg-ink-deep px-6 py-4 flex items-center justify-between">
                 <div>
                   <p className="text-white text-sm font-bold">Abril 2026</p>
                   <p className="text-white/50 text-xs">María L. · Puertas afuera</p>

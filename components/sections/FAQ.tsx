@@ -85,7 +85,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 export default function FAQ() {
   return (
-    <section id="faq" className="py-24 bg-[#fafaf8]">
+    <section id="faq" className="py-24 bg-surface-sunken">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           <div className="lg:col-span-1">
@@ -102,7 +102,7 @@ export default function FAQ() {
             </p>
           </div>
 
-          <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-100 px-6">
+          <div className="lg:col-span-2 bg-surface-card rounded-2xl border border-border px-6">
             {faqs.map((faq, i) => (
               <FAQItem key={i} q={faq.q} a={faq.a} />
             ))}

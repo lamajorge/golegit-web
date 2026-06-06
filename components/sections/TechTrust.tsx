@@ -52,7 +52,7 @@ const compliance = [
 
 export default function TechTrust() {
   return (
-    <section className="py-28 bg-zinc-950 relative overflow-hidden">
+    <section className="py-28 bg-ink-deep relative overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{

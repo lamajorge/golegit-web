@@ -45,7 +45,7 @@ export default function Trust() {
         </div>
 
         {/* Featured card — full width */}
-        <div className="relative rounded-3xl bg-zinc-950 p-8 lg:p-10 mb-4 overflow-hidden">
+        <div className="relative rounded-3xl bg-ink-deep p-8 lg:p-10 mb-4 overflow-hidden">
           {/* Decorative glow */}
           <div
             className="absolute inset-0 pointer-events-none"
@@ -80,7 +80,7 @@ export default function Trust() {
         {/* Other cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
           {trustItems.map((item, i) => (
-            <div key={i} className="flex flex-col gap-4 p-6 rounded-2xl border border-gray-100 hover:border-gray-200 transition-colors group">
+            <div key={i} className="flex flex-col gap-4 p-6 rounded-2xl border border-gray-100 bg-surface-card hover:border-brand-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 ease-[cubic-bezier(.34,1.56,.64,1)] group">
               <div className="w-10 h-10 rounded-xl bg-ink/5 text-ink-muted flex items-center justify-center shrink-0 group-hover:bg-ink/8 transition-colors">
                 {item.icon}
               </div>

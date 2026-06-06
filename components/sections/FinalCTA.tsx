@@ -3,7 +3,7 @@ import CtaButton from "@/components/CtaButton";
 
 export default function FinalCTA() {
   return (
-    <section className="py-32 bg-zinc-950 overflow-hidden relative">
+    <section className="py-32 bg-ink-deep overflow-hidden relative">
       {/* Ambient glow */}
       <div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] pointer-events-none"
@@ -17,13 +17,13 @@ export default function FinalCTA() {
           Empieza hoy
         </p>
 
-        <h2 className="text-5xl lg:text-7xl font-display font-semibold text-white leading-none tracking-tight mb-6">
-          Tu software laboral,
+        <h2 className="text-5xl lg:text-7xl font-display font-semibold text-white leading-[1.02] tracking-tight mb-6">
+          Pon tu hogar en regla,
           <br />
           <span className="text-brand-400">gratis para siempre.</span>
         </h2>
 
-        <p className="text-xl text-white/50 mb-12 max-w-xl mx-auto leading-relaxed">
+        <p className="text-xl text-white/60 mb-12 max-w-xl mx-auto leading-relaxed">
           Sin app, sin portal, sin contrato de permanencia. En 5 minutos tienes
           el contrato de tu trabajador/a generado y enviado.
         </p>
