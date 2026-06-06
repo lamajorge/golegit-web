@@ -96,21 +96,22 @@ function ChatMockup() {
   );
 }
 
+const TRUST = [
+  "Firma con validez legal",
+  "Construido por abogados",
+  "Gratis para siempre",
+];
+
 export default function Hero() {
   return (
-    <section className="relative h-svh lg:h-dvh overflow-hidden bg-zinc-950">
-      {/* Ambient glow — top left */}
+    <section className="relative h-svh lg:h-dvh overflow-hidden bg-ink-deep">
+      {/* Glow ambiente — verde (señal) + arena (calidez), registro Expressive */}
       <div
-        className="absolute top-0 left-0 w-[700px] h-[700px] pointer-events-none"
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(circle at 20% 30%, rgba(22,163,74,0.18) 0%, transparent 65%)",
-        }}
-      />
-      {/* Ambient glow — bottom right */}
-      <div
-        className="absolute bottom-0 right-0 w-[500px] h-[500px] pointer-events-none"
-        style={{
-          background: "radial-gradient(circle at 80% 80%, rgba(22,163,74,0.08) 0%, transparent 60%)",
+          background:
+            "radial-gradient(58% 52% at 16% 24%, oklch(0.627 0.170 149 / 0.30) 0%, transparent 62%), radial-gradient(46% 50% at 94% 86%, oklch(0.700 0.085 62 / 0.15) 0%, transparent 60%)",
         }}
       />
 
@@ -120,30 +121,28 @@ export default function Hero() {
         {/* Left: Copy */}
         <div>
           {/* Badge — just above the headline */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-white/65 text-xs font-medium mb-3 animate-fade-up">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/15 bg-white/[0.05] backdrop-blur text-white/70 text-xs font-medium mb-5 animate-fade-up">
             <span className="w-1.5 h-1.5 rounded-full bg-brand-400" />
             Gratis para siempre · Sin tarjeta de crédito
           </div>
 
-          {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.05] tracking-tight mb-4 animate-fade-up animate-delay-100">
-            El contrato de quien
+          {/* Headline — Fraunces (display), copy aprobada */}
+          <h1 className="font-display text-display font-semibold text-white mb-5 animate-fade-up animate-delay-100">
+            Tu hogar, <span className="italic text-brand-400">en regla</span>.
             <br />
-            trabaja en tu casa,
-            <br />
-            <span className="text-brand-400">por WhatsApp.</span>
+            Sin complicaciones.
           </h1>
 
-          {/* Subtitle */}
-          <p className="text-base lg:text-lg text-white/70 leading-relaxed max-w-lg mb-7 animate-fade-up animate-delay-200">
-            Hacemos el contrato, calculamos el sueldo cada mes y guardamos todo
-            el historial laboral. Por WhatsApp. Sin apps que instalar ni
-            formularios que llenar.
+          {/* Subtitle — copy aprobada */}
+          <p className="text-base lg:text-lg text-white/75 leading-relaxed max-w-xl mb-8 animate-fade-up animate-delay-200">
+            Contrato, liquidaciones, firma con validez legal y control de
+            asistencia. Todo desde WhatsApp, acompañado por abogados. Tú te
+            dedicas a tu familia; nosotros, a que todo esté impecable.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-3 animate-fade-up animate-delay-300">
-            <CtaButton className="inline-flex items-center justify-center gap-2.5 bg-brand-600 hover:bg-brand-500 text-white font-semibold px-6 py-3.5 rounded-xl transition-colors">
+            <CtaButton className="inline-flex items-center justify-center gap-2.5 bg-brand-600 hover:bg-brand-700 text-white font-semibold px-6 py-3.5 rounded-xl shadow-md transition-transform duration-200 ease-[cubic-bezier(.34,1.56,.64,1)] hover:-translate-y-0.5">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
               </svg>
@@ -151,7 +150,7 @@ export default function Hero() {
             </CtaButton>
             <a
               href="#como-funciona"
-              className="inline-flex items-center justify-center gap-2 text-white/70 hover:text-white font-medium px-6 py-3.5 rounded-xl border border-white/20 hover:border-white/35 transition-colors"
+              className="inline-flex items-center justify-center gap-2 text-white/75 hover:text-white font-medium px-6 py-3.5 rounded-xl border border-white/20 hover:border-white/35 transition-colors"
             >
               Ver cómo funciona
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -160,17 +159,15 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* Stats row */}
-          <div className="mt-8 grid grid-cols-3 gap-4 border-t border-white/8 pt-6 animate-fade-up animate-delay-400">
-            {[
-              { value: "$0", label: "para empezar" },
-              { value: "0", label: "apps que instalar" },
-              { value: "100%", label: "automatizado" },
-            ].map((s, i) => (
-              <div key={i}>
-                <p className="text-2xl font-extrabold text-white">{s.value}</p>
-                <p className="text-xs text-white/60 mt-0.5">{s.label}</p>
-              </div>
+          {/* Trust row — señales de confianza (reemplaza stats) */}
+          <div className="mt-9 flex flex-wrap gap-x-6 gap-y-2.5 border-t border-white/10 pt-6 animate-fade-up animate-delay-400">
+            {TRUST.map((t) => (
+              <span key={t} className="inline-flex items-center gap-2 text-sm text-white/75">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" className="text-brand-400">
+                  <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                {t}
+              </span>
             ))}
           </div>
         </div>
