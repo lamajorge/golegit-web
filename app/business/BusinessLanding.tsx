@@ -44,7 +44,7 @@ function WaitlistForm({ dark = false }: { dark?: boolean }) {
 
   if (estado === "ok") {
     return (
-      <p className={`text-sm font-medium ${dark ? "text-indigo-400" : "text-indigo-600"}`}>
+      <p className={`text-sm font-medium ${dark ? "text-blue-400" : "text-blue-600"}`}>
         Listo — te avisamos cuando lancemos GoLegit Business.
       </p>
     );
@@ -62,14 +62,14 @@ function WaitlistForm({ dark = false }: { dark?: boolean }) {
           disabled={estado === "enviando"}
           className={`flex-1 px-4 py-3 rounded-xl text-sm border focus:outline-hidden focus:ring-2 disabled:opacity-60 ${
             dark
-              ? "bg-white/10 border-white/20 text-white placeholder-white/40 focus:ring-indigo-400"
-              : "bg-white border-gray-200 text-ink placeholder-gray-400 focus:ring-indigo-500"
+              ? "bg-white/10 border-white/20 text-white placeholder-white/40 focus:ring-blue-400"
+              : "bg-white border-gray-200 text-ink placeholder-gray-400 focus:ring-blue-500"
           }`}
         />
         <button
           type="submit"
           disabled={estado === "enviando"}
-          className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 disabled:bg-indigo-400 text-white text-sm font-semibold rounded-xl transition-colors whitespace-nowrap"
+          className="px-6 py-3 bg-blue-600 hover:bg-blue-500 disabled:bg-blue-400 text-white text-sm font-semibold rounded-xl transition-colors whitespace-nowrap"
         >
           {estado === "enviando" ? "Enviando..." : "Quiero early access"}
         </button>
@@ -95,13 +95,13 @@ function FeatureCard({
   tag?: string;
 }) {
   return (
-    <div className="relative bg-white rounded-2xl border border-gray-100 p-6 hover:border-indigo-200 hover:shadow-lg hover:shadow-indigo-500/5 transition-all group">
+    <div className="relative bg-white rounded-2xl border border-gray-100 p-6 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-500/5 transition-all group">
       {tag && (
-        <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-100 px-2 py-0.5 rounded-full">
+        <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-full">
           {tag}
         </span>
       )}
-      <div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 mb-4 group-hover:bg-indigo-100 transition-colors">
+      <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4 group-hover:bg-blue-100 transition-colors">
         {icon}
       </div>
       <h3 className="text-base font-bold text-gray-900 mb-2">{title}</h3>
@@ -138,7 +138,7 @@ function PillarCard({
 }) {
   return (
     <div className="flex items-start gap-4">
-      <div className="w-9 h-9 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 shrink-0 mt-0.5">
+      <div className="w-9 h-9 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 shrink-0 mt-0.5">
         {icon}
       </div>
       <div>
@@ -163,13 +163,13 @@ function VerticalCard({
   badge?: string;
 }) {
   return (
-    <div className="relative bg-white rounded-2xl border border-gray-100 p-6 hover:border-indigo-200 transition-all">
+    <div className="relative bg-white rounded-2xl border border-gray-100 p-6 hover:border-blue-200 transition-all">
       {badge && (
-        <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 border border-indigo-100 px-2 py-0.5 rounded-full">
+        <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-full">
           {badge}
         </span>
       )}
-      <div className="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 mb-4">
+      <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 mb-4">
         {icon}
       </div>
       <h3 className="text-base font-bold text-gray-900 mb-2">{title}</h3>
@@ -317,8 +317,8 @@ export default function BusinessLanding() {
         <div className="relative w-full max-w-6xl mx-auto px-6 pt-32 pb-20">
           <div className="max-w-3xl">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-indigo-400/20 text-indigo-300 text-xs font-medium mb-5 animate-fade-up">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-400/20 text-blue-300 text-xs font-medium mb-5 animate-fade-up">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
               Producto en desarrollo — Early access disponible
             </div>
 
@@ -328,7 +328,7 @@ export default function BusinessLanding() {
               <br />
               legalmente en orden.
               <br />
-              <span className="text-indigo-400">Sin contratar un estudio.</span>
+              <span className="text-blue-400">Sin contratar un estudio.</span>
             </h1>
 
             {/* Subtitle */}
@@ -367,7 +367,7 @@ export default function BusinessLanding() {
       <section className="bg-zinc-900 py-20">
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-12">
-            <p className="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">El problema</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">El problema</p>
             <h2 className="text-3xl sm:text-4xl font-display font-semibold text-white leading-tight mb-4">
               Gestionar una pyme en Chile es un laberinto legal.
             </h2>
@@ -393,7 +393,7 @@ export default function BusinessLanding() {
       <section id="laboral" className="py-24 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-14">
-            <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Gestión laboral</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Gestión laboral</p>
             <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Tu equipo al día con el Código del Trabajo.
             </h2>
@@ -443,7 +443,7 @@ export default function BusinessLanding() {
       <section className="py-20 bg-white border-t border-gray-100">
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-12">
-            <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Operación diaria</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Operación diaria</p>
             <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Herramientas para gestionar el equipo día a día.
             </h2>
@@ -479,7 +479,7 @@ export default function BusinessLanding() {
               },
             ].map((item, i) => (
               <div key={i} className="bg-gray-50 rounded-2xl border border-gray-100 p-5">
-                <div className="w-8 h-8 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600 mb-3">
+                <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 mb-3">
                   {item.icon}
                 </div>
                 <p className="text-sm font-semibold text-gray-900 mb-1">{item.title}</p>
@@ -495,7 +495,7 @@ export default function BusinessLanding() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">
+              <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">
                 Rota de turnos
               </p>
               <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-5">
@@ -515,7 +515,7 @@ export default function BusinessLanding() {
                   "Comparte la rota por link — sin instalar nada",
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center shrink-0 mt-0.5">
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
@@ -528,14 +528,14 @@ export default function BusinessLanding() {
 
             {/* Visual — rota mockup */}
             <div className="relative">
-              <div className="absolute -inset-4 bg-indigo-500/5 rounded-3xl blur-2xl" />
+              <div className="absolute -inset-4 bg-blue-500/5 rounded-3xl blur-2xl" />
               <div className="relative bg-white rounded-2xl border border-gray-200 shadow-xl overflow-hidden">
                 <div className="bg-zinc-950 px-6 py-4 flex items-center justify-between">
                   <div>
                     <p className="text-white text-sm font-bold">Rota semanal</p>
                     <p className="text-white/40 text-xs">14 - 20 abril 2026</p>
                   </div>
-                  <span className="text-[10px] font-bold text-indigo-400 bg-indigo-400/10 border border-indigo-400/25 px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] font-bold text-blue-400 bg-blue-400/10 border border-blue-400/25 px-2 py-0.5 rounded-full">
                     Vista previa
                   </span>
                 </div>
@@ -598,7 +598,7 @@ export default function BusinessLanding() {
       <section id="corporativo" className="py-24 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-14">
-            <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Gestión corporativa</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Gestión corporativa</p>
             <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Tu SpA bien constituida y documentada.
             </h2>
@@ -649,7 +649,7 @@ export default function BusinessLanding() {
       <section id="contratos" className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-14">
-            <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Contratos & documentos</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Contratos & documentos</p>
             <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Todos los papeles de tu operación, en regla.
             </h2>
@@ -699,7 +699,7 @@ export default function BusinessLanding() {
       <section id="rubros" className="py-24 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">
+            <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">
               Por rubro
             </p>
             <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
