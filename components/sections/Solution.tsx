@@ -27,7 +27,7 @@ export default function Solution() {
                 "Tu trabajadora también recibe sus documentos",
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-md bg-brand-900/40 border border-brand-700/50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-5 h-5 rounded-md bg-brand-900/40 border border-brand-700/50 flex items-center justify-center shrink-0 mt-0.5">
                     <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
                       <path d="M2 6l3 3 5-5" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>

@@ -65,7 +65,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
       >
         <span className="font-semibold text-ink text-sm leading-snug">{q}</span>
         <div
-          className={`w-5 h-5 rounded-full border border-gray-200 flex items-center justify-center flex-shrink-0 mt-0.5 transition-transform ${
+          className={`w-5 h-5 rounded-full border border-gray-200 flex items-center justify-center shrink-0 mt-0.5 transition-transform ${
             open ? "rotate-180 bg-ink border-ink" : ""
           }`}
         >

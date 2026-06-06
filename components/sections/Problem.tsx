@@ -88,7 +88,7 @@ export default function Problem() {
         </div>
 
         <div className="mt-10 p-7 rounded-2xl bg-red-50 border border-red-100 flex flex-col sm:flex-row items-start sm:items-center gap-5">
-          <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center">
+          <div className="shrink-0 w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#991b1b" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10"/>
               <line x1="12" y1="8" x2="12" y2="12"/>

@@ -14,7 +14,7 @@ export default function ProductSuite() {
             <div className="relative rounded-2xl border border-white/10 bg-white/4 p-7 hover:border-white/20 transition-colors">
               <div className="flex items-start justify-between mb-5">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center flex-shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center shrink-0">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                       <polyline points="9 22 9 12 15 12 15 22" />
@@ -50,7 +50,7 @@ export default function ProductSuite() {
             <div className="relative rounded-2xl border border-white/6 bg-white/2 p-7 opacity-60">
               <div className="flex items-start justify-between mb-5">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-white/8 flex items-center justify-center flex-shrink-0">
+                  <div className="w-9 h-9 rounded-xl bg-white/8 flex items-center justify-center shrink-0">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="2" y="7" width="20" height="14" rx="2" />
                       <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />

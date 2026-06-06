@@ -68,7 +68,7 @@ export default function AttendanceSpotlight() {
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <svg
-                    className="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5"
+                    className="w-5 h-5 text-brand-600 shrink-0 mt-0.5"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -85,7 +85,7 @@ export default function AttendanceSpotlight() {
 
             <div className="flex items-start gap-3 max-w-md">
               <svg
-                className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5"
+                className="w-5 h-5 text-amber-500 shrink-0 mt-0.5"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

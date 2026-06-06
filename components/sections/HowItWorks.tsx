@@ -48,7 +48,7 @@ export default function HowItWorks() {
               </span>
 
               {/* Step badge */}
-              <div className="w-9 h-9 rounded-full bg-ink text-white flex items-center justify-center flex-shrink-0 text-xs font-bold mb-7 relative z-10">
+              <div className="w-9 h-9 rounded-full bg-ink text-white flex items-center justify-center shrink-0 text-xs font-bold mb-7 relative z-10">
                 {step.number}
               </div>
 

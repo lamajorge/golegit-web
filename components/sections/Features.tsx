@@ -110,7 +110,7 @@ export default function Features() {
           {features.map((feature, i) => (
             <div
               key={i}
-              className="p-6 rounded-2xl border border-gray-100 bg-white hover:border-gray-200 hover:shadow-sm transition-all group"
+              className="p-6 rounded-2xl border border-gray-100 bg-white hover:border-gray-200 hover:shadow-xs transition-all group"
             >
               <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4 group-hover:bg-brand-100 transition-colors">
                 {feature.icon}

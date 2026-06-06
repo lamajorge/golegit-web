@@ -152,7 +152,7 @@ export default async function RecursoPage({ params }: { params: Promise<{ slug: 
         </div>
       ) : (
         <div className="max-w-3xl mx-auto px-6 mb-12 -mt-2">
-          <div className="w-full h-40 rounded-2xl overflow-hidden bg-gradient-to-br from-brand-50 to-blue-50 flex items-center justify-center">
+          <div className="w-full h-40 rounded-2xl overflow-hidden bg-linear-to-br from-brand-50 to-blue-50 flex items-center justify-center">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" opacity="0.35">
               <path d={iconPath} />
             </svg>

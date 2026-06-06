@@ -69,7 +69,7 @@ export default function AlertBanner() {
   return (
     <div
       ref={ref}
-      className="fixed top-0 left-0 right-0 z-[60] bg-amber-500 text-amber-950 print:hidden"
+      className="fixed top-0 left-0 right-0 z-60 bg-amber-500 text-amber-950 print:hidden"
     >
       <div className="relative py-2 pl-4 pr-10 sm:pl-6 sm:pr-12">
         <p className="text-xs sm:text-sm leading-snug max-w-6xl mx-auto">
@@ -86,7 +86,7 @@ export default function AlertBanner() {
           type="button"
           onClick={dismiss}
           aria-label="Cerrar aviso"
-          className="absolute top-1/2 right-1.5 sm:right-2 -translate-y-1/2 p-1.5 rounded hover:bg-amber-600/30 transition-colors"
+          className="absolute top-1/2 right-1.5 sm:right-2 -translate-y-1/2 p-1.5 rounded-sm hover:bg-amber-600/30 transition-colors"
         >
           <X className="w-4 h-4" />
         </button>

@@ -1,17 +1,63 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@import './_ds/theme.css'; /* @golegit/tokens — fuente única de verdad (vendoreado; sincronizar desde golegit-tokens/) */
+@plugin '@tailwindcss/typography';
 
-:root {
-  /* --font-sans is injected by next/font (layout.tsx) via className en <html> */
-  --font-display: var(--font-sans);
-  /* legacy aliases que pueden quedar en componentes */
-  --font-fraunces: var(--font-sans);
-  --font-instrument-sans: var(--font-sans);
-  --font-geist-mono: 'Geist Mono', monospace;
+/* ============================================================================
+   Capa de compatibilidad — naming legacy de la web mapeado a los tokens nuevos.
+   Permite migrar la landing al GDS sin romper las clases existentes
+   (brand-*, paper-*, ink-soft, ink-light). El naming nuevo (green-*, surface,
+   primary, sand, text-display…) lo aporta @golegit/tokens/theme.css de arriba.
+   ============================================================================ */
+@theme {
+  /* Fuentes self-hosted (next/font expone --font-jakarta y --font-fraunces en <html>).
+     Override de los literales del paquete para usar las fuentes self-hosted reales. */
+  --font-sans: var(--font-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-fraunces), "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* brand-* (legacy) → verde de marca nuevo (OKLCH, ≈ idéntico al hex anterior) */
+  --color-brand-50: var(--gl-green-50);
+  --color-brand-100: var(--gl-green-100);
+  --color-brand-200: var(--gl-green-200);
+  --color-brand-300: var(--gl-green-300);
+  --color-brand-400: var(--gl-green-400);
+  --color-brand-500: var(--gl-green-500);
+  --color-brand-600: var(--gl-green-600);
+  --color-brand-700: var(--gl-green-700);
+  --color-brand-800: var(--gl-green-800);
+  --color-brand-900: var(--gl-green-900);
+  --color-brand-950: var(--gl-green-950);
+
+  /* paper-* (legacy) → superficie cálida nueva */
+  --color-paper: var(--gl-surface);
+  --color-paper-warm: var(--gl-surface-sunken);
+  --color-paper-cool: var(--gl-surface-card);
+
+  /* ink-soft / ink-light (legacy, fuera de la escala nueva) — preservar look */
+  --color-ink-soft: #1c2433;
+  --color-ink-light: #6b7280;
+
+  /* shimmer (skeleton/loaders de la web — fuera del paquete) */
+  --animate-shimmer: shimmer 2s linear infinite;
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to   { background-position: 200% 0; }
+  }
 }
 
+/*
+  Compatibilidad v4: el border-color por defecto pasó a `currentcolor`.
+  Mantiene el look v3 (gray-200) salvo override explícito. (Generado por el codemod.)
+*/
 @layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -23,46 +69,34 @@
   }
 
   body {
-    background-color: #ffffff;
-    color: #0d1117;
+    background-color: var(--color-surface); /* off-white cálido (antes #ffffff) */
+    color: var(--color-ink);
     font-family: var(--font-sans), sans-serif;
   }
 
   ::selection {
-    background-color: #bbf7d0;
-    color: #052e16;
+    background-color: var(--color-brand-200);
+    color: var(--color-brand-950);
+  }
+
+  :root {
+    --font-geist-mono: 'Geist Mono', monospace;
   }
 }
 
-/* AlertBanner global — desplaza navbar fixed y reserva espacio en main
-   usando la altura medida por JS (var --alert-banner-height en <body>).
-   Navbar es <header class="fixed ..."> (no <nav>), por eso targetea ambos.
-   Fallback ~40px si el JS aún no midió. */
-body.alert-banner-visible header.fixed,
-body.alert-banner-visible nav.fixed {
-  top: var(--alert-banner-height, 40px);
+/* ── Utilidades propias de la web (preservadas del setup v3) ── */
+@utility text-balance {
+  text-wrap: balance;
 }
-body.alert-banner-visible main {
-  padding-top: var(--alert-banner-height, 40px);
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .animate-delay-100 { animation-delay: 100ms; }
-  .animate-delay-200 { animation-delay: 200ms; }
-  .animate-delay-300 { animation-delay: 300ms; }
-  .animate-delay-400 { animation-delay: 400ms; }
-  .animate-delay-500 { animation-delay: 500ms; }
-  .animate-delay-600 { animation-delay: 600ms; }
-
-  .opacity-0-initial {
-    opacity: 0;
-  }
-
-  .noise-overlay::before {
+@utility animate-delay-100 { animation-delay: 100ms; }
+@utility animate-delay-200 { animation-delay: 200ms; }
+@utility animate-delay-300 { animation-delay: 300ms; }
+@utility animate-delay-400 { animation-delay: 400ms; }
+@utility animate-delay-500 { animation-delay: 500ms; }
+@utility animate-delay-600 { animation-delay: 600ms; }
+@utility opacity-0-initial { opacity: 0; }
+@utility noise-overlay {
+  &::before {
     content: '';
     position: fixed;
     inset: 0;
@@ -70,5 +104,16 @@ body.alert-banner-visible main {
     pointer-events: none;
     z-index: 9999;
     opacity: 0.4;
+  }
+}
+
+/* AlertBanner global — desplaza navbar fixed y reserva espacio en main */
+@layer utilities {
+  body.alert-banner-visible header.fixed,
+  body.alert-banner-visible nav.fixed {
+    top: var(--alert-banner-height, 40px);
+  }
+  body.alert-banner-visible main {
+    padding-top: var(--alert-banner-height, 40px);
   }
 }

@@ -19,8 +19,8 @@ function ChatMockup() {
         <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-[#1c1c1e] rounded-full z-20" />
 
         {/* App header */}
-        <div className="bg-brand-700 pt-12 pb-3 px-4 flex items-center gap-3 flex-shrink-0">
-          <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+        <div className="bg-brand-700 pt-12 pb-3 px-4 flex items-center gap-3 shrink-0">
+          <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center shrink-0">
             <svg width="18" height="22" viewBox="0 0 28 35" xmlns="http://www.w3.org/2000/svg">
               <path
                 fill="#16a34a"
@@ -51,7 +51,7 @@ function ChatMockup() {
           </div>
 
           <div className="self-start max-w-[82%]">
-            <div className="bg-white rounded-2xl rounded-tl-sm px-3 py-2 shadow-sm">
+            <div className="bg-white rounded-2xl rounded-tl-sm px-3 py-2 shadow-xs">
               <p className="text-[11px] text-gray-800 leading-snug">Hola, soy GoLegit.</p>
               <p className="text-[11px] text-gray-700 leading-snug mt-1">
                 Vamos a crear el contrato de tu asesora del hogar.
@@ -61,7 +61,7 @@ function ChatMockup() {
           </div>
 
           <div className="self-end max-w-[78%]">
-            <div className="bg-[#25d366] rounded-2xl rounded-tr-sm px-3 py-2 shadow-sm">
+            <div className="bg-[#25d366] rounded-2xl rounded-tr-sm px-3 py-2 shadow-xs">
               <p className="text-[11px] text-white leading-snug">
                 Puertas adentro, $820.000 brutos.
               </p>
@@ -70,13 +70,13 @@ function ChatMockup() {
           </div>
 
           <div className="self-start max-w-[88%]">
-            <div className="bg-white rounded-2xl rounded-tl-sm px-3 py-2 shadow-sm">
+            <div className="bg-white rounded-2xl rounded-tl-sm px-3 py-2 shadow-xs">
               <p className="text-[11px] text-gray-800 font-semibold">Contrato generado</p>
               <p className="text-[11px] text-gray-600 leading-snug mt-0.5">
                 Te lo envié a ti y a Cecilia por email.
               </p>
               <div className="mt-2 bg-gray-50 border border-gray-100 rounded-xl p-2 flex items-center gap-2">
-                <div className="w-6 h-6 bg-red-50 border border-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-6 h-6 bg-red-50 border border-red-100 rounded-lg flex items-center justify-center shrink-0">
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="#ef4444">
                     <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
                   </svg>
@@ -98,7 +98,7 @@ function ChatMockup() {
 
 export default function Hero() {
   return (
-    <section className="relative h-[100svh] lg:h-[100dvh] overflow-hidden bg-zinc-950">
+    <section className="relative h-svh lg:h-dvh overflow-hidden bg-zinc-950">
       {/* Ambient glow — top left */}
       <div
         className="absolute top-0 left-0 w-[700px] h-[700px] pointer-events-none"

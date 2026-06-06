@@ -11,7 +11,7 @@ function RichText({ items }: { items: RichTextItemResponse[] }) {
         const { bold, italic, strikethrough, code, underline, color } = item.annotations;
         let text: React.ReactNode = item.plain_text;
 
-        if (code) text = <code className="bg-gray-100 text-brand-700 text-[0.85em] px-1.5 py-0.5 rounded font-mono">{text}</code>;
+        if (code) text = <code className="bg-gray-100 text-brand-700 text-[0.85em] px-1.5 py-0.5 rounded-sm font-mono">{text}</code>;
         if (bold) text = <strong className="font-semibold text-ink">{text}</strong>;
         if (italic) text = <em>{text}</em>;
         if (strikethrough) text = <s>{text}</s>;
@@ -126,15 +126,15 @@ function renderBlock(block: Block, key: number) {
           <a
             key={key}
             href={linkItem.href}
-            className="not-prose group flex items-center gap-3 bg-brand-600 text-white rounded-2xl px-5 py-4 my-7 no-underline shadow-sm hover:bg-brand-700 hover:shadow-md transition-all"
+            className="not-prose group flex items-center gap-3 bg-brand-600 text-white rounded-2xl px-5 py-4 my-7 no-underline shadow-xs hover:bg-brand-700 hover:shadow-md transition-all"
           >
             {b.callout.icon?.emoji && (
-              <span className="text-2xl flex-shrink-0">{b.callout.icon.emoji}</span>
+              <span className="text-2xl shrink-0">{b.callout.icon.emoji}</span>
             )}
             <span className="font-semibold text-base sm:text-lg leading-snug flex-1">
               {label}
             </span>
-            <span className="text-xl flex-shrink-0 group-hover:translate-x-1 transition-transform">→</span>
+            <span className="text-xl shrink-0 group-hover:translate-x-1 transition-transform">→</span>
           </a>
         );
       }
@@ -142,7 +142,7 @@ function renderBlock(block: Block, key: number) {
       return (
         <div key={key} className="flex gap-3 bg-brand-50 border border-brand-100 rounded-xl p-4 my-6">
           {b.callout.icon?.emoji && (
-            <span className="text-xl flex-shrink-0 mt-0.5">{b.callout.icon.emoji}</span>
+            <span className="text-xl shrink-0 mt-0.5">{b.callout.icon.emoji}</span>
           )}
           <p className="text-sm text-ink-muted leading-relaxed">
             <RichText items={b.callout.rich_text} />
@@ -161,13 +161,13 @@ function renderBlock(block: Block, key: number) {
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="not-prose group flex items-center gap-3 bg-brand-600 text-white rounded-2xl px-5 py-4 my-7 no-underline shadow-sm hover:bg-brand-700 hover:shadow-md transition-all"
+          className="not-prose group flex items-center gap-3 bg-brand-600 text-white rounded-2xl px-5 py-4 my-7 no-underline shadow-xs hover:bg-brand-700 hover:shadow-md transition-all"
         >
-          <span className="text-xl flex-shrink-0">🔗</span>
+          <span className="text-xl shrink-0">🔗</span>
           <span className="font-semibold text-base sm:text-lg leading-snug flex-1">
             {caption || url}
           </span>
-          <span className="text-xl flex-shrink-0 group-hover:translate-x-1 transition-transform">→</span>
+          <span className="text-xl shrink-0 group-hover:translate-x-1 transition-transform">→</span>
         </a>
       );
     }
@@ -225,7 +225,7 @@ export default function BlockRenderer({ blocks }: { blocks: Block[] }) {
                   const b = block as any;
                   return (
                     <li key={j} className="flex items-start gap-2.5 text-ink-muted">
-                      <span className="w-1.5 h-1.5 rounded-full bg-brand-500 flex-shrink-0 mt-2" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0 mt-2" />
                       <span className="leading-relaxed"><RichText items={b.bulleted_list_item.rich_text} /></span>
                     </li>
                   );
@@ -240,7 +240,7 @@ export default function BlockRenderer({ blocks }: { blocks: Block[] }) {
                   const b = block as any;
                   return (
                     <li key={j} className="flex items-start gap-3 text-ink-muted">
-                      <span className="w-6 h-6 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-semibold flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="w-6 h-6 rounded-full bg-brand-50 border border-brand-200 text-brand-700 text-xs font-semibold flex items-center justify-center shrink-0 mt-0.5">
                         {j + 1}
                       </span>
                       <span className="leading-relaxed"><RichText items={b.numbered_list_item.rich_text} /></span>

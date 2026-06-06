@@ -52,7 +52,7 @@ export default function NovedadesClient({ posts, categorias, categoriaActiva }: 
             onClick={() => setCategoria(cat)}
             className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all ${
               categoriaActiva === cat
-                ? "bg-brand-600 text-white border-brand-600 shadow-sm"
+                ? "bg-brand-600 text-white border-brand-600 shadow-xs"
                 : "bg-white text-ink-muted border-gray-200 hover:border-gray-300 hover:text-ink"
             }`}
           >
@@ -75,7 +75,7 @@ export default function NovedadesClient({ posts, categorias, categoriaActiva }: 
               className="group flex flex-col bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-brand-300 hover:shadow-lg hover:shadow-brand-600/6 transition-all duration-300 hover:-translate-y-0.5"
             >
               {/* Imagen */}
-              <div className="h-44 overflow-hidden bg-gray-50 flex-shrink-0">
+              <div className="h-44 overflow-hidden bg-gray-50 shrink-0">
                 {post.portada ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img

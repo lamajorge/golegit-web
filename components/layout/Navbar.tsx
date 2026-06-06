@@ -46,7 +46,7 @@ function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: 
             onClick={() => setOpen(false)}
             className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 transition-colors"
           >
-            <div className="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center flex-shrink-0">
+            <div className="w-7 h-7 rounded-lg bg-brand-600 flex items-center justify-center shrink-0">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                 <polyline points="9 22 9 12 15 12 15 22" />
@@ -56,7 +56,7 @@ function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: 
               <p className="text-xs font-bold text-ink">GoLegit Home</p>
               <p className="text-[10px] text-ink-light">Trabajadoras de casa particular</p>
             </div>
-            {!isBusiness && <span className="w-1.5 h-1.5 rounded-full bg-brand-500 flex-shrink-0" />}
+            {!isBusiness && <span className="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0" />}
           </Link>
 
           <div className="h-px bg-gray-100 mx-4" />
@@ -67,7 +67,7 @@ function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: 
             onClick={() => setOpen(false)}
             className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 transition-colors"
           >
-            <div className="w-7 h-7 rounded-lg bg-zinc-900 flex items-center justify-center flex-shrink-0">
+            <div className="w-7 h-7 rounded-lg bg-zinc-900 flex items-center justify-center shrink-0">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="7" width="20" height="14" rx="2" />
                 <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" />
@@ -78,9 +78,9 @@ function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: 
               <p className="text-[10px] text-ink-muted">Legal & RRHH para empresas</p>
             </div>
             {isBusiness ? (
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 flex-shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
             ) : (
-              <span className="text-[9px] font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200 px-1.5 py-0.5 rounded-full flex-shrink-0">
+              <span className="text-[9px] font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200 px-1.5 py-0.5 rounded-full shrink-0">
                 Early access
               </span>
             )}

@@ -75,7 +75,7 @@ export default async function NovedadesPage({
           `,
         }} />
         <div className="relative max-w-5xl mx-auto px-6">
-          <div className="inline-flex items-center gap-2 bg-white border border-brand-200 text-brand-700 text-xs font-medium px-3.5 py-1.5 rounded-full mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 bg-white border border-brand-200 text-brand-700 text-xs font-medium px-3.5 py-1.5 rounded-full mb-6 shadow-xs">
             <span className="w-1.5 h-1.5 bg-brand-500 rounded-full" />
             Actualizaciones legales para empleadores
           </div>

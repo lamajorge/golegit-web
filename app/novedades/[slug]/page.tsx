@@ -143,7 +143,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </div>
       ) : (
         <div className="max-w-3xl mx-auto px-6 mb-12">
-          <div className="w-full h-48 rounded-2xl overflow-hidden bg-gradient-to-br from-brand-50 to-brand-100 flex items-center justify-center">
+          <div className="w-full h-48 rounded-2xl overflow-hidden bg-linear-to-br from-brand-50 to-brand-100 flex items-center justify-center">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="1.2" opacity="0.4">
               <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
               <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
