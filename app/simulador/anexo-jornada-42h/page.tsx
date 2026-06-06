@@ -91,7 +91,7 @@ export default function AnexoJornada42hPage() {
             <span className="w-1.5 h-1.5 bg-brand-500 rounded-full" />
             Gratis · Sin registro · Descarga directa a PDF
           </div>
-          <h1 className="text-3xl lg:text-4xl font-extrabold text-ink leading-tight tracking-tight mb-3">
+          <h1 className="text-3xl lg:text-4xl font-display font-semibold text-ink leading-tight tracking-tight mb-3">
             Anexo de adecuación de jornada a{" "}
             <span className="text-brand-600">42 horas semanales</span>
           </h1>

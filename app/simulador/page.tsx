@@ -24,7 +24,7 @@ export default function SimuladorLanding() {
             Herramientas gratuitas — sin registrarse
           </div>
 
-          <h1 className="text-4xl lg:text-5xl font-extrabold text-ink leading-tight tracking-tight mb-4">
+          <h1 className="text-4xl lg:text-5xl font-display font-semibold text-ink leading-tight tracking-tight mb-4">
             Simuladores laborales para{" "}
             <span className="text-brand-600">trabajadoras de casa particular</span>
           </h1>

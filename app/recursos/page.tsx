@@ -39,7 +39,7 @@ export default async function RecursosPage({
               <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
             </svg>
           </div>
-          <h1 className="text-2xl font-extrabold text-ink mb-3">CMS no configurado</h1>
+          <h1 className="text-2xl font-display font-semibold text-ink mb-3">CMS no configurado</h1>
           <p className="text-ink-muted mb-2 leading-relaxed max-w-md mx-auto">
             Agrega las variables de entorno en Vercel:
           </p>
@@ -80,7 +80,7 @@ export default async function RecursosPage({
             </svg>
             Recursos para empleadores
           </div>
-          <h1 className="text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+          <h1 className="text-4xl lg:text-5xl font-display font-semibold text-white tracking-tight leading-tight mb-4">
             Centro de Conocimiento
           </h1>
           <p className="text-lg text-white/60 leading-relaxed max-w-xl">

@@ -127,7 +127,7 @@ export default async function RecursoPage({ params }: { params: Promise<{ slug: 
           </div>
 
           {/* Título */}
-          <h1 className="text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight mb-6">
+          <h1 className="text-3xl lg:text-4xl font-display font-semibold text-white tracking-tight leading-tight mb-6">
             {recurso.titulo}
           </h1>
 

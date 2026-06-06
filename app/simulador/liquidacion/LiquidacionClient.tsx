@@ -298,7 +298,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
               Mensual · Gratis
             </span>
           </div>
-          <h1 className="text-3xl lg:text-4xl font-light text-ink leading-tight mb-3" style={{ fontFamily: "var(--font-fraunces)" }}>
+          <h1 className="font-display text-3xl lg:text-4xl font-semibold text-ink leading-tight mb-3">
             Liquidación de sueldo
           </h1>
           <p className="text-ink-muted leading-relaxed max-w-xl">
