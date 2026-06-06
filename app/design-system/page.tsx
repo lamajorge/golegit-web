@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DsPrimitives } from "@/components/sections/DsPrimitives";
 
 export const metadata: Metadata = {
   title: "GoLegit Design System",
@@ -171,6 +172,19 @@ export default function DesignSystemPage() {
               <div><strong className="font-bold">Contrato por vencer.</strong> El plazo fijo de Rosa termina en 3 días. Genera la renovación o el finiquito antes del vencimiento.</div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ── PRIMITIVOS UX (vivos) — Fase 2 ── */}
+      <section className="border-t border-border bg-surface">
+        <div className="mx-auto max-w-5xl px-6 py-20">
+          <span className="text-2xs font-bold uppercase tracking-[0.14em] text-green-600">Primitivos · UX viva</span>
+          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight">No es color — es experiencia</h2>
+          <p className="mt-3 mb-10 max-w-2xl text-ink-muted">
+            Cada primitivo trae su comportamiento adentro: estados de carga, error, vacío,
+            feedback, foco accesible y motion. Esto es lo que se distribuye a la app y el panel.
+          </p>
+          <DsPrimitives />
         </div>
       </section>
 
