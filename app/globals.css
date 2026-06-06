@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import './_ds/theme.css'; /* @golegit/tokens — fuente única de verdad (vendoreado; sincronizar desde golegit-tokens/) */
+@import '@golegit-cl/tokens/theme.css'; /* paquete compartido — fuente única de verdad */
 @plugin '@tailwindcss/typography';
 
 /* ============================================================================

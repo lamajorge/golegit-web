@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/Button";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
-import { Alert } from "@/components/ui/Alert";
-import { Input } from "@/components/ui/Input";
-import { Skeleton, SkeletonCard } from "@/components/ui/Skeleton";
-import { EmptyState } from "@/components/ui/EmptyState";
-import { Modal } from "@/components/ui/Modal";
+import { Button } from "@golegit-cl/tokens/ui/Button";
+import { Card } from "@golegit-cl/tokens/ui/Card";
+import { Badge } from "@golegit-cl/tokens/ui/Badge";
+import { Alert } from "@golegit-cl/tokens/ui/Alert";
+import { Input } from "@golegit-cl/tokens/ui/Input";
+import { Skeleton, SkeletonCard } from "@golegit-cl/tokens/ui/Skeleton";
+import { EmptyState } from "@golegit-cl/tokens/ui/EmptyState";
+import { Modal } from "@golegit-cl/tokens/ui/Modal";
 
 function Block({ label, children }: { label: string; children: React.ReactNode }) {
   return (

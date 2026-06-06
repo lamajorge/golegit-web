@@ -7,6 +7,8 @@ const CMS_IMAGES_ORIGIN =
   "https://domdefqcsiqkdpuchjtu.supabase.co/storage/v1/object/public/cms-images";
 
 const nextConfig: NextConfig = {
+  // @golegit-cl/tokens ships TSX/CSS fuente → Next debe transpilarlo.
+  transpilePackages: ["@golegit-cl/tokens"],
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "**.notion.so" },
