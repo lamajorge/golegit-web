@@ -323,7 +323,7 @@ export default function BusinessLanding() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.08] tracking-tight mb-5 animate-fade-up animate-delay-100">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-white leading-[1.08] tracking-tight mb-5 animate-fade-up animate-delay-100">
               Tu empresa,
               <br />
               legalmente en orden.

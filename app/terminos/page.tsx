@@ -15,7 +15,7 @@ export default function TerminosPage() {
         </Link>
 
         <h1
-          className="text-4xl font-light text-ink mb-2"
+          className="font-display text-4xl font-semibold text-ink mb-2"
           style={{ fontFamily: "var(--font-fraunces)" }}
         >
           Términos y Condiciones de Servicio

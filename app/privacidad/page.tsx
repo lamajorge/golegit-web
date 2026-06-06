@@ -15,7 +15,7 @@ export default function PrivacidadPage() {
         </Link>
 
         <h1
-          className="text-4xl font-light text-ink mb-2"
+          className="font-display text-4xl font-semibold text-ink mb-2"
           style={{ fontFamily: "var(--font-fraunces)" }}
         >
           Política de Privacidad
