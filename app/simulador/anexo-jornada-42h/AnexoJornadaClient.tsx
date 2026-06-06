@@ -246,7 +246,7 @@ export default function AnexoJornadaClient() {
   // PA-adentro NO aplica
   if (data.modalidad === "puertas_adentro") {
     return (
-      <div className="bg-white border border-amber-200 rounded-2xl p-8 shadow-sm print:hidden">
+      <div className="bg-white border border-amber-200 rounded-2xl p-8 shadow-xs print:hidden">
         <div className="flex items-start gap-3 mb-4">
           <AlertCircle className="w-6 h-6 text-amber-600 shrink-0 mt-0.5" />
           <div>
@@ -341,7 +341,7 @@ export default function AnexoJornadaClient() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-sm space-y-6">
+    <form onSubmit={onSubmit} className="bg-white border border-gray-200 rounded-2xl p-6 md:p-8 shadow-xs space-y-6">
       {/* Modalidad */}
       <Section title="Modalidad de trabajo">
         <div className="grid grid-cols-2 gap-3">
@@ -405,7 +405,7 @@ export default function AnexoJornadaClient() {
               type="checkbox"
               checked={data.acepta_aviso}
               onChange={(e) => update("acepta_aviso", e.target.checked)}
-              className="mt-0.5 w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+              className="mt-0.5 w-4 h-4 rounded-sm border-gray-300 text-brand-600 focus:ring-brand-500"
             />
             <span>
               Acepto recibir un email cuando GoLegit lance la app por WhatsApp.
@@ -439,7 +439,7 @@ export default function AnexoJornadaClient() {
             <select
               value={data.jornada_actual_horas}
               onChange={(e) => update("jornada_actual_horas", Number(e.target.value))}
-              className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+              className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-hidden"
             >
               <option value={45}>45 horas semanales (anterior a Ley 21.561)</option>
               <option value={44}>44 horas semanales (vigente hasta 25-abr-2026)</option>
@@ -466,7 +466,7 @@ export default function AnexoJornadaClient() {
                     type="checkbox"
                     checked={dia.activo}
                     onChange={(e) => updateDia(i, "activo", e.target.checked)}
-                    className="w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                    className="w-4 h-4 rounded-sm border-gray-300 text-brand-600 focus:ring-brand-500"
                   />
                   <span className={`text-xs md:text-sm font-medium ${dia.activo ? "text-ink" : "text-ink-muted"}`}>
                     {DIAS_INFO[i].nombre}
@@ -490,7 +490,7 @@ export default function AnexoJornadaClient() {
                     value={dia.entrada}
                     onChange={(e) => updateDia(i, "entrada", e.target.value)}
                     disabled={!dia.activo}
-                    className="flex-1 min-w-0 px-2 py-1.5 text-xs md:text-sm border border-gray-200 rounded-md disabled:bg-gray-100 disabled:text-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+                    className="flex-1 min-w-0 px-2 py-1.5 text-xs md:text-sm border border-gray-200 rounded-md disabled:bg-gray-100 disabled:text-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-hidden"
                   />
                   <span className="text-xs text-ink-muted">a</span>
                   <input
@@ -498,7 +498,7 @@ export default function AnexoJornadaClient() {
                     value={dia.salida}
                     onChange={(e) => updateDia(i, "salida", e.target.value)}
                     disabled={!dia.activo}
-                    className="flex-1 min-w-0 px-2 py-1.5 text-xs md:text-sm border border-gray-200 rounded-md disabled:bg-gray-100 disabled:text-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+                    className="flex-1 min-w-0 px-2 py-1.5 text-xs md:text-sm border border-gray-200 rounded-md disabled:bg-gray-100 disabled:text-gray-400 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-hidden"
                   />
                 </div>
                 {/* Horas desktop */}
@@ -522,7 +522,7 @@ export default function AnexoJornadaClient() {
               <select
                 value={data.colacion}
                 onChange={(e) => update("colacion", Number(e.target.value))}
-                className="px-2 py-1 text-xs border border-gray-200 rounded-md focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+                className="px-2 py-1 text-xs border border-gray-200 rounded-md focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-hidden"
               >
                 <option value={30}>30 min</option>
                 <option value={45}>45 min</option>
@@ -676,7 +676,7 @@ function Input({
         onBlur={onBlur}
         min={min}
         max={max}
-        className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none ${
+        className={`w-full px-3 py-2 text-sm border rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-hidden ${
           error ? "border-red-300 bg-red-50" : "border-gray-200"
         }`}
       />
@@ -693,7 +693,7 @@ function PreviewAnexo({ data, distribucionTexto, totalHoras }: { data: FormData;
   return (
     <div
       id="anexo-preview"
-      className="bg-white border border-gray-200 rounded-2xl p-8 md:p-12 shadow-sm print:shadow-none print:border-0 print:p-0 print:rounded-none"
+      className="bg-white border border-gray-200 rounded-2xl p-8 md:p-12 shadow-xs print:shadow-none print:border-0 print:p-0 print:rounded-none"
       style={{ fontFamily: "'Segoe UI', Arial, sans-serif", color: "#0d1117", lineHeight: 1.6 }}
     >
       <div className="hidden print:block mb-8 pb-3 border-b-2 border-brand-600">

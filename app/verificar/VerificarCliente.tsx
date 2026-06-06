@@ -143,7 +143,7 @@ export default function VerificarCliente() {
           onChange={(e) => setCodigo(e.target.value.toUpperCase())}
           placeholder="GL-1A2B3C4D"
           maxLength={11}
-          className="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-ink font-mono text-lg tracking-wider focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 outline-none"
+          className="flex-1 border border-gray-200 rounded-xl px-4 py-2.5 text-ink font-mono text-lg tracking-wider focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 outline-hidden"
         />
         <button
           type="submit"
@@ -249,7 +249,7 @@ export default function VerificarCliente() {
                         <p className="text-sm font-medium text-ink capitalize">
                           {f.rol === "empleador" ? "Empleador/a" : "Trabajador/a"}
                         </p>
-                        <span className="shrink-0 text-xs font-mono bg-green-50 border border-green-200 text-green-700 px-2 py-0.5 rounded">
+                        <span className="shrink-0 text-xs font-mono bg-green-50 border border-green-200 text-green-700 px-2 py-0.5 rounded-sm">
                           ✓ FES
                         </span>
                       </div>

@@ -46,7 +46,7 @@ export default function AttendanceSpotlight() {
             <p className="text-xs font-semibold tracking-widest text-brand-700 uppercase mb-5">
               Control de asistencia
             </p>
-            <h2 className="text-4xl lg:text-5xl font-extrabold text-ink leading-tight tracking-tight mb-6">
+            <h2 className="text-4xl lg:text-5xl font-display font-semibold text-ink leading-tight tracking-tight mb-6">
               Cada día registrado.
               <br />
               <span className="text-ink-muted font-bold">Cada reporte a la mano.</span>
@@ -68,7 +68,7 @@ export default function AttendanceSpotlight() {
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <svg
-                    className="w-5 h-5 text-brand-600 flex-shrink-0 mt-0.5"
+                    className="w-5 h-5 text-brand-600 shrink-0 mt-0.5"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -85,7 +85,7 @@ export default function AttendanceSpotlight() {
 
             <div className="flex items-start gap-3 max-w-md">
               <svg
-                className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5"
+                className="w-5 h-5 text-amber-500 shrink-0 mt-0.5"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -115,7 +115,7 @@ export default function AttendanceSpotlight() {
               }}
             />
             <div className="relative rounded-2xl bg-white shadow-[0_20px_60px_-15px_rgba(15,23,42,0.15)] overflow-hidden ring-1 ring-black/5">
-              <div className="bg-zinc-950 px-6 py-4 flex items-center justify-between">
+              <div className="bg-ink-deep px-6 py-4 flex items-center justify-between">
                 <div>
                   <p className="text-white text-sm font-bold">Abril 2026</p>
                   <p className="text-white/50 text-xs">María L. · Puertas afuera</p>

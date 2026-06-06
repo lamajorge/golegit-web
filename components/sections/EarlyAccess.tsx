@@ -53,7 +53,7 @@ export default function EarlyAccess() {
         }}
       />
       <div className="relative max-w-xl mx-auto px-6 text-center">
-        <span className="inline-flex items-center gap-2 bg-white border border-brand-200 text-brand-700 text-xs font-medium px-3.5 py-1.5 rounded-full mb-5 shadow-sm">
+        <span className="inline-flex items-center gap-2 bg-white border border-brand-200 text-brand-700 text-xs font-medium px-3.5 py-1.5 rounded-full mb-5 shadow-xs">
           <span className="w-1.5 h-1.5 bg-brand-500 rounded-full" />
           Early access · gratis · sin compromiso
         </span>
@@ -84,7 +84,7 @@ export default function EarlyAccess() {
         ) : (
           <form
             onSubmit={onSubmit}
-            className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm space-y-4 text-left"
+            className="bg-white border border-gray-200 rounded-2xl p-6 shadow-xs space-y-4 text-left"
           >
             <div>
               <label htmlFor="ea-email" className="block text-xs font-medium text-ink mb-1.5">
@@ -97,7 +97,7 @@ export default function EarlyAccess() {
                 placeholder="tu@ejemplo.cl"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none"
+                className="w-full px-3 py-2.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-hidden"
               />
             </div>
             <label className="flex items-start gap-2.5 cursor-pointer text-xs text-ink-muted leading-relaxed">
@@ -105,7 +105,7 @@ export default function EarlyAccess() {
                 type="checkbox"
                 checked={consentimiento}
                 onChange={(e) => setConsentimiento(e.target.checked)}
-                className="mt-0.5 w-4 h-4 rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+                className="mt-0.5 w-4 h-4 rounded-sm border-gray-300 text-brand-600 focus:ring-brand-500"
               />
               <span>
                 Acepto recibir un email cuando GoLegit esté disponible. Puedo

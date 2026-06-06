@@ -65,7 +65,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
       >
         <span className="font-semibold text-ink text-sm leading-snug">{q}</span>
         <div
-          className={`w-5 h-5 rounded-full border border-gray-200 flex items-center justify-center flex-shrink-0 mt-0.5 transition-transform ${
+          className={`w-5 h-5 rounded-full border border-gray-200 flex items-center justify-center shrink-0 mt-0.5 transition-transform ${
             open ? "rotate-180 bg-ink border-ink" : ""
           }`}
         >
@@ -85,12 +85,12 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 export default function FAQ() {
   return (
-    <section id="faq" className="py-24 bg-[#fafaf8]">
+    <section id="faq" className="py-24 bg-surface-sunken">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
           <div className="lg:col-span-1">
             <p className="text-xs font-semibold tracking-widest text-ink-light uppercase mb-5">FAQ</p>
-            <h2 className="text-3xl lg:text-4xl font-extrabold text-ink leading-tight tracking-tight mb-4">
+            <h2 className="text-3xl lg:text-4xl font-display font-semibold text-ink leading-tight tracking-tight mb-4">
               Preguntas frecuentes
             </h2>
             <p className="text-sm text-ink-muted leading-relaxed">
@@ -102,7 +102,7 @@ export default function FAQ() {
             </p>
           </div>
 
-          <div className="lg:col-span-2 bg-white rounded-2xl border border-gray-100 px-6">
+          <div className="lg:col-span-2 bg-surface-card rounded-2xl border border-border px-6">
             {faqs.map((faq, i) => (
               <FAQItem key={i} q={faq.q} a={faq.a} />
             ))}

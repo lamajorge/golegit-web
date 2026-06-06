@@ -37,7 +37,7 @@ export default function Trust() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="max-w-2xl mb-14">
           <p className="text-xs font-semibold tracking-widest text-ink-light uppercase mb-5">Por qué confiar</p>
-          <h2 className="text-4xl lg:text-5xl font-extrabold text-ink leading-tight tracking-tight">
+          <h2 className="text-4xl lg:text-5xl font-display font-semibold text-ink leading-tight tracking-tight">
             Legal desde el diseño,
             <br />
             <span className="text-ink-muted font-bold">no desde el marketing.</span>
@@ -45,7 +45,7 @@ export default function Trust() {
         </div>
 
         {/* Featured card — full width */}
-        <div className="relative rounded-3xl bg-zinc-950 p-8 lg:p-10 mb-4 overflow-hidden">
+        <div className="relative rounded-3xl bg-ink-deep p-8 lg:p-10 mb-4 overflow-hidden">
           {/* Decorative glow */}
           <div
             className="absolute inset-0 pointer-events-none"
@@ -54,7 +54,7 @@ export default function Trust() {
             }}
           />
           <div className="relative flex flex-col lg:flex-row lg:items-center gap-6">
-            <div className="w-12 h-12 rounded-2xl bg-brand-600/20 border border-brand-500/30 flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 rounded-2xl bg-brand-600/20 border border-brand-500/30 flex items-center justify-center shrink-0">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               </svg>
@@ -66,7 +66,7 @@ export default function Trust() {
                 con el Art. 10 del Código del Trabajo y la Ley 20.786. No son formularios genéricos de internet.
               </p>
             </div>
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <span className="inline-flex items-center gap-1.5 bg-brand-600/20 border border-brand-500/30 text-brand-400 text-xs font-semibold px-3 py-1.5 rounded-full">
                 <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
                   <path d="M2 6l3 3 5-5" stroke="#4ade80" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -80,8 +80,8 @@ export default function Trust() {
         {/* Other cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
           {trustItems.map((item, i) => (
-            <div key={i} className="flex flex-col gap-4 p-6 rounded-2xl border border-gray-100 hover:border-gray-200 transition-colors group">
-              <div className="w-10 h-10 rounded-xl bg-ink/5 text-ink-muted flex items-center justify-center flex-shrink-0 group-hover:bg-ink/8 transition-colors">
+            <div key={i} className="flex flex-col gap-4 p-6 rounded-2xl border border-gray-100 bg-surface-card hover:border-brand-200 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 ease-[cubic-bezier(.34,1.56,.64,1)] group">
+              <div className="w-10 h-10 rounded-xl bg-ink/5 text-ink-muted flex items-center justify-center shrink-0 group-hover:bg-ink/8 transition-colors">
                 {item.icon}
               </div>
               <div>
@@ -93,7 +93,7 @@ export default function Trust() {
         </div>
 
         <div className="flex flex-col sm:flex-row items-start gap-5 p-6 rounded-2xl bg-amber-50 border border-amber-100">
-          <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
+          <div className="shrink-0 w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#92400e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
               <polyline points="14,2 14,8 20,8"/>

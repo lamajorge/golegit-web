@@ -60,7 +60,7 @@ const pct = (n: number) => (n * 100).toFixed(2).replace(".", ",") + "%";
 // que React los destruya y recree en cada render (bug input focus)
 // ─────────────────────────────────────────────────────────────
 const inputCls =
-  "w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-400 transition-all";
+  "w-full bg-white border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-ink focus:outline-hidden focus:ring-2 focus:ring-brand-500/30 focus:border-brand-400 transition-all";
 const labelCls = "block text-xs font-medium text-ink-muted mb-1.5";
 
 function MoneyInput({
@@ -99,7 +99,7 @@ function Row({
         </p>
         {sub && <p className="text-[11px] text-ink-light mt-0.5">{sub}</p>}
       </div>
-      <span className={`text-sm font-medium flex-shrink-0 tabular-nums ${negative ? "text-red-600" : bold ? "text-ink" : "text-ink-muted"}`}>
+      <span className={`text-sm font-medium shrink-0 tabular-nums ${negative ? "text-red-600" : bold ? "text-ink" : "text-ink-muted"}`}>
         {value}
       </span>
     </div>
@@ -322,8 +322,8 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
               className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                 modo === key
                   ? key === "liquido"
-                    ? "bg-brand-600 text-white shadow-sm"
-                    : "bg-white text-ink shadow-sm"
+                    ? "bg-brand-600 text-white shadow-xs"
+                    : "bg-white text-ink shadow-xs"
                   : key === "liquido"
                   ? "text-brand-700 hover:text-brand-600"
                   : "text-ink-muted hover:text-ink"
@@ -340,7 +340,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
           <div className="space-y-5">
 
             {/* Remuneración */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-xs">
               <p className="text-sm font-semibold text-ink mb-4">
                 {modo === "base" ? "Remuneración" : "Liquidación objetivo"}
               </p>
@@ -417,7 +417,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
             </div>
 
             {/* AFP */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-xs">
               <p className="text-sm font-semibold text-ink mb-4">Previsión</p>
               <div className="space-y-4">
                 <div>
@@ -458,7 +458,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
             </div>
 
             {/* Período */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-xs">
               <div className="flex items-center justify-between mb-4">
                 <p className="text-sm font-semibold text-ink">Días trabajados</p>
                 <div className="flex items-center gap-2">
@@ -470,7 +470,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
                       const v = Math.min(30, Math.max(1, parseInt(e.target.value.replace(/\D/g, "")) || 1));
                       setDias(v);
                     }}
-                    className="w-14 text-center bg-white border border-gray-200 rounded-lg px-2 py-1.5 text-sm font-medium text-ink focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-400"
+                    className="w-14 text-center bg-white border border-gray-200 rounded-lg px-2 py-1.5 text-sm font-medium text-ink focus:outline-hidden focus:ring-2 focus:ring-brand-500/30 focus:border-brand-400"
                   />
                   <span className="text-sm text-ink-muted">/ 30</span>
                 </div>
@@ -516,7 +516,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
             )}
 
             {/* Haberes */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs">
               <p className="text-[11px] font-semibold text-ink-light uppercase tracking-widest mb-4">Haberes</p>
               <div className="space-y-3">
                 {modo === "base" ? (
@@ -546,7 +546,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
             </div>
 
             {/* Descuentos */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs">
               <p className="text-[11px] font-semibold text-ink-light uppercase tracking-widest mb-4">
                 Descuentos del trabajador
               </p>
@@ -577,7 +577,7 @@ export default function LiquidacionClient({ imm: immProp, topeImponible: topePro
             </div>
 
             {/* Aportes empleador */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs">
               <p className="text-[11px] font-semibold text-ink-light uppercase tracking-widest mb-1">
                 Aportes del empleador — Previred
               </p>

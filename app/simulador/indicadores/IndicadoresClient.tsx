@@ -55,12 +55,12 @@ const Row = ({ label, value, sub, highlight }: { label: string; value: string; s
       <p className="text-sm text-ink-muted leading-snug">{label}</p>
       {sub && <p className="text-[11px] text-ink-light mt-0.5">{sub}</p>}
     </div>
-    <span className="text-sm font-medium text-ink tabular-nums flex-shrink-0">{value}</span>
+    <span className="text-sm font-medium text-ink tabular-nums shrink-0">{value}</span>
   </div>
 )
 
 const Section = ({ title, children }: { title: string; children: React.ReactNode }) => (
-  <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+  <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs">
     <p className="text-[11px] font-semibold text-ink-light uppercase tracking-widest mb-3">{title}</p>
     <div className="divide-y divide-gray-50">{children}</div>
   </div>

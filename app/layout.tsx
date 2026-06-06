@@ -1,15 +1,29 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Fraunces } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import JsonLd from "./JsonLd";
 
+// UI — toda la interfaz. Self-hosted (next/font), métricas de fallback ajustadas.
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   style: ["normal", "italic"],
-  variable: "--font-sans",
+  variable: "--font-jakarta",
   display: "swap",
+  adjustFontFallback: true,
+  fallback: ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
+});
+
+// Display — solo titulares (registro Expressive). Variable font (opsz). Self-hosted.
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  axes: ["opsz"],
+  style: ["normal", "italic"],
+  variable: "--font-fraunces",
+  display: "swap",
+  adjustFontFallback: true,
+  fallback: ["Iowan Old Style", "Palatino Linotype", "Palatino", "Georgia", "Times New Roman", "serif"],
 });
 
 export const metadata: Metadata = {
@@ -84,7 +98,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es-CL" className={plusJakartaSans.variable}>
+    <html lang="es-CL" className={`${plusJakartaSans.variable} ${fraunces.variable}`}>
       <body className="antialiased">
         <JsonLd />
         {children}

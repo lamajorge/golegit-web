@@ -19,7 +19,7 @@ export default function SimuladorLanding() {
           }}
         />
         <div className="relative max-w-5xl mx-auto px-6">
-          <div className="inline-flex items-center gap-2 bg-white border border-brand-200 text-brand-700 text-xs font-medium px-3.5 py-1.5 rounded-full mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 bg-white border border-brand-200 text-brand-700 text-xs font-medium px-3.5 py-1.5 rounded-full mb-6 shadow-xs">
             <span className="w-1.5 h-1.5 bg-brand-500 rounded-full" />
             Herramientas gratuitas — sin registrarse
           </div>
@@ -41,14 +41,14 @@ export default function SimuladorLanding() {
         {/* Destacado: Anexo Jornada 42h (Ley 21.561) */}
         <Link
           href="/simulador/anexo-jornada-42h"
-          className="group relative flex flex-col md:flex-row gap-6 bg-gradient-to-br from-amber-50 via-white to-amber-50/40 border-2 border-amber-300 rounded-3xl p-8 hover:border-amber-400 hover:shadow-xl hover:shadow-amber-600/10 transition-all duration-300 mb-8"
+          className="group relative flex flex-col md:flex-row gap-6 bg-linear-to-br from-amber-50 via-white to-amber-50/40 border-2 border-amber-300 rounded-3xl p-8 hover:border-amber-400 hover:shadow-xl hover:shadow-amber-600/10 transition-all duration-300 mb-8"
         >
           <div className="absolute -top-3 left-8">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-amber-600 px-3 py-1 rounded-full shadow">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-amber-600 px-3 py-1 rounded-full shadow-sm">
               Nuevo · Ley 21.561 vigente desde hoy
             </span>
           </div>
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <div className="w-16 h-16 bg-amber-100 border border-amber-200 rounded-2xl flex items-center justify-center">
               <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="1.7">
                 <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
@@ -115,7 +115,7 @@ export default function SimuladorLanding() {
                 "Proporcional a los días trabajados",
               ].map((f) => (
                 <li key={f} className="flex items-start gap-2.5 text-sm text-ink-muted">
-                  <div className="w-4 h-4 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-4 h-4 rounded-full bg-brand-100 flex items-center justify-center shrink-0 mt-0.5">
                     <svg width="8" height="8" viewBox="0 0 12 12" fill="none">
                       <path d="M2 6l3 3 5-5" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -200,7 +200,7 @@ export default function SimuladorLanding() {
                 "Texto de jornada listo para copiar al contrato",
               ].map((f) => (
                 <li key={f} className="flex items-start gap-2.5 text-sm text-ink-muted">
-                  <div className="w-4 h-4 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-4 h-4 rounded-full bg-brand-100 flex items-center justify-center shrink-0 mt-0.5">
                     <svg width="8" height="8" viewBox="0 0 12 12" fill="none">
                       <path d="M2 6l3 3 5-5" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>

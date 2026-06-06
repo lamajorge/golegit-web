@@ -52,7 +52,7 @@ const compliance = [
 
 export default function TechTrust() {
   return (
-    <section className="py-28 bg-zinc-950 relative overflow-hidden">
+    <section className="py-28 bg-ink-deep relative overflow-hidden">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -65,7 +65,7 @@ export default function TechTrust() {
           <p className="text-xs font-semibold tracking-widest text-brand-400 uppercase mb-5">
             Tecnología y trazabilidad
           </p>
-          <h2 className="text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight mb-6">
+          <h2 className="text-4xl lg:text-5xl font-display font-semibold text-white leading-tight tracking-tight mb-6">
             Firmas con valor legal.
             <br />
             <span className="text-white/60 font-bold">Sin pretextos técnicos.</span>

@@ -75,12 +75,12 @@ export default function Pricing() {
   const totalAnual = ASISTIDO_BANDAS[banda].totalAnual;
 
   return (
-    <section id="precios" className="py-24 bg-[#fafaf8]">
+    <section id="precios" className="py-24 bg-surface">
       <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <p className="text-xs font-semibold tracking-widest text-ink-light uppercase mb-4">Precios</p>
-          <h2 className="text-3xl lg:text-4xl font-extrabold text-ink leading-tight tracking-tight mb-3">
+          <h2 className="text-3xl lg:text-4xl font-display font-semibold text-ink leading-tight tracking-tight mb-3">
             Gratis siempre. Y si quieres, el papeleo lo hacemos nosotros.
           </h2>
           <p className="text-sm text-ink-muted">
@@ -92,9 +92,15 @@ export default function Pricing() {
 
         {/* ─── 2 cards: Home (destacado) + Asistido ───────────────────────────────── */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
-          {/* HOME — Featured (fondo oscuro) */}
-          <div className="relative rounded-2xl p-6 border bg-zinc-950 border-zinc-800 flex flex-col">
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full whitespace-nowrap uppercase tracking-wide">
+          {/* HOME — Featured (fondo evergreen, glow verde) */}
+          <div className="group relative isolate rounded-[18px] p-6 border bg-ink-deep border-white/10 shadow-lg flex flex-col transition-transform duration-200 ease-[cubic-bezier(.34,1.56,.64,1)] hover:-translate-y-1">
+            {/* glow verde superior (sin overflow-hidden: el badge sobresale) */}
+            <div
+              aria-hidden
+              className="absolute inset-0 -z-10 rounded-[18px] pointer-events-none"
+              style={{ background: "radial-gradient(75% 45% at 50% 0%, oklch(0.627 0.170 149 / 0.20) 0%, transparent 70%)" }}
+            />
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full whitespace-nowrap uppercase tracking-wide shadow-md">
               ★ Gratis · Todo incluido
             </span>
 
@@ -135,7 +141,7 @@ export default function Pricing() {
           </div>
 
           {/* ASISTIDO — secundario (fondo claro) */}
-          <div className="relative rounded-2xl p-6 border bg-white border-gray-100 flex flex-col">
+          <div className="relative rounded-[18px] p-6 border bg-surface-card border-border shadow-sm flex flex-col transition-transform duration-200 ease-[cubic-bezier(.34,1.56,.64,1)] hover:-translate-y-1">
             <div className="mb-3 mt-1">
               <p className="text-lg font-extrabold text-ink">Asistido</p>
               <p className="text-xs text-ink-light">Que GoLegit haga el papeleo cada mes</p>
@@ -218,7 +224,7 @@ export default function Pricing() {
         </div>
 
         {/* ─── Servicios Jurídicos — sección aparte, compacta ───────────────────── */}
-        <div className="mt-10 bg-white rounded-2xl border border-gray-100 overflow-hidden">
+        <div className="mt-10 bg-surface-card rounded-[18px] border border-border shadow-sm overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_1.4fr]">
             {/* Lado izquierdo: pitch */}
             <div className="p-6 bg-gray-50/50 md:border-r border-gray-100 flex flex-col justify-between gap-4">

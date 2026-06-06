@@ -2,13 +2,13 @@ import CtaButton from "@/components/CtaButton";
 
 export default function Solution() {
   return (
-    <section className="py-28 bg-zinc-950">
+    <section className="py-28 bg-ink-deep">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left */}
           <div>
             <p className="text-xs font-semibold tracking-widest text-brand-400 uppercase mb-5">La solución</p>
-            <h2 className="text-4xl lg:text-5xl font-extrabold text-white leading-tight tracking-tight mb-6">
+            <h2 className="font-display text-4xl lg:text-5xl font-semibold text-white leading-[1.1] tracking-tight mb-6">
               Todo resuelto
               <br />
               desde tu WhatsApp.
@@ -27,7 +27,7 @@ export default function Solution() {
                 "Tu trabajadora también recibe sus documentos",
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-md bg-brand-900/40 border border-brand-700/50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-5 h-5 rounded-md bg-brand-900/40 border border-brand-700/50 flex items-center justify-center shrink-0 mt-0.5">
                     <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
                       <path d="M2 6l3 3 5-5" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -53,7 +53,7 @@ export default function Solution() {
               { value: "0 apps", label: "que instalar", sub: "Solo necesitas WhatsApp" },
               { value: "100%", label: "automatizado", sub: "Sin tener que llamar a nadie" },
             ].map((stat, i) => (
-              <div key={i} className="p-5 rounded-2xl bg-white/5 border border-white/8 hover:bg-white/8 transition-colors">
+              <div key={i} className="p-5 rounded-2xl bg-white/5 border border-white/8 hover:bg-white/8 hover:-translate-y-0.5 transition-all duration-200 ease-[cubic-bezier(.34,1.56,.64,1)]">
                 <p className="text-3xl font-extrabold text-white tracking-tight mb-1">{stat.value}</p>
                 <p className="text-sm font-semibold text-white/65 mb-1">{stat.label}</p>
                 <p className="text-xs text-white/50">{stat.sub}</p>

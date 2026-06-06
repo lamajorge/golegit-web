@@ -279,7 +279,7 @@ function JornadaPage() {
   }, [token, saving, saved, dias, colacion, modalidad, totalHoras, textoJornada]);
 
   const inputTimeCls =
-    "bg-white border border-gray-200 rounded-lg px-2 py-1.5 text-sm text-ink focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-400 transition-all min-w-0 w-full";
+    "bg-white border border-gray-200 rounded-lg px-2 py-1.5 text-sm text-ink focus:outline-hidden focus:ring-2 focus:ring-brand-500/30 focus:border-brand-400 transition-all min-w-0 w-full";
 
   return (
     <main className="min-h-screen bg-paper">
@@ -353,7 +353,7 @@ function JornadaPage() {
           <div className="space-y-5">
 
             {/* Modalidad — bloqueada cuando viene del bot con &m=... */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-xs">
               <p className="text-sm font-semibold text-ink mb-3">Modalidad</p>
               <div className={`flex gap-1 bg-gray-100 rounded-xl p-1 ${modalidadBloqueada ? "opacity-70 cursor-not-allowed" : ""}`}>
                 {([
@@ -366,7 +366,7 @@ function JornadaPage() {
                     disabled={modalidadBloqueada}
                     className={`flex-1 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
                       modalidad === key
-                        ? "bg-white text-ink shadow-sm"
+                        ? "bg-white text-ink shadow-xs"
                         : "text-ink-muted hover:text-ink disabled:hover:text-ink-muted"
                     } ${modalidadBloqueada ? "cursor-not-allowed" : ""}`}
                   >
@@ -397,7 +397,7 @@ function JornadaPage() {
             {/* Cuando NO es Puertas adentro: simulador de horario tradicional. */}
             {!esAdentro && (<>
             {/* Colación */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-xs">
               <div className="flex items-start justify-between gap-4 mb-1">
                 <div>
                   <p className="text-sm font-semibold text-ink">
@@ -409,7 +409,7 @@ function JornadaPage() {
                       : "No imputable a la jornada (Art. 34 CT)"}
                   </p>
                 </div>
-                <div className="flex items-center gap-2 flex-shrink-0">
+                <div className="flex items-center gap-2 shrink-0">
                   <input
                     type="text"
                     inputMode="numeric"
@@ -419,7 +419,7 @@ function JornadaPage() {
                       const min = esAdentro ? 0 : COLACION_MIN;
                       setColacion(Math.min(COLACION_MAX, Math.max(min, raw)));
                     }}
-                    className="w-20 text-center bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm font-semibold text-ink focus:outline-none focus:ring-2 focus:ring-brand-500/30 focus:border-brand-400"
+                    className="w-20 text-center bg-white border border-gray-200 rounded-xl px-3 py-2 text-sm font-semibold text-ink focus:outline-hidden focus:ring-2 focus:ring-brand-500/30 focus:border-brand-400"
                   />
                   <span className="text-sm text-ink-muted">min</span>
                 </div>
@@ -444,7 +444,7 @@ function JornadaPage() {
             </div>
 
             {/* Horario semanal */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-xs">
               <p className="text-sm font-semibold text-ink mb-5">Horario semanal</p>
 
               <div className="space-y-2">
@@ -461,7 +461,7 @@ function JornadaPage() {
                         role="switch"
                         aria-checked={dias[i].activo}
                         onClick={() => updateDia(i, "activo", !dias[i].activo)}
-                        className={`relative w-9 h-5 rounded-full flex-shrink-0 transition-colors ${
+                        className={`relative w-9 h-5 rounded-full shrink-0 transition-colors ${
                           dias[i].activo ? "bg-brand-600" : "bg-gray-300"
                         }`}
                       >
@@ -474,7 +474,7 @@ function JornadaPage() {
 
                       {/* Día */}
                       <span
-                        className={`text-sm font-medium flex-shrink-0 w-16 sm:w-20 ${
+                        className={`text-sm font-medium shrink-0 w-16 sm:w-20 ${
                           dias[i].activo ? "text-ink" : "text-ink-light"
                         }`}
                       >
@@ -499,7 +499,7 @@ function JornadaPage() {
                               onChange={(e) => updateDia(i, "entrada", e.target.value)}
                               className={`${inputTimeCls} flex-1 min-w-0`}
                             />
-                            <span className="text-ink-light text-xs flex-shrink-0">→</span>
+                            <span className="text-ink-light text-xs shrink-0">→</span>
                             <input
                               type="time"
                               value={dias[i].salida}
@@ -508,7 +508,7 @@ function JornadaPage() {
                             />
                           </div>
                           {/* Horas desktop */}
-                          <span className={`hidden sm:inline text-sm font-medium flex-shrink-0 w-12 text-right tabular-nums ${
+                          <span className={`hidden sm:inline text-sm font-medium shrink-0 w-12 text-right tabular-nums ${
                             esAdentro
                               ? horasPorDia[i] > LIMITE_DIARIO_ADENTRO ? "text-red-600" : "text-brand-700"
                               : horasPorDia[i] > 10 ? "text-red-600" : "text-brand-700"
@@ -610,7 +610,7 @@ function JornadaPage() {
             </div>
 
             {/* Detalle por día */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs">
               <p className="text-[11px] font-semibold text-ink-light uppercase tracking-widest mb-4">
                 Horas por día
               </p>
@@ -644,14 +644,14 @@ function JornadaPage() {
             </>)}
 
             {/* Estado legal */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+            <div className="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs">
               <p className="text-[11px] font-semibold text-ink-light uppercase tracking-widest mb-4">
                 Estado legal
               </p>
               {esAdentro ? (
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
-                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${!diasExceden12h.some(Boolean) ? "bg-brand-500" : "bg-red-500"}`} />
+                    <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${!diasExceden12h.some(Boolean) ? "bg-brand-500" : "bg-red-500"}`} />
                     <div>
                       <p className="text-sm font-medium text-ink">
                         Máx. {LIMITE_DIARIO_ADENTRO} h trabajadas/día (Art. 149 inc. 2° CT)
@@ -664,7 +664,7 @@ function JornadaPage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3 pt-3 border-t border-gray-100">
-                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${descansosInsuficientes.length === 0 ? "bg-brand-500" : "bg-red-500"}`} />
+                    <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${descansosInsuficientes.length === 0 ? "bg-brand-500" : "bg-red-500"}`} />
                     <div>
                       <p className="text-sm font-medium text-ink">
                         Descanso ininterrumpido mín. {DESCANSO_CONTINUO_ADENTRO} h entre jornadas
@@ -683,7 +683,7 @@ function JornadaPage() {
               ) : (
                 <div className="space-y-3">
                   <div className="flex items-start gap-3">
-                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${!algunDiaExcede10h ? "bg-brand-500" : "bg-red-500"}`} />
+                    <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${!algunDiaExcede10h ? "bg-brand-500" : "bg-red-500"}`} />
                     <div>
                       <p className="text-sm font-medium text-ink">
                         Máx. 10 h/día (Art. 28 inc. 2° CT)
@@ -696,7 +696,7 @@ function JornadaPage() {
                     </div>
                   </div>
                   <div className="flex items-start gap-3 pt-3 border-t border-gray-100">
-                    <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${horasExtra === 0 ? "bg-brand-500" : "bg-red-500"}`} />
+                    <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${horasExtra === 0 ? "bg-brand-500" : "bg-red-500"}`} />
                     <div>
                       <p className="text-sm font-medium text-ink">
                         Jornada máxima actual: {jornadaMax} h/semana
@@ -710,7 +710,7 @@ function JornadaPage() {
                   </div>
                   {antesDelCambio && (
                     <div className="flex items-start gap-3 pt-3 border-t border-gray-100">
-                      <div className={`w-2 h-2 rounded-full mt-1.5 flex-shrink-0 ${horasExtra42! > 0 ? "bg-amber-500" : "bg-gray-300"}`} />
+                      <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${horasExtra42! > 0 ? "bg-amber-500" : "bg-gray-300"}`} />
                       <div>
                         <p className="text-sm font-medium text-ink">
                           Desde el 26 de abril de 2026: 42 h/semana
@@ -819,7 +819,7 @@ function JornadaPage() {
 
         {/* ── Texto para el contrato — full width ── */}
         {textoJornada && (
-          <div className="mt-8 bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+          <div className="mt-8 bg-white border border-gray-100 rounded-2xl p-6 shadow-xs">
             <div className="flex items-start justify-between gap-4 mb-4">
               <div>
                 <p className="text-sm font-semibold text-ink">
@@ -831,7 +831,7 @@ function JornadaPage() {
               </div>
               <button
                 onClick={handleCopy}
-                className={`flex-shrink-0 inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-xl border transition-all ${
+                className={`shrink-0 inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-xl border transition-all ${
                   copied
                     ? "bg-brand-600 text-white border-brand-600"
                     : "bg-white text-ink-muted border-gray-200 hover:border-gray-300 hover:text-ink"
@@ -861,7 +861,7 @@ function JornadaPage() {
                 ref={textRef}
                 readOnly
                 value={textoJornada}
-                className="w-full bg-brand-50 border border-brand-100 rounded-xl pt-8 pb-4 px-4 text-sm text-ink leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-brand-300"
+                className="w-full bg-brand-50 border border-brand-100 rounded-xl pt-8 pb-4 px-4 text-sm text-ink leading-relaxed resize-none focus:outline-hidden focus:ring-2 focus:ring-brand-300"
                 rows={3}
               />
             </div>
@@ -908,7 +908,7 @@ A su vez, tendrá derecho a dos días de libre disposición en cada mes calendar
 
   return (
     <>
-      <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+      <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-xs">
         <p className="text-sm font-semibold text-ink mb-4">Régimen legal — Puertas adentro</p>
         <div className="space-y-3 text-sm text-ink-muted leading-relaxed">
           <p><strong className="text-ink">No hay jornada semanal fija.</strong> El Art. 149 inc. 2° CT establece un régimen especial: el/la empleador/a determina la distribución de las labores según la naturaleza del servicio, respetando los descansos mínimos legales.</p>
@@ -916,7 +916,7 @@ A su vez, tendrá derecho a dos días de libre disposición en cada mes calendar
         </div>
       </div>
 
-      <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+      <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-xs">
         <p className="text-sm font-semibold text-ink mb-4">Reglas que sí debes respetar</p>
         <ul className="space-y-3 text-sm text-ink-muted">
           <li className="flex gap-3"><span className="text-brand-600 font-bold">•</span><span><strong className="text-ink">12 h de descanso continuo</strong> entre el fin de una jornada y el inicio de la siguiente. Al menos <strong className="text-ink">9 h ininterrumpidas</strong> dentro de ese bloque.</span></li>
@@ -928,7 +928,7 @@ A su vez, tendrá derecho a dos días de libre disposición en cada mes calendar
         </ul>
       </div>
 
-      <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+      <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-xs">
         <div className="flex items-center justify-between mb-3 gap-3 flex-wrap">
           <p className="text-sm font-semibold text-ink">Cláusula tipo para tu contrato</p>
           <button
@@ -941,7 +941,7 @@ A su vez, tendrá derecho a dos días de libre disposición en cada mes calendar
         <textarea
           readOnly
           value={clausula}
-          className="w-full h-72 text-xs font-mono bg-gray-50 border border-gray-200 rounded-lg p-3 resize-none focus:outline-none"
+          className="w-full h-72 text-xs font-mono bg-gray-50 border border-gray-200 rounded-lg p-3 resize-none focus:outline-hidden"
         />
         <p className="text-xs text-ink-light mt-2 leading-relaxed">
           Este texto está alineado con la plantilla canónica de contratos GoLegit. Puedes pegarlo en la cláusula de jornada del contrato o usarlo como referencia.

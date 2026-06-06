@@ -60,7 +60,7 @@ function WaitlistForm({ dark = false }: { dark?: boolean }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={estado === "enviando"}
-          className={`flex-1 px-4 py-3 rounded-xl text-sm border focus:outline-none focus:ring-2 disabled:opacity-60 ${
+          className={`flex-1 px-4 py-3 rounded-xl text-sm border focus:outline-hidden focus:ring-2 disabled:opacity-60 ${
             dark
               ? "bg-white/10 border-white/20 text-white placeholder-white/40 focus:ring-indigo-400"
               : "bg-white border-gray-200 text-ink placeholder-gray-400 focus:ring-indigo-500"
@@ -115,7 +115,7 @@ function FeatureCard({
 function PainPoint({ text }: { text: string }) {
   return (
     <div className="flex items-start gap-3">
-      <div className="w-5 h-5 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+      <div className="w-5 h-5 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mt-0.5">
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="3" strokeLinecap="round">
           <path d="M18 6L6 18M6 6l12 12" />
         </svg>
@@ -138,7 +138,7 @@ function PillarCard({
 }) {
   return (
     <div className="flex items-start gap-4">
-      <div className="w-9 h-9 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 flex-shrink-0 mt-0.5">
+      <div className="w-9 h-9 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 shrink-0 mt-0.5">
         {icon}
       </div>
       <div>
@@ -300,7 +300,7 @@ export default function BusinessLanding() {
   return (
     <>
       {/* ── Hero ───────────────────────────────────────────────── */}
-      <section className="relative min-h-[100svh] flex items-center overflow-hidden bg-zinc-950">
+      <section className="relative min-h-svh flex items-center overflow-hidden bg-zinc-950">
         <div
           className="absolute top-0 left-0 w-[800px] h-[800px] pointer-events-none"
           style={{
@@ -368,7 +368,7 @@ export default function BusinessLanding() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-3">El problema</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-white leading-tight mb-4">
               Gestionar una pyme en Chile es un laberinto legal.
             </h2>
             <p className="text-white/50 leading-relaxed">
@@ -394,7 +394,7 @@ export default function BusinessLanding() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-14">
             <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Gestión laboral</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Tu equipo al día con el Código del Trabajo.
             </h2>
             <p className="text-gray-500 leading-relaxed">
@@ -444,7 +444,7 @@ export default function BusinessLanding() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Operación diaria</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Herramientas para gestionar el equipo día a día.
             </h2>
             <p className="text-gray-500 leading-relaxed">
@@ -498,7 +498,7 @@ export default function BusinessLanding() {
               <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">
                 Rota de turnos
               </p>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-5">
+              <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-5">
                 Organiza los turnos sin planillas ni grupos de WhatsApp.
               </h2>
               <p className="text-gray-500 leading-relaxed mb-8">
@@ -515,7 +515,7 @@ export default function BusinessLanding() {
                   "Comparte la rota por link — sin instalar nada",
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center shrink-0 mt-0.5">
                       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
@@ -599,7 +599,7 @@ export default function BusinessLanding() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-14">
             <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Gestión corporativa</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Tu SpA bien constituida y documentada.
             </h2>
             <p className="text-gray-500 leading-relaxed">
@@ -650,7 +650,7 @@ export default function BusinessLanding() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-14">
             <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">Contratos & documentos</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Todos los papeles de tu operación, en regla.
             </h2>
             <p className="text-gray-500 leading-relaxed">
@@ -702,7 +702,7 @@ export default function BusinessLanding() {
             <p className="text-xs font-bold uppercase tracking-widest text-indigo-600 mb-3">
               Por rubro
             </p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
               Hecho para las pymes chilenas que más lo necesitan.
             </h2>
             <p className="text-gray-500 leading-relaxed">
@@ -741,7 +741,7 @@ export default function BusinessLanding() {
           }}
         />
         <div className="relative max-w-2xl mx-auto px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-display font-semibold text-white leading-tight mb-4">
             Sé de los primeros en probarlo.
           </h2>
           <p className="text-white/50 leading-relaxed mb-8">

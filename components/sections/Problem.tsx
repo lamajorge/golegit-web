@@ -60,10 +60,10 @@ export default function Problem() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="max-w-2xl mb-16">
           <p className="text-xs font-semibold tracking-widest text-ink-light uppercase mb-5">El problema</p>
-          <h2 className="text-4xl lg:text-5xl font-extrabold text-ink leading-tight tracking-tight mb-5">
+          <h2 className="font-display text-4xl lg:text-5xl font-semibold text-ink leading-[1.1] tracking-tight mb-5">
             Lo que hoy no está en regla
             <br />
-            <span className="text-ink-muted font-bold">te puede salir caro.</span>
+            <span className="text-ink-muted">te puede salir caro.</span>
           </h2>
           <p className="text-lg text-ink-muted leading-relaxed">
             Contratar a una trabajadora de casa particular en Chile tiene requisitos
@@ -76,7 +76,7 @@ export default function Problem() {
           {problems.map((problem, i) => (
             <div
               key={i}
-              className="group p-6 rounded-2xl border border-red-100/60 hover:border-red-200 hover:shadow-md hover:shadow-red-600/5 transition-all bg-white"
+              className="group p-6 rounded-2xl border border-red-100/60 hover:border-red-200 hover:shadow-md hover:shadow-red-600/5 hover:-translate-y-0.5 transition-all duration-200 ease-[cubic-bezier(.34,1.56,.64,1)] bg-white"
             >
               <div className="w-10 h-10 rounded-xl bg-red-50 text-red-700 flex items-center justify-center mb-4 group-hover:bg-red-100 transition-colors">
                 {problem.icon}
@@ -88,7 +88,7 @@ export default function Problem() {
         </div>
 
         <div className="mt-10 p-7 rounded-2xl bg-red-50 border border-red-100 flex flex-col sm:flex-row items-start sm:items-center gap-5">
-          <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center">
+          <div className="shrink-0 w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#991b1b" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10"/>
               <line x1="12" y1="8" x2="12" y2="12"/>
