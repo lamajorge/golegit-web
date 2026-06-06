@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@golegit-cl/tokens": "^0.1.2",
+    "@golegit-cl/tokens": "^0.1.3",
     "@notionhq/client": "^2.2.15",
     "@tailwindcss/typography": "^0.5.19",
     "@vercel/analytics": "^2.0.1",
