@@ -25,8 +25,8 @@ function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: 
         className={`flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full border tracking-wide transition-colors ${
           isBusiness
             ? isDark
-              ? "text-indigo-400 border-indigo-400/30 bg-indigo-400/10 hover:bg-indigo-400/20"
-              : "text-indigo-700 border-indigo-200 bg-indigo-50 hover:bg-indigo-100"
+              ? "text-blue-400 border-blue-400/30 bg-blue-400/10 hover:bg-blue-400/20"
+              : "text-blue-700 border-blue-200 bg-blue-50 hover:bg-blue-100"
             : isDark
               ? "text-brand-400 border-brand-400/30 bg-brand-400/10 hover:bg-brand-400/20"
               : "text-brand-700 border-brand-200 bg-brand-50 hover:bg-brand-100"
@@ -75,12 +75,12 @@ function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: 
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-xs font-bold text-ink">GoLegit Business</p>
-              <p className="text-[10px] text-ink-muted">Legal & RRHH para empresas</p>
+              <p className="text-[10px] text-ink-muted">El aliado legal de tu pyme</p>
             </div>
             {isBusiness ? (
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
             ) : (
-              <span className="text-[9px] font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200 px-1.5 py-0.5 rounded-full shrink-0">
+              <span className="text-[9px] font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-1.5 py-0.5 rounded-full shrink-0">
                 Early access
               </span>
             )}
@@ -106,12 +106,12 @@ export default function Navbar() {
 
   const isDark = (isHome || isBusiness) && !scrolled;
 
-  // Business page: logo links to /business, uses indigo logo
+  // Business page: logo links to /business, uses blue logo
   const logoHref = isBusiness ? "/business" : "/";
   const logoLight = isBusiness ? "/logo/golegit-business-logo.svg" : "/logo/golegit-logo.svg";
   const logoDark = isBusiness ? "/logo/golegit-business-logo-dark.svg" : "/logo/golegit-logo-dark.svg";
   const logoAlt = isBusiness
-    ? "GoLegit Business — Legal & RRHH para empresas"
+    ? "GoLegit Business — El aliado legal de tu pyme"
     : "GoLegit — Contratos y liquidaciones para trabajadoras de casa particular";
 
   // Nav links differ by product
@@ -125,9 +125,8 @@ export default function Navbar() {
     { href: "/recursos", label: "Recursos" },
   ];
   const businessNavLinks = [
-    { href: "/business#laboral", label: "Laboral" },
-    { href: "/business#corporativo", label: "Corporativo" },
-    { href: "/business#contratos", label: "Contratos" },
+    { href: "/business#modulos", label: "Qué incluye" },
+    { href: "/business#contadores", label: "Para contadores" },
   ];
 
   const navLinks = isBusiness ? businessNavLinks : homeNavLinks;
@@ -183,8 +182,8 @@ export default function Navbar() {
               href="/business#waitlist"
               className={`inline-flex items-center text-sm font-semibold px-4 py-2 rounded-lg transition-colors ${
                 isDark
-                  ? "bg-indigo-500 text-white hover:bg-indigo-400"
-                  : "bg-indigo-600 text-white hover:bg-indigo-700"
+                  ? "bg-blue-500 text-white hover:bg-blue-400"
+                  : "bg-blue-600 text-white hover:bg-blue-700"
               }`}
             >
               Early access
@@ -245,7 +244,7 @@ export default function Navbar() {
               ))}
               <a
                 href="/business#waitlist"
-                className="inline-flex items-center justify-center text-sm font-semibold px-4 py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700"
+                className="inline-flex items-center justify-center text-sm font-semibold px-4 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
                 onClick={() => setMenuOpen(false)}
               >
                 Early access

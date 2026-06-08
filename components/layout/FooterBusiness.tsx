@@ -11,14 +11,14 @@ export default function FooterBusiness() {
             <div className="mb-4">
               <img
                 src="/logo/golegit-business-logo-dark.svg"
-                alt="GoLegit Business — Gestión de RRHH para empresas"
+                alt="GoLegit Business — El aliado legal de tu pyme"
                 height={28}
                 style={{ height: 28, width: "auto" }}
               />
             </div>
             <p className="text-sm leading-relaxed text-white/50">
-              Contratos, liquidaciones, turnos y firma digital
-              para equipos de trabajo en Chile.
+              El aliado legal de tu pyme. Tu sociedad, tus datos, tus contratos
+              y tu equipo en regla — sin complicaciones.
             </p>
           </div>
 
@@ -27,13 +27,13 @@ export default function FooterBusiness() {
             <h4 className="text-white text-sm font-medium mb-4">Producto</h4>
             <ul className="space-y-2.5">
               <li>
-                <a href="/business#funcionalidades" className="text-sm hover:text-white transition-colors">
-                  Funcionalidades
+                <a href="/business#modulos" className="text-sm hover:text-white transition-colors">
+                  Qué incluye
                 </a>
               </li>
               <li>
-                <a href="/business#rubros" className="text-sm hover:text-white transition-colors">
-                  Por rubro
+                <a href="/business#contadores" className="text-sm hover:text-white transition-colors">
+                  Para contadores y abogados
                 </a>
               </li>
               <li>
@@ -41,36 +41,26 @@ export default function FooterBusiness() {
                   Early access
                 </a>
               </li>
-              <li>
-                <Link href="/" className="text-sm hover:text-white transition-colors">
-                  GoLegit Hogar
-                </Link>
-              </li>
             </ul>
           </div>
 
-          {/* Herramientas */}
+          {/* GoLegit */}
           <div>
-            <h4 className="text-white text-sm font-medium mb-4">Herramientas</h4>
+            <h4 className="text-white text-sm font-medium mb-4">GoLegit</h4>
             <ul className="space-y-2.5">
               <li>
-                <Link href="/simulador/liquidacion" className="text-sm hover:text-white transition-colors">
-                  Simulador de liquidación
+                <Link href="/" className="text-sm hover:text-white transition-colors">
+                  GoLegit Home (casa particular)
                 </Link>
               </li>
               <li>
-                <Link href="/simulador/jornada" className="text-sm hover:text-white transition-colors">
-                  Simulador de jornada
+                <Link href="/privacidad" className="text-sm hover:text-white transition-colors">
+                  Privacidad
                 </Link>
               </li>
               <li>
-                <Link href="/recursos" className="text-sm hover:text-white transition-colors">
-                  Centro de conocimiento
-                </Link>
-              </li>
-              <li>
-                <Link href="/novedades" className="text-sm hover:text-white transition-colors">
-                  Novedades legales
+                <Link href="/terminos" className="text-sm hover:text-white transition-colors">
+                  Términos
                 </Link>
               </li>
             </ul>

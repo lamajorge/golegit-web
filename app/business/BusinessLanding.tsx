@@ -296,6 +296,12 @@ const IconPower = (
 
 /* ── Main component ────────────────────────────────────────────── */
 
+const IconSparkle = (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8" />
+  </svg>
+);
+
 export default function BusinessLanding() {
   return (
     <>
@@ -304,13 +310,13 @@ export default function BusinessLanding() {
         <div
           className="absolute top-0 left-0 w-[800px] h-[800px] pointer-events-none"
           style={{
-            background: "radial-gradient(circle at 25% 25%, rgba(99,102,241,0.15) 0%, transparent 60%)",
+            background: "radial-gradient(circle at 25% 25%, rgba(37,99,235,0.16) 0%, transparent 60%)",
           }}
         />
         <div
           className="absolute bottom-0 right-0 w-[600px] h-[600px] pointer-events-none"
           style={{
-            background: "radial-gradient(circle at 75% 85%, rgba(99,102,241,0.08) 0%, transparent 55%)",
+            background: "radial-gradient(circle at 75% 85%, rgba(37,99,235,0.08) 0%, transparent 55%)",
           }}
         />
 
@@ -324,34 +330,33 @@ export default function BusinessLanding() {
 
             {/* Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-semibold text-white leading-[1.08] tracking-tight mb-5 animate-fade-up animate-delay-100">
-              Tu empresa,
+              Tu empresa, en regla.
               <br />
-              legalmente en orden.
-              <br />
-              <span className="text-blue-400">Sin contratar un estudio.</span>
+              <span className="text-blue-400">Sin complicaciones.</span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-lg text-white/60 leading-relaxed max-w-xl mb-8 animate-fade-up animate-delay-200">
-              Contratos de trabajo, rota de turnos, juntas de accionistas,
-              modificaciones de tu SpA, arriendos y más — generados, firmados
-              y archivados en un solo portal. Hecho para la pyme chilena.
+              El aliado legal de tu pyme. Tu sociedad, tus datos, tus contratos
+              y tu equipo en orden — te decimos qué te toca, lo dejamos listo y,
+              si algo necesita notario, lo gestionamos por ti. No somos un
+              fiscalizador más.
             </p>
 
             {/* CTA */}
             <div className="animate-fade-up animate-delay-300">
               <WaitlistForm dark />
               <p className="text-xs text-white/30 mt-3">
-                Sin compromiso. Te avisamos cuando esté listo.
+                Empieza gratis. Sin compromiso. Te avisamos cuando esté listo.
               </p>
             </div>
 
             {/* Stats */}
             <div className="mt-12 grid grid-cols-3 gap-6 border-t border-white/8 pt-8 animate-fade-up animate-delay-400">
               {[
-                { value: "3 áreas", label: "Laboral · Corporativo · Contratos" },
-                { value: "Firma FES", label: "Ley 19.799" },
-                { value: "Chile", label: "legislación local" },
+                { value: "Todo en un lugar", label: "sociedad · datos · contratos · equipo" },
+                { value: "Firma FES", label: "validez legal · Ley 19.799" },
+                { value: "Empieza gratis", label: "sin tarjeta, sin permanencia" },
               ].map((s, i) => (
                 <div key={i}>
                   <p className="text-xl sm:text-2xl font-extrabold text-white">{s.value}</p>
@@ -363,160 +368,129 @@ export default function BusinessLanding() {
         </div>
       </section>
 
-      {/* ── Pain points ────────────────────────────────────────── */}
-      <section className="bg-zinc-900 py-20">
+      {/* ── Posicionamiento: aliado, no fiscalizador ───────────── */}
+      <section className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="max-w-2xl mb-12">
-            <p className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">El problema</p>
-            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-white leading-tight mb-4">
-              Gestionar una pyme en Chile es un laberinto legal.
+          <div className="max-w-2xl mb-14">
+            <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Nuestra forma de trabajar</p>
+            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
+              Un aliado que te descomplica. No un fiscalizador más.
             </h2>
-            <p className="text-white/50 leading-relaxed">
-              Contratos a mano, actas de directorio que nadie redacta, arriendos
-              sin cláusulas clave. Cada error es una multa, una demanda
-              o un socio que impugna un acuerdo.
+            <p className="text-gray-500 leading-relaxed">
+              Otros softwares te llenan de alertas rojas de todo lo que haces
+              mal. Nosotros hacemos lo contrario: te decimos qué te toca, te lo
+              dejamos listo, y lo difícil lo absorbemos por ti.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <PainPoint text="Finiquito que no alcanza a salir en 10 días hábiles — y que la DT multa sin piedad." />
-            <PainPoint text="Actas de directorio que nadie redacta a tiempo — y que el banco o la SII puede pedir en cualquier momento." />
-            <PainPoint text="Lagunas previsionales que aparecen meses después y generan cobros retroactivos de Previred." />
-            <PainPoint text="Junta de accionistas sin documentación válida que deja los acuerdos expuestos a impugnación." />
-            <PainPoint text="Contrato de arriendo sin cláusulas esenciales que genera conflictos costosos años después." />
-            <PainPoint text="Documentos sin firma electrónica que no tienen valor probatorio ante la DT o el tribunal." />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
+            <PillarCard
+              icon={IconSparkle}
+              title="Lo hacemos por ti"
+              description="No te entregamos una lista de pendientes — te entregamos el documento listo para firmar. El trabajo lo hacemos nosotros."
+            />
+            <PillarCard
+              icon={IconBell}
+              title="Te avisamos a tiempo, sin asustar"
+              description="«Se acerca tu junta anual, te dejé el acta lista». Recordatorios amables, nunca amenazas de multa."
+            />
+            <PillarCard
+              icon={IconGavel}
+              title="Lo notarial también lo resolvemos"
+              description="Cuando un trámite necesita notario o Conservador, preparamos todo y, si quieres, lo gestionamos por ti. No te dejamos solo."
+            />
+            <PillarCard
+              icon={IconShield}
+              title="Validez legal de verdad"
+              description="Firma electrónica con valor legal (Ley 19.799) y respaldo de abogados. No son plantillas de internet sin valor."
+            />
           </div>
         </div>
       </section>
 
-      {/* ── Laboral ────────────────────────────────────────────── */}
-      <section id="laboral" className="py-24 bg-gray-50">
+      {/* ── Los módulos (por materia) ──────────────────────────── */}
+      <section id="modulos" className="py-24 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
           <div className="max-w-2xl mb-14">
-            <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Gestión laboral</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Todo en un solo lugar</p>
             <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
-              Tu equipo al día con el Código del Trabajo.
+              Activa solo lo que tu empresa necesita.
             </h2>
             <p className="text-gray-500 leading-relaxed">
-              Desde el contrato de ingreso hasta el finiquito, pasando por
-              liquidaciones, rota de turnos y firma digital. Todo lo que el
-              área de RRHH necesita sin contratar un contador externo.
+              GoLegit Business es modular: empiezas con lo básico y sumas lo que
+              haga falta cuando lo necesites. Sin pagar por lo que no usas.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             <FeatureCard
-              icon={IconDoc}
-              title="Contratos y documentos laborales"
-              description="Genera contratos a plazo fijo, indefinido, por obra y cartas de aviso con un par de clics. Plantillas actualizadas a la ley vigente."
+              icon={IconGavel}
+              tag="Sociedad"
+              title="Tu SpA, documentada"
+              description="Actas de junta y directorio, libro de accionistas digital, modificaciones de estatutos y aumentos de capital. Listo para el banco, la SII o tus socios."
             />
             <FeatureCard
-              icon={IconCalculator}
-              title="Liquidaciones y Previred"
-              description="Calcula liquidaciones con tasas previsionales correctas. Sin lagunas, sin cobros retroactivos. Exporta directo a Previred."
+              icon={IconLock}
+              tag="Datos"
+              title="Cumplimiento Ley 21.719"
+              description="Política de privacidad, registro de datos, gestión de derechos y brechas. La nueva ley de datos, resuelta sin angustia."
             />
             <FeatureCard
-              icon={IconCalendar}
-              title="Rota y gestión de turnos"
-              description="Organiza turnos rotativos con cortes, valida automáticamente las horas máximas y comparte la rota con tu equipo."
-            />
-            <FeatureCard
-              icon={IconShield}
-              title="Firma electrónica simple (FES)"
-              description="Firma electrónica con valor legal (Ley 19.799). Cada documento queda trazable con IP, fecha y verificación de identidad."
+              icon={IconHandshake}
+              tag="Contratos"
+              title="Contratos comerciales"
+              description="Servicios, confidencialidad (NDA), arriendo, mandatos. Con las cláusulas correctas y firma electrónica para ambas partes."
             />
             <FeatureCard
               icon={IconUsers}
-              title="Portal del trabajador"
-              description="Cada trabajador accede a sus contratos, liquidaciones y puede firmar documentos desde el celular, sin instalar nada."
+              tag="Laboral"
+              title="Tu equipo en regla"
+              description="Contratos de trabajo, liquidaciones con tasas correctas, finiquitos y reglamento interno. El Código del Trabajo, sin lagunas."
             />
             <FeatureCard
-              icon={IconBell}
-              title="Alertas de plazos legales"
-              description="Avisos de vencimiento de contrato, cotizaciones pendientes y finiquitos por vencer. Nunca más multas DT por olvido."
+              icon={IconCalculator}
+              tag="Impuestos"
+              title="Calendario tributario"
+              description="Te avisamos tus vencimientos del SII, beneficiarios finales y patente municipal. Sin reemplazar a tu contador — lo complementamos."
+            />
+            <FeatureCard
+              icon={IconBuilding}
+              tag="Formaliza"
+              title="Constituir o formalizar"
+              description="¿SpA, EIRL o sociedad limitada? Te ayudamos a decidir y a dejar todo en regla — incluido lo que el portal del Estado no te explica."
             />
           </div>
         </div>
       </section>
 
-      {/* ── Herramientas operativas ────────────────────────────── */}
-      <section className="py-20 bg-white border-t border-gray-100">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="max-w-2xl mb-12">
-            <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Operación diaria</p>
-            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
-              Herramientas para gestionar el equipo día a día.
-            </h2>
-            <p className="text-gray-500 leading-relaxed">
-              Más allá de los contratos y las liquidaciones, tu equipo necesita
-              que alguien resuelva el día a día: quién trabaja cuándo, cuántas
-              horas lleva, cuándo se acaba su contrato. GoLegit Business lo
-              tiene resuelto.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              {
-                icon: IconCalendar,
-                title: "Rota de turnos",
-                desc: "Planificación visual con validación automática de horas máximas y descansos.",
-              },
-              {
-                icon: IconDoc,
-                title: "Control de jornada",
-                desc: "Registro de asistencia digital obligatorio por Ley 21.561 (Ley 40 Horas).",
-              },
-              {
-                icon: IconCalculator,
-                title: "Horas extra",
-                desc: "Cálculo automático de horas extra vinculado a la liquidación del mes.",
-              },
-              {
-                icon: IconBell,
-                title: "Alertas de vencimientos",
-                desc: "Finiquitos, cotizaciones y contratos a punto de vencer — aviso anticipado.",
-              },
-            ].map((item, i) => (
-              <div key={i} className="bg-gray-50 rounded-2xl border border-gray-100 p-5">
-                <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 mb-3">
-                  {item.icon}
-                </div>
-                <p className="text-sm font-semibold text-gray-900 mb-1">{item.title}</p>
-                <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Rota spotlight ─────────────────────────────────────── */}
+      {/* ── Copiloto spotlight ─────────────────────────────────── */}
       <section className="py-24 bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">
-                Rota de turnos
+                Tu copiloto de cumplimiento
               </p>
               <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-5">
-                Organiza los turnos sin planillas ni grupos de WhatsApp.
+                Tu empresa, siempre al día. Sin que tengas que acordarte.
               </h2>
               <p className="text-gray-500 leading-relaxed mb-8">
-                Planificación visual de turnos rotativos con validación legal
-                automática. Sin planillas, sin errores, sin mensajes al grupo.
+                Ser pyme en Chile significa mil plazos repartidos entre la SII,
+                la municipalidad, el Conservador y la nueva agencia de datos.
+                Nosotros llevamos la cuenta — y te avisamos con tiempo, con el
+                documento ya preparado.
               </p>
 
               <div className="space-y-4">
                 {[
-                  "Turnos rotativos con cortes (mañana / noche / doble / franco)",
-                  "Validación automática contra el contrato — horas máximas y descansos",
-                  "Intercambio de turnos entre trabajadores con validación legal",
-                  "Registro de horas extra vinculado directo a la liquidación",
-                  "Comparte la rota por link — sin instalar nada",
+                  "Junta anual, modificaciones, libro de accionistas al día",
+                  "Vencimientos tributarios y beneficiarios finales (sin reemplazar al contador)",
+                  "Plazos de la Ley 21.719 y renovación de patente municipal",
+                  "Cada aviso llega con el documento listo para firmar",
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center shrink-0 mt-0.5">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                     </div>
@@ -526,67 +500,44 @@ export default function BusinessLanding() {
               </div>
             </div>
 
-            {/* Visual — rota mockup */}
+            {/* Visual — copiloto mockup */}
             <div className="relative">
               <div className="absolute -inset-4 bg-blue-500/5 rounded-3xl blur-2xl" />
               <div className="relative bg-white rounded-2xl border border-gray-200 shadow-xl overflow-hidden">
                 <div className="bg-zinc-950 px-6 py-4 flex items-center justify-between">
                   <div>
-                    <p className="text-white text-sm font-bold">Rota semanal</p>
-                    <p className="text-white/40 text-xs">14 - 20 abril 2026</p>
+                    <p className="text-white text-sm font-bold">Inversiones del Sur SpA</p>
+                    <p className="text-white/40 text-xs">Resumen de cumplimiento</p>
                   </div>
-                  <span className="text-[10px] font-bold text-blue-400 bg-blue-400/10 border border-blue-400/25 px-2 py-0.5 rounded-full">
-                    Vista previa
+                  <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-emerald-400 bg-emerald-400/10 border border-emerald-400/25 px-2 py-0.5 rounded-full">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    Al día
                   </span>
                 </div>
 
-                <div className="p-4">
-                  <div className="grid grid-cols-8 gap-px text-[10px] font-medium text-gray-400 mb-2">
-                    <div className="px-1"></div>
-                    {["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"].map((d) => (
-                      <div key={d} className="text-center">{d}</div>
-                    ))}
-                  </div>
+                <div className="p-4 space-y-2.5">
                   {[
-                    { name: "Carolina M.", shifts: ["M", "M", "M", "—", "—", "N", "N"] },
-                    { name: "Diego R.", shifts: ["N", "N", "—", "—", "M", "M", "D"] },
-                    { name: "Valentina S.", shifts: ["—", "D", "D", "N", "N", "—", "M"] },
-                    { name: "Tomás L.", shifts: ["D", "—", "N", "M", "D", "D", "—"] },
-                  ].map((row, i) => (
-                    <div key={i} className="grid grid-cols-8 gap-px items-center mb-1.5">
-                      <div className="text-[10px] font-medium text-gray-700 truncate pr-1">{row.name}</div>
-                      {row.shifts.map((s, j) => {
-                        const colors: Record<string, string> = {
-                          M: "bg-blue-100 text-blue-700",
-                          N: "bg-purple-100 text-purple-700",
-                          D: "bg-amber-100 text-amber-700",
-                          "—": "bg-gray-50 text-gray-300",
-                        };
-                        return (
-                          <div
-                            key={j}
-                            className={`text-center py-1.5 rounded-lg text-[10px] font-bold ${colors[s] || colors["—"]}`}
-                          >
-                            {s}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  ))}
-
-                  <div className="flex items-center gap-4 mt-4 pt-3 border-t border-gray-100">
-                    {[
-                      { label: "Mañana", color: "bg-blue-400" },
-                      { label: "Noche", color: "bg-purple-400" },
-                      { label: "Doble", color: "bg-amber-400" },
-                      { label: "Franco", color: "bg-gray-200" },
-                    ].map((l) => (
-                      <div key={l.label} className="flex items-center gap-1.5">
-                        <div className={`w-2 h-2 rounded-full ${l.color}`} />
-                        <span className="text-[10px] text-gray-400">{l.label}</span>
+                    { t: "Junta ordinaria anual", d: "En 3 semanas · acta lista para firmar", c: "blue", cta: "Revisar" },
+                    { t: "Declaración beneficiarios finales", d: "Marzo · te recordaremos a tiempo", c: "gray", cta: null },
+                    { t: "Política de datos (Ley 21.719)", d: "Generada y vigente", c: "emerald", cta: null },
+                    { t: "Patente municipal", d: "Renovada hasta enero 2027", c: "emerald", cta: null },
+                  ].map((row, i) => {
+                    const dot: Record<string, string> = { blue: "bg-blue-500", emerald: "bg-emerald-500", gray: "bg-gray-300" };
+                    return (
+                      <div key={i} className="flex items-center gap-3 bg-gray-50 rounded-xl px-3.5 py-3 border border-gray-100">
+                        <span className={`w-2 h-2 rounded-full shrink-0 ${dot[row.c]}`} />
+                        <div className="min-w-0 flex-1">
+                          <p className="text-[12px] font-semibold text-gray-800 truncate">{row.t}</p>
+                          <p className="text-[10px] text-gray-400 truncate">{row.d}</p>
+                        </div>
+                        {row.cta && (
+                          <span className="text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-100 px-2 py-1 rounded-lg whitespace-nowrap">
+                            {row.cta}
+                          </span>
+                        )}
                       </div>
-                    ))}
-                  </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -594,140 +545,77 @@ export default function BusinessLanding() {
         </div>
       </section>
 
-      {/* ── Corporativo ────────────────────────────────────────── */}
-      <section id="corporativo" className="py-24 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="max-w-2xl mb-14">
-            <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Gestión corporativa</p>
-            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
-              Tu SpA bien constituida y documentada.
-            </h2>
-            <p className="text-gray-500 leading-relaxed">
-              Juntas de accionistas, actas de directorio, modificaciones de
-              estatutos y operaciones con acciones. Los documentos que el banco,
-              la SII o tus socios pueden pedir en cualquier momento — generados,
-              firmados y listos para tramitar en Empresa en un Día o ante notaría.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <FeatureCard
-              icon={IconGavel}
-              title="Juntas de accionistas"
-              description="Actas de junta ordinaria y extraordinaria. Convocatorias, quórum, acuerdos y firmas — todo en un flujo guiado y con valor legal."
-            />
-            <FeatureCard
-              icon={IconDoc}
-              title="Actas de directorio"
-              description="Genera y firma actas de sesión de directorio. Registro automático de asistencia, acuerdos y representantes."
-            />
-            <FeatureCard
-              icon={IconScroll}
-              title="Modificaciones de estatutos"
-              description="Cambios de razón social, domicilio, objeto social o capital. Documentos listos para tramitar en Empresa en un Día o ante notaría, según el tipo de operación."
-            />
-            <FeatureCard
-              icon={IconChart}
-              title="Operaciones con acciones y cuotas"
-              description="Cesión, venta y prenda de acciones o cuotas. Registro del libro de accionistas y actualización del capital."
-            />
-            <FeatureCard
-              icon={IconPower}
-              title="Aumentos de capital"
-              description="Documentación completa para ampliar el capital social con nuevos aportes o capitalización de utilidades retenidas."
-            />
-            <FeatureCard
-              icon={IconUsers}
-              title="Poderes y representantes"
-              description="Otorgamiento y revocación de poderes. Actualización de representantes legales ante bancos, SII y organismos públicos."
-            />
+      {/* ── Empieza gratis ─────────────────────────────────────── */}
+      <section className="py-20 bg-gray-50 border-t border-gray-100">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="bg-white rounded-3xl border border-gray-200 p-8 sm:p-10 shadow-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Empieza gratis</p>
+                <h2 className="text-2xl sm:text-3xl font-display font-semibold text-gray-900 leading-tight mb-4">
+                  Registra tu empresa y conoce tu situación, sin pagar nada.
+                </h2>
+                <p className="text-gray-500 leading-relaxed text-sm">
+                  Solo pagas cuando generas y firmas documentos. Planes simples,
+                  sin permanencia, pensados para el bolsillo de una pyme — y muy
+                  por debajo de lo que cobra una notaría o un abogado por acto.
+                </p>
+              </div>
+              <ul className="space-y-3">
+                {[
+                  "La ficha completa de tu empresa, socios y directorio",
+                  "Tu libro de accionistas digital, siempre al día",
+                  "El copiloto que te avisa todos tus vencimientos",
+                  "El diagnóstico de la Ley 21.719",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center shrink-0 mt-0.5">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </div>
+                    <span className="text-sm text-gray-700">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── Contratos & documentos ─────────────────────────────── */}
-      <section id="contratos" className="py-24 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="max-w-2xl mb-14">
-            <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">Contratos & documentos</p>
-            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
-              Todos los papeles de tu operación, en regla.
-            </h2>
-            <p className="text-gray-500 leading-relaxed">
-              Más allá del Código del Trabajo: los contratos y documentos del
-              día a día de tu negocio, generados con cláusulas adecuadas y
-              firmados digitalmente.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <FeatureCard
-              icon={IconHome}
-              title="Contratos de arriendo"
-              description="Habitacional y comercial. Con cláusulas de reajuste UF, garantía, inventario y término anticipado. Firmados digitalmente por ambas partes."
+      {/* ── Contadores y abogados ──────────────────────────────── */}
+      <section id="contadores" className="py-24 bg-white">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="rounded-3xl bg-zinc-950 p-8 sm:p-12 relative overflow-hidden">
+            <div
+              className="absolute top-0 right-0 w-96 h-96 pointer-events-none"
+              style={{ background: "radial-gradient(circle at 80% 20%, rgba(37,99,235,0.18) 0%, transparent 60%)" }}
             />
-            <FeatureCard
-              icon={IconHandshake}
-              title="Contratos de servicios"
-              description="Prestación de servicios, mandatos y acuerdos comerciales entre empresas. Claros en plazos, precios, propiedad y responsabilidad."
-            />
-            <FeatureCard
-              icon={IconLock}
-              title="NDA y confidencialidad"
-              description="Acuerdos de confidencialidad para negociaciones, due diligence y relaciones con proveedores o socios estratégicos."
-            />
-            <FeatureCard
-              icon={IconScroll}
-              title="Declaraciones juradas"
-              description="Declaraciones simples con valor legal: domicilio, ingresos, estado civil, inexistencia de deudas. Firmadas y trazables."
-            />
-            <FeatureCard
-              icon={IconDoc}
-              title="Promesas de compraventa"
-              description="Promesas de compraventa de bienes, vehículos y activos. Con condiciones, plazos y garantías bien definidas."
-            />
-            <FeatureCard
-              icon={IconShield}
-              title="Firma electrónica para todo"
-              description="Cualquier documento se puede firmar con FES (Ley 19.799). Valor probatorio completo, sin notaría para los actos que no la requieren."
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ── Rubros ─────────────────────────────────────────────── */}
-      <section id="rubros" className="py-24 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-xs font-bold uppercase tracking-widest text-blue-600 mb-3">
-              Por rubro
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-display font-semibold text-gray-900 leading-tight mb-4">
-              Hecho para las pymes chilenas que más lo necesitan.
-            </h2>
-            <p className="text-gray-500 leading-relaxed">
-              Cada sector tiene sus propios dolores legales y operativos.
-              GoLegit Business los resuelve de raíz.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <VerticalCard
-              icon={IconUtensils}
-              title="Gastronomía y food service"
-              description="Turnos rotativos con cortes, Art. 38 CT, feriados trabajados, alta rotación y propinas. Uno de los primeros rubros en lanzar."
-              badge="Primer vertical"
-            />
-            <VerticalCard
-              icon={IconBuilding}
-              title="Servicios, retail y comercio"
-              description="Contratos a plazo fijo frecuentes, jornadas variables, horas extra por temporada y equipos distribuidos en varias sucursales."
-            />
-            <VerticalCard
-              icon={IconHandshake}
-              title="Empresas con socios"
-              description="Cualquier sociedad que necesite documentar juntas, modificar estatutos, ceder participaciones y mantener su carpeta societaria al día."
-            />
+            <div className="relative max-w-2xl">
+              <p className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-3">Para contadores y abogados</p>
+              <h2 className="text-3xl sm:text-4xl font-display font-semibold text-white leading-tight mb-4">
+                ¿Llevas varias empresas? Gestiónalas todas desde un solo lugar.
+              </h2>
+              <p className="text-white/50 leading-relaxed mb-8">
+                Si eres contador, abogado o tienes un estudio, lleva la carpeta
+                legal y societaria de todos tus clientes con una sola
+                herramienta — con precio por volumen y la cartera completa
+                siempre al día. Tú gestionas; la firma la hace cada
+                representante legal.
+              </p>
+              <div className="flex flex-wrap gap-x-8 gap-y-3">
+                {[
+                  "Todas tus empresas en un panel",
+                  "Precio mayorista por volumen",
+                  "Cada cliente, siempre al día",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                    <span className="text-sm text-white/70">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -737,7 +625,7 @@ export default function BusinessLanding() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse at 50% 100%, rgba(99,102,241,0.12) 0%, transparent 60%)",
+            background: "radial-gradient(ellipse at 50% 100%, rgba(37,99,235,0.12) 0%, transparent 60%)",
           }}
         />
         <div className="relative max-w-2xl mx-auto px-6 text-center">
@@ -745,8 +633,8 @@ export default function BusinessLanding() {
             Sé de los primeros en probarlo.
           </h2>
           <p className="text-white/50 leading-relaxed mb-8">
-            Estamos construyendo GoLegit Business con las primeras pymes.
-            Deja tu email y te avisamos cuando puedas entrar.
+            Estamos construyendo GoLegit Business con las primeras pymes y
+            estudios. Deja tu email y te avisamos cuando puedas entrar.
           </p>
           <div className="flex justify-center">
             <WaitlistForm dark />
