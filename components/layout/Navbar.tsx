@@ -40,9 +40,9 @@ function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: 
 
       {open && (
         <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50">
-          {/* Home */}
-          <Link
-            href="/"
+          {/* Home — subdominio propio (no "/", que es el paraguas) */}
+          <a
+            href="https://home.golegit.cl"
             onClick={() => setOpen(false)}
             className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 transition-colors"
           >
@@ -57,13 +57,13 @@ function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: 
               <p className="text-[10px] text-ink-light">Trabajadoras de casa particular</p>
             </div>
             {!isBusiness && <span className="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0" />}
-          </Link>
+          </a>
 
           <div className="h-px bg-gray-100 mx-4" />
 
-          {/* Business */}
-          <Link
-            href="/business"
+          {/* Business — subdominio propio */}
+          <a
+            href="https://business.golegit.cl"
             onClick={() => setOpen(false)}
             className="flex items-center gap-3 px-4 py-3.5 hover:bg-gray-50 transition-colors"
           >
@@ -78,13 +78,13 @@ function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: 
               <p className="text-[10px] text-ink-muted">El aliado legal de tu pyme</p>
             </div>
             {isBusiness ? (
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
             ) : (
-              <span className="text-[9px] font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-1.5 py-0.5 rounded-full shrink-0">
+              <span className="text-[9px] font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200 px-1.5 py-0.5 rounded-full shrink-0">
                 Early access
               </span>
             )}
-          </Link>
+          </a>
         </div>
       )}
     </div>

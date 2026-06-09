@@ -21,18 +21,19 @@ export const metadata: Metadata = {
 
 export default function ParaguasLanding() {
   return (
-    <main className="min-h-screen bg-paper">
-      <header className="flex h-16 items-center px-6 md:px-10">
-        <Image src="/logo/golegit-logo.svg" alt="GoLegit" width={108} height={28} priority />
-      </header>
-
-      {/* Hero de marca */}
-      <section className="relative overflow-hidden px-6 py-20 text-center md:px-10 md:py-28">
+    <main className="bg-paper">
+      {/* Hero + selector a pantalla completa (100vh), sin navbar */}
+      <section className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 py-12 text-center">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
-          style={{ background: "radial-gradient(55% 45% at 50% 0%, var(--gl-green-200, #bbf7d0) 0%, transparent 60%)", opacity: 0.5 }}
+          style={{ background: "radial-gradient(60% 50% at 50% 0%, var(--gl-green-200, #bbf7d0) 0%, transparent 60%)", opacity: 0.45 }}
         />
+
+        {/* Logo discreto arriba */}
+        <Image src="/logo/golegit-logo.svg" alt="GoLegit" width={120} height={30} priority className="relative mb-10" />
+
+        {/* Hero */}
         <div className="relative mx-auto max-w-2xl">
           <h1 className="font-display text-4xl font-bold leading-tight text-ink md:text-5xl">
             Lo legal, resuelto.<br /><span className="text-brand-600">Del lado tuyo.</span>
@@ -41,11 +42,9 @@ export default function ParaguasLanding() {
             GoLegit se encarga del papeleo legal por ti — sin enredos, sin susto. Elige por dónde empezar:
           </p>
         </div>
-      </section>
 
-      {/* Bifurcación a los dos productos */}
-      <section className="px-6 pb-24 md:px-10">
-        <div className="mx-auto grid max-w-4xl grid-cols-1 gap-5 md:grid-cols-2">
+        {/* Selector — dos productos */}
+        <div className="relative mt-12 grid w-full max-w-4xl grid-cols-1 gap-5 md:grid-cols-2">
           <a
             href="https://home.golegit.cl"
             className="group flex flex-col rounded-3xl border border-brand-200 bg-white p-8 transition-shadow hover:shadow-lg"
@@ -64,7 +63,7 @@ export default function ParaguasLanding() {
           <a
             href="https://business.golegit.cl"
             className="group flex flex-col rounded-3xl border p-8 transition-shadow hover:shadow-lg"
-            style={{ borderColor: "oklch(0.90 0.05 256)", background: "#fff" }}
+            style={{ borderColor: "oklch(0.90 0.06 277)", background: "#fff" }}
           >
             <Image src="/logo/golegit-business-logo.svg" alt="GoLegit Business" width={140} height={35} />
             <h2 className="mt-6 font-display text-2xl font-bold text-ink">Para tu empresa</h2>
@@ -72,7 +71,7 @@ export default function ParaguasLanding() {
               ¿Tienes una PYME o SpA? Cumplimiento de la Ley de Datos 21.719, gobierno societario,
               contratos y firma electrónica. Te decimos qué te toca y lo dejamos listo.
             </p>
-            <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5" style={{ color: "oklch(0.50 0.20 256)" }}>
+            <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5" style={{ color: "oklch(0.511 0.233 277)" }}>
               Ir a GoLegit Business →
             </span>
           </a>
