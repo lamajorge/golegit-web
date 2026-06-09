@@ -133,14 +133,14 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
         isDark
           ? "bg-transparent"
-          : "bg-white/95 backdrop-blur-md border-b border-gray-100"
+          : "bg-white/70 backdrop-blur-xl border-b border-gray-100/60 shadow-[0_1px_20px_-8px_rgba(0,0,0,0.15)]"
       }`}
     >
-      <div className="px-6 md:px-10 h-16 flex items-center justify-between">
-        {/* Logo + product switcher */}
+      <div className="relative px-6 md:px-10 h-16 flex items-center justify-between">
+        {/* Izq — Logo + product switcher */}
         <div className="flex items-center gap-2.5">
           <Link href={logoHref} className="flex items-center">
             <img
@@ -153,14 +153,14 @@ export default function Navbar() {
           <ProductSwitcher isDark={isDark} isBusiness={!!isBusiness} />
         </div>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-8">
+        {/* Centro (absoluto) — nav links centrados */}
+        <nav className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               className={`text-sm font-medium transition-colors ${
-                isDark ? "text-white/60 hover:text-white" : "text-ink-muted hover:text-ink"
+                isDark ? "text-white/70 hover:text-white" : "text-ink-muted hover:text-ink"
               }`}
             >
               {link.label}
@@ -171,19 +171,23 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               className={`text-sm font-medium transition-colors ${
-                isDark ? "text-white/60 hover:text-white" : "text-ink-muted hover:text-ink"
+                isDark ? "text-white/70 hover:text-white" : "text-ink-muted hover:text-ink"
               }`}
             >
               {link.label}
             </Link>
           ))}
+        </nav>
+
+        {/* Der — acciones */}
+        <div className="hidden items-center gap-3 md:flex">
           {isBusiness && (
             <a
               href="/business#waitlist"
               className={`inline-flex items-center text-sm font-semibold px-4 py-2 rounded-lg transition-colors ${
                 isDark
-                  ? "bg-blue-500 text-white hover:bg-blue-400"
-                  : "bg-blue-600 text-white hover:bg-blue-700"
+                  ? "bg-indigo-500 text-white hover:bg-indigo-400"
+                  : "bg-indigo-600 text-white hover:bg-indigo-700"
               }`}
             >
               Early access
@@ -212,7 +216,7 @@ export default function Navbar() {
               </CtaButton>
             </>
           )}
-        </nav>
+        </div>
 
         {/* Mobile menu button */}
         <button
