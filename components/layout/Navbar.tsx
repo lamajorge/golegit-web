@@ -139,7 +139,7 @@ export default function Navbar() {
           : "bg-white/95 backdrop-blur-md border-b border-gray-100"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="px-6 md:px-10 h-16 flex items-center justify-between">
         {/* Logo + product switcher */}
         <div className="flex items-center gap-2.5">
           <Link href={logoHref} className="flex items-center">
@@ -199,7 +199,7 @@ export default function Navbar() {
                     : "border-gray-200 text-ink-muted hover:bg-gray-50 hover:text-ink hover:border-gray-300"
                 }`}
               >
-                Ingresar
+                Ir a mi panel
               </a>
               <CtaButton
                 className={`inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg transition-colors ${
@@ -208,7 +208,7 @@ export default function Navbar() {
                     : "bg-ink text-white hover:bg-ink-soft"
                 }`}
               >
-                Empieza gratis
+                Registrarme
               </CtaButton>
             </>
           )}

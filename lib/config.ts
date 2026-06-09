@@ -1,8 +1,9 @@
 export const SITE_CONFIG = {
   // ─── WhatsApp ────────────────────────────────────────────────
-  // Cambiar whatsappEnabled a `true` cuando el número esté listo
-  whatsappEnabled: false, // poner en true cuando se decida exponer el WhatsApp en el landing
-  whatsappNumber: "56928132444", // número real de GoLegit (confirmar antes de activar)
+  // Activado 09-jun-2026 (Jorge): el número recibe registros. Los CtaButton del
+  // sitio Home ("Registrarme"/"Empieza gratis") llevan al WhatsApp del bot.
+  whatsappEnabled: true,
+  whatsappNumber: "56928132444", // número real de GoLegit (bot de registro)
   whatsappUrl: "https://wa.me/56928132444",
 
   // ─── Contacto ─────────────────────────────────────────────────
