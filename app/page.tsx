@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function ParaguasLanding() {
   return (
-    <main className="bg-ink-deep">
+    <main className="bg-paper">
       {/* ════════ HERO — oscuro, oversized, selector dentro ════════ */}
       <section className="relative flex min-h-svh flex-col overflow-hidden bg-ink-deep">
         {/* Glows: verde (Home) abajo-izq + indigo (Business) arriba-der → las dos marcas */}
@@ -66,7 +66,7 @@ export default function ParaguasLanding() {
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
               </span>
               <p className="relative mt-5 text-lg font-bold text-white">Para tu hogar</p>
-              <p className="relative mt-1 flex-1 text-sm leading-relaxed text-white/70">¿Tienes una nana, asesora del hogar o cuidador/a? Su contrato y todo lo del mes, en regla.</p>
+              <p className="relative mt-1 flex-1 text-sm leading-relaxed text-white/70">¿Tienes a alguien trabajando en tu casa? Su contrato y todo lo del mes, en regla.</p>
               <span className="relative mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-brand-400 transition-all group-hover:gap-2.5">GoLegit Home <Arrow /></span>
             </a>
 
@@ -92,7 +92,7 @@ export default function ParaguasLanding() {
       <section id="comun" className="bg-white px-6 py-24 md:py-28">
         <div className="mx-auto max-w-5xl">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-bold uppercase tracking-widest text-brand-600">Un mismo aliado</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-brand-700">Un mismo aliado</p>
             <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">Lo que hacemos por ti es lo mismo</h2>
             <p className="mt-4 text-base leading-relaxed text-ink-light">
               Da igual si tienes a alguien trabajando en tu casa o si llevas una empresa: GoLegit
@@ -112,13 +112,13 @@ export default function ParaguasLanding() {
       </section>
 
       {/* ════════ HOME en detalle — fondo claro tintado verde ════════ */}
-      <section className="bg-brand-50/40 px-6 py-24">
+      <section className="bg-brand-50 px-6 py-24">
         <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-brand-600">GoLegit Home · para el hogar</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-brand-700">GoLegit Home · para el hogar</p>
             <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">El trabajo de casa particular, en regla</h2>
             <p className="mt-4 text-base leading-relaxed text-ink-light">
-              Si tienes una nana, asesora del hogar o cuidador/a: contrato, liquidaciones mensuales
+              Si tienes una trabajadora de casa particular, asesora del hogar o cuidador/a: contrato, liquidaciones mensuales
               con todas las cotizaciones (AFP, salud, Previred), asistencia y finiquito — todo por
               WhatsApp, cumpliendo la Ley 20.786.
             </p>
@@ -158,7 +158,7 @@ export default function ParaguasLanding() {
       {/* ════════ VALIDEZ LEGAL + FAQ — fondo claro ════════ */}
       <section className="bg-white px-6 py-24">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-bold uppercase tracking-widest text-brand-600">Por qué confiar</p>
+          <p className="text-xs font-bold uppercase tracking-widest text-brand-700">Por qué confiar</p>
           <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">Documentos con validez legal real</h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-ink-light">
             Todo lo que GoLegit genera usa firma electrónica simple (Ley 19.799): cada firma queda
@@ -196,7 +196,7 @@ export default function ParaguasLanding() {
 function ComoFunciona({ pasos, color, dark }: { pasos: string[]; color: "brand" | "indigo"; dark?: boolean }) {
   const bg = dark ? "bg-white/[0.04] border border-white/10" : "bg-white border border-gray-100 shadow-sm";
   const txt = dark ? "text-white" : "text-ink";
-  const eyebrow = color === "brand" ? "text-brand-600" : "";
+  const eyebrow = color === "brand" ? "text-brand-700" : "";
   return (
     <div className={`rounded-3xl p-8 ${bg}`}>
       <p className="text-xs font-bold uppercase tracking-widest" style={color === "indigo" ? { color: "oklch(0.72 0.18 277)" } : undefined}>
