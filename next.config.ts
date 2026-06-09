@@ -30,6 +30,24 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        // /business (landing vieja, ahora vive en el proyecto separado
+        // golegit-business). 301 permanente: transfiere autoridad SEO al
+        // subdominio y arregla de una vez los links internos a /business
+        // (Navbar, Footer) sin tocar cada componente.
+        source: "/business",
+        destination: "https://business.golegit.cl",
+        permanent: true,
+      },
+      {
+        source: "/business/:path*",
+        destination: "https://business.golegit.cl/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

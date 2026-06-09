@@ -37,11 +37,11 @@ module.exports = {
 
   transform: async (config, path) => {
     const priorities = {
-      "/": 1.0,
+      "/": 1.0,        // landing-paraguas de marca
+      "/home": 0.9,    // landing TCP/Home (servida en home.golegit.cl)
       "/simulador": 0.9,
       "/simulador/liquidacion": 0.9,
       "/simulador/jornada": 0.9,
-      "/business": 0.9,
       "/novedades": 0.8,
       "/recursos": 0.8,
       "/verificar": 0.6,

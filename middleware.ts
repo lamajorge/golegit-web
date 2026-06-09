@@ -1,20 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Subdomain routing skeleton para GoLegit multi-producto
-// Hoy solo existe "home" (raíz). "business" es futuro.
+// Subdomain routing para GoLegit multi-producto.
 //
-// Arquitectura objetivo:
-//   golegit.cl          → raíz (landing home/tcp, producto actual)
-//   home.golegit.cl     → mismo contenido que raíz (alias)
-//   business.golegit.cl → /business/* (próximamente)
+// Arquitectura (09-jun-2026):
+//   golegit.cl          → APEX: landing-paraguas de marca (app/page.tsx)
+//   home.golegit.cl     → landing TCP/Home → reescribe a /home/*
+//   business.golegit.cl → proyecto Vercel SEPARADO (golegit-business) — NO lo
+//                         sirve este repo; no se rutea acá.
 //
-// En desarrollo local los subdominios no funcionan — usar rutas directas.
+// En desarrollo local los subdominios no funcionan — usar /home directo.
 
 export function middleware(req: NextRequest) {
   const hostname = req.headers.get("host") ?? "";
   const subdomain = hostname.split(".")[0];
 
-  // En local o Vercel preview, no hacer nada
+  // En local o Vercel preview, no hacer nada (acceder a /home directo).
   if (
     hostname.includes("localhost") ||
     hostname.includes("vercel.app") ||
@@ -23,18 +23,15 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // home.golegit.cl → sirve la raíz normalmente
+  // home.golegit.cl → sirve la landing TCP que vive en /home/* (el usuario ve
+  // home.golegit.cl/, internamente se reescribe a /home sin exponer el path).
   if (subdomain === "home") {
-    return NextResponse.rewrite(new URL(req.nextUrl.pathname, req.url));
+    const url = req.nextUrl.clone();
+    const p = req.nextUrl.pathname;
+    // Evitar doble prefijo si ya viene /home; raíz "/" → "/home".
+    url.pathname = p === "/" ? "/home" : p.startsWith("/home") ? p : `/home${p}`;
+    return NextResponse.rewrite(url);
   }
-
-  // business.golegit.cl → reescribe a /business/* (ruta aún no creada)
-  // Descomentar cuando exista app/business/
-  // if (subdomain === "business") {
-  //   return NextResponse.rewrite(
-  //     new URL(`/business${req.nextUrl.pathname}`, req.url)
-  //   );
-  // }
 
   return NextResponse.next();
 }
