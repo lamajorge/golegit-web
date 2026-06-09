@@ -53,7 +53,7 @@ export default function ParaguasLanding() {
             Tenerlo todo<br /><span className="italic text-brand-400">en regla</span>, fácil.
           </h1>
 
-          <p className="animate-fade-up animate-delay-200 mx-auto mt-7 max-w-lg text-lg leading-relaxed text-white/55">
+          <p className="animate-fade-up animate-delay-200 mx-auto mt-7 max-w-lg text-lg leading-relaxed text-white/75">
             GoLegit hace el papeleo por ti — contratos, firma electrónica y cumplimiento.
             Elige por dónde empezar:
           </p>
@@ -66,7 +66,7 @@ export default function ParaguasLanding() {
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
               </span>
               <p className="relative mt-5 text-lg font-bold text-white">Para tu hogar</p>
-              <p className="relative mt-1 flex-1 text-sm leading-relaxed text-white/50">¿Tienes una nana, asesora del hogar o cuidador/a? Su contrato y todo lo del mes, en regla.</p>
+              <p className="relative mt-1 flex-1 text-sm leading-relaxed text-white/70">¿Tienes una nana, asesora del hogar o cuidador/a? Su contrato y todo lo del mes, en regla.</p>
               <span className="relative mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-brand-400 transition-all group-hover:gap-2.5">GoLegit Home <Arrow /></span>
             </a>
 
@@ -76,7 +76,7 @@ export default function ParaguasLanding() {
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" /></svg>
               </span>
               <p className="relative mt-5 text-lg font-bold text-white">Para tu empresa</p>
-              <p className="relative mt-1 flex-1 text-sm leading-relaxed text-white/50">¿Tienes una empresa? Cumplimiento de datos, sociedad y contratos — al día, sin enredos.</p>
+              <p className="relative mt-1 flex-1 text-sm leading-relaxed text-white/70">¿Tienes una empresa? Cumplimiento de datos, sociedad y contratos — al día, sin enredos.</p>
               <span className="relative mt-5 inline-flex items-center gap-1.5 text-sm font-bold transition-all group-hover:gap-2.5" style={{ color: "oklch(0.72 0.18 277)" }}>GoLegit Business <Arrow /></span>
             </a>
           </div>
@@ -84,7 +84,7 @@ export default function ParaguasLanding() {
 
         {/* Hint scroll */}
         <div className="relative z-10 pb-8 text-center">
-          <a href="#comun" className="text-xs font-medium text-white/30 transition-colors hover:text-white/60">Conoce más ↓</a>
+          <a href="#comun" className="text-xs font-medium text-white/50 transition-colors hover:text-white/75">Conoce más ↓</a>
         </div>
       </section>
 
@@ -140,7 +140,7 @@ export default function ParaguasLanding() {
           <div>
             <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "oklch(0.72 0.18 277)" }}>GoLegit Business · para la empresa</p>
             <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl">Tu empresa en regla, sin complicaciones</h2>
-            <p className="mt-4 text-base leading-relaxed text-white/55">
+            <p className="mt-4 text-base leading-relaxed text-white/75">
               Sea una SpA, Ltda o EIRL: cumplimiento de la nueva Ley de Datos 21.719 (vigente desde
               diciembre 2026), gobierno societario — juntas, directorio, libro de accionistas — y
               contratos con firma electrónica.
@@ -178,7 +178,7 @@ export default function ParaguasLanding() {
 
       {/* Footer */}
       <footer className="bg-ink-deep px-6 py-10 md:px-10">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 text-center text-xs text-white/40 sm:flex-row sm:text-left">
+        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 text-center text-xs text-white/55 sm:flex-row sm:text-left">
           <p>GoLegit · Cubillos Lama SpA · RUT 78.393.969-K</p>
           <div className="flex items-center gap-5">
             <a href="https://home.golegit.cl" className="hover:text-white">Home</a>
