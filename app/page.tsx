@@ -36,9 +36,10 @@ export default function ParaguasLanding() {
         <div aria-hidden className="pointer-events-none absolute -left-40 top-1/4 h-[700px] w-[700px]" style={{ background: "radial-gradient(circle, rgba(34,197,94,0.16) 0%, transparent 60%)" }} />
         <div aria-hidden className="pointer-events-none absolute -right-40 -top-20 h-[600px] w-[600px]" style={{ background: "radial-gradient(circle, rgba(79,70,229,0.18) 0%, transparent 60%)" }} />
 
-        {/* Topbar mínima — solo el logo (el acceso al panel vive en cada producto, no en el apex) */}
-        <header className="relative z-10 flex items-center px-6 py-6 md:px-10">
-          <Image src="/logo/golegit-logo-dark.svg" alt="GoLegit" width={120} height={30} priority />
+        {/* Topbar — los dos productos balanceando los glows: Home (verde) izq · Business (indigo) der */}
+        <header className="relative z-10 flex items-center justify-between px-6 py-6 md:px-10">
+          <Image src="/logo/golegit-logo-dark.svg" alt="GoLegit Home" width={120} height={30} priority className="opacity-90" />
+          <Image src="/logo/golegit-business-logo-dark.svg" alt="GoLegit Business" width={120} height={30} priority className="opacity-90" />
         </header>
 
         {/* Hero content */}
