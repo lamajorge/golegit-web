@@ -2,33 +2,26 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 
-// Landing-PARAGUAS de marca GoLegit (apex golegit.cl) — CORAZÓN SEO del ecosistema.
-// Habla de lo COMÚN entre los dos productos (software legal chileno, firma
-// electrónica, "lo hacemos por ti") y entra en cada solución y cómo funciona.
-// Captura términos amplios de marca legal que ningún producto específico rankea
-// solo, y cruza a Home (TCP) y Business (PYME). Conserva la autoridad SEO en el apex.
+// Landing-PARAGUAS de marca GoLegit (apex golegit.cl) — corazón SEO del ecosistema.
+// Patrón extraído de las dos landings que funcionan (Home + Business): hero
+// OSCURO impactante con el selector dentro, Fraunces SOLO en el h1, secciones que
+// ALTERNAN dark/light con eyebrows de color, oversized type + jerarquía (tendencia
+// 2026). Habla de lo común y entra en cada solución y cómo funciona.
 export const metadata: Metadata = {
   title: "GoLegit — Software legal chileno: contratos, firma electrónica y cumplimiento",
   description:
-    "GoLegit se encarga del papeleo legal por ti, con validez ante la ley chilena. Para tu hogar (trabajadoras de casa particular) y para tu empresa (PYME, SpA): contratos, liquidaciones, firma electrónica (Ley 19.799) y cumplimiento de la Ley de Datos 21.719. Sin enredos.",
+    "GoLegit se encarga del papeleo legal por ti, con validez ante la ley chilena. Para tu hogar (trabajadoras de casa particular) y para tu empresa (PYME, SpA): contratos, liquidaciones, firma electrónica (Ley 19.799) y cumplimiento de la Ley de Datos 21.719.",
   keywords: [
-    "software legal Chile",
-    "contratos legales online Chile",
-    "firma electrónica Chile",
-    "firma electrónica simple ley 19.799",
-    "cumplimiento legal empresas Chile",
-    "ley 21.719 protección de datos",
-    "contrato trabajadora de casa particular",
-    "liquidación nana",
-    "documentos legales empresa SpA",
-    "gobierno societario pyme",
-    "aliado legal pyme",
-    "papeleo legal automatizado Chile",
+    "software legal Chile", "contratos legales online Chile", "firma electrónica Chile",
+    "firma electrónica simple ley 19.799", "cumplimiento legal empresas Chile",
+    "ley 21.719 protección de datos", "contrato trabajadora de casa particular",
+    "liquidación nana", "documentos legales empresa SpA", "gobierno societario pyme",
+    "aliado legal pyme", "papeleo legal automatizado Chile",
   ],
   alternates: { canonical: "https://golegit.cl" },
   openGraph: {
     title: "GoLegit — El aliado legal que descomplica",
-    description: "Para tu hogar y para tu empresa: lo legal, resuelto. Con validez ante la ley chilena, sin enredos.",
+    description: "Para tu hogar y para tu empresa: lo legal, resuelto. Con validez ante la ley chilena.",
     url: "https://golegit.cl",
     siteName: "GoLegit",
   },
@@ -36,47 +29,80 @@ export const metadata: Metadata = {
 
 export default function ParaguasLanding() {
   return (
-    <main className="bg-paper">
-      {/* ── HERO ── */}
-      <section className="relative overflow-hidden px-6 pb-16 pt-20 text-center md:pt-28">
-        <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "radial-gradient(60% 50% at 50% -5%, var(--gl-green-200, #bbf7d0) 0%, transparent 55%)", opacity: 0.5 }} />
-        <Image src="/logo/golegit-logo.svg" alt="GoLegit" width={128} height={32} priority className="relative mx-auto mb-10 animate-fade-up" />
-        <div className="relative mx-auto max-w-3xl">
-          <span className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/70 px-3.5 py-1.5 text-xs font-semibold text-brand-700 backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-500" />
-            El aliado legal que descomplica
+    <main className="bg-ink-deep">
+      {/* ════════ HERO — oscuro, oversized, selector dentro ════════ */}
+      <section className="relative flex min-h-svh flex-col overflow-hidden bg-ink-deep">
+        {/* Glows: verde (Home) abajo-izq + indigo (Business) arriba-der → las dos marcas */}
+        <div aria-hidden className="pointer-events-none absolute -left-40 top-1/4 h-[700px] w-[700px]" style={{ background: "radial-gradient(circle, rgba(34,197,94,0.16) 0%, transparent 60%)" }} />
+        <div aria-hidden className="pointer-events-none absolute -right-40 -top-20 h-[600px] w-[600px]" style={{ background: "radial-gradient(circle, rgba(79,70,229,0.18) 0%, transparent 60%)" }} />
+
+        {/* Topbar mínima */}
+        <header className="relative z-10 flex items-center justify-between px-6 py-6 md:px-10">
+          <Image src="/logo/golegit-logo-dark.svg" alt="GoLegit" width={120} height={30} priority />
+          <a href="https://app.golegit.cl/login" className="text-sm font-semibold text-white/70 transition-colors hover:text-white">Ir a mi panel</a>
+        </header>
+
+        {/* Hero content */}
+        <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center px-6 py-10 text-center">
+          <span className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-xs font-medium text-white/70 backdrop-blur">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
+            El aliado legal que descomplica · hecho en Chile
           </span>
-          <h1 className="animate-fade-up animate-delay-100 mt-6 font-display text-[2.75rem] font-bold leading-[1.05] tracking-tight text-ink sm:text-6xl">
-            Lo legal, resuelto.<br /><span className="text-brand-600">Del lado tuyo.</span>
+
+          <h1 className="animate-fade-up animate-delay-100 mt-7 font-display text-5xl font-semibold leading-[1.02] tracking-tight text-white sm:text-7xl">
+            Lo legal, <span className="italic text-brand-400">resuelto</span>.
+            <br />
+            Del lado tuyo.
           </h1>
-          <p className="animate-fade-up animate-delay-200 mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-light">
-            GoLegit es el software legal chileno que se encarga del papeleo por ti —
-            con validez ante la ley, sin enredos. Genera tus documentos, los firma
-            electrónicamente y te mantiene en regla, sea en tu hogar o en tu empresa.
+
+          <p className="animate-fade-up animate-delay-200 mx-auto mt-7 max-w-xl text-lg leading-relaxed text-white/55">
+            GoLegit se encarga del papeleo legal por ti — con validez ante la ley,
+            sin enredos. ¿Por dónde quieres empezar?
           </p>
-          <div className="animate-fade-up animate-delay-300 mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a href="#productos" className="inline-flex items-center gap-1.5 rounded-xl bg-ink px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-ink-soft">
-              Ver las soluciones
+
+          {/* SELECTOR dentro del hero — las dos puertas */}
+          <div className="animate-fade-up animate-delay-300 mt-10 grid w-full max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
+            <a href="https://home.golegit.cl" className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-left backdrop-blur transition-all duration-300 hover:border-brand-400/40 hover:bg-white/[0.07]">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-500 text-white">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
+              </span>
+              <p className="mt-4 text-base font-bold text-white">Para tu hogar</p>
+              <p className="mt-1 text-sm text-white/50">¿Tienes una nana o asesora del hogar?</p>
+              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-400 transition-all group-hover:gap-2.5">GoLegit Home <Arrow /></span>
             </a>
-            <a href="#como-funciona" className="text-sm font-semibold text-ink-muted hover:text-ink">Cómo funciona →</a>
+
+            <a href="https://business.golegit.cl" className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-left backdrop-blur transition-all duration-300 hover:bg-white/[0.07]" style={{ ["--hov" as string]: "oklch(0.65 0.20 277)" }}>
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl text-white" style={{ background: "oklch(0.55 0.23 277)" }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" /></svg>
+              </span>
+              <p className="mt-4 text-base font-bold text-white">Para tu empresa</p>
+              <p className="mt-1 text-sm text-white/50">¿Tienes una PYME o SpA?</p>
+              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5" style={{ color: "oklch(0.72 0.18 277)" }}>GoLegit Business <Arrow /></span>
+            </a>
           </div>
+        </div>
+
+        {/* Hint scroll */}
+        <div className="relative z-10 pb-8 text-center">
+          <a href="#comun" className="text-xs font-medium text-white/30 transition-colors hover:text-white/60">Conoce más ↓</a>
         </div>
       </section>
 
-      {/* ── LO COMÚN (el corazón SEO de marca) ── */}
-      <section className="border-t border-brand-100 bg-white px-6 py-20 md:py-24">
+      {/* ════════ LO COMÚN — fondo claro, eyebrow ════════ */}
+      <section id="comun" className="bg-white px-6 py-24 md:py-28">
         <div className="mx-auto max-w-5xl">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-display text-3xl font-bold text-ink">Un mismo aliado, para todo lo legal</h2>
+            <p className="text-xs font-bold uppercase tracking-widest text-brand-600">Un mismo aliado</p>
+            <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">Lo que hacemos por ti es lo mismo</h2>
             <p className="mt-4 text-base leading-relaxed text-ink-light">
-              Da igual si tienes a alguien trabajando en tu casa o si llevas una empresa:
-              lo que GoLegit hace por ti es lo mismo — y con el mismo respaldo legal.
+              Da igual si tienes a alguien trabajando en tu casa o si llevas una empresa: GoLegit
+              hace el trabajo, no te lo audita. Y siempre con el mismo respaldo legal.
             </p>
           </div>
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {COMUNES.map((c) => (
-              <div key={c.t} className="rounded-2xl border border-brand-100 bg-paper/40 p-6">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-600 text-white">{c.icon}</span>
+              <div key={c.t} className="rounded-2xl border border-gray-100 p-6 transition-shadow hover:shadow-md">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-600">{c.icon}</span>
                 <h3 className="mt-4 text-base font-bold text-ink">{c.t}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-ink-light">{c.d}</p>
               </div>
@@ -85,89 +111,64 @@ export default function ParaguasLanding() {
         </div>
       </section>
 
-      {/* ── LAS DOS SOLUCIONES (en detalle, con CTA a cada subdominio) ── */}
-      <section id="productos" className="px-6 py-20 md:py-24">
-        <div className="mx-auto max-w-5xl">
-          <h2 className="text-center font-display text-3xl font-bold text-ink">Dos soluciones, según lo que necesites</h2>
-
-          {/* Home */}
-          <div className="mt-12 grid grid-cols-1 items-center gap-8 rounded-3xl border border-brand-200/70 bg-white p-8 md:grid-cols-5 md:p-10">
-            <div className="md:col-span-3">
-              <span className="inline-flex items-center gap-2 rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700">GoLegit Home · para el hogar</span>
-              <h3 className="mt-4 font-display text-2xl font-bold text-ink">El trabajo de casa particular, en regla</h3>
-              <p className="mt-3 text-sm leading-relaxed text-ink-light">
-                Si tienes una nana, asesora del hogar o cuidador/a, GoLegit genera el contrato,
-                calcula las liquidaciones mensuales con todas las cotizaciones (AFP, salud, Previred),
-                lleva la asistencia y hace el finiquito — todo por WhatsApp, cumpliendo la Ley 20.786.
-              </p>
-              <ul className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                {["Contrato puertas adentro o afuera", "Liquidación mensual automática", "Finiquito con indemnizaciones", "Registro ante la Dirección del Trabajo"].map((x) => (
-                  <li key={x} className="flex items-center gap-2 text-sm text-ink"><Dot /> {x}</li>
-                ))}
-              </ul>
-              <a href="https://home.golegit.cl" className="mt-6 inline-flex items-center gap-1.5 text-sm font-bold text-brand-600 hover:gap-2.5 transition-all">
-                Ir a GoLegit Home <Arrow />
-              </a>
-            </div>
-            <div className="md:col-span-2">
-              <div className="rounded-2xl bg-brand-600/5 p-6">
-                <p className="text-xs font-bold uppercase tracking-wider text-brand-700">Cómo funciona</p>
-                <ol className="mt-3 space-y-3 text-sm text-ink">
-                  <li className="flex gap-3"><Step n={1} /> Escribes al WhatsApp de GoLegit</li>
-                  <li className="flex gap-3"><Step n={2} /> Respondes preguntas simples sobre el trabajo</li>
-                  <li className="flex gap-3"><Step n={3} /> Recibes el contrato listo para firmar</li>
-                </ol>
-              </div>
-            </div>
+      {/* ════════ HOME en detalle — fondo claro tintado verde ════════ */}
+      <section className="bg-brand-50/40 px-6 py-24">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-widest text-brand-600">GoLegit Home · para el hogar</p>
+            <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">El trabajo de casa particular, en regla</h2>
+            <p className="mt-4 text-base leading-relaxed text-ink-light">
+              Si tienes una nana, asesora del hogar o cuidador/a: contrato, liquidaciones mensuales
+              con todas las cotizaciones (AFP, salud, Previred), asistencia y finiquito — todo por
+              WhatsApp, cumpliendo la Ley 20.786.
+            </p>
+            <ul className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+              {["Contrato puertas adentro o afuera", "Liquidación mensual automática", "Finiquito con indemnizaciones", "Registro ante la DT"].map((x) => (
+                <li key={x} className="flex items-center gap-2 text-sm text-ink"><Dot /> {x}</li>
+              ))}
+            </ul>
+            <a href="https://home.golegit.cl" className="mt-7 inline-flex items-center gap-1.5 rounded-xl bg-brand-600 px-5 py-3 text-sm font-bold text-white transition-all hover:bg-brand-700 hover:gap-2.5">Ir a GoLegit Home <Arrow /></a>
           </div>
+          <ComoFunciona color="brand" pasos={["Escribes al WhatsApp de GoLegit", "Respondes preguntas simples sobre el trabajo", "Recibes el contrato listo para firmar"]} />
+        </div>
+      </section>
 
-          {/* Business */}
-          <div className="mt-6 grid grid-cols-1 items-center gap-8 rounded-3xl border bg-white p-8 md:grid-cols-5 md:p-10" style={{ borderColor: "oklch(0.90 0.06 277 / 0.7)" }}>
-            <div className="md:col-span-3">
-              <span className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-bold" style={{ background: "oklch(0.966 0.022 277)", color: "oklch(0.45 0.20 277)" }}>GoLegit Business · para la empresa</span>
-              <h3 className="mt-4 font-display text-2xl font-bold text-ink">Tu empresa en regla, sin complicaciones</h3>
-              <p className="mt-3 text-sm leading-relaxed text-ink-light">
-                Si tienes una PYME o SpA, GoLegit te pone al día con la nueva Ley de Datos 21.719
-                (vigente desde diciembre 2026), lleva tu gobierno societario — juntas, directorio,
-                libro de accionistas — y genera tus contratos y documentos con firma electrónica.
-              </p>
-              <ul className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                {["Cumplimiento Ley 21.719 (datos)", "Actas de juntas y directorio", "Libro de accionistas al día", "Contratos comerciales + firma FES"].map((x) => (
-                  <li key={x} className="flex items-center gap-2 text-sm text-ink"><Dot indigo /> {x}</li>
-                ))}
-              </ul>
-              <a href="https://business.golegit.cl" className="mt-6 inline-flex items-center gap-1.5 text-sm font-bold hover:gap-2.5 transition-all" style={{ color: "oklch(0.511 0.233 277)" }}>
-                Ir a GoLegit Business <Arrow />
-              </a>
-            </div>
-            <div className="md:col-span-2">
-              <div className="rounded-2xl p-6" style={{ background: "oklch(0.966 0.022 277 / 0.5)" }}>
-                <p className="text-xs font-bold uppercase tracking-wider" style={{ color: "oklch(0.45 0.20 277)" }}>Cómo funciona</p>
-                <ol className="mt-3 space-y-3 text-sm text-ink">
-                  <li className="flex gap-3"><Step n={1} indigo /> Cargas tu empresa con el RUT</li>
-                  <li className="flex gap-3"><Step n={2} indigo /> Haces el diagnóstico de datos en 5 min</li>
-                  <li className="flex gap-3"><Step n={3} indigo /> Recibes tus documentos listos</li>
-                </ol>
-              </div>
-            </div>
+      {/* ════════ BUSINESS en detalle — fondo OSCURO (alterna ritmo) ════════ */}
+      <section className="bg-ink-deep px-6 py-24">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
+          <ComoFunciona color="indigo" dark pasos={["Cargas tu empresa con el RUT", "Haces el diagnóstico de datos en 5 min", "Recibes tus documentos listos"]} />
+          <div>
+            <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "oklch(0.72 0.18 277)" }}>GoLegit Business · para la empresa</p>
+            <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-white sm:text-4xl">Tu empresa en regla, sin complicaciones</h2>
+            <p className="mt-4 text-base leading-relaxed text-white/55">
+              Si tienes una PYME o SpA: cumplimiento de la nueva Ley de Datos 21.719 (vigente desde
+              diciembre 2026), gobierno societario — juntas, directorio, libro de accionistas — y
+              contratos con firma electrónica.
+            </p>
+            <ul className="mt-6 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+              {["Cumplimiento Ley 21.719", "Actas de juntas y directorio", "Libro de accionistas al día", "Contratos + firma FES"].map((x) => (
+                <li key={x} className="flex items-center gap-2 text-sm text-white/80"><Dot indigo /> {x}</li>
+              ))}
+            </ul>
+            <a href="https://business.golegit.cl" className="mt-7 inline-flex items-center gap-1.5 rounded-xl px-5 py-3 text-sm font-bold text-white transition-all hover:gap-2.5" style={{ background: "oklch(0.55 0.23 277)" }}>Ir a GoLegit Business <Arrow /></a>
           </div>
         </div>
       </section>
 
-      {/* ── CÓMO FUNCIONA / por qué confiar (común) ── */}
-      <section id="como-funciona" className="border-t border-brand-100 bg-white px-6 py-20 md:py-24">
+      {/* ════════ VALIDEZ LEGAL + FAQ — fondo claro ════════ */}
+      <section className="bg-white px-6 py-24">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-display text-3xl font-bold text-ink">Documentos con validez legal real</h2>
+          <p className="text-xs font-bold uppercase tracking-widest text-brand-600">Por qué confiar</p>
+          <h2 className="mt-3 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">Documentos con validez legal real</h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-ink-light">
-            Todo lo que GoLegit genera usa firma electrónica simple bajo la Ley 19.799: cada firma
-            queda registrada con quién firmó, cuándo y desde dónde, con respaldo probatorio ante la
-            Inspección del Trabajo o un tribunal. No son plantillas sin valor — son documentos que
-            sostienen frente a la autoridad.
+            Todo lo que GoLegit genera usa firma electrónica simple (Ley 19.799): cada firma queda
+            registrada con quién firmó, cuándo y desde dónde, con respaldo probatorio ante la
+            autoridad. No son plantillas sin valor — son documentos que sostienen.
           </p>
         </div>
-        <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-3">
+        <div className="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-5 sm:grid-cols-3">
           {FAQ.map((f) => (
-            <div key={f.q} className="rounded-2xl border border-brand-100 p-6">
+            <div key={f.q} className="rounded-2xl border border-gray-100 p-6">
               <p className="text-sm font-bold text-ink">{f.q}</p>
               <p className="mt-2 text-sm leading-relaxed text-ink-light">{f.a}</p>
             </div>
@@ -175,37 +176,41 @@ export default function ParaguasLanding() {
         </div>
       </section>
 
-      {/* ── CTA final ── */}
-      <section className="px-6 py-20">
-        <div className="mx-auto max-w-3xl rounded-3xl bg-ink p-10 text-center md:p-14">
-          <h2 className="font-display text-3xl font-bold text-white">Empieza por donde lo necesites</h2>
-          <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/60">
-            Elige tu solución. En ambas, GoLegit hace el trabajo por ti.
-          </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a href="https://home.golegit.cl" className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-brand-500 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-brand-400 sm:w-auto">
-              Para mi hogar (Home)
-            </a>
-            <a href="https://business.golegit.cl" className="inline-flex w-full items-center justify-center gap-1.5 rounded-xl px-6 py-3 text-sm font-bold text-white transition-colors sm:w-auto" style={{ background: "oklch(0.511 0.233 277)" }}>
-              Para mi empresa (Business)
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* Footer */}
-      <footer className="border-t border-brand-100 px-6 py-10 md:px-10">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 text-center text-xs text-ink-light sm:flex-row sm:text-left">
+      <footer className="bg-ink-deep px-6 py-10 md:px-10">
+        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 text-center text-xs text-white/40 sm:flex-row sm:text-left">
           <p>GoLegit · Cubillos Lama SpA · RUT 78.393.969-K</p>
           <div className="flex items-center gap-5">
-            <a href="https://home.golegit.cl" className="hover:text-ink">Home</a>
-            <a href="https://business.golegit.cl" className="hover:text-ink">Business</a>
-            <Link href="/privacidad" className="hover:text-ink">Privacidad</Link>
-            <Link href="/terminos" className="hover:text-ink">Términos</Link>
+            <a href="https://home.golegit.cl" className="hover:text-white">Home</a>
+            <a href="https://business.golegit.cl" className="hover:text-white">Business</a>
+            <Link href="/privacidad" className="hover:text-white">Privacidad</Link>
+            <Link href="/terminos" className="hover:text-white">Términos</Link>
           </div>
         </div>
       </footer>
     </main>
+  );
+}
+
+/* ── "Cómo funciona" card ── */
+function ComoFunciona({ pasos, color, dark }: { pasos: string[]; color: "brand" | "indigo"; dark?: boolean }) {
+  const bg = dark ? "bg-white/[0.04] border border-white/10" : "bg-white border border-gray-100 shadow-sm";
+  const txt = dark ? "text-white" : "text-ink";
+  const eyebrow = color === "brand" ? "text-brand-600" : "";
+  return (
+    <div className={`rounded-3xl p-8 ${bg}`}>
+      <p className="text-xs font-bold uppercase tracking-widest" style={color === "indigo" ? { color: "oklch(0.72 0.18 277)" } : undefined}>
+        <span className={eyebrow}>Cómo funciona</span>
+      </p>
+      <ol className="mt-5 space-y-5">
+        {pasos.map((p, i) => (
+          <li key={i} className={`flex items-start gap-4 ${txt}`}>
+            <Step n={i + 1} indigo={color === "indigo"} />
+            <span className="pt-0.5 text-sm leading-relaxed">{p}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }
 
@@ -216,22 +221,19 @@ const COMUNES = [
   { t: "Sin susto", d: "Recordatorios amables a tiempo, nunca amenazas de multa.", icon: <IconBell /> },
   { t: "Hecho en Chile", d: "Diseñado por abogados, según la ley chilena vigente.", icon: <IconFlag /> },
 ];
-
 const FAQ = [
   { q: "¿Los documentos tienen valor legal?", a: "Sí. Usan firma electrónica simple (Ley 19.799) y plantillas hechas por abogados según la ley chilena." },
   { q: "¿Necesito instalar algo?", a: "No. Home funciona por WhatsApp; Business desde el navegador. Sin apps ni instalaciones." },
   { q: "¿Cuánto cuesta?", a: "Ambos tienen una versión gratuita. Solo pagas si quieres que gestionemos el papeleo por ti." },
 ];
 
-/* ── Átomos visuales ── */
+/* ── Átomos ── */
 function Dot({ indigo }: { indigo?: boolean }) {
-  return <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: indigo ? "oklch(0.511 0.233 277)" : "var(--gl-green-500, #22c55e)" }} />;
+  return <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: indigo ? "oklch(0.65 0.20 277)" : "var(--gl-green-500, #22c55e)" }} />;
 }
-function Arrow() {
-  return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
-}
+function Arrow() { return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>; }
 function Step({ n, indigo }: { n: number; indigo?: boolean }) {
-  return <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white" style={{ background: indigo ? "oklch(0.511 0.233 277)" : "var(--gl-green-600, #16a34a)" }}>{n}</span>;
+  return <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white" style={{ background: indigo ? "oklch(0.55 0.23 277)" : "var(--gl-green-600, #16a34a)" }}>{n}</span>;
 }
 function IconCheck() { return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5" /></svg>; }
 function IconShield() { return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>; }
