@@ -80,6 +80,14 @@ Ambos productos tienen footer **oscuro con glow de marca** (no bloque plano):
 
 ## 6. Patrones de landing (extraídos de Home + Business, tendencias 2026)
 
+- **Hero = UNA pantalla exacta** (patrón Home, canónico en los 3 sitios). El hero se bloquea
+  a la altura del viewport con `h-svh lg:h-dvh` + un `min-h-[NNNpx]` de piso (≈640-680px según el
+  contenido) y centra el contenido vertical (`justify-center` en columna, o `items-center`). NO usar
+  `min-h-svh` con `pt-32` top-aligned: en pantallas altas deja un hueco arriba ("se ve mal"). Aplica a
+  `web/components/sections/Hero.tsx` (Home), `web/app/page.tsx` (paraguas) y
+  `golegit-business/.../BusinessLanding.tsx` (Business).
+- **Secciones de contenido = padding vertical `py-24`** (NO se fuerzan a una pantalla — crecen con su
+  contenido). Solo el hero se bloquea a 1 pantalla.
 - **Hero OSCURO impactante** + glow + tipografía oversized (`text-7xl` h1). Mostrar valor antes del scroll.
 - **Secciones ALTERNAN** fondo (claro → tintado → oscuro → claro) = ritmo, no color plano.
 - **Eyebrows** de color (`text-xs uppercase tracking-widest`) sobre los `<h2>`.

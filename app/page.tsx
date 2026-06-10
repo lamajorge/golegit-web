@@ -31,7 +31,8 @@ export default function ParaguasLanding() {
   return (
     <main className="bg-paper">
       {/* ════════ HERO — oscuro, oversized, selector dentro ════════ */}
-      <section className="relative flex min-h-svh flex-col overflow-hidden bg-ink-deep">
+      {/* Patrón Home: bloqueado a UNA pantalla (h-svh/dvh) — contenido centrado vertical. */}
+      <section className="relative flex h-svh lg:h-dvh min-h-[640px] flex-col overflow-hidden bg-ink-deep">
         {/* Glows: verde (Home) abajo-izq + indigo (Business) arriba-der → las dos marcas */}
         <div aria-hidden className="pointer-events-none absolute -left-40 top-1/4 h-[700px] w-[700px]" style={{ background: "radial-gradient(circle, rgba(34,197,94,0.16) 0%, transparent 60%)" }} />
         <div aria-hidden className="pointer-events-none absolute -right-40 -top-20 h-[600px] w-[600px]" style={{ background: "radial-gradient(circle, rgba(79,70,229,0.18) 0%, transparent 60%)" }} />
