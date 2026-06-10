@@ -22,19 +22,15 @@ function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: 
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className={`flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full border tracking-wide transition-colors ${
-          isBusiness
-            ? isDark
-              ? "text-blue-400 border-blue-400/30 bg-blue-400/10 hover:bg-blue-400/20"
-              : "text-blue-700 border-blue-200 bg-blue-50 hover:bg-blue-100"
-            : isDark
-              ? "text-brand-400 border-brand-400/30 bg-brand-400/10 hover:bg-brand-400/20"
-              : "text-brand-700 border-brand-200 bg-brand-50 hover:bg-brand-100"
+        className={`flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium transition-colors ${
+          isDark
+            ? "text-white/80 ring-1 ring-white/15 backdrop-blur hover:bg-white/10 hover:text-white"
+            : "text-ink-muted ring-1 ring-gray-200 bg-white/60 backdrop-blur hover:bg-gray-50 hover:text-ink"
         }`}
       >
         {isBusiness ? "Business" : "Home"}
-        <svg width="8" height="8" viewBox="0 0 10 10" fill="currentColor">
-          <path d="M1 3l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform ${open ? "rotate-180" : ""}`}>
+          <path d="M6 9l6 6 6-6" />
         </svg>
       </button>
 
@@ -95,11 +91,15 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  // La landing TCP vive en /home (servida en home.golegit.cl). El hero ahí es
+  // oscuro → el navbar arranca transparente/dark. (El apex "/" es el paraguas,
+  // que tiene su propio header y no usa este Navbar.)
+  const isHome = pathname === "/home" || pathname?.startsWith("/home/");
   const isBusiness = pathname?.startsWith("/business");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
+    handleScroll(); // evaluar al montar (evita flash blanco si carga ya scrolleado)
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);

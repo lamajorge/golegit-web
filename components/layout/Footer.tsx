@@ -4,8 +4,10 @@ import CtaButton from "@/components/CtaButton";
 
 export default function Footer() {
   return (
-    <footer className="bg-ink text-ink-faint">
-      <div className="max-w-6xl mx-auto px-6 py-16">
+    <footer className="relative overflow-hidden bg-ink-deep text-ink-light">
+      {/* glow de marca sutil para que el footer no sea un bloque plano */}
+      <div aria-hidden className="pointer-events-none absolute -bottom-32 left-1/2 h-[400px] w-[700px] -translate-x-1/2" style={{ background: "radial-gradient(ellipse at center, var(--gl-green-600, #16a34a) 0%, transparent 70%)", opacity: 0.10 }} />
+      <div className="relative max-w-6xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="col-span-1">
