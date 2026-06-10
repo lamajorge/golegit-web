@@ -88,23 +88,20 @@ function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: 
 }
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   // La landing TCP vive en /home (servida en home.golegit.cl). El hero ahí es
-  // oscuro → el navbar arranca transparente/dark. (El apex "/" es el paraguas,
-  // que tiene su propio header y no usa este Navbar.)
+  // oscuro → el navbar es transparente. (El apex "/" es el paraguas, que tiene su
+  // propio header y no usa este Navbar.)
   const isHome = pathname === "/home" || pathname?.startsWith("/home/");
   const isBusiness = pathname?.startsWith("/business");
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60);
-    handleScroll(); // evaluar al montar (evita flash blanco si carga ya scrolleado)
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const isDark = (isHome || isBusiness) && !scrolled;
+  // En /home (hero oscuro) el navbar es absolute + transparente → se queda en el
+  // hero y se va con el scroll (como Business). En las demás páginas (fondo claro)
+  // es fixed + fondo claro al scrollear → siempre visible y legible.
+  const heroPage = isHome || isBusiness;          // página con hero oscuro
+  const isDark = heroPage;                          // transparente sobre el hero
+  const posClass = heroPage ? "absolute" : "fixed"; // anclado al hero vs sigue al usuario
 
   // Business page: logo links to /business, uses blue logo
   const logoHref = isBusiness ? "/business" : "/";
@@ -133,8 +130,8 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
-        isDark
+      className={`${posClass} top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
+        heroPage
           ? "bg-transparent"
           : "bg-white/70 backdrop-blur-xl border-b border-gray-100/60 shadow-[0_1px_20px_-8px_rgba(0,0,0,0.15)]"
       }`}
