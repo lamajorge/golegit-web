@@ -37,7 +37,7 @@ export default function HomeTcpLanding() {
   return (
     <main className="min-h-screen bg-paper overflow-x-hidden">
       <AlertBanner />
-      <Navbar />
+      <Navbar product="home" />
       <Hero />
       <Problem />
       <Solution />

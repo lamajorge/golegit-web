@@ -88,14 +88,17 @@ function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: 
   );
 }
 
-export default function Navbar() {
+export default function Navbar({ product }: { product?: "home" | "business" } = {}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
-  // La landing TCP vive en /home (servida en home.golegit.cl). El hero ahí es
-  // oscuro → el navbar es transparente. (El apex "/" es el paraguas, que tiene su
-  // propio header y no usa este Navbar.)
-  const isHome = pathname === "/home" || pathname?.startsWith("/home/");
-  const isBusiness = pathname?.startsWith("/business");
+  // ⚠️ `usePathname()` devuelve la URL del BROWSER, no el path reescrito por el
+  // middleware. En home.golegit.cl el usuario ve "/" → el pathname es "/", NO
+  // "/home" → sin la prop `product`, el navbar caía al modo paraguas (gris +
+  // logo light + sin pill HOME). Por eso cada página pasa `product` explícito:
+  // app/home/page.tsx → "home", páginas business → "business". Las de contenido
+  // del paraguas (/simulador, /recursos…) no pasan prop → detección por path.
+  const isHome = product === "home" || pathname === "/home" || pathname?.startsWith("/home/");
+  const isBusiness = product === "business" || pathname?.startsWith("/business");
 
   // En /home (hero oscuro) el navbar es absolute + transparente → se queda en el
   // hero y se va con el scroll (como Business). En las demás páginas (fondo claro)
