@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SITE_CONFIG } from "@/lib/config";
+import { Logo } from "@golegit-cl/tokens/brand/Logo";
 
 export default function FooterBusiness() {
   return (
@@ -9,11 +10,12 @@ export default function FooterBusiness() {
           {/* Brand */}
           <div className="col-span-1">
             <div className="mb-4">
-              <img
-                src="/logo/golegit-business-logo-dark.svg"
-                alt="GoLegit Business — El aliado legal de tu pyme"
+              {/* Footer Business (fondo oscuro) → pill BUSINESS */}
+              <Logo
+                product="business"
+                mode="dark"
                 height={28}
-                style={{ height: 28, width: "auto" }}
+                title="GoLegit Business — El aliado legal de tu pyme"
               />
             </div>
             <p className="text-sm leading-relaxed text-white/50">

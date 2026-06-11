@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SITE_CONFIG } from "@/lib/config";
 import CtaButton from "@/components/CtaButton";
+import { Logo } from "@golegit-cl/tokens/brand/Logo";
 
 function ProductSwitcher({ isDark, isBusiness }: { isDark: boolean; isBusiness: boolean }) {
   const [open, setOpen] = useState(false);
@@ -105,8 +106,6 @@ export default function Navbar() {
 
   // Business page: logo links to /business, uses blue logo
   const logoHref = isBusiness ? "/business" : "/";
-  const logoLight = isBusiness ? "/logo/golegit-business-logo.svg" : "/logo/golegit-logo.svg";
-  const logoDark = isBusiness ? "/logo/golegit-business-logo-dark.svg" : "/logo/golegit-logo-dark.svg";
   const logoAlt = isBusiness
     ? "GoLegit Business — El aliado legal de tu pyme"
     : "GoLegit — Contratos y liquidaciones para trabajadoras de casa particular";
@@ -140,11 +139,16 @@ export default function Navbar() {
         {/* Izq — Logo + product switcher */}
         <div className="flex items-center gap-2.5">
           <Link href={logoHref} className="flex items-center">
-            <img
-              src={isDark ? logoDark : logoLight}
-              alt={logoAlt}
+            {/* Pill (sistema de familia): BUSINESS en páginas Business, HOME en el
+                producto Home (/home ↔ home.golegit.cl vía middleware). Las páginas
+                de contenido del paraguas golegit.cl (/simulador, /recursos,
+                /novedades) van sin pill — lockup paraguas. */}
+            <Logo
+              product={isBusiness ? "business" : "home"}
+              mode={isDark ? "dark" : "light"}
               height={28}
-              style={{ height: 28, width: "auto" }}
+              pill={!!isBusiness || isHome}
+              title={logoAlt}
             />
           </Link>
           <ProductSwitcher isDark={isDark} isBusiness={!!isBusiness} />

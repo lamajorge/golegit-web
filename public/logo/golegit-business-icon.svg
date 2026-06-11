@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- golegit-business-icon.svg — GENERADO desde @golegit-cl/tokens src/brand/geometry.js. NO editar a mano: npm run build:svg -->
+<svg width="512" height="512" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="30" rx="6.5" fill="#4f46e5"/><g transform="translate(1.6,1.2) scale(0.97)"><path fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M19.8,4 H4.5 Q3,4 3,6.5 V22.5 Q3,25 5.5,25 H22.5 Q25,25 25,22.5 V11"/><polyline fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" points="10,14 14.8,20 25,5.2"/></g></svg>

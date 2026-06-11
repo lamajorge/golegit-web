@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SITE_CONFIG } from "@/lib/config";
 import CtaButton from "@/components/CtaButton";
+import { Logo } from "@golegit-cl/tokens/brand/Logo";
 
 export default function Footer() {
   return (
@@ -12,11 +13,12 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-1">
             <div className="mb-4">
-              <img
-                src="/logo/golegit-logo-dark.svg"
-                alt="GoLegit — Contratos y liquidaciones para trabajadoras de casa particular"
+              {/* Footer del producto Home (fondo oscuro) → pill HOME */}
+              <Logo
+                product="home"
+                mode="dark"
                 height={28}
-                style={{ height: 28, width: "auto" }}
+                title="GoLegit — Contratos y liquidaciones para trabajadoras de casa particular"
               />
             </div>
             <p className="text-sm leading-relaxed text-ink-light">

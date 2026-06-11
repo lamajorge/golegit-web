@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- favicon-business.svg — GENERADO desde @golegit-cl/tokens src/brand/geometry.js. NO editar a mano: npm run build:svg -->
+<svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bg { fill: #ffffff; }
+    .cont { stroke: #4f46e5; }
+    .check { stroke: #4f46e5; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #18181b; }
+      .cont { stroke: #ffffff; }
+      .check { stroke: #818cf8; }
+    }
+  </style>
+  <rect class="bg" x="0" y="0" width="28" height="28" rx="5"/>
+  <g transform="translate(0,-1.2)"><path class="cont" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M19.8,4 H4.5 Q3,4 3,6.5 V22.5 Q3,25 5.5,25 H22.5 Q25,25 25,22.5 V11"/>
+  <polyline class="check" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" points="10,14 14.8,20 25,5.2"/></g>
+</svg>
