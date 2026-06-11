@@ -87,6 +87,33 @@ HOME —Navbar/CtaButton/EarlyAccess section de web— es otro producto y sigue 
 - Apex (paraguas): usa verde (Home) izq + indigo (Business) der en los glows y tarjetas-selector,
   representando ambas marcas.
 
+## 5.1 Isotipos y logos — FUENTE ÚNICA `@golegit-cl/tokens/brand` (11-jun-2026)
+
+⚠️ **Ningún logo/favicon se edita a mano en los repos.** Todos derivan de
+`golegit-tokens/src/brand/geometry.js`. Cambio de marca (promo/festividad) = editar
+ahí → `npm run build:svg` → bump+publish → `sync-brand` + bump de dep en consumidores.
+
+**Anatomía** (ver README de `golegit-tokens` para el detalle):
+- **Home** = burbuja de chat, crece hacia abajo (cola/canal WhatsApp).
+- **Business** = la misma caja de la burbuja SIN cola, borde sup-derecho interrumpido,
+  tick saliendo por la apertura con la punta sobre la línea del borde derecho. Crece
+  hacia arriba (cumplimiento). Aprobado por Jorge, iteración v10.
+- **Pill descriptor** HOME/BUSINESS debajo del wordmark; paraguas `golegit.cl` sin pill.
+
+**Consumo:** componente `<Logo product mode height pill colors />` (React) o SVG estático
+(`public/logo/`, favicons, OG). `mode`: light=fondo claro · dark=fondo oscuro.
+
+**Favicon por frente** (los 4 proyectos Vercel, vinculados a la fuente única):
+| Frente Vercel | Favicon | Notas |
+|---|---|---|
+| `web` (golegit.cl paraguas + home.golegit.cl) | `app/icon.svg` = favicon-home | burbuja verde adaptiva; ambos son territorio Home |
+| `golegit-app` (app.golegit.cl) | `app/icon.svg` = favicon-home | |
+| `golegit-panel` (panel.golegit.cl) | `app/icon.svg` = favicon-home | antes solo tenía .ico default |
+| `golegit-business` (business.golegit.cl) | `metadata.icons` → favicon-business | caja índigo adaptiva |
+
+> El navbar de `web` aplica el pill por producto: Business→BUSINESS · home.golegit.cl
+> (`/home`)→HOME · páginas de contenido del paraguas (`/simulador` etc.)→sin pill.
+
 ## 6. Patrones de landing (extraídos de Home + Business, tendencias 2026)
 
 - **Hero = UNA pantalla exacta** (patrón Home, canónico en los 3 sitios). El hero se bloquea
