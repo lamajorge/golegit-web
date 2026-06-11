@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "https://golegit.cl" },
   openGraph: {
-    title: "GoLegit — El aliado legal que descomplica",
-    description: "Para tu hogar y para tu empresa: todo en regla, sin complicaciones. Con validez ante la ley chilena.",
+    title: "GoLegit — El aliado legal que te quita el peso",
+    description: "Para tu hogar y para tu empresa: todo en regla, sin que te pese. Con validez ante la ley chilena.",
     url: "https://golegit.cl",
     siteName: "GoLegit",
   },

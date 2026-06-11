@@ -37,8 +37,8 @@ export default function FooterBusiness() {
                 </a>
               </li>
               <li>
-                <a href="/business#waitlist" className="text-sm hover:text-white transition-colors">
-                  Early access
+                <a href="https://business.golegit.cl/diagnostico" className="text-sm hover:text-white transition-colors">
+                  Diagnóstico legal gratis
                 </a>
               </li>
             </ul>

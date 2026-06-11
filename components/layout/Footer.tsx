@@ -47,9 +47,6 @@ export default function Footer() {
               <li>
                 <Link href="/business" className="text-sm hover:text-white transition-colors">
                   GoLegit Business
-                  <span className="ml-1.5 text-[9px] font-semibold text-indigo-400 bg-indigo-400/10 border border-indigo-400/20 px-1.5 py-0.5 rounded-full">
-                    Early access
-                  </span>
                 </Link>
               </li>
             </ul>
