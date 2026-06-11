@@ -50,8 +50,17 @@ Ambos productos tienen footer **oscuro con glow de marca** (no bloque plano):
 - **Home** (`web/components/layout/Footer.tsx`): `bg-ink-deep` (grafito — el token diseñado para
   footers; NO `bg-ink` que es verde-medio y da contraste flojo 3.95) + `text-ink-light` (6.64 AA) +
   glow verde sutil.
-- **Business** (`golegit-business/app/page.tsx`): `bg-zinc-950` + glow indigo + links de producto +
-  enlace cross-producto a Home y al apex.
+- **Business** (`golegit-business/app/page.tsx`): `bg-zinc-950` + glow indigo, y desde 11-jun-2026
+  replica la ESTRUCTURA del de Home (referencia de diseño — pedido Jorge): 4 columnas
+  (Brand / Producto / GoLegit / Contacto con hola@ y soporte@) + barra legal
+  (© año · servicio de Cubillos Lama SpA · links Privacidad/Términos → golegit.cl).
+
+**Sin "early access" en Business (11-jun-2026):** el producto está vivo → la landing de
+business.golegit.cl no menciona early access ni waitlist (WaitlistForm eliminado; leads se
+capturan en el gate del diagnóstico público). El badge del hero dice "Diagnóstico legal gratis —
+disponible ahora" y el CTA final es diagnóstico + crear cuenta (`#empieza`, ya no `#waitlist`).
+El footer de Home tampoco le pone badge "Early access" al link de Business. (El early access de
+HOME —Navbar/CtaButton/EarlyAccess section de web— es otro producto y sigue su propio estado.)
 
 ## 4. Tipografía (paquete `@golegit-cl/tokens`)
 
