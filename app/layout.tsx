@@ -27,10 +27,10 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
+  // Sin bloque `icons` manual: Next.js sirve automáticamente app/icon.svg
+  // (favicon-home CUADRADO desde @golegit-cl/tokens). Antes apuntaba a
+  // /favicon.ico y /apple-touch-icon.png — ambos eliminados/inexistentes
+  // (el .ico era rectangular viejo). El SVG cuadrado adaptativo los reemplaza.
   title: "GoLegit — Contratos y liquidaciones para trabajadores/as de casa particular",
   description:
     "GoLegit genera contratos legales, calcula liquidaciones y mantiene el historial laboral de tu trabajador/a de casa particular. Todo por WhatsApp. Gratis para siempre, sin tarjeta de crédito.",

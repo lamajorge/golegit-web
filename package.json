@@ -10,7 +10,7 @@
     "sync-brand": "cp node_modules/@golegit-cl/tokens/svg/*.svg public/logo/"
   },
   "dependencies": {
-    "@golegit-cl/tokens": "^0.2.2",
+    "@golegit-cl/tokens": "^0.2.3",
     "@notionhq/client": "^2.2.15",
     "@tailwindcss/typography": "^0.5.19",
     "@vercel/analytics": "^2.0.1",
