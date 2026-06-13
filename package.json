@@ -7,7 +7,10 @@
     "build": "next build && next-sitemap",
     "start": "next start",
     "lint": "next lint",
-    "sync-brand": "cp node_modules/@golegit-cl/tokens/svg/*.svg public/logo/"
+    "sync-brand": "cp node_modules/@golegit-cl/tokens/svg/*.svg public/logo/",
+    "devkit:sync": "node node_modules/@golegit-cl/devkit/sync.mjs",
+    "devkit:check": "node node_modules/@golegit-cl/devkit/check.mjs",
+    "check": "npm run devkit:check"
   },
   "dependencies": {
     "@golegit-cl/tokens": "^0.2.3",
@@ -21,6 +24,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@golegit-cl/devkit": "^0.1.0",
     "@tailwindcss/postcss": "^4.3.0",
     "@types/node": "^20",
     "@types/react": "^19",
