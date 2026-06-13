@@ -24,7 +24,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@golegit-cl/devkit": "^0.2.2",
+    "@golegit-cl/devkit": "^0.2.3",
     "@tailwindcss/postcss": "^4.3.0",
     "@types/node": "^20",
     "@types/react": "^19",
